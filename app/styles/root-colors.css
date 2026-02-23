@@ -1,0 +1,149 @@
+/* ================================================================
+ * PRIMITIVES — Colors
+ * Source: Figma collection "_root colors"
+ * Raw palette values, never used directly in components.
+ * Components consume semantic tokens (semantic-colors.css).
+ * ================================================================ */
+:root {
+  /* Base */
+  --root-color-base-black: #000000;
+  --root-color-base-transparent: #fafafa00;
+  --root-color-base-white: #ffffff;
+
+  /* Brand */
+  --root-color-brand-050: #eff6ff;
+  --root-color-brand-100: #dbeafe;
+  --root-color-brand-200: #bedbff;
+  --root-color-brand-300: #8ec5ff;
+  --root-color-brand-400: #51a2ff;
+  --root-color-brand-500: #2b7fff;
+  --root-color-brand-600: #155dfc;
+  --root-color-brand-700: #1447e6;
+  --root-color-brand-800: #193cb8;
+  --root-color-brand-900: #1c398e;
+  --root-color-brand-950: #162456;
+
+  /* Danger */
+  --root-color-danger-050: #fef2f2;
+  --root-color-danger-100: #ffe2e2;
+  --root-color-danger-200: #ffc9c9;
+  --root-color-danger-300: #ffa2a2;
+  --root-color-danger-400: #ff6467;
+  --root-color-danger-500: #fb2c36;
+  --root-color-danger-600: #e7000b;
+  --root-color-danger-700: #c10007;
+  --root-color-danger-800: #9f0712;
+  --root-color-danger-900: #82181a;
+  --root-color-danger-950: #460809;
+
+  /* Neutral */
+  --root-color-neutral-050: #fafafa;
+  --root-color-neutral-100: #f5f5f5;
+  --root-color-neutral-200: #e5e5e5;
+  --root-color-neutral-300: #d4d4d4;
+  --root-color-neutral-400: #a1a1a1;
+  --root-color-neutral-500: #737373;
+  --root-color-neutral-600: #525252;
+  --root-color-neutral-700: #404040;
+  --root-color-neutral-800: #262626;
+  --root-color-neutral-900: #171717;
+  --root-color-neutral-950: #0f0f0f;
+
+  /* Success */
+  --root-color-success-050: #f0fdf4;
+  --root-color-success-100: #dcfce7;
+  --root-color-success-200: #b9f8cf;
+  --root-color-success-300: #7bf1a8;
+  --root-color-success-400: #05df72;
+  --root-color-success-500: #00c950;
+  --root-color-success-600: #00a63e;
+  --root-color-success-700: #008236;
+  --root-color-success-800: #016630;
+  --root-color-success-900: #0d542b;
+  --root-color-success-950: #032e15;
+
+  /* Warning */
+  --root-color-warning-050: #fff7ed;
+  --root-color-warning-100: #ffedd4;
+  --root-color-warning-200: #ffd6a7;
+  --root-color-warning-300: #ffb86a;
+  --root-color-warning-400: #ff8904;
+  --root-color-warning-500: #ff6900;
+  --root-color-warning-600: #f54900;
+  --root-color-warning-700: #ca3500;
+  --root-color-warning-800: #9f2d00;
+  --root-color-warning-900: #7e2a0c;
+  --root-color-warning-950: #441306;
+
+  /* Opacity — Brand */
+  --root-opacity-brand-050: #2b7fff05;
+  --root-opacity-brand-100: #2b7fff08;
+  --root-opacity-brand-200: #2b7fff0d;
+  --root-opacity-brand-300: #2b7fff14;
+  --root-opacity-brand-400: #2b7fff21;
+  --root-opacity-brand-500: #2b7fff36;
+  --root-opacity-brand-600: #2b7fff57;
+  --root-opacity-brand-700: #2b7fff8c;
+  --root-opacity-brand-800: #2b7fffcc;
+  --root-opacity-brand-900: #2b7fff;
+
+  /* Opacity — Danger */
+  --root-opacity-danger-050: #fb2c3605;
+  --root-opacity-danger-100: #fb2c3608;
+  --root-opacity-danger-200: #fb2c360d;
+  --root-opacity-danger-300: #fb2c3614;
+  --root-opacity-danger-400: #fb2c3621;
+  --root-opacity-danger-500: #fb2c3636;
+  --root-opacity-danger-600: #fb2c3657;
+  --root-opacity-danger-700: #fb2c368c;
+  --root-opacity-danger-800: #fb2c36cc;
+  --root-opacity-danger-900: #fb2c36;
+
+  /* Opacity — Inverse */
+  --root-opacity-inverse-050: #fafafa05;
+  --root-opacity-inverse-100: #fafafa08;
+  --root-opacity-inverse-200: #fafafa0d;
+  --root-opacity-inverse-300: #fafafa14;
+  --root-opacity-inverse-400: #fafafa3d;
+  --root-opacity-inverse-500: #fafafa52;
+  --root-opacity-inverse-600: #fafafa8f;
+  --root-opacity-inverse-700: #fafafaa3;
+  --root-opacity-inverse-800: #fafafacc;
+  --root-opacity-inverse-900: #fafafa;
+
+  /* Opacity — Neutral */
+  --root-opacity-neutral-050: #0a0a0a05;
+  --root-opacity-neutral-100: #0a0a0a08;
+  --root-opacity-neutral-200: #0a0a0a0d;
+  --root-opacity-neutral-300: #0a0a0a14;
+  --root-opacity-neutral-400: #0a0a0a21;
+  --root-opacity-neutral-500: #0a0a0a36;
+  --root-opacity-neutral-600: #0a0a0a57;
+  --root-opacity-neutral-700: #0a0a0a8c;
+  --root-opacity-neutral-800: #0a0a0ae3;
+  --root-opacity-neutral-900: #0a0a0a;
+
+  /* Opacity — Success */
+  --root-opacity-success-050: #00c95005;
+  --root-opacity-success-100: #00c95008;
+  --root-opacity-success-200: #00c9500d;
+  --root-opacity-success-300: #00c95014;
+  --root-opacity-success-400: #00c95021;
+  --root-opacity-success-500: #00c95036;
+  --root-opacity-success-600: #00c95057;
+  --root-opacity-success-700: #00c9508c;
+  --root-opacity-success-800: #00c950cc;
+  --root-opacity-success-900: #00c950;
+
+  /* Opacity — Warning */
+  --root-opacity-warning-050: #ff690005;
+  --root-opacity-warning-100: #ff690008;
+  --root-opacity-warning-200: #ff69000d;
+  --root-opacity-warning-300: #ff690014;
+  --root-opacity-warning-400: #ff690021;
+  --root-opacity-warning-500: #ff690036;
+  --root-opacity-warning-600: #ff690057;
+  --root-opacity-warning-700: #ff69008c;
+  --root-opacity-warning-800: #ff6900cc;
+  --root-opacity-warning-900: #ff6900;
+}

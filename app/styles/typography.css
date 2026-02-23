@@ -1,0 +1,118 @@
+/* ================================================================
+ * TYPOGRAPHY — Composite Classes
+ * Combines font-family, size, line-height, weight, letter-spacing
+ * into ready-to-use utility classes.
+ *
+ * Naming: .text-{category}-{scale}
+ *   category: content | heading
+ *   scale: caption | note | body | highlight | feature
+ *          small | medium | large | display
+ *
+ * Weight modifiers: .font-regular | .font-accent | .font-emphasis | .font-bold
+ * ================================================================ */
+
+@layer base {
+  /* --------------------------------
+   * Content — Inter (body copy)
+   * Default weight: regular (400)
+   * -------------------------------- */
+
+  .text-content-caption {
+    font-family: var(--font-family-content);
+    font-size: var(--font-size-content-caption);
+    line-height: var(--font-line-height-content-caption);
+    letter-spacing: var(--font-letter-spacing-content);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-content-note {
+    font-family: var(--font-family-content);
+    font-size: var(--font-size-content-note);
+    line-height: var(--font-line-height-content-note);
+    letter-spacing: var(--font-letter-spacing-content);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-content-body {
+    font-family: var(--font-family-content);
+    font-size: var(--font-size-content-body);
+    line-height: var(--font-line-height-content-body);
+    letter-spacing: var(--font-letter-spacing-content);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-content-highlight {
+    font-family: var(--font-family-content);
+    font-size: var(--font-size-content-highlight);
+    line-height: var(--font-line-height-content-highlight);
+    letter-spacing: var(--font-letter-spacing-content);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-content-feature {
+    font-family: var(--font-family-content);
+    font-size: var(--font-size-content-feature);
+    line-height: var(--font-line-height-content-feature);
+    letter-spacing: var(--font-letter-spacing-content);
+    font-weight: var(--font-weight-regular);
+  }
+
+  /* --------------------------------
+   * Heading — DM Sans
+   * Default weight: bold (700)
+   * -------------------------------- */
+
+  .text-heading-small {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-heading-small);
+    line-height: var(--font-line-height-heading-small);
+    letter-spacing: var(--font-letter-spacing-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-heading-medium {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-heading-medium);
+    line-height: var(--font-line-height-heading-medium);
+    letter-spacing: var(--font-letter-spacing-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-heading-large {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-heading-large);
+    line-height: var(--font-line-height-heading-large);
+    letter-spacing: var(--font-letter-spacing-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-heading-display {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-heading-display);
+    line-height: var(--font-line-height-heading-display);
+    letter-spacing: var(--font-letter-spacing-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* --------------------------------
+   * Weight modifiers
+   * Override the default weight of any text class
+   * Usage: class="text-content-body font-accent"
+   * -------------------------------- */
+
+  .font-regular {
+    font-weight: var(--font-weight-regular);
+  }
+
+  .font-accent {
+    font-weight: var(--font-weight-accent);
+  }
+
+  .font-emphasis {
+    font-weight: var(--font-weight-emphasis);
+  }
+
+  .font-bold {
+    font-weight: var(--font-weight-bold);
+  }
+}

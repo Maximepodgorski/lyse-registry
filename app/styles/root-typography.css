@@ -1,0 +1,61 @@
+/* ================================================================
+ * PRIMITIVES — Typography
+ * Source: Figma collection "_root font"
+ * Font metrics: sizes, weights, line-heights, letter-spacing.
+ * Note: font-weight values corrected from Figma rem export.
+ * ================================================================ */
+:root {
+  /* Letter Spacing */
+  --root-font-letter-spacing-xs: -0.125rem;
+  --root-font-letter-spacing-sm: -0.0625rem;
+  --root-font-letter-spacing-md: 0rem;
+  --root-font-letter-spacing-lg: 0.0625rem;
+  --root-font-letter-spacing-xl: 0.125rem;
+
+  /* Line Height */
+  --root-font-line-height-2xs: 0.875rem;
+  --root-font-line-height-xs: 1rem;
+  --root-font-line-height-sm: 1.25rem;
+  --root-font-line-height-md: 1.5rem;
+  --root-font-line-height-lg: 1.625rem;
+  --root-font-line-height-xl: 1.75rem;
+  --root-font-line-height-2xl: 2rem;
+  --root-font-line-height-3xl: 2.5rem;
+  --root-font-line-height-4xl: 2.875rem;
+  --root-font-line-height-5xl: 3.375rem;
+  --root-font-line-height-6xl: 4.125rem;
+  --root-font-line-height-7xl: 4.875rem;
+  --root-font-line-height-8xl: 6.625rem;
+  --root-font-line-height-9xl: 8.5rem;
+
+  /* Font Size */
+  --root-font-size-2xs: 0.625rem;
+  --root-font-size-xs: 0.75rem;
+  --root-font-size-sm: 0.875rem;
+  --root-font-size-md: 1rem;
+  --root-font-size-lg: 1.125rem;
+  --root-font-size-xl: 1.25rem;
+  --root-font-size-2xl: 1.5rem;
+  --root-font-size-3xl: 1.875rem;
+  --root-font-size-4xl: 2.25rem;
+  --root-font-size-5xl: 3rem;
+  --root-font-size-6xl: 3.75rem;
+  --root-font-size-7xl: 4.5rem;
+  --root-font-size-8xl: 6rem;
+  --root-font-size-9xl: 8rem;
+
+  /* Font Weight (corrected from Figma rem → unitless) */
+  --root-font-weight-100: 100;
+  --root-font-weight-200: 200;
+  --root-font-weight-300: 300;
+  --root-font-weight-400: 400;
+  --root-font-weight-500: 500;
+  --root-font-weight-600: 600;
+  --root-font-weight-700: 700;
+  --root-font-weight-800: 800;
+  --root-font-weight-900: 900;
+
+  /* Font Family (injected by next/font/google) */
+  --root-font-family-primary: var(--font-dm-sans);
+  --root-font-family-secondary: var(--font-inter);
+}

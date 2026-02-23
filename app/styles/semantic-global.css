@@ -1,0 +1,136 @@
+/* ================================================================
+ * SEMANTICS — Global (mode-independent)
+ * Source: Figma collection "global"
+ * Aliases to primitives. Single mode, no light/dark variation.
+ * ================================================================ */
+:root {
+  /* Typography — Letter Spacing */
+  --font-letter-spacing-heading: var(--root-font-letter-spacing-sm);
+  --font-letter-spacing-content: var(--root-font-letter-spacing-md);
+
+  /* Typography — Line Height */
+  --font-line-height-content-caption: var(--root-font-line-height-xs);
+  --font-line-height-content-note: var(--root-font-line-height-sm);
+  --font-line-height-content-body: var(--root-font-line-height-md);
+  --font-line-height-content-highlight: var(--root-font-line-height-lg);
+  --font-line-height-content-feature: var(--root-font-line-height-xl);
+  --font-line-height-heading-small: var(--root-font-line-height-xl);
+  --font-line-height-heading-medium: var(--root-font-line-height-2xl);
+  --font-line-height-heading-large: var(--root-font-line-height-3xl);
+  --font-line-height-heading-display: var(--root-font-line-height-4xl);
+
+  /* Typography — Font Size */
+  --font-size-content-caption: var(--root-font-size-xs);
+  --font-size-content-note: var(--root-font-size-sm);
+  --font-size-content-body: var(--root-font-size-md);
+  --font-size-content-highlight: var(--root-font-size-lg);
+  --font-size-content-feature: var(--root-font-size-xl);
+  --font-size-heading-small: var(--root-font-size-xl);
+  --font-size-heading-medium: var(--root-font-size-2xl);
+  --font-size-heading-large: var(--root-font-size-3xl);
+  --font-size-heading-display: var(--root-font-size-4xl);
+
+  /* Typography — Font Weight */
+  --font-weight-regular: var(--root-font-weight-400);
+  --font-weight-accent: var(--root-font-weight-500);
+  --font-weight-emphasis: var(--root-font-weight-600);
+  --font-weight-bold: var(--root-font-weight-700);
+
+  /* Typography — Font Family */
+  --font-family-content: var(--root-font-family-secondary);
+  --font-family-heading: var(--root-font-family-primary);
+
+  /* Grid */
+  --grid-column: var(--root-column-lg);
+  --grid-gutter: var(--root-space-7);
+  --grid-margin: var(--root-space-7);
+
+  /* Layout — Border */
+  --layout-border-none: var(--root-border-width-0);
+  --layout-border-thin: var(--root-border-width-1);
+  --layout-border-thick: var(--root-border-width-2);
+  --layout-border-thicker: var(--root-border-width-4);
+
+  /* Layout — Gap */
+  --layout-gap-none: var(--root-space-0);
+  --layout-gap-xs: var(--root-space-1);
+  --layout-gap-sm: var(--root-space-2);
+  --layout-gap-md: var(--root-space-4);
+  --layout-gap-lg: var(--root-space-5);
+  --layout-gap-xl: var(--root-space-6);
+  --layout-gap-2xl: var(--root-space-7);
+  --layout-gap-3xl: var(--root-space-8);
+  --layout-gap-4xl: var(--root-space-9);
+
+  /* Layout — Padding */
+  --layout-padding-none: var(--root-space-0);
+  --layout-padding-2xs: var(--root-space-1);
+  --layout-padding-xs: var(--root-space-2);
+  --layout-padding-sm: var(--root-space-3);
+  --layout-padding-md: var(--root-space-4);
+  --layout-padding-lg: var(--root-space-5);
+  --layout-padding-xl: var(--root-space-6);
+  --layout-padding-2xl: var(--root-space-7);
+  --layout-padding-3xl: var(--root-space-8);
+  --layout-padding-4xl: var(--root-space-9);
+  --layout-padding-5xl: var(--root-space-12);
+  --layout-padding-6xl: var(--root-space-15);
+
+  /* Layout — Radius */
+  --layout-radius-xs: var(--root-radius-1);
+  --layout-radius-sm: var(--root-radius-2);
+  --layout-radius-md: var(--root-radius-3);
+  --layout-radius-lg: var(--root-radius-4);
+  --layout-radius-xl: var(--root-radius-5);
+  --layout-radius-2xl: var(--root-radius-6);
+  --layout-radius-3xl: var(--root-radius-7);
+  --layout-radius-full: var(--root-radius-full);
+
+  /* Layout — Size */
+  --layout-size-2xs: var(--root-size-4);
+  --layout-size-xs: var(--root-size-5);
+  --layout-size-base: var(--root-size-6);
+  --layout-size-sm: var(--root-size-6);
+  --layout-size-md: var(--root-size-7);
+  --layout-size-lg: var(--root-size-8);
+  --layout-size-xl: var(--root-size-9);
+  --layout-size-2xl: var(--root-size-10);
+  --layout-size-3xl: var(--root-size-11);
+
+  /* Opacity */
+  --opacity-disabled: var(--root-opacity-4);
+
+  /* Shadow — Blur */
+  --shadow-blur-negative-2xl: var(--root-negative-6);
+  --shadow-blur-negative-xl: var(--root-negative-5);
+  --shadow-blur-negative-lg: var(--root-negative-3);
+  --shadow-blur-negative-md: var(--root-negative-2);
+  --shadow-blur-negative-sm: var(--root-negative-1);
+  --shadow-blur-positive-none: var(--root-positive-0);
+  --shadow-blur-positive-sm: var(--root-positive-1);
+  --shadow-blur-positive-md: var(--root-positive-2);
+  --shadow-blur-positive-lg: var(--root-positive-3);
+  --shadow-blur-positive-xl: var(--root-positive-5);
+  --shadow-blur-positive-2xl: var(--root-positive-7);
+  --shadow-blur-positive-3xl: var(--root-positive-10);
+  --shadow-blur-positive-4xl: var(--root-positive-11);
+  --shadow-blur-positive-5xl: var(--root-positive-12);
+
+  /* Shadow — Position */
+  --shadow-position-negative-3xl: var(--root-negative-6);
+  --shadow-position-negative-2xl: var(--root-negative-5);
+  --shadow-position-negative-xl: var(--root-negative-4);
+  --shadow-position-negative-lg: var(--root-negative-3);
+  --shadow-position-negative-md: var(--root-negative-2);
+  --shadow-position-negative-sm: var(--root-negative-1);
+  --shadow-position-positive-none: var(--root-positive-0);
+  --shadow-position-positive-sm: var(--root-positive-1);
+  --shadow-position-positive-md: var(--root-positive-2);
+  --shadow-position-positive-lg: var(--root-positive-3);
+  --shadow-position-positive-xl: var(--root-positive-4);
+  --shadow-position-positive-2xl: var(--root-positive-5);
+  --shadow-position-positive-3xl: var(--root-positive-7);
+  --shadow-position-positive-4xl: var(--root-positive-9);
+  --shadow-position-positive-5xl: var(--root-positive-10);
+  --shadow-position-positive-6xl: var(--root-positive-11);
+}

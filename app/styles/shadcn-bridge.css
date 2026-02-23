@@ -1,0 +1,40 @@
+/* ================================================================
+ * SHADCN COMPATIBILITY BRIDGE
+ * Maps Lyse semantic tokens → shadcn convention names.
+ * Defined once in :root — automatically resolves to dark values
+ * when .dark overrides the underlying Lyse tokens.
+ * ================================================================ */
+:root {
+  --background: var(--background-base);
+  --foreground: var(--text-base-strong);
+  --card: var(--background-elevated);
+  --card-foreground: var(--text-base-strong);
+  --popover: var(--background-elevated);
+  --popover-foreground: var(--text-base-strong);
+  --primary: var(--background-brand-strong-default);
+  --primary-foreground: var(--root-color-base-white);
+  --secondary: var(--background-neutral-lighter-default);
+  --secondary-foreground: var(--text-base-strong);
+  --muted: var(--background-neutral-faint-default);
+  --muted-foreground: var(--text-base-moderate);
+  --accent: var(--background-neutral-lighter-default);
+  --accent-foreground: var(--text-base-strong);
+  --destructive: var(--background-danger-strong-default);
+  --destructive-foreground: var(--root-color-base-white);
+  --border: var(--border-default);
+  --input: var(--border-default);
+  --ring: var(--border-selected);
+  --chart-1: var(--root-color-brand-500);
+  --chart-2: var(--root-color-success-500);
+  --chart-3: var(--root-color-warning-500);
+  --chart-4: var(--root-color-danger-500);
+  --chart-5: var(--root-color-brand-300);
+  --sidebar: var(--background-base);
+  --sidebar-foreground: var(--text-base-strong);
+  --sidebar-primary: var(--background-brand-strong-default);
+  --sidebar-primary-foreground: var(--root-color-base-white);
+  --sidebar-accent: var(--background-neutral-lighter-default);
+  --sidebar-accent-foreground: var(--text-base-strong);
+  --sidebar-border: var(--border-divider);
+  --sidebar-ring: var(--border-selected);
+}
