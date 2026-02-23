@@ -1,0 +1,92 @@
+/* ================================================================
+ * BUTTON — Variant & State Styles
+ * Structure (flex, height, gap, radius) lives in button.tsx via cva.
+ * Theming (colors, borders, states) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Variants
+ * -------------------------------- */
+
+/* Primary — Neutral strong */
+.btn-primary {
+  background: var(--background-neutral-strong-default);
+  color: var(--text-inverse);
+}
+.btn-primary:hover {
+  background: var(--background-neutral-strong-hover);
+}
+.btn-primary:active {
+  background: var(--background-neutral-strong-pressed);
+}
+.btn-primary:disabled {
+  background: var(--background-disabled);
+  color: var(--text-disabled);
+}
+
+/* Secondary — Faint + border */
+.btn-secondary {
+  background: var(--background-neutral-faint-default);
+  color: var(--text-base-strong);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+.btn-secondary:hover {
+  background: var(--background-neutral-faint-hover);
+}
+.btn-secondary:active {
+  background: var(--background-neutral-faint-pressed);
+}
+.btn-secondary:disabled {
+  background: var(--background-disabled);
+  color: var(--text-disabled);
+  border-color: var(--border-disabled);
+}
+
+/* Terciary — Ghost */
+.btn-terciary {
+  color: var(--text-base-strong);
+}
+.btn-terciary:hover {
+  background: var(--background-neutral-faint-hover);
+}
+.btn-terciary:active {
+  background: var(--background-neutral-faint-pressed);
+}
+.btn-terciary:disabled {
+  color: var(--text-disabled);
+}
+
+/* Destructive — Ghost danger */
+.btn-destructive {
+  color: var(--text-danger-moderate);
+}
+.btn-destructive:hover {
+  background: var(--background-danger-faint-hover);
+}
+.btn-destructive:active {
+  background: var(--background-danger-faint-pressed);
+}
+.btn-destructive:disabled {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Focus ring (all variants)
+ * -------------------------------- */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-terciary:focus-visible,
+.btn-destructive:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* --------------------------------
+ * Disabled (all variants)
+ * -------------------------------- */
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-terciary:disabled,
+.btn-destructive:disabled {
+  pointer-events: none;
+}

@@ -1,0 +1,27 @@
+/* ================================================================
+ * TOOLTIP — Content & Shortcut Styles
+ * Structure (flex, gap, padding, radius, max-w) lives in tooltip.tsx via cva.
+ * Theming (colors, borders) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Tooltip content
+ * -------------------------------- */
+.tooltip-content {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  color: var(--text-base-bolder);
+}
+
+/* --------------------------------
+ * Keyboard shortcut indicator
+ * -------------------------------- */
+.tooltip-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--layout-padding-2xs) var(--layout-padding-xs);
+  border: var(--layout-border-thin) solid var(--border-default);
+  border-radius: var(--layout-radius-sm);
+  color: var(--text-base-medium);
+}

@@ -1,0 +1,77 @@
+/* ================================================================
+ * TOAST — Styles
+ * Structure (flex, gap, padding, radius) lives in toast.tsx via cva.
+ * Theming (colors, borders, shadow) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Base
+ * -------------------------------- */
+.toast-base {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  color: var(--text-base-strong);
+  box-shadow:
+    0 3px 8px 0 rgba(0, 0, 0, 0.04),
+    0 14px 14px 0 rgba(0, 0, 0, 0.03),
+    0 31px 19px 0 rgba(0, 0, 0, 0.02),
+    0 55px 22px 0 rgba(0, 0, 0, 0.01);
+}
+
+/* --------------------------------
+ * Variant icon colors
+ * -------------------------------- */
+.toast-brand .toast-icon {
+  color: var(--text-brand-moderate);
+}
+
+.toast-success .toast-icon {
+  color: var(--text-success-moderate);
+}
+
+.toast-danger .toast-icon {
+  color: var(--text-danger-moderate);
+}
+
+.toast-warning .toast-icon {
+  color: var(--text-warning-moderate);
+}
+
+/* --------------------------------
+ * Close button
+ * -------------------------------- */
+.toast-close {
+  color: var(--text-base-moderate);
+}
+
+.toast-close:hover {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Stacking transitions
+ * -------------------------------- */
+.toast-item {
+  transition:
+    margin-bottom 300ms cubic-bezier(0.2, 0, 0, 1),
+    transform 300ms cubic-bezier(0.2, 0, 0, 1),
+    opacity 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* --------------------------------
+ * Enter animation
+ * -------------------------------- */
+@keyframes toast-slide-in {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toast-enter {
+  animation: toast-slide-in 300ms cubic-bezier(0.2, 0, 0, 1);
+}

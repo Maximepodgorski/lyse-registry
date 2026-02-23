@@ -1,0 +1,96 @@
+/* ================================================================
+ * BADGE — Variant & Type Styles
+ * Structure (flex, min-w, gap, padding, radius) lives in badge.tsx via cva.
+ * Theming (colors, borders, dot) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Variant tokens
+ * Each variant sets scoped custom properties.
+ * -------------------------------- */
+
+.badge-brand {
+  --badge-overlay: var(--overlay-brand-default);
+  --badge-bg: var(--background-brand-strong-default);
+  --badge-text: var(--text-brand-moderate);
+  --badge-text-filled: var(--text-fixed);
+  --badge-border: var(--border-brand-lighter);
+}
+
+.badge-neutral {
+  --badge-overlay: var(--overlay-neutral-default);
+  --badge-bg: var(--background-neutral-strong-default);
+  --badge-text: var(--text-base-moderate);
+  --badge-text-filled: var(--text-inverse);
+  --badge-border: var(--border-neutral-lighter);
+}
+
+.badge-success {
+  --badge-overlay: var(--overlay-success-default);
+  --badge-bg: var(--background-success-strong-default);
+  --badge-text: var(--text-success-moderate);
+  --badge-text-filled: var(--text-fixed);
+  --badge-border: var(--border-success-lighter);
+}
+
+.badge-danger {
+  --badge-overlay: var(--overlay-danger-default);
+  --badge-bg: var(--background-danger-strong-default);
+  --badge-text: var(--text-danger-moderate);
+  --badge-text-filled: var(--text-fixed);
+  --badge-border: var(--border-danger-lighter);
+}
+
+.badge-warning {
+  --badge-overlay: var(--overlay-warning-default);
+  --badge-bg: var(--background-warning-strong-default);
+  --badge-text: var(--text-warning-moderate);
+  --badge-text-filled: var(--text-fixed);
+  --badge-border: var(--border-warning-lighter);
+}
+
+/* --------------------------------
+ * Default state (non-filled)
+ * -------------------------------- */
+.badge-brand,
+.badge-neutral,
+.badge-success,
+.badge-danger,
+.badge-warning {
+  background: var(--badge-overlay);
+  color: var(--badge-text);
+}
+
+/* --------------------------------
+ * Filled state
+ * -------------------------------- */
+.badge-filled {
+  background: var(--badge-bg);
+  color: var(--badge-text-filled);
+}
+
+/* --------------------------------
+ * Type — light (solid border)
+ * -------------------------------- */
+.badge-light {
+  border: var(--layout-border-thin) solid var(--badge-border);
+}
+
+/* --------------------------------
+ * Type — dash (dashed border)
+ * -------------------------------- */
+.badge-dash {
+  border: var(--layout-border-thin) dashed var(--badge-border);
+}
+
+/* --------------------------------
+ * Dot
+ * -------------------------------- */
+.badge-dot {
+  border-radius: var(--layout-radius-full);
+  background: var(--badge-bg);
+}
+
+.badge-filled .badge-dot {
+  background: var(--badge-text-filled);
+}

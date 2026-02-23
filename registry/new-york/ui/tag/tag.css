@@ -1,0 +1,117 @@
+/* ================================================================
+ * TAG — Variant & Type Styles
+ * Structure (flex, gap, padding, radius) lives in tag.tsx via cva.
+ * Theming (colors, borders, dot) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Variant tokens
+ * Each variant sets scoped custom properties.
+ * -------------------------------- */
+
+.tag-brand {
+  --tag-bg-faint: var(--background-brand-faint-default);
+  --tag-bg-lighter: var(--background-brand-lighter-default);
+  --tag-text: var(--text-brand-moderate);
+  --tag-border-variant: var(--border-brand-lighter);
+  --tag-dot-color: var(--background-brand-strong-default);
+}
+
+.tag-neutral {
+  --tag-bg-faint: var(--background-neutral-faint-default);
+  --tag-bg-lighter: var(--background-neutral-lighter-default);
+  --tag-text: var(--text-base-strong);
+  --tag-border-variant: var(--border-default);
+  --tag-dot-color: var(--background-neutral-strong-default);
+}
+
+.tag-success {
+  --tag-bg-faint: var(--background-success-faint-default);
+  --tag-bg-lighter: var(--background-success-lighter-default);
+  --tag-text: var(--text-success-moderate);
+  --tag-border-variant: var(--border-success-lighter);
+  --tag-dot-color: var(--background-success-strong-default);
+}
+
+.tag-danger {
+  --tag-bg-faint: var(--background-danger-faint-default);
+  --tag-bg-lighter: var(--background-danger-lighter-default);
+  --tag-text: var(--text-danger-moderate);
+  --tag-border-variant: var(--border-danger-lighter);
+  --tag-dot-color: var(--background-danger-strong-default);
+}
+
+.tag-warning {
+  --tag-bg-faint: var(--background-warning-faint-default);
+  --tag-bg-lighter: var(--background-warning-lighter-default);
+  --tag-text: var(--text-warning-moderate);
+  --tag-border-variant: var(--border-warning-lighter);
+  --tag-dot-color: var(--background-warning-strong-default);
+}
+
+/* --------------------------------
+ * All variants share text color
+ * -------------------------------- */
+.tag-brand,
+.tag-neutral,
+.tag-success,
+.tag-danger,
+.tag-warning {
+  color: var(--tag-text);
+}
+
+/* --------------------------------
+ * Type — fill (colored bg + colored border, solid)
+ * -------------------------------- */
+.tag-fill {
+  background: var(--tag-bg-faint);
+  border: var(--layout-border-thin) solid var(--tag-border-variant);
+}
+
+/* --------------------------------
+ * Type — dash (colored bg + colored border, dashed)
+ * -------------------------------- */
+.tag-dash {
+  background: var(--tag-bg-faint);
+  border: var(--layout-border-thin) dashed var(--tag-border-variant);
+}
+
+/* --------------------------------
+ * Type — emphasis (lighter bg + default border)
+ * -------------------------------- */
+.tag-emphasis {
+  background: var(--background-neutral-lighter-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Type — ghost (no bg, default border)
+ * -------------------------------- */
+.tag-ghost {
+  border: var(--layout-border-thin) solid var(--border-default);
+  color: var(--text-base-strong);
+}
+
+.tag-ghost > svg {
+  color: var(--tag-text);
+}
+
+/* --------------------------------
+ * Dot
+ * -------------------------------- */
+.tag-dot {
+  border-radius: var(--layout-radius-full);
+  background: var(--tag-dot-color);
+}
+
+/* --------------------------------
+ * Close button
+ * -------------------------------- */
+.tag-close {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.tag-close:hover {
+  opacity: 1;
+}
