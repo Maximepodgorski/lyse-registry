@@ -1,0 +1,88 @@
+/* ================================================================
+ * RADIO — Indicator & State Styles
+ * Structure (flex, size, gap, radius) lives in radio.tsx via cva.
+ * Theming (colors, borders, states) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Indicator — base
+ * -------------------------------- */
+.radio-indicator {
+  border: var(--layout-border-thin) solid var(--border-default);
+  overflow: hidden;
+}
+
+/* --------------------------------
+ * Indicator — unchecked states
+ * -------------------------------- */
+.radio-indicator[data-state="unchecked"] {
+  background: var(--background-neutral-faint-default);
+}
+.radio-indicator[data-state="unchecked"]:not([data-disabled]):hover {
+  background: var(--background-neutral-faint-hover);
+}
+.radio-indicator[data-state="unchecked"]:not([data-disabled]):active {
+  background: var(--background-neutral-faint-pressed);
+}
+
+/* --------------------------------
+ * Indicator — checked states
+ * -------------------------------- */
+.radio-indicator[data-state="checked"] {
+  background: var(--background-brand-strong-default);
+}
+.radio-indicator[data-state="checked"]:not([data-disabled]):hover {
+  background: var(--background-brand-strong-hover);
+}
+.radio-indicator[data-state="checked"]:not([data-disabled]):active {
+  background: var(--background-brand-strong-pressed);
+}
+
+/* --------------------------------
+ * Indicator — disabled
+ * -------------------------------- */
+.radio-indicator[data-disabled] {
+  background: var(--background-disabled);
+  border-color: var(--border-disabled);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* --------------------------------
+ * Focus ring (matches Button pattern)
+ * -------------------------------- */
+.radio-indicator:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* --------------------------------
+ * Checked dot
+ * -------------------------------- */
+.radio-dot {
+  background: var(--text-fixed);
+}
+.radio-indicator[data-disabled] .radio-dot {
+  background: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Text — label & description
+ * -------------------------------- */
+.radio-label {
+  color: var(--text-base-strong);
+}
+.radio-description {
+  color: var(--text-base-medium);
+}
+
+/* --------------------------------
+ * Text — disabled
+ * -------------------------------- */
+[data-slot="radio"][data-disabled] .radio-label,
+[data-slot="radio"][data-disabled] .radio-description {
+  color: var(--text-disabled);
+}
+[data-slot="radio"][data-disabled] label {
+  cursor: default;
+}
