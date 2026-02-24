@@ -78,6 +78,23 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "menu",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-slot"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/ui/menu/menu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/menu/menu.css",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

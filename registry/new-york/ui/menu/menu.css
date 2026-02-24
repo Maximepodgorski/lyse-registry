@@ -1,0 +1,126 @@
+/* ================================================================
+ * MENU — Styles
+ * Structure (flex, gap, padding, radius) lives in menu.tsx via cva.
+ * Theming (colors, borders, focus ring) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * MenuItem — base
+ * -------------------------------- */
+.menu-item {
+  color: var(--text-base-strong);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menu-item {
+    transition:
+      background 150ms ease,
+      color 150ms ease;
+  }
+}
+
+.menu-item:hover {
+  background: var(--background-neutral-faint-hover);
+}
+
+.menu-item:active {
+  background: var(--background-neutral-faint-pressed);
+}
+
+.menu-item:focus-visible {
+  background: var(--background-neutral-faint-hover);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
+}
+
+/* --------------------------------
+ * MenuItem — active state
+ * -------------------------------- */
+.menu-item-active {
+  background: var(--background-neutral-lighter-default);
+}
+
+.menu-item-active:hover {
+  background: var(--background-neutral-lighter-hover);
+}
+
+/* --------------------------------
+ * MenuItem — accent variant
+ * -------------------------------- */
+.menu-item-accent {
+  color: var(--text-brand-moderate);
+}
+
+.menu-item.menu-item-accent .menu-item-icon {
+  color: var(--text-brand-moderate);
+}
+
+.menu-item.menu-item-accent:hover .menu-item-icon {
+  color: var(--text-brand-moderate);
+}
+
+/* --------------------------------
+ * MenuItem — disabled
+ * -------------------------------- */
+.menu-item-disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.menu-item-disabled .menu-item-icon {
+  color: var(--text-disabled);
+}
+
+.menu-item-disabled .menu-item-shortcut {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Icon
+ * -------------------------------- */
+.menu-item-icon {
+  color: var(--text-base-moderate);
+}
+
+.menu-item:hover .menu-item-icon {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Shortcut
+ * -------------------------------- */
+.menu-item-shortcut {
+  color: var(--text-base-medium);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Badge
+ * -------------------------------- */
+.menu-item-badge {
+  background: var(--overlay-brand-default);
+  border: var(--layout-border-thin) solid var(--border-brand-lighter);
+  color: var(--text-brand-moderate);
+}
+
+/* --------------------------------
+ * Dot
+ * -------------------------------- */
+.menu-item-dot {
+  background: var(--background-brand-strong-default);
+}
+
+/* --------------------------------
+ * Divider
+ * -------------------------------- */
+.menu-divider {
+  border-top: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Group label
+ * -------------------------------- */
+.menu-group-label {
+  color: var(--text-base-moderate);
+}
