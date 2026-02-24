@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Tag, TagDot, TagClose } from "@/registry/new-york/ui/tag/tag"
+import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink, Clock8 } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
@@ -241,7 +242,6 @@ type Tab = "overview" | "props"
 
 export default function TagPage() {
   const [tab, setTab] = useState<Tab>("overview")
-  const [copied, setCopied] = useState(false)
 
   return (
     <>
@@ -273,14 +273,11 @@ export default function TagPage() {
               onClick={() => {
                 navigator.clipboard
                   .writeText("npx shadcn@latest add @lyse/tag")
-                  .then(() => {
-                    setCopied(true)
-                    setTimeout(() => setCopied(false), 2000)
-                  })
+                  .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}
             >
-              {copied ? "Copied!" : <><Copy /> Copy install command</>}
+              <><Copy /> Copy install command</>
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -331,64 +328,66 @@ export default function TagPage() {
           </div>
 
           {/* Code example */}
-          <CodeBlock
-            preview={<Tag size="md">Tag</Tag>}
-            code={
-              <>
-                <span style={{ color: "#c084fc" }}>import</span>
-                {" { "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
+          {tab === "overview" && (
+            <CodeBlock
+              preview={<Tag size="md">Tag</Tag>}
+              code={
+                <>
+                  <span style={{ color: "#c084fc" }}>import</span>
+                  {" { "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Tag
+                  </span>
+                  {" } "}
+                  <span style={{ color: "#c084fc" }}>from</span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-warning-400)" }}
+                  >{`'@/components/ui/tag'`}</span>
+                  {"\n\n"}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    export default
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    function
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Example
+                  </span>
+                  {"() {\n"}
+                  {"  "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    return
+                  </span>{" "}
+                  {"<"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Tag
+                  </span>
+                  {">"}
                   Tag
-                </span>
-                {" } "}
-                <span style={{ color: "#c084fc" }}>from</span>{" "}
-                <span
-                  style={{ color: "var(--root-color-warning-400)" }}
-                >{`'@/components/ui/tag'`}</span>
-                {"\n\n"}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  export default
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  function
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Example
-                </span>
-                {"() {\n"}
-                {"  "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  return
-                </span>{" "}
-                {"<"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Tag
-                </span>
-                {">"}
-                Tag
-                {"</"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Tag
-                </span>
-                {">\n"}
-                {"}"}
-              </>
-            }
-          />
+                  {"</"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Tag
+                  </span>
+                  {">\n"}
+                  {"}"}
+                </>
+              }
+            />
+          )}
 
           {/* Tab content */}
           {tab === "overview" ? (

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/registry/new-york/ui/button/button"
+import { toast } from "@/registry/new-york/ui/toast/toast"
 import {
   Heart,
   Mail,
@@ -183,7 +184,6 @@ type Tab = "overview" | "props"
 
 export default function ButtonPage() {
   const [tab, setTab] = useState<Tab>("overview")
-  const [copied, setCopied] = useState(false)
 
   return (
     <>
@@ -215,14 +215,11 @@ export default function ButtonPage() {
               onClick={() => {
                 navigator.clipboard
                   .writeText("npx shadcn@latest add @lyse/button")
-                  .then(() => {
-                    setCopied(true)
-                    setTimeout(() => setCopied(false), 2000)
-                  })
+                  .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}
             >
-              {copied ? "Copied!" : <><Copy /> Copy install command</>}
+              <><Copy /> Copy install command</>
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -273,64 +270,66 @@ export default function ButtonPage() {
           </div>
 
           {/* Code example */}
-          <CodeBlock
-            preview={<Button>Button</Button>}
-            code={
-              <>
-                <span style={{ color: "#c084fc" }}>import</span>
-                {" { "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
+          {tab === "overview" && (
+            <CodeBlock
+              preview={<Button>Button</Button>}
+              code={
+                <>
+                  <span style={{ color: "#c084fc" }}>import</span>
+                  {" { "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Button
+                  </span>
+                  {" } "}
+                  <span style={{ color: "#c084fc" }}>from</span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-warning-400)" }}
+                  >{`'@/components/ui/button'`}</span>
+                  {"\n\n"}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    export default
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    function
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Example
+                  </span>
+                  {"() {\n"}
+                  {"  "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    return
+                  </span>{" "}
+                  {"<"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Button
+                  </span>
+                  {">"}
                   Button
-                </span>
-                {" } "}
-                <span style={{ color: "#c084fc" }}>from</span>{" "}
-                <span
-                  style={{ color: "var(--root-color-warning-400)" }}
-                >{`'@/components/ui/button'`}</span>
-                {"\n\n"}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  export default
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  function
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Example
-                </span>
-                {"() {\n"}
-                {"  "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  return
-                </span>{" "}
-                {"<"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Button
-                </span>
-                {">"}
-                Button
-                {"</"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Button
-                </span>
-                {">\n"}
-                {"}"}
-              </>
-            }
-          />
+                  {"</"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Button
+                  </span>
+                  {">\n"}
+                  {"}"}
+                </>
+              }
+            />
+          )}
 
           {/* Tab content */}
           {tab === "overview" ? (

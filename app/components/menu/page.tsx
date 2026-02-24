@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { toast } from "@/registry/new-york/ui/toast/toast"
 import {
   Menu,
   MenuGroup,
@@ -257,7 +258,10 @@ function OverviewTab() {
             }}
           >
             <div className="flex-1">
-              <Menu>
+              <Menu className="gap-4">
+                <div className="p-[var(--layout-padding-xs)]">
+                  <img src="/logotype.svg" alt="Lyse" className="size-6" />
+                </div>
                 <MenuGroup label="Workspace">
                   <MenuItem size="sm" icon={<Home />} isActive>
                     Members
@@ -302,7 +306,6 @@ type Tab = "overview" | "props"
 
 export default function MenuPage() {
   const [tab, setTab] = useState<Tab>("overview")
-  const [copied, setCopied] = useState(false)
 
   return (
     <>
@@ -334,14 +337,11 @@ export default function MenuPage() {
               onClick={() => {
                 navigator.clipboard
                   .writeText("npx shadcn@latest add @lyse/menu")
-                  .then(() => {
-                    setCopied(true)
-                    setTimeout(() => setCopied(false), 2000)
-                  })
+                  .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}
             >
-              {copied ? "Copied!" : <><Copy className="size-4" /> Copy install command</>}
+              <><Copy className="size-4" /> Copy install command</>
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -392,78 +392,80 @@ export default function MenuPage() {
           </div>
 
           {/* Code example */}
-          <CodeBlock
-            preview={
-              <div className="w-[240px]">
-                <MenuItem icon={<Home />}>Home</MenuItem>
-              </div>
-            }
-            code={
-              <>
-                <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
-                {" { "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  MenuItem
-                </span>
-                {" } "}
-                <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
-                <span
-                  style={{ color: "var(--root-color-warning-400)" }}
-                >{`'@/components/ui/menu'`}</span>
-                {"\n\n"}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  export default
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  function
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Example
-                </span>
-                {"() {\n"}
-                {"  "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  return
-                </span>{" "}
-                {"<"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  MenuItem
-                </span>
-                {" "}
-                <span style={{ color: "var(--root-color-brand-300)" }}>
-                  icon
-                </span>
-                {"={<"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
+          {tab === "overview" && (
+            <CodeBlock
+              preview={
+                <div className="w-[240px]">
+                  <MenuItem icon={<Home />}>Home</MenuItem>
+                </div>
+              }
+              code={
+                <>
+                  <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
+                  {" { "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    MenuItem
+                  </span>
+                  {" } "}
+                  <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-warning-400)" }}
+                  >{`'@/components/ui/menu'`}</span>
+                  {"\n\n"}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    export default
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    function
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Example
+                  </span>
+                  {"() {\n"}
+                  {"  "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    return
+                  </span>{" "}
+                  {"<"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    MenuItem
+                  </span>
+                  {" "}
+                  <span style={{ color: "var(--root-color-brand-300)" }}>
+                    icon
+                  </span>
+                  {"={<"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Home
+                  </span>
+                  {" />}>"}
                   Home
-                </span>
-                {" />}>"}
-                Home
-                {"</"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  MenuItem
-                </span>
-                {">\n"}
-                {"}"}
-              </>
-            }
-          />
+                  {"</"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    MenuItem
+                  </span>
+                  {">\n"}
+                  {"}"}
+                </>
+              }
+            />
+          )}
 
           {/* Tab content */}
           {tab === "overview" ? (

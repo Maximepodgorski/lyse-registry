@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ChevronLeft, ChevronRight } from "lucide-react"
@@ -9,6 +10,7 @@ import {
   MenuGroup,
   MenuItem,
 } from "@/registry/new-york/ui/menu/menu"
+import { Toaster } from "@/registry/new-york/ui/toast/toast"
 
 const navGroups = [
   {
@@ -66,7 +68,7 @@ export default function ComponentsLayout({
     >
       {/* Header */}
       <header
-        className="sticky top-0 z-10 px-6 h-14 flex items-center justify-between backdrop-blur-md"
+        className="sticky top-0 z-10 px-[var(--layout-padding-2xl)] h-14 flex items-center justify-between backdrop-blur-md"
         style={{
           background:
             "color-mix(in srgb, var(--background-base) 80%, transparent)",
@@ -74,12 +76,7 @@ export default function ComponentsLayout({
             "var(--layout-border-thin) solid var(--border-default)",
         }}
       >
-        <span
-          className="text-content-body font-bold"
-          style={{ color: "var(--text-base-strong)" }}
-        >
-          Lyse UI
-        </span>
+        <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto" />
         <Button variant="terciary" size="sm" asChild>
           <a
             href="https://github.com/lyse-labs/registry"
@@ -95,7 +92,7 @@ export default function ComponentsLayout({
       <div className="flex-1 w-full flex">
         {/* Left sidebar */}
         <Menu
-          className="hidden lg:flex w-56 shrink-0 pt-[var(--layout-padding-lg)] pb-16 px-[var(--layout-padding-lg)] sticky top-14 h-[calc(100svh-3.5rem)] overflow-y-auto"
+          className="hidden lg:flex w-56 shrink-0 pt-[var(--layout-padding-lg)] pb-[var(--root-space-11)] px-[var(--layout-padding-lg)] sticky top-14 h-[calc(100svh-3.5rem)] overflow-y-auto"
           style={{
             background: "var(--background-base)",
             borderRight:
@@ -135,9 +132,9 @@ export default function ComponentsLayout({
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Breadcrumb */}
           {breadcrumb && (
-            <div className="px-8 lg:px-16 xl:px-20 pt-6">
+            <div className="px-[var(--layout-padding-3xl)] lg:px-[var(--root-space-11)] xl:px-[var(--root-space-12)] pt-[var(--layout-padding-2xl)]">
               <nav
-                className="text-content-caption font-accent flex items-center gap-1.5"
+                className="text-content-caption font-accent flex items-center gap-[var(--layout-padding-sm)]"
                 style={{ color: "var(--text-base-moderate)" }}
                 aria-label="Breadcrumb"
               >
@@ -156,7 +153,7 @@ export default function ComponentsLayout({
           {/* Prev / Next */}
           {(prev || next) && (
             <nav
-              className="flex items-center justify-between px-8 lg:px-16 xl:px-20 py-10"
+              className="flex items-center justify-between px-[var(--layout-padding-3xl)] lg:px-[var(--root-space-11)] xl:px-[var(--root-space-12)] py-[var(--layout-padding-4xl)]"
               style={{
                 borderTop:
                   "var(--layout-border-thin) solid var(--border-default)",
@@ -166,7 +163,7 @@ export default function ComponentsLayout({
               {prev ? (
                 <Link
                   href={prev.href}
-                  className="flex items-center gap-2 text-content-note font-accent group"
+                  className="flex items-center gap-[var(--layout-gap-md)] text-content-note font-accent group"
                   style={{ color: "var(--text-base-moderate)" }}
                 >
                   <ChevronLeft
@@ -186,7 +183,7 @@ export default function ComponentsLayout({
               {next ? (
                 <Link
                   href={next.href}
-                  className="flex items-center gap-2 text-content-note font-accent group text-right"
+                  className="flex items-center gap-[var(--layout-gap-md)] text-content-note font-accent group text-right"
                   style={{ color: "var(--text-base-moderate)" }}
                 >
                   <div className="flex flex-col">
@@ -210,7 +207,7 @@ export default function ComponentsLayout({
 
       {/* Footer */}
       <footer
-        className="px-6 py-6 text-center text-content-caption"
+        className="px-[var(--layout-padding-2xl)] py-[var(--layout-padding-2xl)] text-center text-content-caption"
         style={{
           color: "var(--text-base-moderate)",
           borderTop:
@@ -226,6 +223,8 @@ export default function ComponentsLayout({
           Lyse Labs
         </a>
       </footer>
+
+      <Toaster />
     </div>
   )
 }

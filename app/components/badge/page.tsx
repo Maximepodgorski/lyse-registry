@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Badge, BadgeDot } from "@/registry/new-york/ui/badge/badge"
+import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
@@ -209,7 +210,6 @@ type Tab = "overview" | "props"
 
 export default function BadgePage() {
   const [tab, setTab] = useState<Tab>("overview")
-  const [copied, setCopied] = useState(false)
 
   return (
     <>
@@ -240,14 +240,11 @@ export default function BadgePage() {
               onClick={() => {
                 navigator.clipboard
                   .writeText("npx shadcn@latest add @lyse/badge")
-                  .then(() => {
-                    setCopied(true)
-                    setTimeout(() => setCopied(false), 2000)
-                  })
+                  .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}
             >
-              {copied ? "Copied!" : <><Copy /> Copy install command</>}
+              <><Copy /> Copy install command</>
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -298,64 +295,66 @@ export default function BadgePage() {
           </div>
 
           {/* Code example */}
-          <CodeBlock
-            preview={<Badge>Badge</Badge>}
-            code={
-              <>
-                <span style={{ color: "#c084fc" }}>import</span>
-                {" { "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
+          {tab === "overview" && (
+            <CodeBlock
+              preview={<Badge>Badge</Badge>}
+              code={
+                <>
+                  <span style={{ color: "#c084fc" }}>import</span>
+                  {" { "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Badge
+                  </span>
+                  {" } "}
+                  <span style={{ color: "#c084fc" }}>from</span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-warning-400)" }}
+                  >{`'@/components/ui/badge'`}</span>
+                  {"\n\n"}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    export default
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    function
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Example
+                  </span>
+                  {"() {\n"}
+                  {"  "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    return
+                  </span>{" "}
+                  {"<"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Badge
+                  </span>
+                  {">"}
                   Badge
-                </span>
-                {" } "}
-                <span style={{ color: "#c084fc" }}>from</span>{" "}
-                <span
-                  style={{ color: "var(--root-color-warning-400)" }}
-                >{`'@/components/ui/badge'`}</span>
-                {"\n\n"}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  export default
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  function
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Example
-                </span>
-                {"() {\n"}
-                {"  "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  return
-                </span>{" "}
-                {"<"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Badge
-                </span>
-                {">"}
-                Badge
-                {"</"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Badge
-                </span>
-                {">\n"}
-                {"}"}
-              </>
-            }
-          />
+                  {"</"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Badge
+                  </span>
+                  {">\n"}
+                  {"}"}
+                </>
+              }
+            />
+          )}
 
           {/* Tab content */}
           {tab === "overview" ? (

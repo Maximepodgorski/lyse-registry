@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { toast } from "@/registry/new-york/ui/toast/toast"
 import {
   Tooltip,
   TooltipContent,
@@ -215,7 +216,6 @@ type Tab = "overview" | "props"
 
 export default function TooltipPage() {
   const [tab, setTab] = useState<Tab>("overview")
-  const [copied, setCopied] = useState(false)
 
   return (
     <>
@@ -246,14 +246,11 @@ export default function TooltipPage() {
               onClick={() => {
                 navigator.clipboard
                   .writeText("npx shadcn@latest add @lyse/tooltip")
-                  .then(() => {
-                    setCopied(true)
-                    setTimeout(() => setCopied(false), 2000)
-                  })
+                  .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}
             >
-              {copied ? "Copied!" : <><Copy /> Copy install command</>}
+              <><Copy /> Copy install command</>
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -304,117 +301,119 @@ export default function TooltipPage() {
           </div>
 
           {/* Code example */}
-          <CodeBlock
-            preview={
-              <TooltipProvider delayDuration={100}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button>Hover me</Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
+          {tab === "overview" && (
+            <CodeBlock
+              preview={
+                <TooltipProvider delayDuration={100}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button>Hover me</Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      Tooltip
+                      <TooltipShortcut>&#8984;C</TooltipShortcut>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              }
+              code={
+                <>
+                  <span style={{ color: "#c084fc" }}>import</span>
+                  {" { "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Tooltip, TooltipContent, TooltipProvider, TooltipTrigger
+                  </span>
+                  {" }\n"}
+                  <span style={{ color: "#c084fc" }}>from</span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-warning-400)" }}
+                  >{`'@/components/ui/tooltip'`}</span>
+                  {"\n\n"}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    export default
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    function
+                  </span>{" "}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Example
+                  </span>
+                  {"() {\n"}
+                  {"  "}
+                  <span
+                    style={{ color: "var(--root-color-brand-400)" }}
+                  >
+                    return
+                  </span>
+                  {" (\n"}
+                  {"    <"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    TooltipProvider
+                  </span>
+                  {">\n"}
+                  {"      <"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
                     Tooltip
-                    <TooltipShortcut>&#8984;C</TooltipShortcut>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            }
-            code={
-              <>
-                <span style={{ color: "#c084fc" }}>import</span>
-                {" { "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Tooltip, TooltipContent, TooltipProvider, TooltipTrigger
-                </span>
-                {" }\n"}
-                <span style={{ color: "#c084fc" }}>from</span>{" "}
-                <span
-                  style={{ color: "var(--root-color-warning-400)" }}
-                >{`'@/components/ui/tooltip'`}</span>
-                {"\n\n"}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  export default
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  function
-                </span>{" "}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Example
-                </span>
-                {"() {\n"}
-                {"  "}
-                <span
-                  style={{ color: "var(--root-color-brand-400)" }}
-                >
-                  return
-                </span>
-                {" (\n"}
-                {"    <"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  TooltipProvider
-                </span>
-                {">\n"}
-                {"      <"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Tooltip
-                </span>
-                {">\n"}
-                {"        <"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  TooltipTrigger
-                </span>
-                {">Hover me</"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  TooltipTrigger
-                </span>
-                {">\n"}
-                {"        <"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  TooltipContent
-                </span>
-                {">Tooltip</"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  TooltipContent
-                </span>
-                {">\n"}
-                {"      </"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  Tooltip
-                </span>
-                {">\n"}
-                {"    </"}
-                <span
-                  style={{ color: "var(--root-color-success-400)" }}
-                >
-                  TooltipProvider
-                </span>
-                {">\n"}
-                {"  )\n"}
-                {"}"}
-              </>
-            }
-          />
+                  </span>
+                  {">\n"}
+                  {"        <"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    TooltipTrigger
+                  </span>
+                  {">Hover me</"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    TooltipTrigger
+                  </span>
+                  {">\n"}
+                  {"        <"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    TooltipContent
+                  </span>
+                  {">Tooltip</"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    TooltipContent
+                  </span>
+                  {">\n"}
+                  {"      </"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    Tooltip
+                  </span>
+                  {">\n"}
+                  {"    </"}
+                  <span
+                    style={{ color: "var(--root-color-success-400)" }}
+                  >
+                    TooltipProvider
+                  </span>
+                  {">\n"}
+                  {"  )\n"}
+                  {"}"}
+                </>
+              }
+            />
+          )}
 
           {/* Tab content */}
           {tab === "overview" ? (

@@ -12,7 +12,7 @@ export function ComponentPreview({
   children: React.ReactNode
 }) {
   return (
-    <section id={id} className="flex flex-col gap-3 scroll-mt-[110px]">
+    <section id={id} className="flex flex-col gap-[var(--layout-gap-lg)] scroll-mt-[110px]">
       <h3
         className="text-heading-small"
         style={{ color: "var(--text-base-strong)" }}
@@ -28,13 +28,13 @@ export function ComponentPreview({
         </p>
       )}
       <div
-        className="overflow-hidden rounded-xl"
+        className="overflow-hidden rounded-[var(--layout-radius-xl)]"
         style={{
           border: "var(--layout-border-thin) solid var(--border-default)",
         }}
       >
         <div
-          className="flex items-center flex-wrap gap-4 px-8 py-10"
+          className="flex items-center flex-wrap gap-[var(--layout-gap-xl)] px-[var(--layout-padding-3xl)] py-[var(--layout-padding-4xl)]"
           style={{
             background: "var(--background-neutral-faint-default)",
           }}
