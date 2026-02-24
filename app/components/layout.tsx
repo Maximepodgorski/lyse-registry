@@ -30,6 +30,11 @@ const navGroups = [
       { label: "Tooltip", href: "/components/tooltip" },
       { label: "Toast", href: "/components/toast" },
       { label: "Menu", href: "/components/menu" },
+      { label: "Checkbox", href: "/components/checkbox" },
+      { label: "Radio", href: "/components/radio" },
+      { label: "Toggle", href: "/components/toggle" },
+      { label: "BannerInfo", href: "/components/banner-info" },
+      { label: "Avatar", href: "/components/avatar" },
     ],
   },
 ] as const
@@ -103,23 +108,23 @@ export default function ComponentsLayout({
             <MenuGroup key={group.label} label={group.label}>
               {group.items.map((item) => {
                 const href = "href" in item ? item.href : undefined
-                const isActive = href === pathname
+                const isCurrent = href === pathname
                 return href ? (
                   <MenuItem
                     key={item.label}
                     size="sm"
-                    isActive={isActive}
+                    active={isCurrent}
                     asChild
                   >
                     <Link
                       href={href}
-                      aria-current={isActive ? "page" : undefined}
+                      aria-current={isCurrent ? "page" : undefined}
                     >
                       {item.label}
                     </Link>
                   </MenuItem>
                 ) : (
-                  <MenuItem key={item.label} size="sm" isDisabled>
+                  <MenuItem key={item.label} size="sm" disabled>
                     {item.label}
                   </MenuItem>
                 )

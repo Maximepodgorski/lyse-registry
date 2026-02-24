@@ -95,6 +95,93 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-checkbox",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/ui/checkbox/checkbox.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/checkbox/checkbox.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-radio-group"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/ui/radio/radio.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/radio/radio.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-switch"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/ui/toggle/toggle.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/toggle/toggle.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "banner-info",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/ui/banner-info/banner-info.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/banner-info/banner-info.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/new-york/ui/avatar/avatar.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/avatar/avatar.css",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
