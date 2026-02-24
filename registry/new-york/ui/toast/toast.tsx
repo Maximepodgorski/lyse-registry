@@ -122,10 +122,11 @@ toast.warning = (text: string, opts?: { duration?: number }) =>
 /*  Toaster                                                            */
 /* ------------------------------------------------------------------ */
 
-const STACK_OVERLAP = 32
+const STACK_OFFSET = 12
 const EXPANDED_GAP = 12
 const VISIBLE_COUNT = 3
 const DEFAULT_DURATION = 5000
+const TOAST_HEIGHT = 48
 
 function Toaster({ className }: { className?: string }) {
   const [toasts, setToasts] = React.useState<ToastData[]>([])
@@ -173,14 +174,22 @@ function Toaster({ className }: { className?: string }) {
 
   if (toasts.length === 0) return null
 
+  // Reversed: newest = index 0 (front, bottom)
+  const reversed = [...toasts].reverse()
+  const visibleCount = Math.min(reversed.length, VISIBLE_COUNT)
+  const containerHeight = expanded
+    ? reversed.length * TOAST_HEIGHT + (reversed.length - 1) * EXPANDED_GAP
+    : TOAST_HEIGHT + (visibleCount - 1) * STACK_OFFSET
+
   return (
     <ol
       data-slot="toaster"
-      className={cn(
-        "fixed bottom-6 right-6 z-[9999] flex flex-col items-end",
-        className
-      )}
-      style={{ width: 400 }}
+      className={cn("fixed bottom-6 right-6 z-[9999]", className)}
+      style={{
+        width: 400,
+        height: containerHeight,
+        transition: "height 300ms cubic-bezier(0.2, 0, 0, 1)",
+      }}
       onMouseEnter={() => {
         setExpanded(true)
         pauseTimers()
@@ -190,32 +199,28 @@ function Toaster({ className }: { className?: string }) {
         resumeTimers()
       }}
     >
-      {toasts.map((t, i) => {
-        const distFromFront = toasts.length - 1 - i
-        const isVisible = distFromFront < VISIBLE_COUNT || expanded
-        const isLast = i === toasts.length - 1
+      {reversed.map((t, i) => {
+        // i=0 newest (front), i=N oldest (back)
+        const isVisible = i < VISIBLE_COUNT || expanded
+        const translateY = expanded
+          ? i * (TOAST_HEIGHT + EXPANDED_GAP)
+          : i * STACK_OFFSET
+        const scale = expanded ? 1 : Math.max(1 - i * 0.05, 0.85)
+        const opacity = isVisible
+          ? expanded
+            ? 1
+            : Math.max(1 - i * 0.1, 0)
+          : 0
 
         return (
           <li
             key={t.id}
-            className="toast-item w-full list-none"
+            className="toast-item absolute bottom-0 left-0 right-0 list-none"
             style={{
-              marginBottom: isLast
-                ? 0
-                : expanded
-                  ? EXPANDED_GAP
-                  : -STACK_OVERLAP,
-              transform:
-                !expanded && distFromFront > 0
-                  ? `scale(${Math.max(1 - distFromFront * 0.05, 0.85)})`
-                  : "none",
-              opacity: isVisible
-                ? expanded
-                  ? 1
-                  : Math.max(1 - distFromFront * 0.1, 0)
-                : 0,
+              transform: `translateY(-${translateY}px) scale(${scale})`,
+              opacity,
+              zIndex: reversed.length - i,
               transformOrigin: "bottom center",
-              zIndex: i,
               pointerEvents: isVisible ? "auto" : "none",
             }}
           >
