@@ -1,0 +1,124 @@
+/* ================================================================
+ * AVATAR — Theming & State Styles
+ * Structure (flex, size, radius) lives in avatar.tsx via cva.
+ * Theming (colors, borders, states) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Avatar — fallback background (initials + placeholder)
+ * -------------------------------- */
+.avatar {
+  background: var(--background-brand-faint-default);
+}
+
+.avatar-initials {
+  color: var(--text-brand-moderate);
+}
+
+.avatar-placeholder {
+  color: var(--text-brand-moderate);
+  width: 50%;
+  height: 50%;
+}
+
+/* --------------------------------
+ * Status indicator — shared
+ * -------------------------------- */
+.avatar-status {
+  border: var(--layout-border-thick) solid var(--border-base);
+}
+
+/* --------------------------------
+ * Status indicator — variants
+ * -------------------------------- */
+.avatar-status-online {
+  background: var(--background-success-strong-default);
+}
+
+.avatar-status-offline {
+  background: var(--background-neutral-bolder-default);
+}
+
+.avatar-status-busy {
+  background: var(--background-danger-strong-default);
+}
+
+.avatar-status-company {
+  border: var(--layout-border-thick) solid var(--border-base);
+  background: var(--background-base);
+  overflow: hidden;
+}
+
+/* --------------------------------
+ * AvatarLabel — text
+ * -------------------------------- */
+.avatar-label-name {
+  color: var(--text-base-strong);
+}
+
+.avatar-label-description {
+  color: var(--text-base-medium);
+}
+
+/* --------------------------------
+ * AvatarGroup — overlap ring
+ * -------------------------------- */
+.avatar-group-item [data-slot="avatar"] {
+  box-shadow: 0 0 0 var(--layout-border-thick) var(--border-base);
+}
+
+/* --------------------------------
+ * AvatarGroup — overflow count
+ * -------------------------------- */
+.avatar-group-overflow {
+  background: var(--background-brand-faint-default);
+  color: var(--text-brand-moderate);
+  box-shadow: 0 0 0 var(--layout-border-thick) var(--border-base);
+}
+
+/* --------------------------------
+ * AvatarAddButton — base
+ * -------------------------------- */
+.avatar-add-button {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  color: var(--text-base-moderate);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .avatar-add-button {
+    transition:
+      background 150ms ease,
+      border-color 150ms ease;
+  }
+}
+
+/* --------------------------------
+ * AvatarAddButton — hover / pressed
+ * -------------------------------- */
+.avatar-add-button:hover {
+  background: var(--background-neutral-faint-hover);
+}
+
+.avatar-add-button:active {
+  background: var(--background-neutral-faint-pressed);
+}
+
+/* --------------------------------
+ * AvatarAddButton — focus ring
+ * -------------------------------- */
+.avatar-add-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* --------------------------------
+ * AvatarAddButton — disabled
+ * -------------------------------- */
+.avatar-add-button:disabled {
+  background: var(--background-disabled);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
+  pointer-events: none;
+  cursor: default;
+}
