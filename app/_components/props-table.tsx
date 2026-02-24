@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Badge } from "@/registry/new-york/ui/badge/badge"
 
 export type PropDef = {
   name: string
@@ -6,30 +7,6 @@ export type PropDef = {
   default?: string
   required?: boolean
   description: string
-}
-
-function TypeTag({
-  children,
-  isDefault,
-}: {
-  children: React.ReactNode
-  isDefault?: boolean
-}) {
-  return (
-    <span
-      className="text-content-caption font-mono inline-flex px-1.5 py-0.5 rounded-md"
-      style={{
-        background: isDefault
-          ? "var(--background-neutral-strong-default)"
-          : "var(--background-neutral-faint-default)",
-        color: isDefault
-          ? "var(--text-inverse)"
-          : "var(--text-base-moderate)",
-      }}
-    >
-      {children}
-    </span>
-  )
 }
 
 export function PropsTable({
@@ -106,13 +83,13 @@ export function PropsTable({
                 <td className="px-5 py-4 align-top">
                   <div className="flex flex-wrap gap-1">
                     {p.type.map((t) => (
-                      <TypeTag key={t}>{t}</TypeTag>
+                      <Badge key={t} variant="neutral" type="light" size="sm" className="font-mono">{t}</Badge>
                     ))}
                   </div>
                 </td>
                 <td className="px-5 py-4 align-top">
                   {p.default ? (
-                    <TypeTag isDefault>{p.default}</TypeTag>
+                    <Badge variant="neutral" type="fill" size="sm" className="font-mono">{p.default}</Badge>
                   ) : (
                     <span style={{ color: "var(--text-base-moderate)" }}>
                       —

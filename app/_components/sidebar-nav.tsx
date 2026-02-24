@@ -2,6 +2,11 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import {
+  Menu,
+  MenuGroup,
+  MenuItem,
+} from "@/registry/new-york/ui/menu/menu"
 
 const navGroups = [
   {
@@ -20,8 +25,8 @@ const navGroups = [
       { label: "Tag", href: "/components/tag" },
       { label: "Tooltip", href: "/components/tooltip" },
       { label: "Toast", href: "/components/toast" },
+      { label: "Menu", href: "/components/menu" },
       { label: "Input" },
-      { label: "Badge" },
       { label: "Card" },
       { label: "Dialog" },
       { label: "Dropdown" },
@@ -33,47 +38,24 @@ export function SidebarNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky top-20 flex flex-col gap-6">
+    <Menu className="sticky top-20">
       {navGroups.map((group) => (
-        <div key={group.label} className="flex flex-col gap-2">
-          <span
-            className="text-content-caption font-bold uppercase tracking-wider"
-            style={{ color: "var(--text-base-moderate)" }}
-          >
-            {group.label}
-          </span>
-          <ul className="flex flex-col gap-1.5">
-            {group.items.map((item) => {
-              const href = "href" in item ? item.href : undefined
-              const isActive = href === pathname
-              return (
-                <li key={item.label}>
-                  {href ? (
-                    <Link
-                      href={href}
-                      className={`text-content-note ${isActive ? "font-accent" : ""}`}
-                      style={{
-                        color: isActive
-                          ? "var(--text-base-strong)"
-                          : "var(--text-base-moderate)",
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  ) : (
-                    <span
-                      className="text-content-note"
-                      style={{ color: "var(--text-base-moderate)" }}
-                    >
-                      {item.label}
-                    </span>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <MenuGroup key={group.label} label={group.label}>
+          {group.items.map((item) => {
+            const href = "href" in item ? item.href : undefined
+            const isActive = href === pathname
+            return href ? (
+              <MenuItem key={item.label} size="sm" isActive={isActive} asChild>
+                <Link href={href}>{item.label}</Link>
+              </MenuItem>
+            ) : (
+              <MenuItem key={item.label} size="sm" isDisabled>
+                {item.label}
+              </MenuItem>
+            )
+          })}
+        </MenuGroup>
       ))}
-    </nav>
+    </Menu>
   )
 }
