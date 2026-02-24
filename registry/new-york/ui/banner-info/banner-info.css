@@ -1,0 +1,69 @@
+/* ================================================================
+ * BANNER INFO — Variant Styles
+ * Structure (flex, padding, gap, radius) lives in banner-info.tsx via cva.
+ * Theming (colors, borders, text) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Variant tokens
+ * Each variant sets scoped custom properties.
+ * -------------------------------- */
+
+.banner-info-brand {
+  --banner-bg: var(--overlay-brand-default);
+  --banner-border: var(--border-brand-lighter);
+  --banner-text: var(--text-brand-moderate);
+  --banner-icon: var(--icon-brand-moderate);
+}
+
+.banner-info-neutral {
+  --banner-bg: var(--background-neutral-faint-default);
+  --banner-border: var(--border-default);
+  --banner-text: var(--text-base-bolder);
+  --banner-icon: var(--icon-neutral-moderate);
+}
+
+.banner-info-danger {
+  --banner-bg: var(--overlay-danger-default);
+  --banner-border: var(--border-danger-lighter);
+  --banner-text: var(--text-danger-moderate);
+  --banner-icon: var(--icon-danger-moderate);
+}
+
+.banner-info-success {
+  --banner-bg: var(--overlay-success-default);
+  --banner-border: var(--border-success-lighter);
+  --banner-text: var(--text-success-moderate);
+  --banner-icon: var(--icon-success-moderate);
+}
+
+.banner-info-warning {
+  --banner-bg: var(--overlay-warning-default);
+  --banner-border: var(--border-warning-lighter);
+  --banner-text: var(--text-warning-moderate);
+  --banner-icon: var(--icon-warning-moderate);
+}
+
+/* --------------------------------
+ * Base — applied to all variants
+ * -------------------------------- */
+.banner-info-brand,
+.banner-info-neutral,
+.banner-info-danger,
+.banner-info-success,
+.banner-info-warning {
+  background: var(--banner-bg);
+  border: var(--layout-border-thin) solid var(--banner-border);
+  color: var(--banner-text);
+}
+
+/* --------------------------------
+ * Icon color — separate from text
+ * -------------------------------- */
+.banner-info-brand svg,
+.banner-info-neutral svg,
+.banner-info-danger svg,
+.banner-info-success svg,
+.banner-info-warning svg {
+  color: var(--banner-icon);
+}
