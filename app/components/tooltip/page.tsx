@@ -17,6 +17,7 @@ import {
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
+import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -99,28 +100,10 @@ function OverviewTab() {
           title="Sizes"
           description={
             <>
-              Use the{" "}
-              <code
-                className="font-mono"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                size
-              </code>{" "}
-              prop on TooltipContent with{" "}
-              <code
-                className="font-mono"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                md
-              </code>{" "}
-              (default) or{" "}
-              <code
-                className="font-mono"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                sm
-              </code>
-              . Each size adjusts padding and font size.
+              Use the <InlineCode>size</InlineCode> prop on TooltipContent
+              with <InlineCode>md</InlineCode> (default) or{" "}
+              <InlineCode>sm</InlineCode>. Each size adjusts padding and font
+              size.
             </>
           }
         >
@@ -143,14 +126,8 @@ function OverviewTab() {
           title="With Shortcut"
           description={
             <>
-              Compose with{" "}
-              <code
-                className="font-mono"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                TooltipShortcut
-              </code>{" "}
-              to display a keyboard shortcut indicator alongside the tooltip
+              Compose with <InlineCode>TooltipShortcut</InlineCode> to
+              display a keyboard shortcut indicator alongside the tooltip
               label.
             </>
           }
@@ -195,15 +172,8 @@ function OverviewTab() {
           title="Placement"
           description={
             <>
-              Use the{" "}
-              <code
-                className="font-mono"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                side
-              </code>{" "}
-              prop to control placement. Radix auto-flips when space is
-              constrained.
+              Use the <InlineCode>side</InlineCode> prop to control
+              placement. Radix auto-flips when space is constrained.
             </>
           }
         >
@@ -245,12 +215,12 @@ type Tab = "overview" | "props"
 
 export default function TooltipPage() {
   const [tab, setTab] = useState<Tab>("overview")
+  const [copied, setCopied] = useState(false)
 
   return (
     <>
       <main
-        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none px-8 lg:px-16 xl:px-20"
       >
         {/* Hero */}
         <div className="flex flex-col gap-3">
@@ -273,13 +243,17 @@ export default function TooltipPage() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  "npx shadcn@latest add @lyse/tooltip"
-                )
-              }
+              onClick={() => {
+                navigator.clipboard
+                  .writeText("npx shadcn@latest add @lyse/tooltip")
+                  .then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 2000)
+                  })
+                  .catch(() => {})
+              }}
             >
-              <Copy /> Copy install command
+              {copied ? "Copied!" : <><Copy /> Copy install command</>}
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -311,7 +285,7 @@ export default function TooltipPage() {
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
-                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer"
+                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
                 style={{
                   color:
                     tab === t.key
@@ -321,6 +295,7 @@ export default function TooltipPage() {
                     tab === t.key
                       ? "2px solid var(--text-base-strong)"
                       : "2px solid transparent",
+                  transition: "color 150ms ease, border-color 150ms ease",
                 }}
               >
                 {t.label}

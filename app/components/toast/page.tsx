@@ -126,13 +126,13 @@ type Tab = "overview" | "props"
 
 export default function ToastPage() {
   const [tab, setTab] = useState<Tab>("overview")
+  const [copied, setCopied] = useState(false)
 
   return (
     <>
       <Toaster />
       <main
-        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none px-8 lg:px-16 xl:px-20"
       >
         {/* Hero */}
         <div className="flex flex-col gap-3">
@@ -155,13 +155,17 @@ export default function ToastPage() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  "npx shadcn@latest add @lyse/toast"
-                )
-              }
+              onClick={() => {
+                navigator.clipboard
+                  .writeText("npx shadcn@latest add @lyse/toast")
+                  .then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 2000)
+                  })
+                  .catch(() => {})
+              }}
             >
-              <Copy /> Copy install command
+              {copied ? "Copied!" : <><Copy /> Copy install command</>}
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -193,7 +197,7 @@ export default function ToastPage() {
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
-                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer"
+                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
                 style={{
                   color:
                     tab === t.key
@@ -203,6 +207,7 @@ export default function ToastPage() {
                     tab === t.key
                       ? "2px solid var(--text-base-strong)"
                       : "2px solid transparent",
+                  transition: "color 150ms ease, border-color 150ms ease",
                 }}
               >
                 {t.label}

@@ -12,7 +12,7 @@ export function ComponentPreview({
   children: React.ReactNode
 }) {
   return (
-    <section id={id} className="flex flex-col gap-3 scroll-mt-20">
+    <section id={id} className="flex flex-col gap-3 scroll-mt-[110px]">
       <h3
         className="text-heading-small"
         style={{ color: "var(--text-base-strong)" }}

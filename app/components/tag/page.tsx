@@ -11,6 +11,7 @@ import {
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
+import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -71,49 +72,11 @@ function OverviewTab() {
         title="Variants"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              variant
-            </code>{" "}
-            prop to change the color.{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              neutral
-            </code>{" "}
-            (default) for general use,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              brand
-            </code>
-            ,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              success
-            </code>
-            ,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              danger
-            </code>
-            , and{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              warning
-            </code>
-            .
+            Use the <InlineCode>variant</InlineCode> prop to change the
+            color. <InlineCode>neutral</InlineCode> (default) for general use,{" "}
+            <InlineCode>brand</InlineCode>, <InlineCode>success</InlineCode>,{" "}
+            <InlineCode>danger</InlineCode>, and{" "}
+            <InlineCode>warning</InlineCode>.
           </>
         }
       >
@@ -129,35 +92,10 @@ function OverviewTab() {
         title="Sizes"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              size
-            </code>{" "}
-            prop with{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              sm
-            </code>{" "}
-            (default),{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              md
-            </code>
-            , or{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              lg
-            </code>
-            . Each size adjusts padding, gap, border radius, and font size.
+            Use the <InlineCode>size</InlineCode> prop with{" "}
+            <InlineCode>sm</InlineCode> (default),{" "}
+            <InlineCode>md</InlineCode>, or <InlineCode>lg</InlineCode>. Each
+            size adjusts padding, gap, border radius, and font size.
           </>
         }
       >
@@ -171,42 +109,13 @@ function OverviewTab() {
         title="Types"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              type
-            </code>{" "}
-            prop to control border and background style.{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              fill
-            </code>{" "}
-            (default) has a colored background with solid border,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              dash
-            </code>{" "}
-            uses a dashed border,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              emphasis
-            </code>{" "}
-            uses a lighter background with a default border, and{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              ghost
-            </code>{" "}
-            has no background.
+            Use the <InlineCode>type</InlineCode> prop to control border and
+            background style. <InlineCode>fill</InlineCode> (default) has a
+            colored background with solid border,{" "}
+            <InlineCode>dash</InlineCode> uses a dashed border,{" "}
+            <InlineCode>emphasis</InlineCode> uses a lighter background with a
+            default border, and <InlineCode>ghost</InlineCode> has no
+            background.
           </>
         }
       >
@@ -248,14 +157,8 @@ function OverviewTab() {
         title="With Dot"
         description={
           <>
-            Compose with{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              TagDot
-            </code>{" "}
-            to add a status indicator. The dot color matches the variant.
+            Compose with <InlineCode>TagDot</InlineCode> to add a status
+            indicator. The dot color matches the variant.
           </>
         }
       >
@@ -305,22 +208,9 @@ function OverviewTab() {
         title="Dismissible"
         description={
           <>
-            Compose with{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              TagClose
-            </code>{" "}
-            to add a dismiss button. TagClose renders a default X icon but
-            accepts custom children. Wire your own{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              onClick
-            </code>{" "}
-            handler.
+            Compose with <InlineCode>TagClose</InlineCode> to add a dismiss
+            button. TagClose renders a default X icon but accepts custom
+            children. Wire your own <InlineCode>onClick</InlineCode> handler.
           </>
         }
       >
@@ -351,12 +241,12 @@ type Tab = "overview" | "props"
 
 export default function TagPage() {
   const [tab, setTab] = useState<Tab>("overview")
+  const [copied, setCopied] = useState(false)
 
   return (
     <>
       <main
-        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none px-8 lg:px-16 xl:px-20"
       >
         {/* Hero */}
         <div className="flex flex-col gap-3">
@@ -380,13 +270,17 @@ export default function TagPage() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  "npx shadcn@latest add @lyse/tag"
-                )
-              }
+              onClick={() => {
+                navigator.clipboard
+                  .writeText("npx shadcn@latest add @lyse/tag")
+                  .then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 2000)
+                  })
+                  .catch(() => {})
+              }}
             >
-              <Copy /> Copy install command
+              {copied ? "Copied!" : <><Copy /> Copy install command</>}
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -418,7 +312,7 @@ export default function TagPage() {
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
-                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer"
+                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
                 style={{
                   color:
                     tab === t.key
@@ -428,6 +322,7 @@ export default function TagPage() {
                     tab === t.key
                       ? "2px solid var(--text-base-strong)"
                       : "2px solid transparent",
+                  transition: "color 150ms ease, border-color 150ms ease",
                 }}
               >
                 {t.label}

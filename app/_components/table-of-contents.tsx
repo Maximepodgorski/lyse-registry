@@ -34,7 +34,7 @@ export function TableOfContents({ sections }: { sections: TocSection[] }) {
     <aside className="hidden xl:block w-56 shrink-0 py-16 pr-6">
       <nav className="sticky top-20 flex flex-col gap-4">
         <span
-          className="text-content-caption font-bold uppercase tracking-wider"
+          className="text-content-caption font-accent"
           style={{ color: "var(--text-base-moderate)" }}
         >
           On this page
@@ -46,7 +46,7 @@ export function TableOfContents({ sections }: { sections: TocSection[] }) {
               <li key={s.id}>
                 <a
                   href={`#${s.id}`}
-                  className="text-content-note block py-1.5 transition-colors"
+                  className="text-content-note block py-1.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
                   style={{
                     color: isActive
                       ? "var(--text-base-strong)"
@@ -55,6 +55,8 @@ export function TableOfContents({ sections }: { sections: TocSection[] }) {
                       ? "2px solid var(--text-base-strong)"
                       : "2px solid transparent",
                     paddingLeft: "12px",
+                    transition:
+                      "color 200ms ease, border-color 200ms ease",
                   }}
                 >
                   {s.label}

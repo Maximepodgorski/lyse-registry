@@ -10,20 +10,23 @@ export function CodeBlock({
   return (
     <div
       className="flex flex-col overflow-hidden rounded-xl"
-      style={{ border: "1px solid var(--root-color-neutral-800)" }}
+      style={{
+        border: "var(--layout-border-thin) solid var(--border-default)",
+      }}
     >
       <div
         className="flex items-center justify-center py-16"
-        style={{ background: "var(--root-color-neutral-950)" }}
+        style={{ background: "var(--background-neutral-faint-default)" }}
       >
         {preview}
       </div>
       <pre
         className="text-content-caption font-mono p-5 overflow-x-auto leading-relaxed"
         style={{
-          background: "var(--root-color-neutral-900)",
-          color: "var(--root-color-neutral-300)",
-          borderTop: "1px solid var(--root-color-neutral-800)",
+          background: "var(--background-neutral-faint-default)",
+          color: "var(--text-base-moderate)",
+          borderTop:
+            "var(--layout-border-thin) solid var(--border-default)",
         }}
       >
         <code>{code}</code>

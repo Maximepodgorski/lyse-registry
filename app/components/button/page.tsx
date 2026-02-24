@@ -17,6 +17,7 @@ import {
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
+import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -96,42 +97,11 @@ function OverviewTab() {
         title="Variants"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              variant
-            </code>{" "}
-            prop to change the visual style.{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              primary
-            </code>{" "}
-            for main actions,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              secondary
-            </code>{" "}
-            for alternatives,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              terciary
-            </code>{" "}
-            for ghost actions, and{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              destructive
-            </code>{" "}
-            for dangerous operations.
+            Use the <InlineCode>variant</InlineCode> prop to change the
+            visual style. <InlineCode>primary</InlineCode> for main actions,{" "}
+            <InlineCode>secondary</InlineCode> for alternatives,{" "}
+            <InlineCode>terciary</InlineCode> for ghost actions, and{" "}
+            <InlineCode>destructive</InlineCode> for dangerous operations.
           </>
         }
       >
@@ -146,42 +116,11 @@ function OverviewTab() {
         title="Sizes"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              size
-            </code>{" "}
-            prop with{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              xs
-            </code>
-            ,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              sm
-            </code>
-            ,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              md
-            </code>{" "}
-            (default) or{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              lg
-            </code>
-            . Each size adjusts height, padding, font size, and icon size.
+            Use the <InlineCode>size</InlineCode> prop with{" "}
+            <InlineCode>xs</InlineCode>, <InlineCode>sm</InlineCode>,{" "}
+            <InlineCode>md</InlineCode> (default) or{" "}
+            <InlineCode>lg</InlineCode>. Each size adjusts height, padding,
+            font size, and icon size.
           </>
         }
       >
@@ -196,15 +135,9 @@ function OverviewTab() {
         title="Disabled"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              disabled
-            </code>{" "}
-            prop to prevent interactions. The button applies muted styling
-            and blocks pointer events.
+            Use the <InlineCode>disabled</InlineCode> prop to prevent
+            interactions. The button applies muted styling and blocks pointer
+            events.
           </>
         }
       >
@@ -250,12 +183,12 @@ type Tab = "overview" | "props"
 
 export default function ButtonPage() {
   const [tab, setTab] = useState<Tab>("overview")
+  const [copied, setCopied] = useState(false)
 
   return (
     <>
       <main
-        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none px-8 lg:px-16 xl:px-20"
       >
         {/* Hero */}
         <div className="flex flex-col gap-3">
@@ -279,13 +212,17 @@ export default function ButtonPage() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  "npx shadcn@latest add @lyse/button"
-                )
-              }
+              onClick={() => {
+                navigator.clipboard
+                  .writeText("npx shadcn@latest add @lyse/button")
+                  .then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 2000)
+                  })
+                  .catch(() => {})
+              }}
             >
-              <Copy /> Copy install command
+              {copied ? "Copied!" : <><Copy /> Copy install command</>}
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -317,7 +254,7 @@ export default function ButtonPage() {
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
-                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer"
+                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
                 style={{
                   color:
                     tab === t.key
@@ -327,6 +264,7 @@ export default function ButtonPage() {
                     tab === t.key
                       ? "2px solid var(--text-base-strong)"
                       : "2px solid transparent",
+                  transition: "color 150ms ease, border-color 150ms ease",
                 }}
               >
                 {t.label}

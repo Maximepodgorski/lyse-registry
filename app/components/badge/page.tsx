@@ -11,6 +11,7 @@ import {
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
+import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -76,49 +77,11 @@ function OverviewTab() {
         title="Variants"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              variant
-            </code>{" "}
-            prop to change the color.{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              brand
-            </code>{" "}
-            for branding,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              neutral
-            </code>{" "}
-            (default) for general use,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              success
-            </code>
-            ,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              danger
-            </code>
-            , and{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              warning
-            </code>{" "}
-            for semantic states.
+            Use the <InlineCode>variant</InlineCode> prop to change the
+            color. <InlineCode>brand</InlineCode> for branding,{" "}
+            <InlineCode>neutral</InlineCode> (default) for general use,{" "}
+            <InlineCode>success</InlineCode>, <InlineCode>danger</InlineCode>,
+            and <InlineCode>warning</InlineCode> for semantic states.
           </>
         }
       >
@@ -134,35 +97,10 @@ function OverviewTab() {
         title="Sizes"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              size
-            </code>{" "}
-            prop with{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              sm
-            </code>
-            ,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              md
-            </code>{" "}
-            (default), or{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              lg
-            </code>
-            . Each size adjusts height, padding, gap, and font size.
+            Use the <InlineCode>size</InlineCode> prop with{" "}
+            <InlineCode>sm</InlineCode>, <InlineCode>md</InlineCode>{" "}
+            (default), or <InlineCode>lg</InlineCode>. Each size adjusts
+            height, padding, gap, and font size.
           </>
         }
       >
@@ -176,35 +114,10 @@ function OverviewTab() {
         title="Types"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              type
-            </code>{" "}
-            prop to control the border style.{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              fill
-            </code>{" "}
-            (default) has no border,{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              light
-            </code>{" "}
-            adds a solid border, and{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              dash
-            </code>{" "}
-            adds a dashed border.
+            Use the <InlineCode>type</InlineCode> prop to control the border
+            style. <InlineCode>fill</InlineCode> (default) has no border,{" "}
+            <InlineCode>light</InlineCode> adds a solid border, and{" "}
+            <InlineCode>dash</InlineCode> adds a dashed border.
           </>
         }
       >
@@ -218,16 +131,9 @@ function OverviewTab() {
         title="Filled"
         description={
           <>
-            Use the{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              isFilled
-            </code>{" "}
-            prop for a strong background with inverse text. Compare the
-            default overlay style (top row) with the filled variant (bottom
-            row).
+            Use the <InlineCode>isFilled</InlineCode> prop for a strong
+            background with inverse text. Compare the default overlay style
+            (top row) with the filled variant (bottom row).
           </>
         }
       >
@@ -264,15 +170,9 @@ function OverviewTab() {
         title="With Dot"
         description={
           <>
-            Compose with{" "}
-            <code
-              className="font-mono"
-              style={{ color: "var(--text-base-strong)" }}
-            >
-              BadgeDot
-            </code>{" "}
-            to add a status indicator. The dot color matches the variant and
-            scales with the badge size.
+            Compose with <InlineCode>BadgeDot</InlineCode> to add a status
+            indicator. The dot color matches the variant and scales with the
+            badge size.
           </>
         }
       >
@@ -309,12 +209,12 @@ type Tab = "overview" | "props"
 
 export default function BadgePage() {
   const [tab, setTab] = useState<Tab>("overview")
+  const [copied, setCopied] = useState(false)
 
   return (
     <>
       <main
-        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+        className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none px-8 lg:px-16 xl:px-20"
       >
         {/* Hero */}
         <div className="flex flex-col gap-3">
@@ -337,13 +237,17 @@ export default function BadgePage() {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  "npx shadcn@latest add @lyse/badge"
-                )
-              }
+              onClick={() => {
+                navigator.clipboard
+                  .writeText("npx shadcn@latest add @lyse/badge")
+                  .then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 2000)
+                  })
+                  .catch(() => {})
+              }}
             >
-              <Copy /> Copy install command
+              {copied ? "Copied!" : <><Copy /> Copy install command</>}
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
@@ -375,7 +279,7 @@ export default function BadgePage() {
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
-                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer"
+                className="text-content-note font-accent px-4 py-2 -mb-px transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
                 style={{
                   color:
                     tab === t.key
@@ -385,6 +289,7 @@ export default function BadgePage() {
                     tab === t.key
                       ? "2px solid var(--text-base-strong)"
                       : "2px solid transparent",
+                  transition: "color 150ms ease, border-color 150ms ease",
                 }}
               >
                 {t.label}
