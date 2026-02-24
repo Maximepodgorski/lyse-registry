@@ -1,0 +1,127 @@
+/* ================================================================
+ * CHECKBOX — Indicator & State Styles
+ * Structure (flex, size, gap, radius) lives in checkbox.tsx via cva.
+ * Theming (colors, borders, states) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Indicator — base
+ * -------------------------------- */
+.checkbox-indicator {
+  border: var(--layout-border-thin) solid var(--border-default);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .checkbox-indicator {
+    transition:
+      background 150ms ease,
+      border-color 150ms ease;
+  }
+}
+
+/* --------------------------------
+ * Indicator — unchecked states
+ * -------------------------------- */
+.checkbox-indicator[data-state="unchecked"] {
+  background: var(--background-neutral-faint-default);
+}
+.checkbox-indicator[data-state="unchecked"]:hover {
+  background: var(--background-neutral-faint-hover);
+}
+.checkbox-indicator[data-state="unchecked"]:active {
+  background: var(--background-neutral-faint-pressed);
+}
+
+/* --------------------------------
+ * Indicator — checked states
+ * -------------------------------- */
+.checkbox-indicator[data-state="checked"] {
+  background: var(--background-brand-strong-default);
+}
+.checkbox-indicator[data-state="checked"]:hover {
+  background: var(--background-brand-strong-hover);
+}
+.checkbox-indicator[data-state="checked"]:active {
+  background: var(--background-brand-strong-pressed);
+}
+
+/* --------------------------------
+ * Indicator — indeterminate states
+ * -------------------------------- */
+.checkbox-indicator[data-state="indeterminate"] {
+  background: var(--background-brand-strong-default);
+}
+.checkbox-indicator[data-state="indeterminate"]:hover {
+  background: var(--background-brand-strong-hover);
+}
+.checkbox-indicator[data-state="indeterminate"]:active {
+  background: var(--background-brand-strong-pressed);
+}
+
+/* --------------------------------
+ * Indicator — disabled
+ * -------------------------------- */
+.checkbox-indicator[data-disabled] {
+  background: var(--background-disabled);
+  border-color: var(--border-disabled);
+  pointer-events: none;
+  cursor: default;
+}
+
+/* --------------------------------
+ * Focus ring (matches Radio/Button pattern)
+ * -------------------------------- */
+.checkbox-indicator:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* --------------------------------
+ * Icon visibility — show check or minus based on state
+ * -------------------------------- */
+.checkbox-icon {
+  color: var(--text-fixed);
+}
+
+.checkbox-indicator[data-disabled] .checkbox-icon {
+  color: var(--text-disabled);
+}
+
+/* Default: hide both icons */
+.checkbox-check,
+.checkbox-minus {
+  display: none;
+}
+
+/* Show check when checked */
+.checkbox-indicator[data-state="checked"] .checkbox-check {
+  display: block;
+}
+
+/* Show minus when indeterminate */
+.checkbox-indicator[data-state="indeterminate"] .checkbox-minus {
+  display: block;
+}
+
+/* --------------------------------
+ * Text — label & description
+ * -------------------------------- */
+.checkbox-label {
+  color: var(--text-base-strong);
+}
+.checkbox-description {
+  color: var(--text-base-medium);
+}
+
+/* --------------------------------
+ * Text — disabled
+ * -------------------------------- */
+[data-slot="checkbox"][data-disabled] .checkbox-label,
+[data-slot="checkbox"][data-disabled] .checkbox-description {
+  color: var(--text-disabled);
+}
+[data-slot="checkbox"][data-disabled] label {
+  cursor: default;
+}
