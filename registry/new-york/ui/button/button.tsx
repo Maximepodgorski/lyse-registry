@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import "./button.css"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center overflow-hidden whitespace-nowrap font-accent cursor-pointer transition-colors [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "relative inline-flex items-center justify-center overflow-hidden whitespace-nowrap font-accent cursor-pointer transition-colors [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -16,10 +16,10 @@ const buttonVariants = cva(
         destructive: "btn-destructive",
       },
       size: {
-        xs: "h-6 gap-[var(--layout-gap-xs)] px-[var(--layout-padding-xs)] rounded-lg text-content-caption [&_svg]:size-3.5",
-        sm: "h-8 gap-[var(--layout-gap-sm)] px-[var(--layout-padding-md)] rounded-lg text-content-note [&_svg]:size-4",
-        md: "h-10 gap-[var(--layout-gap-sm)] px-[var(--layout-padding-lg)] rounded-lg text-content-note [&_svg]:size-4",
-        lg: "h-12 gap-[var(--layout-gap-sm)] px-[var(--layout-padding-xl)] rounded-xl text-content-body [&_svg]:size-5",
+        xs: "h-[var(--layout-size-md)] gap-[var(--layout-gap-xs)] px-[var(--layout-padding-xs)] rounded-[var(--layout-radius-lg)] text-content-caption [&_svg]:size-3.5",
+        sm: "h-[var(--layout-size-lg)] gap-[var(--layout-gap-sm)] px-[var(--layout-padding-md)] rounded-[var(--layout-radius-lg)] text-content-note [&_svg]:h-[var(--layout-size-xs)] [&_svg]:w-[var(--layout-size-xs)]",
+        md: "h-[var(--layout-size-xl)] gap-[var(--layout-gap-sm)] px-[var(--layout-padding-lg)] rounded-[var(--layout-radius-lg)] text-content-note [&_svg]:h-[var(--layout-size-xs)] [&_svg]:w-[var(--layout-size-xs)]",
+        lg: "h-[var(--layout-size-2xl)] gap-[var(--layout-gap-sm)] px-[var(--layout-padding-xl)] rounded-[var(--layout-radius-xl)] text-content-body [&_svg]:h-[var(--layout-size-sm)] [&_svg]:w-[var(--layout-size-sm)]",
       },
     },
     defaultVariants: {
@@ -35,6 +35,7 @@ function Button({
   size,
   isIconOnly = false,
   asChild = false,
+  onPointerDown,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
@@ -43,6 +44,24 @@ function Button({
   }) {
   const Comp = asChild ? Slot : "button"
 
+  const handlePointerDown = React.useCallback(
+    (e: React.PointerEvent<HTMLButtonElement>) => {
+      onPointerDown?.(e)
+      const btn = e.currentTarget
+      const rect = btn.getBoundingClientRect()
+      const diameter = Math.sqrt(rect.width ** 2 + rect.height ** 2) * 2
+      const ripple = document.createElement("span")
+      ripple.className = "absolute rounded-full bg-current pointer-events-none animate-ripple motion-reduce:hidden"
+      ripple.style.width = `${diameter}px`
+      ripple.style.height = `${diameter}px`
+      ripple.style.left = `${e.clientX - rect.left - diameter / 2}px`
+      ripple.style.top = `${e.clientY - rect.top - diameter / 2}px`
+      btn.appendChild(ripple)
+      ripple.addEventListener("animationend", () => ripple.remove())
+    },
+    [onPointerDown]
+  )
+
   return (
     <Comp
       data-slot="button"
@@ -50,6 +69,7 @@ function Button({
         buttonVariants({ variant, size, className }),
         isIconOnly && "aspect-square px-0 gap-0"
       )}
+      onPointerDown={handlePointerDown}
       {...props}
     />
   )

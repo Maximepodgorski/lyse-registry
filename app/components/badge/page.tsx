@@ -368,9 +368,7 @@ export default function BadgePage() {
         </div>
       </main>
 
-      {tab === "overview" && (
-        <TableOfContents sections={overviewSections} />
-      )}
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

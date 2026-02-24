@@ -63,16 +63,23 @@
 /* --------------------------------
  * MenuItem — disabled
  * -------------------------------- */
-.menu-item-disabled {
+.menu-item-disabled,
+.menu-item:disabled,
+.menu-item[aria-disabled="true"] {
   color: var(--text-disabled);
   cursor: not-allowed;
+  pointer-events: none;
 }
 
-.menu-item-disabled .menu-item-icon {
+.menu-item-disabled .menu-item-icon,
+.menu-item:disabled .menu-item-icon,
+.menu-item[aria-disabled="true"] .menu-item-icon {
   color: var(--text-disabled);
 }
 
-.menu-item-disabled .menu-item-shortcut {
+.menu-item-disabled .menu-item-shortcut,
+.menu-item:disabled .menu-item-shortcut,
+.menu-item[aria-disabled="true"] .menu-item-shortcut {
   color: var(--text-disabled);
 }
 

@@ -62,13 +62,13 @@ function Toast({
       aria-live="polite"
       {...props}
     >
-      <Icon className="toast-icon shrink-0 size-6" />
+      <Icon className="toast-icon shrink-0 h-[var(--layout-size-md)] w-[var(--layout-size-md)]" />
       <p className="flex-1 min-w-0">{children}</p>
       {onClose && (
         <button
           type="button"
           onClick={onClose}
-          className="toast-close shrink-0 cursor-pointer inline-flex items-center justify-center size-6"
+          className="toast-close shrink-0 cursor-pointer inline-flex items-center justify-center h-[var(--layout-size-md)] w-[var(--layout-size-md)]"
           aria-label="Dismiss"
         >
           <X className="size-3.5" />

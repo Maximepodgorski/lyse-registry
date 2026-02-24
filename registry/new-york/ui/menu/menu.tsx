@@ -18,8 +18,8 @@ const menuItemVariants = cva(
         accent: "menu-item-accent",
       },
       size: {
-        sm: "h-8 gap-[var(--layout-gap-sm)] py-[var(--layout-padding-sm)] px-[var(--layout-padding-md)] [&_.menu-item-icon]:size-4 [&_.menu-item-icon>svg]:size-4",
-        md: "h-9 gap-[var(--layout-gap-md)] p-[var(--layout-padding-md)] [&_.menu-item-icon]:size-4 [&_.menu-item-icon>svg]:size-4",
+        sm: "h-[var(--layout-size-lg)] gap-[var(--layout-gap-sm)] py-[var(--layout-padding-sm)] px-[var(--layout-padding-md)] [&_.menu-item-icon]:h-[var(--layout-size-xs)] [&_.menu-item-icon]:w-[var(--layout-size-xs)] [&_.menu-item-icon>svg]:h-[var(--layout-size-xs)] [&_.menu-item-icon>svg]:w-[var(--layout-size-xs)]",
+        md: "h-9 gap-[var(--layout-gap-md)] p-[var(--layout-padding-md)] [&_.menu-item-icon]:h-[var(--layout-size-xs)] [&_.menu-item-icon]:w-[var(--layout-size-xs)] [&_.menu-item-icon>svg]:h-[var(--layout-size-xs)] [&_.menu-item-icon>svg]:w-[var(--layout-size-xs)]",
       },
     },
     defaultVariants: {
@@ -33,8 +33,13 @@ const menuItemVariants = cva(
 /*  Menu                                                               */
 /* ------------------------------------------------------------------ */
 
-const Menu = React.forwardRef<HTMLElement, React.ComponentProps<"nav">>(
-  ({ className, children, ...props }, ref) => (
+function Menu({
+  className,
+  children,
+  ref,
+  ...props
+}: React.ComponentProps<"nav">) {
+  return (
     <nav
       ref={ref}
       data-slot="menu"
@@ -44,17 +49,19 @@ const Menu = React.forwardRef<HTMLElement, React.ComponentProps<"nav">>(
       {children}
     </nav>
   )
-)
-Menu.displayName = "Menu"
+}
 
 /* ------------------------------------------------------------------ */
 /*  MenuGroup                                                          */
 /* ------------------------------------------------------------------ */
 
-const MenuGroup = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> & { label?: string }
->(({ className, label, children, ...props }, ref) => {
+function MenuGroup({
+  className,
+  label,
+  children,
+  ref,
+  ...props
+}: React.ComponentProps<"div"> & { label?: string }) {
   const labelId = React.useId()
   return (
     <div
@@ -78,114 +85,107 @@ const MenuGroup = React.forwardRef<
       </div>
     </div>
   )
-})
-MenuGroup.displayName = "MenuGroup"
+}
 
 /* ------------------------------------------------------------------ */
 /*  MenuItem                                                           */
 /* ------------------------------------------------------------------ */
 
-const MenuItem = React.forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<"button"> &
-    VariantProps<typeof menuItemVariants> & {
-      asChild?: boolean
-      isActive?: boolean
-      isDisabled?: boolean
-      icon?: React.ReactNode
-      shortcut?: string
-      badge?: React.ReactNode
-      dot?: boolean
-    }
->(
-  (
-    {
-      className,
-      variant,
-      size,
-      isActive,
-      isDisabled,
-      asChild,
-      icon,
-      shortcut,
-      badge,
-      dot,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const itemClass = cn(
-      menuItemVariants({ variant, size, className }),
-      isActive && "menu-item-active",
-      isDisabled && "menu-item-disabled"
-    )
+function MenuItem({
+  className,
+  variant,
+  size,
+  active,
+  disabled,
+  asChild,
+  icon,
+  shortcut,
+  badge,
+  dot,
+  children,
+  ref,
+  ...props
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof menuItemVariants> & {
+    asChild?: boolean
+    active?: boolean
+    icon?: React.ReactNode
+    shortcut?: string
+    badge?: React.ReactNode
+    dot?: boolean
+  }) {
+  const itemClass = cn(
+    menuItemVariants({ variant, size }),
+    active && "menu-item-active",
+    disabled && "menu-item-disabled",
+    className
+  )
 
-    if (asChild) {
-      return (
-        <Slot
-          ref={ref as React.Ref<HTMLElement>}
-          data-slot="menu-item"
-          className={itemClass}
-          aria-disabled={isDisabled || undefined}
-          {...props}
-        >
-          {children}
-        </Slot>
-      )
-    }
-
+  if (asChild) {
     return (
-      <button
-        ref={ref}
+      <Slot
+        ref={ref as React.Ref<HTMLElement>}
         data-slot="menu-item"
-        type="button"
-        disabled={isDisabled}
+        aria-disabled={disabled || undefined}
         className={itemClass}
         {...props}
       >
-        {icon && (
-          <span className="menu-item-icon shrink-0" aria-hidden="true">
-            {icon}
-          </span>
-        )}
-        <span className="flex-1 min-w-0 text-start">{children}</span>
-        {badge && (
-          <span className="menu-item-badge shrink-0 inline-flex items-center justify-center min-w-5 px-[var(--layout-padding-sm)] py-[var(--layout-padding-2xs)] rounded-[var(--layout-radius-full)] text-content-caption">
-            {badge}
-          </span>
-        )}
-        {shortcut && (
-          <span className="menu-item-shortcut shrink-0 inline-flex items-center justify-center h-5 px-[var(--layout-padding-xs)] py-[var(--layout-padding-2xs)] rounded-[var(--layout-radius-sm)] text-content-caption">
-            {shortcut}
-          </span>
-        )}
-        {dot && (
-          <span className="menu-item-dot shrink-0 size-2 rounded-[var(--layout-radius-full)]" />
-        )}
-      </button>
+        {children}
+      </Slot>
     )
   }
-)
-MenuItem.displayName = "MenuItem"
+
+  return (
+    <button
+      ref={ref}
+      data-slot="menu-item"
+      type="button"
+      disabled={disabled}
+      className={itemClass}
+      {...props}
+    >
+      {icon && (
+        <span className="menu-item-icon shrink-0" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+      <span className="flex-1 min-w-0 text-start">{children}</span>
+      {badge && (
+        <span className="menu-item-badge shrink-0 inline-flex items-center justify-center min-w-[var(--layout-size-sm)] px-[var(--layout-padding-sm)] py-[var(--layout-padding-2xs)] rounded-[var(--layout-radius-full)] text-content-caption">
+          {badge}
+        </span>
+      )}
+      {shortcut && (
+        <span className="menu-item-shortcut shrink-0 inline-flex items-center justify-center h-[var(--layout-size-sm)] px-[var(--layout-padding-xs)] py-[var(--layout-padding-2xs)] rounded-[var(--layout-radius-sm)] text-content-caption">
+          {shortcut}
+        </span>
+      )}
+      {dot && (
+        <span className="menu-item-dot shrink-0 size-2 rounded-[var(--layout-radius-full)]" />
+      )}
+    </button>
+  )
+}
 
 /* ------------------------------------------------------------------ */
 /*  MenuDivider                                                        */
 /* ------------------------------------------------------------------ */
 
-const MenuDivider = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div">
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    data-slot="menu-divider"
-    className={cn("menu-divider my-[var(--layout-gap-xs)]", className)}
-    role="separator"
-    aria-orientation="horizontal"
-    {...props}
-  />
-))
-MenuDivider.displayName = "MenuDivider"
+function MenuDivider({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      ref={ref}
+      data-slot="menu-divider"
+      className={cn("menu-divider my-[var(--layout-gap-xs)]", className)}
+      role="separator"
+      aria-orientation="horizontal"
+      {...props}
+    />
+  )
+}
 
 export { Menu, MenuGroup, MenuItem, MenuDivider, menuItemVariants }

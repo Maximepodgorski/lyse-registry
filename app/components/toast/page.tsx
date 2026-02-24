@@ -316,9 +316,7 @@ export default function ToastPage() {
         </div>
       </main>
 
-      {tab === "overview" && (
-        <TableOfContents sections={overviewSections} />
-      )}
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

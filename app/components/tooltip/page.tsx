@@ -427,9 +427,7 @@ export default function TooltipPage() {
         </div>
       </main>
 
-      {tab === "overview" && (
-        <TableOfContents sections={overviewSections} />
-      )}
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

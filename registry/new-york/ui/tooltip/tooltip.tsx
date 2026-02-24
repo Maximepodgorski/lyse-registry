@@ -74,7 +74,7 @@ function TooltipShortcut({
   return (
     <kbd
       data-slot="tooltip-shortcut"
-      className={cn("tooltip-shortcut h-5 shrink-0 text-content-caption", className)}
+      className={cn("tooltip-shortcut h-[var(--layout-size-sm)] shrink-0 text-content-caption", className)}
       {...props}
     />
   )

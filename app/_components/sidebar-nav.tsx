@@ -45,11 +45,11 @@ export function SidebarNav() {
             const href = "href" in item ? item.href : undefined
             const isActive = href === pathname
             return href ? (
-              <MenuItem key={item.label} size="sm" isActive={isActive} asChild>
+              <MenuItem key={item.label} size="sm" active={isActive} asChild>
                 <Link href={href}>{item.label}</Link>
               </MenuItem>
             ) : (
-              <MenuItem key={item.label} size="sm" isDisabled>
+              <MenuItem key={item.label} size="sm" disabled>
                 {item.label}
               </MenuItem>
             )

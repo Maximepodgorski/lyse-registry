@@ -56,14 +56,14 @@ const propDefs: PropDef[] = [
     description: "Visual variant. Accent uses brand color for text and icon.",
   },
   {
-    name: "isActive",
+    name: "active",
     type: ["boolean"],
     default: "false",
     description:
       "Active state — highlights the item with a subtle background and border.",
   },
   {
-    name: "isDisabled",
+    name: "disabled",
     type: ["boolean"],
     default: "false",
     description: "Disabled state — mutes colors and prevents interaction.",
@@ -147,14 +147,14 @@ function OverviewTab() {
         title="Active"
         description={
           <>
-            Use <InlineCode>isActive</InlineCode> to highlight the current
+            Use <InlineCode>active</InlineCode> to highlight the current
             page or selection. Adds a subtle background and border.
           </>
         }
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Home />}>Home</MenuItem>
-          <MenuItem icon={<FileText />} isActive>
+          <MenuItem icon={<FileText />} active>
             Documents
           </MenuItem>
           <MenuItem icon={<Users />}>Team</MenuItem>
@@ -166,14 +166,14 @@ function OverviewTab() {
         title="Disabled"
         description={
           <>
-            Use <InlineCode>isDisabled</InlineCode> to prevent interaction.
+            Use <InlineCode>disabled</InlineCode> to prevent interaction.
             Text and icons are muted.
           </>
         }
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Home />}>Home</MenuItem>
-          <MenuItem icon={<Archive />} isDisabled>
+          <MenuItem icon={<Archive />} disabled>
             Archived
           </MenuItem>
           <MenuItem icon={<Settings />}>Settings</MenuItem>
@@ -263,7 +263,7 @@ function OverviewTab() {
                   <img src="/logotype.svg" alt="Lyse" className="size-6" />
                 </div>
                 <MenuGroup label="Workspace">
-                  <MenuItem size="sm" icon={<Home />} isActive>
+                  <MenuItem size="sm" icon={<Home />} active>
                     Members
                   </MenuItem>
                   <MenuItem size="sm" icon={<Layers />}>Usage</MenuItem>
@@ -479,9 +479,7 @@ export default function MenuPage() {
         </div>
       </main>
 
-      {tab === "overview" && (
-        <TableOfContents sections={overviewSections} />
-      )}
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

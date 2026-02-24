@@ -11,6 +11,8 @@ export function TableOfContents({ sections }: { sections: TocSection[] }) {
   const [activeId, setActiveId] = useState(sections[0]?.id)
 
   useEffect(() => {
+    if (sections.length === 0) return
+
     const observers: IntersectionObserver[] = []
 
     sections.forEach((section) => {
@@ -32,40 +34,42 @@ export function TableOfContents({ sections }: { sections: TocSection[] }) {
 
   return (
     <aside className="hidden xl:block w-56 shrink-0 py-[var(--root-space-11)] pr-[var(--layout-padding-2xl)]">
-      <nav className="sticky top-20 flex flex-col gap-[var(--layout-gap-xl)]">
-        <span
-          className="text-content-caption font-accent"
-          style={{ color: "var(--text-base-moderate)" }}
-        >
-          On this page
-        </span>
-        <ul className="flex flex-col">
-          {sections.map((s) => {
-            const isActive = s.id === activeId
-            return (
-              <li key={s.id}>
-                <a
-                  href={`#${s.id}`}
-                  className="text-content-note block py-[var(--layout-padding-sm)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
-                  style={{
-                    color: isActive
-                      ? "var(--text-base-strong)"
-                      : "var(--text-base-moderate)",
-                    borderLeft: isActive
-                      ? "2px solid var(--text-base-strong)"
-                      : "2px solid transparent",
-                    paddingLeft: "var(--layout-padding-lg)",
-                    transition:
-                      "color 200ms ease, border-color 200ms ease",
-                  }}
-                >
-                  {s.label}
-                </a>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
+      {sections.length > 0 && (
+        <nav className="sticky top-20 flex flex-col gap-[var(--layout-gap-xl)]">
+          <span
+            className="text-content-caption font-accent"
+            style={{ color: "var(--text-base-moderate)" }}
+          >
+            On this page
+          </span>
+          <ul className="flex flex-col">
+            {sections.map((s) => {
+              const isActive = s.id === activeId
+              return (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    className="text-content-note block py-[var(--layout-padding-sm)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
+                    style={{
+                      color: isActive
+                        ? "var(--text-base-strong)"
+                        : "var(--text-base-moderate)",
+                      borderLeft: isActive
+                        ? "2px solid var(--text-base-strong)"
+                        : "2px solid transparent",
+                      paddingLeft: "var(--layout-padding-lg)",
+                      transition:
+                        "color 200ms ease, border-color 200ms ease",
+                    }}
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
+      )}
     </aside>
   )
 }
