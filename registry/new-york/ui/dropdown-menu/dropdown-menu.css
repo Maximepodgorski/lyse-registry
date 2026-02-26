@@ -1,0 +1,109 @@
+/* ================================================================
+ * DROPDOWN MENU — Styles
+ * Structure (flex, gap, padding, radius) lives in dropdown-menu.tsx via cva.
+ * Theming (colors, borders, focus ring) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Content panel
+ * -------------------------------- */
+.dropdown-menu-content {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Item — base
+ * -------------------------------- */
+.dropdown-menu-item {
+  color: var(--text-base-strong);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dropdown-menu-item {
+    transition:
+      background 150ms ease,
+      color 150ms ease;
+  }
+}
+
+.dropdown-menu-item[data-highlighted] {
+  background: var(--background-neutral-faint-hover);
+  outline: none;
+}
+
+.dropdown-menu-item:active {
+  background: var(--background-neutral-faint-pressed);
+}
+
+.dropdown-menu-item:focus-visible {
+  background: var(--background-neutral-faint-hover);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
+}
+
+/* --------------------------------
+ * Item — destructive
+ * -------------------------------- */
+.dropdown-menu-item-destructive {
+  color: var(--text-danger-moderate);
+}
+
+.dropdown-menu-item-destructive .dropdown-menu-item-icon {
+  color: var(--text-danger-moderate);
+}
+
+.dropdown-menu-item-destructive:focus-visible {
+  box-shadow: 0 0 0 2px var(--shadow-danger-moderate);
+}
+
+/* --------------------------------
+ * Item — disabled
+ * -------------------------------- */
+.dropdown-menu-item[data-disabled] {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dropdown-menu-item[data-disabled] .dropdown-menu-item-icon {
+  color: var(--text-disabled);
+}
+
+.dropdown-menu-item[data-disabled] .dropdown-menu-shortcut {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Icon
+ * -------------------------------- */
+.dropdown-menu-item-icon {
+  color: var(--text-base-moderate);
+}
+
+.dropdown-menu-item[data-highlighted] .dropdown-menu-item-icon {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Shortcut
+ * -------------------------------- */
+.dropdown-menu-shortcut {
+  color: var(--text-base-medium);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Label (group header)
+ * -------------------------------- */
+.dropdown-menu-label {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Separator
+ * -------------------------------- */
+.dropdown-menu-separator {
+  border-top: var(--layout-border-thin) solid var(--border-default);
+}
