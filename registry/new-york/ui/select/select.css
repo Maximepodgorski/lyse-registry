@@ -1,0 +1,150 @@
+/* ================================================================
+ * SELECT — Styles
+ * Structure (flex, gap, padding, radius) lives in select.tsx via cva.
+ * Theming (colors, borders, focus ring) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Trigger — base
+ * -------------------------------- */
+.select-trigger {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  color: var(--text-base-strong);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .select-trigger {
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+}
+
+.select-trigger:hover {
+  background: var(--background-neutral-faint-hover);
+}
+
+.select-trigger:focus-visible,
+.select-trigger[data-state="open"] {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
+}
+
+/* --------------------------------
+ * Trigger — placeholder
+ * -------------------------------- */
+.select-trigger [data-placeholder] {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Trigger — disabled
+ * -------------------------------- */
+.select-trigger[data-disabled] {
+  background: var(--background-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.select-trigger[data-disabled] .select-chevron {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Trigger — destructive variant
+ * -------------------------------- */
+.select-trigger-destructive {
+  border-color: var(--border-danger-strong);
+}
+
+.select-trigger-destructive:focus-visible,
+.select-trigger-destructive[data-state="open"] {
+  box-shadow: 0 0 0 2px var(--shadow-danger-moderate);
+}
+
+/* --------------------------------
+ * Trigger — success variant
+ * -------------------------------- */
+.select-trigger-success {
+  border-color: var(--border-success-strong);
+}
+
+.select-trigger-success:focus-visible,
+.select-trigger-success[data-state="open"] {
+  box-shadow: 0 0 0 2px var(--shadow-success-moderate);
+}
+
+/* --------------------------------
+ * Chevron
+ * -------------------------------- */
+.select-chevron {
+  color: var(--icon-neutral-moderate);
+}
+
+/* --------------------------------
+ * Content panel
+ * -------------------------------- */
+.select-content {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Item — base
+ * -------------------------------- */
+.select-item {
+  color: var(--text-base-strong);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .select-item {
+    transition:
+      background 150ms ease,
+      color 150ms ease;
+  }
+}
+
+.select-item[data-highlighted] {
+  background: var(--background-neutral-faint-hover);
+  outline: none;
+}
+
+.select-item:focus-visible {
+  background: var(--background-neutral-faint-hover);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
+}
+
+/* --------------------------------
+ * Item — disabled
+ * -------------------------------- */
+.select-item[data-disabled] {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --------------------------------
+ * Item indicator (check)
+ * -------------------------------- */
+.select-item-indicator {
+  color: var(--icon-brand-moderate);
+}
+
+/* --------------------------------
+ * Label (group header)
+ * -------------------------------- */
+.select-label {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Separator
+ * -------------------------------- */
+.select-separator {
+  border-top: var(--layout-border-thin) solid var(--border-default);
+}
