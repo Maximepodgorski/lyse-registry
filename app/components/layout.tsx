@@ -35,6 +35,8 @@ const navGroups = [
       { label: "Toggle", href: "/components/toggle" },
       { label: "BannerInfo", href: "/components/banner-info" },
       { label: "Avatar", href: "/components/avatar" },
+      { label: "DropdownMenu", href: "/components/dropdown-menu" },
+      { label: "Select", href: "/components/select" },
     ],
   },
 ] as const
