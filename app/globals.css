@@ -14,6 +14,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@source not "../specs";
+@source not "../.claude";
+
 /* Primitives */
 @import "./styles/root-colors.css";
 @import "./styles/root-typography.css";

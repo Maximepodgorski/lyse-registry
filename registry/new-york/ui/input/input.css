@@ -1,0 +1,126 @@
+/* ================================================================
+ * INPUT — Styles
+ * Structure (flex, gap, padding, radius) lives in input.tsx via cva.
+ * Theming (colors, borders, focus ring) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Input — base container
+ * -------------------------------- */
+.input-base {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  color: var(--text-base-strong);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .input-base {
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+}
+
+.input-base:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
+}
+
+/* --------------------------------
+ * Input — native input element
+ * -------------------------------- */
+.input-native {
+  color: inherit;
+  font: inherit;
+}
+
+.input-native::placeholder {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Input — disabled
+ * -------------------------------- */
+.input-base[data-disabled] {
+  background: var(--background-disabled);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.input-base[data-disabled] .input-native::placeholder {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Input — leading / trailing icons
+ * -------------------------------- */
+.input-leading {
+  color: var(--icon-neutral-moderate);
+}
+
+.input-trailing {
+  color: var(--icon-neutral-moderate);
+}
+
+.input-base[data-disabled] .input-leading,
+.input-base[data-disabled] .input-trailing {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Input — destructive variant
+ * -------------------------------- */
+.input-destructive {
+  border-color: var(--border-danger-strong);
+}
+
+.input-destructive:focus-within {
+  box-shadow: 0 0 0 2px var(--shadow-danger-moderate);
+}
+
+.input-destructive .input-trailing {
+  color: var(--icon-danger-moderate);
+}
+
+/* --------------------------------
+ * Input — success variant
+ * -------------------------------- */
+.input-success {
+  border-color: var(--border-success-strong);
+}
+
+.input-success:focus-within {
+  box-shadow: 0 0 0 2px var(--shadow-success-moderate);
+}
+
+.input-success .input-trailing {
+  color: var(--icon-success-moderate);
+}
+
+/* --------------------------------
+ * InputLabel
+ * -------------------------------- */
+.input-label {
+  color: var(--text-base-strong);
+}
+
+.input-label-asterisk {
+  color: var(--text-danger-moderate);
+}
+
+/* --------------------------------
+ * InputHint
+ * -------------------------------- */
+.input-hint {
+  color: var(--text-base-moderate);
+}
+
+.input-hint-destructive {
+  color: var(--text-danger-moderate);
+}
+
+.input-hint-success {
+  color: var(--text-success-moderate);
+}

@@ -1,0 +1,74 @@
+/* ================================================================
+ * TEXTAREA — Styles
+ * Structure (flex, padding, radius, min-height) lives in textarea.tsx via cva.
+ * Theming (colors, borders, focus ring) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Base
+ * -------------------------------- */
+.textarea-base {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  color: var(--text-base-strong);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .textarea-base {
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+}
+
+/* --------------------------------
+ * Placeholder
+ * -------------------------------- */
+.textarea-base::placeholder {
+  color: var(--text-base-medium);
+}
+
+/* --------------------------------
+ * Focus
+ * -------------------------------- */
+.textarea-base:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
+}
+
+/* --------------------------------
+ * Disabled
+ * -------------------------------- */
+.textarea-base:disabled {
+  background: var(--background-disabled);
+  color: var(--text-disabled);
+  border-color: var(--border-disabled);
+  cursor: not-allowed;
+  resize: none;
+}
+
+.textarea-base:disabled::placeholder {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Destructive variant
+ * -------------------------------- */
+.textarea-destructive {
+  border-color: var(--border-danger-strong);
+}
+
+.textarea-destructive:focus-visible {
+  box-shadow: 0 0 0 2px var(--shadow-danger-moderate);
+}
+
+/* --------------------------------
+ * Success variant
+ * -------------------------------- */
+.textarea-success {
+  border-color: var(--border-success-strong);
+}
+
+.textarea-success:focus-visible {
+  box-shadow: 0 0 0 2px var(--shadow-success-moderate);
+}

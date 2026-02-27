@@ -217,6 +217,34 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/new-york/ui/input/input.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/input/input.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/new-york/ui/textarea/textarea.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/textarea/textarea.css",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
