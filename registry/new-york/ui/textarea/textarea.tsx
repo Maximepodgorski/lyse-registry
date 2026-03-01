@@ -15,12 +15,11 @@ const textareaVariants = cva(
       variant: {
         default: "",
         destructive: "textarea-destructive",
-        success: "textarea-success",
       },
       size: {
-        sm: "min-h-[100px] p-[var(--layout-padding-md)] rounded-[var(--layout-radius-lg)] text-content-note",
-        md: "min-h-[130px] p-[var(--layout-padding-md)] rounded-[var(--layout-radius-lg)] text-content-note",
-        lg: "min-h-[166px] p-[var(--layout-padding-lg)] rounded-[var(--layout-radius-xl)] text-content-body",
+        sm: "min-h-[6.25rem] p-[var(--layout-padding-md)] rounded-[var(--layout-radius-lg)] text-content-note",
+        md: "min-h-[8.125rem] p-[var(--layout-padding-md)] rounded-[var(--layout-radius-lg)] text-content-note",
+        lg: "min-h-[10.375rem] p-[var(--layout-padding-lg)] rounded-[var(--layout-radius-xl)] text-content-body",
       },
     },
     defaultVariants: {
@@ -35,7 +34,6 @@ const textareaHintVariants = cva("textarea-hint text-content-note", {
     variant: {
       default: "",
       destructive: "textarea-hint-destructive",
-      success: "textarea-hint-success",
     },
   },
   defaultVariants: {
@@ -57,6 +55,7 @@ function Textarea({
   return (
     <textarea
       data-slot="textarea"
+      aria-invalid={variant === "destructive" || undefined}
       className={cn(textareaVariants({ variant, size, className }))}
       {...props}
     />

@@ -25,7 +25,7 @@
  * Placeholder
  * -------------------------------- */
 .textarea-base::placeholder {
-  color: var(--text-base-medium);
+  color: var(--text-base-moderate);
 }
 
 /* --------------------------------
@@ -63,17 +63,6 @@
 }
 
 /* --------------------------------
- * Success variant
- * -------------------------------- */
-.textarea-success {
-  border-color: var(--border-success-strong);
-}
-
-.textarea-success:focus-visible {
-  box-shadow: 0 0 0 2px var(--shadow-success-moderate);
-}
-
-/* --------------------------------
  * TextareaLabel
  * -------------------------------- */
 .textarea-label {
@@ -93,8 +82,4 @@
 
 .textarea-hint-destructive {
   color: var(--text-danger-moderate);
-}
-
-.textarea-hint-success {
-  color: var(--text-success-moderate);
 }
