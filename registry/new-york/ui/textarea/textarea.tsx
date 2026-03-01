@@ -30,6 +30,19 @@ const textareaVariants = cva(
   }
 )
 
+const textareaHintVariants = cva("textarea-hint text-content-note", {
+  variants: {
+    variant: {
+      default: "",
+      destructive: "textarea-hint-destructive",
+      success: "textarea-hint-success",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+})
+
 /* ------------------------------------------------------------------ */
 /*  Textarea                                                           */
 /* ------------------------------------------------------------------ */
@@ -50,4 +63,80 @@ function Textarea({
   )
 }
 
-export { Textarea, textareaVariants }
+/* ------------------------------------------------------------------ */
+/*  TextareaField                                                      */
+/* ------------------------------------------------------------------ */
+
+function TextareaField({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="textarea-field"
+      className={cn(
+        "flex flex-col gap-[var(--layout-gap-md)] w-full",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  TextareaLabel                                                      */
+/* ------------------------------------------------------------------ */
+
+function TextareaLabel({
+  className,
+  required,
+  children,
+  ...props
+}: React.ComponentProps<"label"> & { required?: boolean }) {
+  return (
+    <label
+      data-slot="textarea-label"
+      className={cn(
+        "textarea-label inline-flex items-center gap-[var(--layout-gap-xs)] text-content-note font-accent",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      {required && <span className="textarea-label-asterisk">*</span>}
+    </label>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  TextareaHint                                                       */
+/* ------------------------------------------------------------------ */
+
+function TextareaHint({
+  className,
+  variant,
+  children,
+  ...props
+}: React.ComponentProps<"p"> & VariantProps<typeof textareaHintVariants>) {
+  return (
+    <p
+      data-slot="textarea-hint"
+      className={cn(textareaHintVariants({ variant, className }))}
+      {...props}
+    >
+      {children}
+    </p>
+  )
+}
+
+export {
+  Textarea,
+  TextareaField,
+  TextareaLabel,
+  TextareaHint,
+  textareaVariants,
+  textareaHintVariants,
+}

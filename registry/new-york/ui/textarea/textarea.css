@@ -72,3 +72,29 @@
 .textarea-success:focus-visible {
   box-shadow: 0 0 0 2px var(--shadow-success-moderate);
 }
+
+/* --------------------------------
+ * TextareaLabel
+ * -------------------------------- */
+.textarea-label {
+  color: var(--text-base-strong);
+}
+
+.textarea-label-asterisk {
+  color: var(--text-danger-moderate);
+}
+
+/* --------------------------------
+ * TextareaHint
+ * -------------------------------- */
+.textarea-hint {
+  color: var(--text-base-moderate);
+}
+
+.textarea-hint-destructive {
+  color: var(--text-danger-moderate);
+}
+
+.textarea-hint-success {
+  color: var(--text-success-moderate);
+}
