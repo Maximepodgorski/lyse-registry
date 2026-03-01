@@ -1,0 +1,116 @@
+/* ================================================================
+ * MODAL — Styles
+ * Structure (flex, gap, padding, radius) lives in modal.tsx via cva.
+ * Theming (colors, borders, shadow) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Overlay (backdrop)
+ * -------------------------------- */
+.modal-overlay {
+  background: var(--overlay-default);
+}
+
+/* --------------------------------
+ * Content (surface)
+ * -------------------------------- */
+.modal-content {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  border-radius: var(--layout-radius-xl);
+  --modal-shadow:
+    0 3px 8px 0 rgba(0, 0, 0, 0.04),
+    0 14px 14px 0 rgba(0, 0, 0, 0.03),
+    0 31px 19px 0 rgba(0, 0, 0, 0.02),
+    0 55px 22px 0 rgba(0, 0, 0, 0.01);
+  box-shadow: var(--modal-shadow);
+}
+
+:is(.dark *).modal-content {
+  --modal-shadow:
+    0 3px 8px 0 rgba(0, 0, 0, 0.2),
+    0 14px 14px 0 rgba(0, 0, 0, 0.18),
+    0 31px 19px 0 rgba(0, 0, 0, 0.1),
+    0 55px 22px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------
+ * Header (with bottom border)
+ * -------------------------------- */
+.modal-header {
+  border-bottom: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Title
+ * -------------------------------- */
+.modal-title {
+  color: var(--text-base-bolder);
+}
+
+/* --------------------------------
+ * Description text
+ * -------------------------------- */
+.modal-description {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Footer (with top border)
+ * -------------------------------- */
+.modal-footer {
+  border-top: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Close button
+ * -------------------------------- */
+.modal-close {
+  color: var(--text-base-moderate);
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Icon — variant colors
+ * -------------------------------- */
+.modal-icon-brand {
+  background: var(--overlay-brand-default);
+  color: var(--icon-brand-moderate);
+}
+
+.modal-icon-destructive {
+  background: var(--overlay-danger-default);
+  color: var(--icon-danger-moderate);
+}
+
+.modal-icon-success {
+  background: var(--overlay-success-default);
+  color: var(--icon-success-moderate);
+}
+
+.modal-icon-warning {
+  background: var(--overlay-warning-default);
+  color: var(--icon-warning-moderate);
+}
+
+/* --------------------------------
+ * View transition (content swap)
+ * -------------------------------- */
+@keyframes modal-view-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-view-enter {
+  animation: modal-view-enter 250ms cubic-bezier(0.2, 0, 0, 1);
+}
