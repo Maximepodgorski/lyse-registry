@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "registry/new-york/ui/spinner/spinner.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./spinner.css\"\n\nconst spinnerVariants = cva(\n  \"inline-flex items-center justify-center\",\n  {\n    variants: {\n      size: {\n        sm: \"size-[var(--layout-size-xs)]\",\n        md: \"size-[var(--layout-size-md)]\",\n        lg: \"size-[var(--layout-size-lg)]\",\n      },\n    },\n    defaultVariants: {\n      size: \"md\",\n    },\n  }\n)\n\nfunction Spinner({\n  className,\n  size,\n  label = \"Loading\",\n  ...props\n}: React.ComponentProps<\"span\"> &\n  VariantProps<typeof spinnerVariants> & {\n    label?: string\n  }) {\n  return (\n    <span\n      data-slot=\"spinner\"\n      role=\"status\"\n      className={cn(spinnerVariants({ size, className }))}\n      {...props}\n    >\n      <svg\n        className=\"size-full animate-spinner spinner-svg\"\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        xmlns=\"http://www.w3.org/2000/svg\"\n        aria-hidden=\"true\"\n      >\n        <circle\n          className=\"spinner-track\"\n          cx=\"12\"\n          cy=\"12\"\n          r=\"9\"\n          strokeWidth=\"1.5\"\n        />\n        <circle\n          className=\"spinner-dot\"\n          cx=\"12\"\n          cy=\"3\"\n          r=\"1.5\"\n        />\n      </svg>\n      <span className=\"sr-only\">{label}</span>\n    </span>\n  )\n}\n\nexport { Spinner, spinnerVariants }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/spinner/spinner.css",
+      "content": "/* ================================================================\n * SPINNER — Variant & State Styles\n * Structure (size) lives in spinner.tsx via cva.\n * Theming (colors, animation) lives here via tokens.\n * ================================================================ */\n\n.spinner-track {\n  stroke: var(--border-default);\n  fill: none;\n}\n\n.spinner-dot {\n  fill: var(--background-brand-strong-default);\n}\n\n/* Reduced motion — slow down instead of stopping */\n@media (prefers-reduced-motion: reduce) {\n  .spinner-svg {\n    animation-duration: 4s;\n  }\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

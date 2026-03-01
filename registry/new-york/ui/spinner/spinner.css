@@ -1,0 +1,21 @@
+/* ================================================================
+ * SPINNER — Variant & State Styles
+ * Structure (size) lives in spinner.tsx via cva.
+ * Theming (colors, animation) lives here via tokens.
+ * ================================================================ */
+
+.spinner-track {
+  stroke: var(--border-default);
+  fill: none;
+}
+
+.spinner-dot {
+  fill: var(--background-brand-strong-default);
+}
+
+/* Reduced motion — slow down instead of stopping */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-svg {
+    animation-duration: 4s;
+  }
+}
