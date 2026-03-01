@@ -9,8 +9,9 @@
   fill: none;
 }
 
-.spinner-dot {
-  fill: var(--background-brand-strong-default);
+.spinner-arc {
+  stroke: var(--background-brand-strong-default);
+  fill: none;
 }
 
 /* Reduced motion — slow down instead of stopping */

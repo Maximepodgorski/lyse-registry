@@ -51,10 +51,13 @@ function Spinner({
           strokeWidth="1.5"
         />
         <circle
-          className="spinner-dot"
+          className="spinner-arc"
           cx="12"
-          cy="3"
-          r="1.5"
+          cy="12"
+          r="9"
+          strokeWidth="1.5"
+          strokeDasharray="14.14 42.41"
+          strokeLinecap="round"
         />
       </svg>
       <span className="sr-only">{label}</span>
