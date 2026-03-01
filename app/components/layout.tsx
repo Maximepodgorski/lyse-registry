@@ -39,6 +39,8 @@ const navGroups = [
       { label: "Select", href: "/components/select" },
       { label: "Input", href: "/components/input" },
       { label: "Textarea", href: "/components/textarea" },
+      { label: "Modal", href: "/components/modal" },
+      { label: "Spinner", href: "/components/spinner" },
     ],
   },
 ] as const
