@@ -34,10 +34,10 @@ const overviewSections: TocSection[] = [
 const propDefs: PropDef[] = [
   {
     name: "variant",
-    type: ["default", "destructive", "success"],
+    type: ["default", "destructive"],
     default: "default",
     description:
-      "Visual variant. Controls border and focus ring color for validation states.",
+      "Visual variant. Controls border and focus ring color for validation state.",
   },
   {
     name: "size",
@@ -86,10 +86,10 @@ const labelPropDefs: PropDef[] = [
 const hintPropDefs: PropDef[] = [
   {
     name: "variant",
-    type: ["default", "destructive", "success"],
+    type: ["default", "destructive"],
     default: "default",
     description:
-      "Text color. Use destructive for error messages, success for confirmation.",
+      "Text color. Use destructive for error messages.",
   },
   {
     name: "children",
@@ -149,7 +149,6 @@ function OverviewTab() {
         <div className="flex flex-col gap-4">
           <Textarea variant="default" placeholder="Default" className="max-w-[320px]" />
           <Textarea variant="destructive" placeholder="Destructive" className="max-w-[320px]" />
-          <Textarea variant="success" placeholder="Success" className="max-w-[320px]" />
         </div>
       </ComponentPreview>
 
@@ -183,16 +182,6 @@ function OverviewTab() {
             </TextareaHint>
           </TextareaField>
 
-          <TextareaField>
-            <TextareaLabel required>Message</TextareaLabel>
-            <Textarea
-              variant="success"
-              placeholder="Type your message here..."
-            />
-            <TextareaHint variant="success">
-              Message saved.
-            </TextareaHint>
-          </TextareaField>
         </div>
       </ComponentPreview>
 
