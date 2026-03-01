@@ -2,7 +2,12 @@
 
 import { useState } from "react"
 import { toast } from "@/registry/new-york/ui/toast/toast"
-import { Textarea } from "@/registry/new-york/ui/textarea/textarea"
+import {
+  Textarea,
+  TextareaField,
+  TextareaLabel,
+  TextareaHint,
+} from "@/registry/new-york/ui/textarea/textarea"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { Copy, ExternalLink } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
@@ -22,6 +27,7 @@ const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "sizes", label: "Sizes" },
   { id: "variants", label: "Variants" },
+  { id: "textarea-field", label: "TextareaField" },
   { id: "disabled", label: "Disabled" },
 ]
 
@@ -49,6 +55,47 @@ const propDefs: PropDef[] = [
     name: "placeholder",
     type: ["string"],
     description: "Placeholder text displayed when the textarea is empty.",
+  },
+  {
+    name: "className",
+    type: ["string"],
+    description: "Additional class names merged via cn().",
+  },
+]
+
+const labelPropDefs: PropDef[] = [
+  {
+    name: "required",
+    type: ["boolean"],
+    default: "false",
+    description: "Shows a red asterisk after the label text.",
+  },
+  {
+    name: "children",
+    type: ["ReactNode"],
+    required: true,
+    description: "Label text.",
+  },
+  {
+    name: "className",
+    type: ["string"],
+    description: "Additional class names merged via cn().",
+  },
+]
+
+const hintPropDefs: PropDef[] = [
+  {
+    name: "variant",
+    type: ["default", "destructive", "success"],
+    default: "default",
+    description:
+      "Text color. Use destructive for error messages, success for confirmation.",
+  },
+  {
+    name: "children",
+    type: ["ReactNode"],
+    required: true,
+    description: "Hint text content.",
   },
   {
     name: "className",
@@ -107,11 +154,61 @@ function OverviewTab() {
       </ComponentPreview>
 
       <ComponentPreview
+        id="textarea-field"
+        title="TextareaField"
+        description={
+          <>
+            Compose <InlineCode>TextareaField</InlineCode>,{" "}
+            <InlineCode>TextareaLabel</InlineCode>, and{" "}
+            <InlineCode>TextareaHint</InlineCode> for a full form field with
+            label, textarea, and helper text.
+          </>
+        }
+      >
+        <div className="flex flex-col gap-8 max-w-[320px]">
+          <TextareaField>
+            <TextareaLabel required>Message</TextareaLabel>
+            <Textarea placeholder="Type your message here..." />
+            <TextareaHint>Maximum 500 characters.</TextareaHint>
+          </TextareaField>
+
+          <TextareaField>
+            <TextareaLabel required>Message</TextareaLabel>
+            <Textarea
+              variant="destructive"
+              placeholder="Type your message here..."
+            />
+            <TextareaHint variant="destructive">
+              Message is required.
+            </TextareaHint>
+          </TextareaField>
+
+          <TextareaField>
+            <TextareaLabel required>Message</TextareaLabel>
+            <Textarea
+              variant="success"
+              placeholder="Type your message here..."
+            />
+            <TextareaHint variant="success">
+              Message saved.
+            </TextareaHint>
+          </TextareaField>
+        </div>
+      </ComponentPreview>
+
+      <ComponentPreview
         id="disabled"
         title="Disabled"
         description="Disable the textarea to prevent interaction."
       >
-        <Textarea disabled placeholder="Disabled textarea" className="max-w-[320px]" />
+        <div className="flex flex-col gap-4 max-w-[320px]">
+          <Textarea disabled placeholder="Disabled textarea" />
+          <TextareaField>
+            <TextareaLabel required>Message</TextareaLabel>
+            <Textarea disabled placeholder="Type your message here..." />
+            <TextareaHint>Maximum 500 characters.</TextareaHint>
+          </TextareaField>
+        </div>
       </ComponentPreview>
     </div>
   )
@@ -141,9 +238,9 @@ export default function TextareaPage() {
             className="text-content-body"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A multi-line text input for collecting longer form content. Supports
-            sizes, validation variants, placeholder text, and disabled state.
-            Resizable by default.
+            A multi-line text input for collecting longer form content. Compose
+            with TextareaField, TextareaLabel, and TextareaHint for full form
+            fields with labels, validation states, and helper text.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -210,14 +307,19 @@ export default function TextareaPage() {
           {tab === "overview" && (
             <CodeBlock
               preview={
-                <Textarea placeholder="Type something..." className="max-w-[320px]" />
+                <TextareaField className="max-w-[320px]">
+                  <TextareaLabel required>Message</TextareaLabel>
+                  <Textarea placeholder="Type your message here..." />
+                  <TextareaHint>Maximum 500 characters.</TextareaHint>
+                </TextareaField>
               }
               code={
                 <>
                   <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
                   {" { "}
                   <span style={{ color: "var(--root-color-success-400)" }}>
-                    Textarea
+                    Textarea, TextareaField,{"\n"}
+                    {"  "}TextareaLabel, TextareaHint
                   </span>
                   {" } "}
                   <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
@@ -226,12 +328,38 @@ export default function TextareaPage() {
                   </span>
                   {"\n\n"}
                   <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Textarea</span>
+                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaField</span>
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
+                  {"\n  "}
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
+                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaLabel</span>
                   {" "}
+                  <span style={{ color: "var(--root-color-brand-300)" }}>required</span>
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
+                  {"Message"}
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
+                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaLabel</span>
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
+                  {"\n  "}
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
+                  <span style={{ color: "var(--root-color-success-400)" }}>Textarea</span>
+                  {"\n    "}
                   <span style={{ color: "var(--root-color-brand-300)" }}>placeholder</span>
                   {"="}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>{`"Type something..."`}</span>
-                  {" />"}
+                  <span style={{ color: "var(--root-color-warning-400)" }}>{`"Type your message..."`}</span>
+                  {"\n  />"}
+                  {"\n  "}
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
+                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaHint</span>
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
+                  {"Helper text"}
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
+                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaHint</span>
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
+                  {"\n"}
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
+                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaField</span>
+                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
                 </>
               }
             />
@@ -251,7 +379,31 @@ export default function TextareaPage() {
                 </h3>
                 <PropsTable
                   propDefs={propDefs}
-                  extendsType="React.TextareaHTMLAttributes"
+                  extendsType='React.ComponentProps<"textarea">'
+                />
+              </div>
+              <div>
+                <h3
+                  className="text-heading-small mb-4"
+                  style={{ color: "var(--text-base-strong)" }}
+                >
+                  TextareaLabel
+                </h3>
+                <PropsTable
+                  propDefs={labelPropDefs}
+                  extendsType='React.ComponentProps<"label">'
+                />
+              </div>
+              <div>
+                <h3
+                  className="text-heading-small mb-4"
+                  style={{ color: "var(--text-base-strong)" }}
+                >
+                  TextareaHint
+                </h3>
+                <PropsTable
+                  propDefs={hintPropDefs}
+                  extendsType='React.ComponentProps<"p">'
                 />
               </div>
             </div>
