@@ -1,0 +1,40 @@
+/* ================================================================
+ * PROGRESS — Progress Item & Progress Indicator
+ * Structure (flex, height, radius) lives in progress.tsx via cva.
+ * Theming (colors, transitions) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Progress Item — transition
+ * -------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .progress-item-base {
+    transition: background-color 150ms ease;
+  }
+}
+
+/* --------------------------------
+ * Progress Item — active / inactive colors
+ * -------------------------------- */
+.progress-item-active {
+  background-color: var(--background-brand-strong-default);
+}
+
+.progress-item-inactive {
+  background-color: var(--background-neutral-medium-default);
+}
+
+/* --------------------------------
+ * Progress Track — background fallback
+ * -------------------------------- */
+.progress-track {
+  background-color: var(--background-neutral-medium-default);
+}
+
+/* --------------------------------
+ * Progress Label — text color
+ * Typography (size, weight) set via Tailwind utilities in TSX.
+ * -------------------------------- */
+.progress-label {
+  color: var(--text-base-bolder);
+}
