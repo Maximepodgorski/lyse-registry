@@ -62,19 +62,18 @@ function MenuGroup({
   ref,
   ...props
 }: React.ComponentProps<"div"> & { label?: string }) {
-  const labelId = React.useId()
   return (
     <div
       ref={ref}
       data-slot="menu-group"
       role="group"
-      aria-labelledby={label ? labelId : undefined}
+      aria-label={label || undefined}
       className={cn("flex flex-col gap-[var(--layout-gap-md)]", className)}
       {...props}
     >
       {label && (
         <span
-          id={labelId}
+          aria-hidden="true"
           className="menu-group-label px-[var(--layout-padding-md)] text-content-caption font-accent"
         >
           {label}
