@@ -14,6 +14,20 @@
   fill: none;
 }
 
+/* Self-contained rotation animation */
+.spinner-svg {
+  animation: spinner-rotate 800ms linear infinite;
+}
+
+@keyframes spinner-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Reduced motion — slow down instead of stopping */
 @media (prefers-reduced-motion: reduce) {
   .spinner-svg {

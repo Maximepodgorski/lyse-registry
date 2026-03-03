@@ -62,9 +62,27 @@
   transition: translate 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Squish on press — uses global @keyframes toggle-squish */
+/* Squish on press */
 .toggle-track:not([data-disabled]):active .toggle-thumb {
-  animation: var(--animate-toggle-squish);
+  animation: toggle-squish 350ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes toggle-squish {
+  0% {
+    scale: 1 1;
+  }
+  20% {
+    scale: 1.35 0.85;
+  }
+  50% {
+    scale: 0.9 1.1;
+  }
+  70% {
+    scale: 1.08 0.96;
+  }
+  100% {
+    scale: 1 1;
+  }
 }
 
 /* --------------------------------
