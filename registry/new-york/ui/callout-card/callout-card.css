@@ -1,0 +1,63 @@
+/* ================================================================
+ * CALLOUT CARD — Styles
+ * Structure (flex, gap) lives in callout-card.tsx.
+ * Theming (colors, borders) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Base
+ * -------------------------------- */
+.callout-card-base {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-gap-lg);
+  align-items: flex-start;
+  justify-content: center;
+  background: var(--background-neutral-lighter-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  border-radius: var(--layout-radius-2xl);
+  padding: var(--layout-padding-lg);
+}
+
+/* --------------------------------
+ * Icon
+ * -------------------------------- */
+.callout-card-icon {
+  color: var(--icon-brand-moderate);
+}
+
+.callout-card-icon > svg {
+  width: var(--layout-size-xs);
+  height: var(--layout-size-xs);
+}
+
+/* --------------------------------
+ * Title
+ * -------------------------------- */
+.callout-card-title {
+  color: var(--text-brand-moderate);
+}
+
+/* --------------------------------
+ * Dismiss
+ * -------------------------------- */
+.callout-card-dismiss {
+  color: var(--icon-neutral-moderate);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .callout-card-dismiss {
+    transition: color 150ms ease;
+  }
+}
+
+.callout-card-dismiss:hover {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Description
+ * -------------------------------- */
+.callout-card-description {
+  color: var(--text-base-moderate);
+}
