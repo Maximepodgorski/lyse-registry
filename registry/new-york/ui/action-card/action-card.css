@@ -1,0 +1,30 @@
+/* ================================================================
+ * ACTION CARD — Base & Icon Wrapper Styles
+ * Structure (internal flex) lives in action-card.tsx.
+ * Theming (colors, borders, spacing) lives here via tokens.
+ * ================================================================ */
+
+.action-card-base {
+  display: flex;
+  align-items: center;
+  gap: var(--layout-gap-2xl);
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  border-radius: var(--layout-radius-xl);
+  padding: var(--layout-padding-xl);
+}
+
+.action-card-logo {
+  display: flex;
+  align-items: center;
+}
+
+.action-card-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-base-moderate);
+}
+
+.action-card-label {
+  color: var(--text-base-moderate);
+}
