@@ -4,11 +4,56 @@
   "homepage": "https://ui.lyse.dev",
   "items": [
     {
+      "name": "lyse-tokens",
+      "type": "registry:style",
+      "description": "Lyse Design System tokens — required foundation for all Lyse components. Includes color primitives, semantic colors (light/dark), layout tokens, typography tokens, and shadcn bridge.",
+      "files": [
+        {
+          "path": "app/styles/root-colors.css",
+          "type": "registry:file",
+          "target": "~/styles/lyse/root-colors.css"
+        },
+        {
+          "path": "app/styles/root-typography.css",
+          "type": "registry:file",
+          "target": "~/styles/lyse/root-typography.css"
+        },
+        {
+          "path": "app/styles/root-layout.css",
+          "type": "registry:file",
+          "target": "~/styles/lyse/root-layout.css"
+        },
+        {
+          "path": "app/styles/semantic-global.css",
+          "type": "registry:file",
+          "target": "~/styles/lyse/semantic-global.css"
+        },
+        {
+          "path": "app/styles/semantic-colors.css",
+          "type": "registry:file",
+          "target": "~/styles/lyse/semantic-colors.css"
+        },
+        {
+          "path": "app/styles/shadcn-bridge.css",
+          "type": "registry:file",
+          "target": "~/styles/lyse/shadcn-bridge.css"
+        },
+        {
+          "path": "app/styles/typography.css",
+          "type": "registry:file",
+          "target": "~/styles/lyse/typography.css"
+        }
+      ],
+      "docs": "After installing, import all token files in your main CSS entry point (e.g. globals.css):\n\n@import './styles/lyse/root-colors.css';\n@import './styles/lyse/root-typography.css';\n@import './styles/lyse/root-layout.css';\n@import './styles/lyse/semantic-global.css';\n@import './styles/lyse/semantic-colors.css';\n@import './styles/lyse/shadcn-bridge.css';\n@import './styles/lyse/typography.css';\n\nFor dark mode, add the 'dark' class to your HTML root element."
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-slot"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/button/button.tsx",
@@ -23,6 +68,10 @@
     {
       "name": "badge",
       "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/badge/badge.tsx",
@@ -37,6 +86,10 @@
     {
       "name": "tag",
       "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/tag/tag.tsx",
@@ -52,8 +105,10 @@
       "name": "tooltip",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-tooltip"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/tooltip/tooltip.tsx",
@@ -68,6 +123,11 @@
     {
       "name": "toast",
       "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/toast/toast.tsx",
@@ -83,8 +143,10 @@
       "name": "menu",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-slot"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/menu/menu.tsx",
@@ -100,9 +162,11 @@
       "name": "checkbox",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-checkbox",
         "lucide-react"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/checkbox/checkbox.tsx",
@@ -118,8 +182,10 @@
       "name": "radio",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-radio-group"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/radio/radio.tsx",
@@ -135,8 +201,10 @@
       "name": "toggle",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-switch"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/toggle/toggle.tsx",
@@ -152,8 +220,10 @@
       "name": "banner-info",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "lucide-react"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/banner-info/banner-info.tsx",
@@ -169,9 +239,11 @@
       "name": "avatar",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-slot",
         "lucide-react"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/avatar/avatar.tsx",
@@ -187,8 +259,10 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-dropdown-menu"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/dropdown-menu/dropdown-menu.tsx",
@@ -204,9 +278,11 @@
       "name": "select",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-select",
         "lucide-react"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/select/select.tsx",
@@ -221,6 +297,10 @@
     {
       "name": "input",
       "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/input/input.tsx",
@@ -235,6 +315,10 @@
     {
       "name": "textarea",
       "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/textarea/textarea.tsx",
@@ -250,9 +334,11 @@
       "name": "modal",
       "type": "registry:ui",
       "dependencies": [
+        "class-variance-authority",
         "@radix-ui/react-dialog",
         "lucide-react"
       ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/modal/modal.tsx",
@@ -267,6 +353,10 @@
     {
       "name": "spinner",
       "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/spinner/spinner.tsx",
@@ -281,6 +371,10 @@
     {
       "name": "progress",
       "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["lyse-tokens"],
       "files": [
         {
           "path": "registry/new-york/ui/progress/progress.tsx",
@@ -288,6 +382,95 @@
         },
         {
           "path": "registry/new-york/ui/progress/progress.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "action-card",
+      "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["lyse-tokens"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/action-card/action-card.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/action-card/action-card.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:ui",
+      "registryDependencies": ["lyse-tokens"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/spotlight-card/spotlight-card.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/spotlight-card/spotlight-card.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "callout-card",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": ["lyse-tokens"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/callout-card/callout-card.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/callout-card/callout-card.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": ["lyse-tokens"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/chip/chip.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/chip/chip.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority",
+        "@radix-ui/react-tabs"
+      ],
+      "registryDependencies": ["lyse-tokens"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/tabs/tabs.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/tabs/tabs.css",
           "type": "registry:ui"
         }
       ]

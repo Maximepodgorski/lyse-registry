@@ -2,6 +2,12 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input",
   "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
+  ],
   "files": [
     {
       "path": "registry/new-york/ui/input/input.tsx",

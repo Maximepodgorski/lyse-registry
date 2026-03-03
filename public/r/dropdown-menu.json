@@ -3,7 +3,11 @@
   "name": "dropdown-menu",
   "type": "registry:ui",
   "dependencies": [
+    "class-variance-authority",
     "@radix-ui/react-dropdown-menu"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
   ],
   "files": [
     {

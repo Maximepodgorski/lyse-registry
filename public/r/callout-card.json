@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "callout-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ui/callout-card/callout-card.tsx",
+      "content": "import * as React from \"react\"\nimport { X } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./callout-card.css\"\n\nfunction CalloutCard({\n  className,\n  icon,\n  title,\n  description,\n  action,\n  onDismiss,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  icon?: React.ReactNode\n  title?: string\n  description?: string\n  action?: React.ReactNode\n  onDismiss?: () => void\n}) {\n  return (\n    <div\n      data-slot=\"callout-card\"\n      className={cn(\"callout-card-base\", className)}\n      {...props}\n    >\n      <div className=\"flex flex-col gap-[var(--layout-gap-sm)] w-full\">\n        {(icon || title || onDismiss) && (\n          <div className=\"flex items-start justify-between w-full\">\n            <div className=\"flex gap-[var(--layout-gap-sm)] items-center\">\n              {icon && (\n                <span\n                  className=\"callout-card-icon shrink-0\"\n                  aria-hidden=\"true\"\n                >\n                  {icon}\n                </span>\n              )}\n              {title && (\n                <p className=\"callout-card-title text-content-note font-accent\">\n                  {title}\n                </p>\n              )}\n            </div>\n            {onDismiss && (\n              <button\n                type=\"button\"\n                onClick={onDismiss}\n                className=\"callout-card-dismiss shrink-0 cursor-pointer inline-flex items-center justify-center size-[var(--layout-size-xs)]\"\n                aria-label=\"Dismiss\"\n              >\n                <X className=\"size-4\" />\n              </button>\n            )}\n          </div>\n        )}\n        {description && (\n          <p className=\"callout-card-description text-content-note\">\n            {description}\n          </p>\n        )}\n      </div>\n      {action && <div className=\"w-full\">{action}</div>}\n    </div>\n  )\n}\n\nexport { CalloutCard }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/callout-card/callout-card.css",
+      "content": "/* ================================================================\n * CALLOUT CARD — Styles\n * Structure (flex, gap) lives in callout-card.tsx.\n * Theming (colors, borders) lives here via tokens.\n * ================================================================ */\n\n/* --------------------------------\n * Base\n * -------------------------------- */\n.callout-card-base {\n  display: flex;\n  flex-direction: column;\n  gap: var(--layout-gap-lg);\n  align-items: flex-start;\n  justify-content: center;\n  background: var(--background-neutral-lighter-default);\n  border: var(--layout-border-thin) solid var(--border-default);\n  border-radius: var(--layout-radius-2xl);\n  padding: var(--layout-padding-lg);\n}\n\n/* --------------------------------\n * Icon\n * -------------------------------- */\n.callout-card-icon {\n  color: var(--icon-brand-moderate);\n}\n\n.callout-card-icon > svg {\n  width: var(--layout-size-xs);\n  height: var(--layout-size-xs);\n}\n\n/* --------------------------------\n * Title\n * -------------------------------- */\n.callout-card-title {\n  color: var(--text-brand-moderate);\n}\n\n/* --------------------------------\n * Dismiss\n * -------------------------------- */\n.callout-card-dismiss {\n  color: var(--icon-neutral-moderate);\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .callout-card-dismiss {\n    transition: color 150ms ease;\n  }\n}\n\n.callout-card-dismiss:hover {\n  color: var(--text-base-strong);\n}\n\n/* --------------------------------\n * Description\n * -------------------------------- */\n.callout-card-description {\n  color: var(--text-base-moderate);\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

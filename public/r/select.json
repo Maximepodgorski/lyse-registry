@@ -3,8 +3,12 @@
   "name": "select",
   "type": "registry:ui",
   "dependencies": [
+    "class-variance-authority",
     "@radix-ui/react-select",
     "lucide-react"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
   ],
   "files": [
     {

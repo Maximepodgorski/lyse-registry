@@ -2,6 +2,13 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "toast",
   "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
+  ],
   "files": [
     {
       "path": "registry/new-york/ui/toast/toast.tsx",

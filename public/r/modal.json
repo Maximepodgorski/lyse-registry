@@ -3,8 +3,12 @@
   "name": "modal",
   "type": "registry:ui",
   "dependencies": [
+    "class-variance-authority",
     "@radix-ui/react-dialog",
     "lucide-react"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
   ],
   "files": [
     {

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spotlight-card",
+  "type": "registry:ui",
+  "registryDependencies": [
+    "lyse-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ui/spotlight-card/spotlight-card.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./spotlight-card.css\"\n\nfunction SpotlightCard({\n  className,\n  title,\n  description,\n  image,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  title?: string\n  description?: string\n  image?: React.ReactNode\n}) {\n  return (\n    <div\n      data-slot=\"spotlight-card\"\n      className={cn(\"spotlight-card-base\", className)}\n      {...props}\n    >\n      <div className=\"spotlight-card-image\">\n        {image ?? <div className=\"spotlight-card-image-fallback\" />}\n      </div>\n      <div className=\"flex flex-col gap-[var(--layout-gap-xs)] p-[var(--layout-padding-lg)]\">\n        {title && (\n          <p className=\"text-content-note font-accent [color:var(--text-base-strong)]\">\n            {title}\n          </p>\n        )}\n        {description && (\n          <p className=\"text-content-caption [color:var(--text-base-moderate)]\">\n            {description}\n          </p>\n        )}\n      </div>\n    </div>\n  )\n}\n\nexport { SpotlightCard }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/spotlight-card/spotlight-card.css",
+      "content": "/* ================================================================\n * SPOTLIGHT CARD — Base, Image & Fallback Styles\n * Structure (flex layout) lives in spotlight-card.tsx.\n * Theming (colors, borders, shadows) lives here via tokens.\n * ================================================================ */\n\n.spotlight-card-base {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n  background: var(--background-neutral-lighter-default);\n  border: var(--layout-border-thin) solid var(--border-default);\n  border-radius: var(--layout-radius-2xl);\n  box-shadow:\n    0px 0px 1px 0px rgba(0, 0, 0, 0.02),\n    0px 2px 2px 0px rgba(0, 0, 0, 0.02),\n    0px 4px 3px 0px rgba(0, 0, 0, 0.01),\n    0px 8px 3px 0px rgba(0, 0, 0, 0),\n    0px 12px 3px 0px rgba(0, 0, 0, 0);\n}\n\n.spotlight-card-image {\n  flex: 1 1 0%;\n  min-height: 0;\n  overflow: hidden;\n}\n\n.spotlight-card-image > img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n\n.spotlight-card-image-fallback {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(\n    135deg,\n    var(--background-neutral-medium-default) 0%,\n    var(--background-neutral-lighter-default) 100%\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

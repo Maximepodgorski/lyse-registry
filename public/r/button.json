@@ -3,7 +3,11 @@
   "name": "button",
   "type": "registry:ui",
   "dependencies": [
+    "class-variance-authority",
     "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
   ],
   "files": [
     {

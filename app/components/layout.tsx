@@ -41,6 +41,12 @@ const navGroups = [
       { label: "Textarea", href: "/components/textarea" },
       { label: "Modal", href: "/components/modal" },
       { label: "Spinner", href: "/components/spinner" },
+      { label: "Progress", href: "/components/progress" },
+      { label: "Chip", href: "/components/chip" },
+      { label: "Tabs", href: "/components/tabs" },
+      { label: "ActionCard", href: "/components/action-card" },
+      { label: "SpotlightCard", href: "/components/spotlight-card" },
+      { label: "CalloutCard", href: "/components/callout-card" },
     ],
   },
 ] as const

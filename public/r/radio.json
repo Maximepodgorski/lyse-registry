@@ -3,7 +3,11 @@
   "name": "radio",
   "type": "registry:ui",
   "dependencies": [
+    "class-variance-authority",
     "@radix-ui/react-radio-group"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
   ],
   "files": [
     {

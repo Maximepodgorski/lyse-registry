@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chip",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ui/chip/chip.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { ChevronDown } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./chip.css\"\n\nconst chipVariants = cva(\n  \"chip-base inline-flex h-[var(--layout-size-md)] items-center justify-center whitespace-nowrap rounded-[var(--layout-radius-full)] py-[var(--layout-padding-xs)] text-content-caption cursor-pointer [&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        filled: \"chip-filled\",\n        outline: \"chip-outline\",\n        ghost: \"chip-ghost\",\n      },\n    },\n    defaultVariants: {\n      variant: \"filled\",\n    },\n  }\n)\n\nfunction Chip({\n  className,\n  variant,\n  hasDropdown = false,\n  icon,\n  children,\n  ...props\n}: React.ComponentProps<\"button\"> &\n  VariantProps<typeof chipVariants> & {\n    hasDropdown?: boolean\n    icon?: React.ReactNode\n  }) {\n  return (\n    <button\n      data-slot=\"chip\"\n      type=\"button\"\n      className={cn(\n        chipVariants({ variant, className }),\n        hasDropdown\n          ? \"gap-0 pl-[var(--layout-padding-md)] pr-[var(--layout-padding-xs)]\"\n          : \"gap-[var(--layout-padding-xs)] px-[var(--layout-padding-md)]\"\n      )}\n      {...props}\n    >\n      {!hasDropdown && icon && (\n        <span className=\"chip-icon shrink-0 flex items-center\" aria-hidden=\"true\">\n          {icon}\n        </span>\n      )}\n      {children}\n      {hasDropdown && (\n        <ChevronDown className=\"chip-chevron\" aria-hidden=\"true\" />\n      )}\n    </button>\n  )\n}\n\nexport { Chip, chipVariants }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/chip/chip.css",
+      "content": "/* ================================================================\n * CHIP — Variant & State Styles\n * Structure (flex, gap, padding, radius) lives in chip.tsx via cva.\n * Theming (colors, borders, states) lives here via tokens.\n * ================================================================ */\n\n/* --------------------------------\n * Base\n * -------------------------------- */\n.chip-base {\n  color: var(--text-base-moderate);\n}\n\n/* --------------------------------\n * Icon & Chevron sizing\n * -------------------------------- */\n.chip-icon > svg {\n  height: var(--layout-size-2xs);\n  width: var(--layout-size-2xs);\n}\n\n.chip-chevron {\n  height: var(--layout-size-xs);\n  width: var(--layout-size-xs);\n}\n\n/* --------------------------------\n * Filled\n * -------------------------------- */\n.chip-filled {\n  background: var(--background-neutral-lighter-default);\n  border: var(--layout-border-thin) solid var(--border-default);\n}\n\n.chip-filled:hover {\n  background: var(--background-neutral-lighter-hover);\n}\n\n.chip-filled:active,\n.chip-filled[data-state=\"open\"] {\n  background: var(--background-neutral-lighter-pressed);\n}\n\n/* --------------------------------\n * Outline\n * -------------------------------- */\n.chip-outline {\n  border: var(--layout-border-thin) solid var(--border-default);\n}\n\n.chip-outline:hover {\n  background: var(--background-neutral-faint-hover);\n}\n\n.chip-outline:active,\n.chip-outline[data-state=\"open\"] {\n  background: var(--background-neutral-faint-pressed);\n}\n\n/* --------------------------------\n * Ghost\n * -------------------------------- */\n.chip-ghost:hover {\n  background: var(--background-neutral-faint-hover);\n}\n\n.chip-ghost:active,\n.chip-ghost[data-state=\"open\"] {\n  background: var(--background-neutral-faint-pressed);\n}\n\n/* --------------------------------\n * Focus ring (all variants)\n * -------------------------------- */\n.chip-filled:focus-visible,\n.chip-outline:focus-visible,\n.chip-ghost:focus-visible {\n  outline: none;\n  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);\n}\n\n/* --------------------------------\n * Disabled (all variants)\n * -------------------------------- */\n.chip-filled:disabled,\n.chip-outline:disabled,\n.chip-ghost:disabled {\n  color: var(--text-disabled);\n  pointer-events: none;\n}\n\n.chip-filled:disabled {\n  background: var(--background-disabled);\n  border-color: var(--border-disabled);\n}\n\n.chip-outline:disabled {\n  border-color: var(--border-disabled);\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

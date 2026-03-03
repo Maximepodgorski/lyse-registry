@@ -3,7 +3,11 @@
   "name": "banner-info",
   "type": "registry:ui",
   "dependencies": [
+    "class-variance-authority",
     "lucide-react"
+  ],
+  "registryDependencies": [
+    "lyse-tokens"
   ],
   "files": [
     {
