@@ -1,0 +1,99 @@
+/* ================================================================
+ * CHIP — Variant & State Styles
+ * Structure (flex, gap, padding, radius) lives in chip.tsx via cva.
+ * Theming (colors, borders, states) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Base
+ * -------------------------------- */
+.chip-base {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Icon & Chevron sizing
+ * -------------------------------- */
+.chip-icon > svg {
+  height: var(--layout-size-2xs);
+  width: var(--layout-size-2xs);
+}
+
+.chip-chevron {
+  height: var(--layout-size-xs);
+  width: var(--layout-size-xs);
+}
+
+/* --------------------------------
+ * Filled
+ * -------------------------------- */
+.chip-filled {
+  background: var(--background-neutral-lighter-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+.chip-filled:hover {
+  background: var(--background-neutral-lighter-hover);
+}
+
+.chip-filled:active,
+.chip-filled[data-state="open"] {
+  background: var(--background-neutral-lighter-pressed);
+}
+
+/* --------------------------------
+ * Outline
+ * -------------------------------- */
+.chip-outline {
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+.chip-outline:hover {
+  background: var(--background-neutral-faint-hover);
+}
+
+.chip-outline:active,
+.chip-outline[data-state="open"] {
+  background: var(--background-neutral-faint-pressed);
+}
+
+/* --------------------------------
+ * Ghost
+ * -------------------------------- */
+.chip-ghost:hover {
+  background: var(--background-neutral-faint-hover);
+}
+
+.chip-ghost:active,
+.chip-ghost[data-state="open"] {
+  background: var(--background-neutral-faint-pressed);
+}
+
+/* --------------------------------
+ * Focus ring (all variants)
+ * -------------------------------- */
+.chip-filled:focus-visible,
+.chip-outline:focus-visible,
+.chip-ghost:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* --------------------------------
+ * Disabled (all variants)
+ * -------------------------------- */
+.chip-filled:disabled,
+.chip-outline:disabled,
+.chip-ghost:disabled {
+  color: var(--text-disabled);
+  pointer-events: none;
+}
+
+.chip-filled:disabled {
+  background: var(--background-disabled);
+  border-color: var(--border-disabled);
+}
+
+.chip-outline:disabled {
+  border-color: var(--border-disabled);
+}
