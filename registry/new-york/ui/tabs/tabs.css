@@ -1,0 +1,122 @@
+/* ================================================================
+ * TABS — Variant & State Styles
+ * Structure (flex, height, gap, radius) lives in tabs.tsx via cva.
+ * Theming (colors, borders, states) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Transition
+ * -------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .tabs-trigger {
+    transition:
+      color 150ms ease,
+      background 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+}
+
+/* ================================
+ * UNDERLINE variant
+ * ================================ */
+
+/* List — bottom border */
+.tabs-list-underline {
+  border-bottom: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* Trigger — base */
+.tabs-trigger-underline {
+  position: relative;
+  color: var(--text-base-moderate);
+  border-bottom: var(--layout-border-thick) solid transparent;
+  margin-bottom: calc(-1 * var(--layout-border-thin));
+}
+
+.tabs-trigger-underline:hover {
+  color: var(--text-base-strong);
+}
+
+/* Trigger — active */
+.tabs-trigger-underline[data-state="active"] {
+  color: var(--text-base-strong);
+  border-bottom-color: var(--border-selected);
+}
+
+/* Trigger — disabled */
+.tabs-trigger-underline:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ================================
+ * PILL variant
+ * ================================ */
+
+/* List — container background */
+.tabs-list-pill {
+  background: var(--background-neutral-lighter-default);
+}
+
+/* Trigger — base */
+.tabs-trigger-pill {
+  color: var(--text-base-moderate);
+}
+
+.tabs-trigger-pill:hover {
+  color: var(--text-base-strong);
+}
+
+/* Trigger — active (light: white pops from gray container, dark: lighter shade elevates) */
+.tabs-trigger-pill[data-state="active"] {
+  background: var(--background-neutral-faint-default);
+  color: var(--text-base-strong);
+  box-shadow:
+    0 1px 2px var(--shadow-neutral-strong),
+    0 0 1px var(--shadow-neutral-strong);
+}
+
+.dark .tabs-trigger-pill[data-state="active"] {
+  background: var(--background-neutral-medium-default);
+}
+
+/* Trigger — disabled */
+.tabs-trigger-pill:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ================================
+ * Focus ring (both variants)
+ * ================================ */
+.tabs-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* Pill active + focus needs combined shadow */
+.tabs-trigger-pill[data-state="active"]:focus-visible {
+  box-shadow:
+    0 1px 2px var(--shadow-neutral-strong),
+    0 0 1px var(--shadow-neutral-strong),
+    0 0 0 2px var(--background-neutral-faint-default),
+    0 0 0 4px var(--border-selected);
+}
+
+.dark .tabs-trigger-pill[data-state="active"]:focus-visible {
+  box-shadow:
+    0 1px 2px var(--shadow-neutral-strong),
+    0 0 1px var(--shadow-neutral-strong),
+    0 0 0 2px var(--background-neutral-medium-default),
+    0 0 0 4px var(--border-selected);
+}
+
+/* ================================
+ * Content
+ * ================================ */
+.tabs-content:focus-visible {
+  outline: none;
+}
