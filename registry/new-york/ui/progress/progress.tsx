@@ -9,7 +9,7 @@ const progressItemVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-1",
+        sm: "h-1.5",
         md: "h-2",
       },
       position: {
