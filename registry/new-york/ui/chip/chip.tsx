@@ -41,7 +41,7 @@ function Chip({
         chipVariants({ variant, className }),
         hasDropdown
           ? "gap-0 pl-[var(--layout-padding-md)] pr-[var(--layout-padding-xs)]"
-          : "gap-[var(--layout-padding-xs)] px-[var(--layout-padding-md)]"
+          : "gap-[var(--layout-gap-xs)] px-[var(--layout-padding-md)]"
       )}
       {...props}
     >

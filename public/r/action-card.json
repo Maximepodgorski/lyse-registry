@@ -2,9 +2,6 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "action-card",
   "type": "registry:ui",
-  "dependencies": [
-    "class-variance-authority"
-  ],
   "registryDependencies": [
     "lyse-tokens"
   ],

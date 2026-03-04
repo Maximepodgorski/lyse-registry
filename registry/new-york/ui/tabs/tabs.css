@@ -119,4 +119,6 @@
  * ================================ */
 .tabs-content:focus-visible {
   outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+  border-radius: var(--layout-radius-md);
 }

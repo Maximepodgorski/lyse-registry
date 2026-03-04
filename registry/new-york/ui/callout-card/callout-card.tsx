@@ -50,7 +50,7 @@ function CalloutCard({
                 className="callout-card-dismiss shrink-0 cursor-pointer inline-flex items-center justify-center size-[var(--layout-size-xs)]"
                 aria-label="Dismiss"
               >
-                <X className="size-4" />
+                <X className="size-[var(--layout-size-2xs)]" />
               </button>
             )}
           </div>

@@ -389,9 +389,6 @@
     {
       "name": "action-card",
       "type": "registry:ui",
-      "dependencies": [
-        "class-variance-authority"
-      ],
       "registryDependencies": ["lyse-tokens"],
       "files": [
         {
