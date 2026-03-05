@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Github } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import {
   Menu,
@@ -16,9 +16,10 @@ const navGroups = [
   {
     label: "Getting Started",
     items: [
-      { label: "Introduction" },
-      { label: "Installation" },
-      { label: "Tokens" },
+      { label: "Introduction", href: "/components/introduction" },
+      { label: "Components", href: "/components/directory" },
+      { label: "Installation", href: "/components/installation" },
+      { label: "Changelog", href: "/components/changelog" },
     ],
   },
   {
@@ -77,6 +78,10 @@ export default function ComponentsLayout({
   const breadcrumb = pageName
     ? pageName.charAt(0).toUpperCase() + pageName.slice(1)
     : null
+  const breadcrumbGroup =
+    navGroups.find((g) =>
+      g.items.some((i) => "href" in i && i.href === pathname)
+    )?.label ?? "Components"
 
   return (
     <div
@@ -96,26 +101,29 @@ export default function ComponentsLayout({
         <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto" />
         <Button variant="terciary" size="sm" asChild>
           <a
-            href="https://github.com/lyse-labs/registry"
+            href="https://github.com/Maximepodgorski/lyse-registry"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View source on GitHub"
           >
-            GitHub
+            <Github /> GitHub
           </a>
         </Button>
       </header>
 
       <div className="flex-1 w-full flex">
         {/* Left sidebar */}
-        <Menu
-          className="hidden lg:flex w-56 shrink-0 pt-[var(--layout-padding-lg)] pb-[var(--root-space-11)] px-[var(--layout-padding-lg)] sticky top-14 h-[calc(100svh-3.5rem)] overflow-y-auto"
+        <div
+          className="hidden lg:block w-56 shrink-0 sticky top-14 h-[calc(100svh-3.5rem)] relative"
           style={{
             background: "var(--background-base)",
             borderRight:
               "var(--layout-border-thin) solid var(--border-default)",
           }}
         >
+          <Menu
+            className="flex w-full h-full pt-[var(--layout-padding-2xl)] pb-[var(--layout-padding-4xl)] px-[var(--layout-padding-lg)] overflow-y-auto gap-[var(--layout-gap-2xl)]"
+          >
           {navGroups.map((group) => (
             <MenuGroup key={group.label} label={group.label}>
               {group.items.map((item) => {
@@ -143,19 +151,31 @@ export default function ComponentsLayout({
               })}
             </MenuGroup>
           ))}
-        </Menu>
+          </Menu>
+          <div
+            className="pointer-events-none absolute bottom-0 left-0 right-0 h-20 backdrop-blur-[1px]"
+            style={{
+              background:
+                "linear-gradient(to top, var(--background-base) 25%, transparent)",
+              maskImage:
+                "linear-gradient(to top, black 50%, transparent)",
+              WebkitMaskImage:
+                "linear-gradient(to top, black 50%, transparent)",
+            }}
+          />
+        </div>
 
         {/* Main content area */}
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Breadcrumb */}
           {breadcrumb && (
-            <div className="px-[var(--layout-padding-3xl)] lg:px-[var(--root-space-11)] xl:px-[var(--root-space-12)] pt-[var(--layout-padding-2xl)]">
+            <div className="px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] pt-[var(--layout-padding-2xl)]">
               <nav
                 className="text-content-caption font-accent flex items-center gap-[var(--layout-padding-sm)]"
                 style={{ color: "var(--text-base-moderate)" }}
                 aria-label="Breadcrumb"
               >
-                <span>Components</span>
+                <span>{breadcrumbGroup}</span>
                 <span aria-hidden>/</span>
                 <span style={{ color: "var(--text-base-strong)" }}>
                   {breadcrumb}
@@ -170,7 +190,7 @@ export default function ComponentsLayout({
           {/* Prev / Next */}
           {(prev || next) && (
             <nav
-              className="flex items-center justify-between px-[var(--layout-padding-3xl)] lg:px-[var(--root-space-11)] xl:px-[var(--root-space-12)] py-[var(--layout-padding-4xl)]"
+              className="flex items-center justify-between px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] py-[var(--layout-padding-4xl)]"
               style={{
                 borderTop:
                   "var(--layout-border-thin) solid var(--border-default)",
