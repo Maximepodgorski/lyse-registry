@@ -11,18 +11,6 @@
   background: var(--background-neutral-lighter-default);
   border: var(--layout-border-thin) solid var(--border-default);
   border-radius: var(--layout-radius-2xl);
-  --spotlight-card-shadow:
-    0px 0px 1px 0px var(--shadow-neutral-strong),
-    0px 2px 2px 0px var(--shadow-neutral-strong),
-    0px 4px 3px 0px var(--shadow-neutral-strong);
-  box-shadow: var(--spotlight-card-shadow);
-}
-
-.dark .spotlight-card-base {
-  --spotlight-card-shadow:
-    0px 0px 1px 0px var(--shadow-neutral-moderate),
-    0px 2px 4px 0px var(--shadow-neutral-moderate),
-    0px 4px 6px 0px var(--shadow-neutral-moderate);
 }
 
 .spotlight-card-image {
