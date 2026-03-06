@@ -8,20 +8,20 @@ import {
   MenuItem,
 } from "@/registry/new-york/ui/menu/menu"
 import {
-  Layers,
-  Settings,
-  Users,
-  Home,
-  FileText,
-  Star,
-  Trash2,
+  Archive,
+  BarChart3,
+  Bell,
   Copy,
   ExternalLink,
-  Bell,
-  Search,
-  Archive,
-  Sparkles,
+  FileText,
+  Home,
   MessageSquare,
+  Search,
+  Settings,
+  Sparkles,
+  Star,
+  Trash2,
+  Users,
 } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
@@ -123,7 +123,7 @@ function OverviewTab() {
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Home />}>Default</MenuItem>
-          <MenuItem icon={<Star />} variant="accent">
+          <MenuItem icon={<Sparkles />} variant="accent">
             Accent
           </MenuItem>
         </div>
@@ -132,10 +132,10 @@ function OverviewTab() {
       <ComponentPreview
         id="with-icon"
         title="With Icon"
-        description="Pass an icon to the leading slot. Icons are sized to 24px and use contextual colors."
+        description="Pass an icon to the leading slot. Icons are sized to 24×24 and use contextual colors."
       >
         <div className="w-[240px] flex flex-col">
-          <MenuItem icon={<Home />}>Home</MenuItem>
+          <MenuItem icon={<Search />}>Search</MenuItem>
           <MenuItem icon={<FileText />}>Documents</MenuItem>
           <MenuItem icon={<Users />}>Team</MenuItem>
           <MenuItem icon={<Settings />}>Settings</MenuItem>
@@ -153,11 +153,11 @@ function OverviewTab() {
         }
       >
         <div className="w-[240px] flex flex-col">
-          <MenuItem icon={<Home />}>Home</MenuItem>
-          <MenuItem icon={<FileText />} active>
-            Documents
+          <MenuItem icon={<Home />}>Overview</MenuItem>
+          <MenuItem icon={<BarChart3 />} active>
+            Analytics
           </MenuItem>
-          <MenuItem icon={<Users />}>Team</MenuItem>
+          <MenuItem icon={<Settings />}>Settings</MenuItem>
         </div>
       </ComponentPreview>
 
@@ -172,11 +172,13 @@ function OverviewTab() {
         }
       >
         <div className="w-[240px] flex flex-col">
-          <MenuItem icon={<Home />}>Home</MenuItem>
+          <MenuItem icon={<Star />}>Favorites</MenuItem>
           <MenuItem icon={<Archive />} disabled>
             Archived
           </MenuItem>
-          <MenuItem icon={<Settings />}>Settings</MenuItem>
+          <MenuItem icon={<Trash2 />} disabled>
+            Deleted
+          </MenuItem>
         </div>
       </ComponentPreview>
 
@@ -209,7 +211,7 @@ function OverviewTab() {
         description={
           <>
             Pass a <InlineCode>badge</InlineCode> to show a pill indicator
-            -- useful for unread counts or status.
+            — useful for unread counts or status.
           </>
         }
       >
@@ -217,10 +219,9 @@ function OverviewTab() {
           <MenuItem icon={<Bell />} badge="3">
             Notifications
           </MenuItem>
-          <MenuItem icon={<FileText />} badge="12">
-            Documents
+          <MenuItem icon={<MessageSquare />} badge="12">
+            Messages
           </MenuItem>
-          <MenuItem icon={<Users />}>Team</MenuItem>
         </div>
       </ComponentPreview>
 
@@ -233,7 +234,9 @@ function OverviewTab() {
           <MenuItem icon={<Bell />} dot>
             Notifications
           </MenuItem>
-          <MenuItem icon={<Home />}>Home</MenuItem>
+          <MenuItem icon={<Sparkles />} dot>
+            What&apos;s new
+          </MenuItem>
         </div>
       </ComponentPreview>
 
@@ -245,53 +248,52 @@ function OverviewTab() {
             Compose with <InlineCode>Menu</InlineCode>,{" "}
             <InlineCode>MenuGroup</InlineCode>, and{" "}
             <InlineCode>MenuDivider</InlineCode> to build full navigation
-            sidebars.
+            panels.
           </>
         }
       >
-        <div className="flex gap-10">
-          {/* Sidebar — Main */}
-          <div
-            className="w-[240px] h-[800px] flex flex-col p-[var(--layout-padding-md)]"
-            style={{
-              borderRight: "var(--layout-border-thin) solid var(--border-default)",
-            }}
-          >
-            <div className="flex-1">
-              <Menu className="gap-4">
-                <div className="p-[var(--layout-padding-xs)]">
-                  <img src="/logotype.svg" alt="Lyse" className="size-6" />
-                </div>
-                <MenuGroup label="Workspace">
-                  <MenuItem size="sm" icon={<Home />} active>
-                    Members
-                  </MenuItem>
-                  <MenuItem size="sm" icon={<Layers />}>Usage</MenuItem>
-                </MenuGroup>
-                <MenuGroup label="Teams">
-                  <MenuItem size="sm" icon={<Users />}>Members</MenuItem>
-                  <MenuItem size="sm" icon={<Layers />}>Usage</MenuItem>
-                  <MenuItem size="sm" icon={<Layers />}>Usage</MenuItem>
-                  <MenuItem size="sm" icon={<Layers />}>Usage</MenuItem>
-                </MenuGroup>
-              </Menu>
-            </div>
-            <Menu>
-              <MenuGroup>
-                <MenuItem size="sm" icon={<Sparkles />} variant="accent">
-                  What&apos;s new
+        <div
+          className="w-[240px] h-[50rem] flex flex-col p-[var(--layout-padding-md)]"
+          style={{
+            borderRight: "var(--layout-border-thin) solid var(--border-default)",
+          }}
+        >
+          <div className="flex-1">
+            <Menu className="gap-[var(--layout-gap-lg)]">
+              <div className="p-[var(--layout-padding-xs)]">
+                <img src="/logotype.svg" alt="Lyse" className="h-6 w-auto" />
+              </div>
+              <MenuGroup label="Platform">
+                <MenuItem size="sm" icon={<Home />} active>
+                  Dashboard
                 </MenuItem>
-                <MenuItem size="sm" icon={<Users />}>Join the community</MenuItem>
-                <MenuItem size="sm" icon={<MessageSquare />}>
-                  Share feedback
+                <MenuItem size="sm" icon={<BarChart3 />}>
+                  Analytics
+                </MenuItem>
+                <MenuItem size="sm" icon={<Users />}>
+                  Team
                 </MenuItem>
               </MenuGroup>
-              <MenuGroup>
-                <MenuItem size="sm" icon={<Settings />}>Settings</MenuItem>
+              <MenuGroup label="Resources">
+                <MenuItem size="sm" icon={<FileText />}>
+                  Documentation
+                </MenuItem>
+                <MenuItem size="sm" icon={<MessageSquare />}>
+                  Support
+                </MenuItem>
               </MenuGroup>
             </Menu>
           </div>
-
+          <Menu>
+            <MenuGroup>
+              <MenuItem size="sm" icon={<Sparkles />} variant="accent">
+                What&apos;s new
+              </MenuItem>
+              <MenuItem size="sm" icon={<Settings />}>
+                Settings
+              </MenuItem>
+            </MenuGroup>
+          </Menu>
         </div>
       </ComponentPreview>
     </div>
