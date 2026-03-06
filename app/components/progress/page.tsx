@@ -282,7 +282,7 @@ export default function ProgressPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/progress")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/progress.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

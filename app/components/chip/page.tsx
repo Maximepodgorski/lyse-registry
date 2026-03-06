@@ -236,7 +236,7 @@ export default function ChipPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/chip")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/chip.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

@@ -295,7 +295,7 @@ export default function SelectPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/select")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/select.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

@@ -177,7 +177,7 @@ export default function BannerInfoPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/banner-info")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/banner-info.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

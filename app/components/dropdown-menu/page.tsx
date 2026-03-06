@@ -285,7 +285,7 @@ export default function DropdownMenuPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/dropdown-menu")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/dropdown-menu.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

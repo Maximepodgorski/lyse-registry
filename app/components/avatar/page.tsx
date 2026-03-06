@@ -451,7 +451,7 @@ export default function AvatarPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/avatar")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/avatar.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

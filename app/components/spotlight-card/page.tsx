@@ -163,7 +163,7 @@ export default function SpotlightCardPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/spotlight-card")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/spotlight-card.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

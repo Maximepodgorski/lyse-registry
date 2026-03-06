@@ -257,7 +257,7 @@ export default function RadioPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/radio")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/radio.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

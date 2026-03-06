@@ -306,7 +306,7 @@ export default function CheckboxPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/checkbox")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/checkbox.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

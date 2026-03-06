@@ -325,7 +325,7 @@ export default function InputPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/input")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/input.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

@@ -156,7 +156,7 @@ export default function ToastPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/toast")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/toast.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

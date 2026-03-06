@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: "Lyse Design System",
     description:
       "Production-ready React components from the Lyse Figma Design System.",
-    url: "https://ui.lyse.dev",
+    url: "https://lyse-registry.vercel.app",
     siteName: "Lyse Design System",
     type: "website",
   },

@@ -43,7 +43,7 @@ function CommandBlock({ command }: { command: string }) {
 }
 
 const installCommand =
-  "npx shadcn@latest add https://ui.lyse.dev/r/button.json"
+  "npx shadcn@latest add https://lyse-registry.vercel.app/r/button.json"
 
 export default function InstallationPage() {
   return (

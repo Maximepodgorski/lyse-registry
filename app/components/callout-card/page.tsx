@@ -168,7 +168,7 @@ export default function CalloutCardPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/callout-card")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/callout-card.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

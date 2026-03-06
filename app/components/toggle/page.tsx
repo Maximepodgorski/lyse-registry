@@ -255,7 +255,7 @@ export default function TogglePage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/toggle")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/toggle.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

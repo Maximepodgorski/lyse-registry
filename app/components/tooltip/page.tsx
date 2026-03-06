@@ -245,7 +245,7 @@ export default function TooltipPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/tooltip")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/tooltip.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

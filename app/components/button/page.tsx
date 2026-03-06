@@ -214,7 +214,7 @@ export default function ButtonPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/button")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/button.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

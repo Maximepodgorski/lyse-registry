@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "description": "Lyse Design System — shadcn-compatible React component registry",
-  "homepage": "https://ui.lyse.dev",
+  "homepage": "https://lyse-registry.vercel.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/Maximepodgorski/lyse-registry.git"

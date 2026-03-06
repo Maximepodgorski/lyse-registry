@@ -220,7 +220,7 @@ export default function TabsPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/tabs")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/tabs.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

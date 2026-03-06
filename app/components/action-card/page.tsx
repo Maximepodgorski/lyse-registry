@@ -241,7 +241,7 @@ export default function ActionCardPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/action-card")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/action-card.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

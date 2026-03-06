@@ -338,7 +338,7 @@ export default function MenuPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/menu")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/menu.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}

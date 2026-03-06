@@ -272,7 +272,7 @@ export default function TagPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add @lyse/tag")
+                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/tag.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}
