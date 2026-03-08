@@ -12,7 +12,7 @@ export function ComponentPreview({
   children: React.ReactNode
 }) {
   return (
-    <section id={id} className="flex flex-col gap-[var(--layout-gap-lg)] scroll-mt-[110px]">
+    <section id={id} className="flex flex-col gap-[var(--layout-gap-sm)] scroll-mt-[110px]">
       <h3
         className="text-heading-small"
         style={{ color: "var(--text-base-strong)" }}
@@ -21,14 +21,14 @@ export function ComponentPreview({
       </h3>
       {description && (
         <p
-          className="text-content-note"
+          className="text-content-body"
           style={{ color: "var(--text-base-moderate)" }}
         >
           {description}
         </p>
       )}
       <div
-        className="overflow-hidden rounded-[var(--layout-radius-xl)]"
+        className="overflow-hidden rounded-[var(--layout-radius-xl)] mt-[var(--layout-gap-md)]"
         style={{
           border: "var(--layout-border-thin) solid var(--border-default)",
         }}
