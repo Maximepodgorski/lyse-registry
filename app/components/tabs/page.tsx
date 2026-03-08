@@ -10,13 +10,13 @@ import { Button } from "@/registry/new-york/ui/button/button"
 import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -27,6 +27,112 @@ const overviewSections: TocSection[] = [
   { id: "pill", label: "Pill" },
   { id: "sizes", label: "Sizes" },
   { id: "disabled", label: "Disabled" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <Tabs defaultValue="overview" variant="underline">
+          <TabsList>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
+      description:
+        'Use variant="underline" for page-level content sections.',
+    },
+    dont: {
+      preview: (
+        <Tabs defaultValue="grid" variant="underline">
+          <TabsList>
+            <TabsTrigger value="grid">Grid</TabsTrigger>
+            <TabsTrigger value="list">List</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
+      description:
+        "Don't use underline for compact toggle controls — use pill instead.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Tabs defaultValue="grid" variant="pill" size="sm">
+          <TabsList>
+            <TabsTrigger value="grid">Grid</TabsTrigger>
+            <TabsTrigger value="list">List</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
+      description:
+        'Use variant="pill" for compact view toggles (grid/list, day/week).',
+    },
+    dont: {
+      preview: (
+        <Tabs defaultValue="a" variant="pill">
+          <TabsList>
+            <TabsTrigger value="a">Tab 1</TabsTrigger>
+            <TabsTrigger value="b">Tab 2</TabsTrigger>
+            <TabsTrigger value="c">Tab 3</TabsTrigger>
+            <TabsTrigger value="d">Tab 4</TabsTrigger>
+            <TabsTrigger value="e">Tab 5</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
+      description:
+        "Don't use pill for many tabs — the container grows too wide.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Tabs defaultValue="general" variant="underline">
+          <TabsList>
+            <TabsTrigger value="general">General</TabsTrigger>
+            <TabsTrigger value="billing">Billing</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
+      description:
+        "Keep tab labels short (1-2 words).",
+    },
+    dont: {
+      preview: (
+        <Tabs defaultValue="a" variant="underline">
+          <TabsList>
+            <TabsTrigger value="a">General account settings</TabsTrigger>
+            <TabsTrigger value="b">Billing and payments</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
+      description:
+        "Don't use long sentences as tab labels.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Tabs defaultValue="active" variant="underline">
+          <TabsList>
+            <TabsTrigger value="active">Active</TabsTrigger>
+            <TabsTrigger value="api" disabled>API (soon)</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
+      description:
+        'Use disabled for tabs that exist but aren\'t available yet.',
+    },
+    dont: {
+      description:
+        "Don't hide tabs that are temporarily unavailable — show them disabled with context.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -74,13 +180,7 @@ function OverviewTab() {
       <ComponentPreview
         id="underline"
         title="Underline"
-        description={
-          <>
-            The default <InlineCode>underline</InlineCode> variant uses a bottom
-            border indicator. Clean and minimal — great for content sections and
-            page-level navigation.
-          </>
-        }
+        description="Bottom border indicator. Clean and minimal for content sections and page-level navigation."
       >
         <Tabs defaultValue="overview" variant="underline">
           <TabsList>
@@ -94,14 +194,7 @@ function OverviewTab() {
       <ComponentPreview
         id="pill"
         title="Pill"
-        description={
-          <>
-            The <InlineCode>pill</InlineCode> variant wraps triggers in a
-            neutral container with a filled background for the active tab.
-            Compact and modern — ideal for toggling between views within a card
-            or panel.
-          </>
-        }
+        description="Filled background for the active tab inside a neutral container. Ideal for toggling views within a card or panel."
       >
         <Tabs defaultValue="grid" variant="pill">
           <TabsList>
@@ -115,13 +208,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode> or <InlineCode>md</InlineCode>{" "}
-            (default). Size applies to all triggers via context.
-          </>
-        }
+        description="Two sizes: sm and md (default). Applies to all triggers via context."
       >
         <div className="flex flex-col gap-8 w-full">
           <Tabs defaultValue="a" variant="underline" size="sm">
@@ -185,11 +272,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function TabsPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -200,19 +295,18 @@ export default function TabsPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Tabs
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Tabs organize content into distinct sections, allowing users to
-            switch between views. Built on Radix Tabs for full keyboard
-            navigation and accessibility. Two visual styles: underline for
-            page-level navigation, pill for compact view toggles.
+            The Tabs component organizes content into distinct, switchable
+            sections within the same view. It helps users navigate between
+            related content areas without leaving the page.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -252,6 +346,7 @@ export default function TabsPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -351,17 +446,19 @@ export default function TabsPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<typeof TabsPrimitive.Root>`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
       <TableOfContents
-        sections={tab === "overview" ? overviewSections : []}
+        sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []}
       />
     </>
   )

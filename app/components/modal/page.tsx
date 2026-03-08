@@ -35,13 +35,13 @@ import {
   Info,
 } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -53,6 +53,132 @@ const overviewSections: TocSection[] = [
   { id: "with-input", label: "With Input" },
   { id: "invitation", label: "Invitation" },
   { id: "controlled", label: "Controlled" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <ModalClose asChild>
+            <Button variant="secondary" size="sm">Cancel</Button>
+          </ModalClose>
+          <Button size="sm">Confirm</Button>
+        </div>
+      ),
+      description:
+        "Use ModalClose asChild on Cancel buttons to automatically close the dialog.",
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Button variant="secondary" size="sm">Cancel</Button>
+          <Button size="sm">Confirm</Button>
+        </div>
+      ),
+      description:
+        "Don't add manual onClick={() => setOpen(false)} on Cancel when ModalClose handles it.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-md)]">
+          <ModalIcon variant="destructive"><Trash2 /></ModalIcon>
+          <ModalIcon variant="success"><CircleCheck /></ModalIcon>
+          <ModalIcon variant="warning"><TriangleAlert /></ModalIcon>
+        </div>
+      ),
+      description:
+        "Use ModalIcon with a semantic variant for colored icon circles.",
+    },
+    dont: {
+      preview: (
+        <div
+          className="flex items-center justify-center w-10 h-10 rounded-full"
+          style={{ background: "#fee2e2" }}
+        >
+          <Trash2 size={18} style={{ color: "#ef4444" }} />
+        </div>
+      ),
+      description:
+        "Don't hardcode background colors for icon backgrounds — use ModalIcon variants.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-xs)]">
+          <ModalTitle>Delete project</ModalTitle>
+          <ModalDescription>This action cannot be undone.</ModalDescription>
+        </div>
+      ),
+      description:
+        "Use ModalTitle for accessible dialog labeling (provides aria-labelledby).",
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-xs)]">
+          <p className="text-content-body font-accent" style={{ color: "var(--text-base-strong)" }}>Delete project</p>
+          <p className="text-content-caption" style={{ color: "var(--text-base-moderate)" }}>This action cannot be undone.</p>
+        </div>
+      ),
+      description:
+        "Don't use a plain <p> for the modal title — screen readers won't announce it.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Button variant="destructive" size="sm">
+          <Trash2 /> Delete project
+        </Button>
+      ),
+      description:
+        "Use onInteractOutside with preventDefault for destructive actions to prevent accidental dismiss.",
+    },
+    dont: {
+      preview: (
+        <Button variant="secondary" size="sm">
+          <Trash2 /> Delete project
+        </Button>
+      ),
+      description:
+        "Don't remove the overlay entirely to prevent dismiss — use onInteractOutside instead.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-xs)] w-full max-w-[200px]">
+          <div className="h-5 rounded" style={{ background: "var(--background-neutral-moderate-default)", width: "80%" }} />
+          <div className="h-8 rounded" style={{ background: "var(--background-neutral-faint-default)", border: "var(--layout-border-thin) solid var(--border-default)" }} />
+          <div className="flex justify-end gap-[var(--layout-gap-xs)]">
+            <Button variant="secondary" size="xs">Cancel</Button>
+            <Button size="xs">Save</Button>
+          </div>
+        </div>
+      ),
+      description:
+        "Compose parts freely — mix ModalHeader, ModalBody, ModalFooter for flexible layouts.",
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-xs)] w-full max-w-[200px]">
+          <div className="h-5 rounded" style={{ background: "var(--background-neutral-moderate-default)", width: "80%" }} />
+          <div className="h-5 rounded" style={{ background: "var(--background-neutral-moderate-default)", width: "60%" }} />
+          <div className="h-5 rounded" style={{ background: "var(--background-neutral-moderate-default)", width: "70%" }} />
+          <div className="h-5 rounded" style={{ background: "var(--background-neutral-moderate-default)", width: "50%" }} />
+        </div>
+      ),
+      description:
+        "Don't force all modals into a single rigid layout.",
+    },
+  },
 ]
 
 const contentPropDefs: PropDef[] = [
@@ -262,7 +388,7 @@ function OverviewTab() {
       <ComponentPreview
         id="confirmation"
         title="Confirmation"
-        description="A brand-variant modal with icon, title, description, and action buttons. Uses ModalIcon + ModalTitle + ModalDescription for the confirmation pattern."
+        description="Modal with icon, title, description, and action buttons."
       >
         <ConfirmationModal
           variant="brand"
@@ -276,12 +402,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use <InlineCode>ModalIcon variant</InlineCode> to express semantic
-            intent: brand, destructive, success, or warning.
-          </>
-        }
+        description="Semantic icon colors: brand, destructive, success, or warning."
       >
         <div className="flex flex-wrap gap-3">
           <ConfirmationModal
@@ -320,12 +441,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-input"
         title="With Input"
-        description={
-          <>
-            Use <InlineCode>ModalBody</InlineCode> to add custom content like a
-            confirmation input between the header area and footer.
-          </>
-        }
+        description="Custom content like a confirmation input inside the modal body."
       >
         <Modal>
           <ModalTrigger asChild>
@@ -371,13 +487,7 @@ function OverviewTab() {
       <ComponentPreview
         id="invitation"
         title="Invitation"
-        description={
-          <>
-            The invitation modal uses <InlineCode>ModalHeader</InlineCode> with{" "}
-            <InlineCode>ModalClose</InlineCode> for a header bar pattern.
-            Switches between link and email views.
-          </>
-        }
+        description="Header bar with close button, switching between link and email views."
       >
         <InvitationModal />
       </ComponentPreview>
@@ -385,13 +495,7 @@ function OverviewTab() {
       <ComponentPreview
         id="controlled"
         title="Controlled"
-        description={
-          <>
-            Use <InlineCode>open</InlineCode> and{" "}
-            <InlineCode>onOpenChange</InlineCode> to control the modal
-            programmatically.
-          </>
-        }
+        description="Open and close the modal programmatically."
       >
         <div className="flex items-center gap-3">
           <Button
@@ -431,11 +535,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function ModalPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -446,19 +558,19 @@ export default function ModalPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Modal
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            An overlay dialog for confirmations, alerts, forms, and focused
-            interactions. Built on Radix Dialog with focus trapping, keyboard
-            dismiss, and ARIA support. Compose with ModalHeader, ModalBody,
-            ModalFooter, ModalIcon, and ModalClose for flexible layouts.
+            The Modal component is an overlay dialog that focuses the
+            user&apos;s attention on a specific task or decision. It provides a
+            structured space for confirmations, alerts, forms, or any
+            interaction that requires focused input.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -498,6 +610,7 @@ export default function ModalPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -647,7 +760,7 @@ export default function ModalPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-12">
               <div>
                 <h3
@@ -698,11 +811,21 @@ export default function ModalPage() {
                 />
               </div>
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

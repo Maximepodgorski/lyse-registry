@@ -15,13 +15,13 @@ import {
 import { Button } from "@/registry/new-york/ui/button/button"
 import { Copy, ExternalLink } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -33,6 +33,137 @@ const overviewSections: TocSection[] = [
   { id: "variants", label: "Variants" },
   { id: "grouped", label: "Grouped" },
   { id: "disabled", label: "Disabled" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select a fruit" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
+      description:
+        "Use for single-value selection in forms.",
+    },
+    dont: {
+      description:
+        "Don't use for action menus — use DropdownMenu instead.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Choose an option..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="a">Option A</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
+      description:
+        "Provide a clear placeholder that describes the expected selection.",
+    },
+    dont: {
+      preview: (
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="a">Option A</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
+      description:
+        "Don't leave the placeholder empty — the user won't know what to select.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select a timezone" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>North America</SelectLabel>
+              <SelectItem value="est">Eastern (EST)</SelectItem>
+              <SelectItem value="pst">Pacific (PST)</SelectItem>
+            </SelectGroup>
+            <SelectSeparator />
+            <SelectGroup>
+              <SelectLabel>Europe</SelectLabel>
+              <SelectItem value="gmt">Greenwich (GMT)</SelectItem>
+              <SelectItem value="cet">Central (CET)</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ),
+      description:
+        "Group related options with labels and separators for organization.",
+    },
+    dont: {
+      preview: (
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Pick one" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="est">Eastern (EST)</SelectItem>
+            <SelectItem value="pst">Pacific (PST)</SelectItem>
+            <SelectItem value="gmt">Greenwich (GMT)</SelectItem>
+            <SelectItem value="cet">Central (CET)</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
+      description:
+        "Don't mix unrelated options in a flat list without separators.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Select>
+          <SelectTrigger variant="destructive" className="w-[200px]">
+            <SelectValue placeholder="Error state" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="a">Option A</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
+      description:
+        "Use validation variants (destructive, success) for form feedback.",
+    },
+    dont: {
+      preview: (
+        <Select>
+          <SelectTrigger variant="destructive" className="w-[200px]">
+            <SelectValue placeholder="Highlighted" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="a">Option A</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
+      description:
+        "Don't use the destructive variant for non-error states.",
+    },
+  },
 ]
 
 const triggerPropDefs: PropDef[] = [
@@ -98,7 +229,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description="A basic select with placeholder text."
+        description="Basic select with placeholder text."
       >
         <Select>
           <SelectTrigger className="w-[200px]">
@@ -116,12 +247,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop on{" "}
-            <InlineCode>SelectTrigger</InlineCode> to control height.
-          </>
-        }
+        description="Controls trigger height."
       >
         <div className="flex items-end gap-4">
           <Select>
@@ -157,12 +283,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use <InlineCode>variant</InlineCode> to change the trigger
-            border and focus ring color for validation states.
-          </>
-        }
+        description="Border and focus ring color for validation states."
       >
         <div className="flex items-end gap-4">
           <Select>
@@ -198,13 +319,7 @@ function OverviewTab() {
       <ComponentPreview
         id="grouped"
         title="Grouped"
-        description={
-          <>
-            Use <InlineCode>SelectGroup</InlineCode>,{" "}
-            <InlineCode>SelectLabel</InlineCode>, and{" "}
-            <InlineCode>SelectSeparator</InlineCode> to organize options.
-          </>
-        }
+        description="Organize options with groups, labels, and separators."
       >
         <Select>
           <SelectTrigger className="w-[200px]">
@@ -260,11 +375,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function SelectPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -275,19 +398,19 @@ export default function SelectPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Select
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A form select component for choosing a single value from a dropdown
-            list. Built on Radix UI Select with full keyboard navigation, ARIA
-            combobox pattern, and scroll management. Supports sizes, validation
-            variants, groups, labels, and disabled states.
+            The Select component is a form control for choosing a single value
+            from a dropdown list. It provides a compact and accessible way to
+            make selections when the list of options is too long for radio
+            buttons.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -327,6 +450,7 @@ export default function SelectPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -429,7 +553,7 @@ export default function SelectPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-12">
               <div>
                 <h3
@@ -456,11 +580,21 @@ export default function SelectPage() {
                 />
               </div>
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

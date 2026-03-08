@@ -6,13 +6,14 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink, Clock8 } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -26,6 +27,102 @@ const overviewSections: TocSection[] = [
   { id: "with-dot", label: "With Dot" },
   { id: "with-icon", label: "With Icon" },
   { id: "dismissible", label: "Dismissible" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <Tag variant="success" size="md">
+          <TagDot />
+          Active
+        </Tag>
+      ),
+      description:
+        "Use TagDot as the first child for status indicators.",
+    },
+    dont: {
+      preview: (
+        <Tag variant="success" size="md">
+          <span style={{ fontSize: 10 }}>&#x1F7E2;</span>
+          Active
+        </Tag>
+      ),
+      description:
+        "Don't use a raw <span> or emoji as a status dot.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Tag variant="neutral" size="md">
+          Design
+          <TagClose onClick={() => {}} aria-label="Remove Design" />
+        </Tag>
+      ),
+      description:
+        'Add aria-label to TagClose describing what is being removed (e.g., "Remove Design").',
+    },
+    dont: {
+      preview: (
+        <Tag variant="neutral" size="md">
+          Design
+          <TagClose onClick={() => {}} />
+        </Tag>
+      ),
+      description:
+        "Don't leave TagClose without context \u2014 \u201CX\u201D alone is not descriptive for screen readers.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Tag variant="brand" type="ghost" size="md">
+          <Clock8 />
+          In Progress
+        </Tag>
+      ),
+      description:
+        'Use type="ghost" for low-emphasis inline labels where full styling would be too heavy.',
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Tag variant="brand" type="ghost" size="sm">A</Tag>
+          <Tag variant="brand" type="ghost" size="sm">B</Tag>
+          <Tag variant="brand" type="ghost" size="sm">C</Tag>
+        </div>
+      ),
+      description:
+        "Don't use type=\"ghost\" as the primary tag style \u2014 it lacks contrast at small sizes.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Tag variant="neutral" type="dash" size="md">Draft</Tag>
+          <Tag variant="neutral" type="dash" size="md">Placeholder</Tag>
+        </div>
+      ),
+      description:
+        'Use type="dash" for placeholder or draft states consistently.',
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Tag variant="brand" type="dash" size="md">Draft</Tag>
+          <Tag variant="brand" type="fill" size="md">Active</Tag>
+        </div>
+      ),
+      description:
+        'Don\'t mix type="dash" with type="fill" tags in the same list \u2014 be consistent.',
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -71,15 +168,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use the <InlineCode>variant</InlineCode> prop to change the
-            color. <InlineCode>neutral</InlineCode> (default) for general use,{" "}
-            <InlineCode>brand</InlineCode>, <InlineCode>success</InlineCode>,{" "}
-            <InlineCode>danger</InlineCode>, and{" "}
-            <InlineCode>warning</InlineCode>.
-          </>
-        }
+        description="Neutral (default), brand, success, danger, and warning."
       >
         <Tag variant="neutral">Neutral</Tag>
         <Tag variant="brand">Brand</Tag>
@@ -91,14 +180,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode> (default),{" "}
-            <InlineCode>md</InlineCode>, or <InlineCode>lg</InlineCode>. Each
-            size adjusts padding, gap, border radius, and font size.
-          </>
-        }
+        description="Three sizes from sm (default) to lg. Each adjusts padding, gap, radius, and font size."
       >
         <Tag size="sm">Small</Tag>
         <Tag size="md">Medium</Tag>
@@ -108,17 +190,7 @@ function OverviewTab() {
       <ComponentPreview
         id="types"
         title="Types"
-        description={
-          <>
-            Use the <InlineCode>type</InlineCode> prop to control border and
-            background style. <InlineCode>fill</InlineCode> (default) has a
-            colored background with solid border,{" "}
-            <InlineCode>dash</InlineCode> uses a dashed border,{" "}
-            <InlineCode>emphasis</InlineCode> uses a lighter background with a
-            default border, and <InlineCode>ghost</InlineCode> has no
-            background.
-          </>
-        }
+        description="Fill (default) with colored background, dash with dashed border, emphasis with lighter background, and ghost with no background."
       >
         <Tag variant="brand" type="fill" size="md">Fill</Tag>
         <Tag variant="brand" type="dash" size="md">Dash</Tag>
@@ -156,12 +228,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-dot"
         title="With Dot"
-        description={
-          <>
-            Compose with <InlineCode>TagDot</InlineCode> to add a status
-            indicator. The dot color matches the variant.
-          </>
-        }
+        description="Adds a status indicator dot. Color matches the variant."
       >
         <Tag variant="neutral" size="md">
           <TagDot />
@@ -207,13 +274,7 @@ function OverviewTab() {
       <ComponentPreview
         id="dismissible"
         title="Dismissible"
-        description={
-          <>
-            Compose with <InlineCode>TagClose</InlineCode> to add a dismiss
-            button. TagClose renders a default X icon but accepts custom
-            children. Wire your own <InlineCode>onClick</InlineCode> handler.
-          </>
-        }
+        description="Adds a dismiss button. Renders a default X icon and accepts a custom onClick handler."
       >
         <Tag variant="neutral" size="md">
           Label
@@ -234,11 +295,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function TagPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -251,20 +320,19 @@ export default function TagPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Tag
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            The Tag component is a compact interactive label used to
-            categorize, filter, or display metadata. It supports five color
-            variants, three sizes, four border types (fill, dash, emphasis,
-            ghost), an optional dot indicator, icon slot, and dismissible
-            close button.
+            The Tag component is a small, interactive label used to
+            categorize, filter, or display metadata. It supports actions like
+            dismissal and selection, helping users organize and manage content
+            efficiently.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -304,6 +372,7 @@ export default function TagPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -392,16 +461,26 @@ export default function TagPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<"span">`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

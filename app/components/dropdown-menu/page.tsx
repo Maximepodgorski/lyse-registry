@@ -26,13 +26,13 @@ import {
   Pencil,
 } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -45,6 +45,162 @@ const overviewSections: TocSection[] = [
   { id: "destructive", label: "Destructive" },
   { id: "grouped", label: "Grouped" },
   { id: "disabled-items", label: "Disabled Items" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem icon={<Pencil />}>Edit</DropdownMenuItem>
+            <DropdownMenuItem icon={<Share2 />}>Share</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem icon={<Trash2 />} variant="destructive">Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Use for action menus (edit, delete, share) triggered by a button.",
+    },
+    dont: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">
+              Select status
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>Active</DropdownMenuItem>
+            <DropdownMenuItem>Inactive</DropdownMenuItem>
+            <DropdownMenuItem>Archived</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Don't use for value selection in forms — use Select instead.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">Actions</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem icon={<Pencil />}>Edit</DropdownMenuItem>
+            <DropdownMenuItem icon={<Copy />}>Duplicate</DropdownMenuItem>
+            <DropdownMenuItem icon={<Download />}>Export</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Keep items short and scannable with clear action labels.",
+    },
+    dont: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">Actions</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>Edit this item and update all fields</DropdownMenuItem>
+            <DropdownMenuItem>Make a copy of the current document</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Don't add complex or multi-line content inside menu items.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">Account</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-48">
+            <DropdownMenuLabel>Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem icon={<User />}>Profile</DropdownMenuItem>
+              <DropdownMenuItem icon={<Settings />}>Settings</DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem icon={<LogOut />}>Log out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Group related actions with labels and separators for scannability.",
+    },
+    dont: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">Account</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem icon={<User />}>Profile</DropdownMenuItem>
+            <DropdownMenuItem icon={<Settings />}>Settings</DropdownMenuItem>
+            <DropdownMenuItem icon={<LogOut />}>Log out</DropdownMenuItem>
+            <DropdownMenuItem icon={<Trash2 />} variant="destructive">Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Don't mix unrelated actions in a flat list without separators.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem icon={<Pencil />}>Edit</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem icon={<Trash2 />} variant="destructive">Delete project</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Use the destructive variant for dangerous actions like delete or remove.",
+    },
+    dont: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="sm">
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem icon={<Pencil />} variant="destructive">Edit</DropdownMenuItem>
+            <DropdownMenuItem icon={<Share2 />} variant="destructive">Share</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      description:
+        "Don't use the destructive variant for non-dangerous items.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -100,7 +256,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description="A basic dropdown menu triggered by a button."
+        description="Basic dropdown menu triggered by a button."
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -119,7 +275,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-icons"
         title="With Icons"
-        description="Pass an icon to the leading slot for visual context."
+        description="Leading icons for visual context."
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -139,12 +295,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-shortcuts"
         title="With Shortcuts"
-        description={
-          <>
-            Use the <InlineCode>shortcut</InlineCode> prop to display keyboard
-            shortcut hints.
-          </>
-        }
+        description="Display keyboard shortcut hints on the trailing side."
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -170,12 +321,7 @@ function OverviewTab() {
       <ComponentPreview
         id="destructive"
         title="Destructive"
-        description={
-          <>
-            Use <InlineCode>variant=&quot;destructive&quot;</InlineCode> for
-            dangerous actions like delete or remove.
-          </>
-        }
+        description="Red styling for dangerous actions like delete or remove."
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -197,13 +343,7 @@ function OverviewTab() {
       <ComponentPreview
         id="grouped"
         title="Grouped"
-        description={
-          <>
-            Use <InlineCode>DropdownMenuGroup</InlineCode>,{" "}
-            <InlineCode>DropdownMenuLabel</InlineCode>, and{" "}
-            <InlineCode>DropdownMenuSeparator</InlineCode> to organize items.
-          </>
-        }
+        description="Organize items with groups, labels, and separators."
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -229,7 +369,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled-items"
         title="Disabled Items"
-        description="Disabled items are non-interactive with muted styling."
+        description="Non-interactive items with muted styling."
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -250,11 +390,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function DropdownMenuPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -265,19 +413,19 @@ export default function DropdownMenuPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             DropdownMenu
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            An action menu triggered by a button or control. Built on Radix UI
-            DropdownMenu with full keyboard navigation, focus management, and
-            ARIA attributes. Supports icons, shortcuts, destructive variants,
-            groups, labels, and separators.
+            The DropdownMenu component is an action menu triggered by a button
+            or control. It organizes contextual actions into a structured
+            overlay, helping users access commands without leaving their current
+            view.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -317,6 +465,7 @@ export default function DropdownMenuPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -413,16 +562,26 @@ export default function DropdownMenuPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType="DropdownMenuPrimitive.ItemProps"
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

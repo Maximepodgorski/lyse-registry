@@ -6,13 +6,14 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -23,6 +24,58 @@ const overviewSections: TocSection[] = [
   { id: "sizes", label: "Sizes" },
   { id: "custom-label", label: "Custom Label" },
   { id: "in-a-button", label: "In a Button" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-md)]">
+          <Spinner size="sm" />
+          <span className="text-content-note" style={{ color: "var(--text-base-moderate)" }}>Loading...</span>
+        </div>
+      ),
+      description:
+        'Use size="sm" when placing inside a button or inline with text.',
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center justify-center w-16 h-16" style={{ border: "var(--layout-border-thin) solid var(--border-default)", borderRadius: "var(--layout-radius-md)" }}>
+          <Spinner size="lg" />
+        </div>
+      ),
+      description:
+        'Don\'t use size="lg" inside a small container — it will look oversized.',
+    },
+  },
+  {
+    do: {
+      preview: <Spinner label="Saving changes" />,
+      description:
+        'Provide a descriptive label for screen readers (e.g., "Loading messages").',
+    },
+    dont: {
+      preview: <Spinner />,
+      description:
+        'Don\'t leave the default "Loading" when a more specific label is available.',
+    },
+  },
+  {
+    do: {
+      preview: <Spinner size="md" />,
+      description:
+        "Show the spinner only after a short delay (200ms+) for fast operations.",
+    },
+    dont: {
+      preview: <Spinner size="sm" />,
+      description:
+        "Don't flash the spinner for instant operations — it creates visual noise.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -58,13 +111,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            A continuously rotating spinner that indicates loading. Uses{" "}
-            <InlineCode>role=&quot;status&quot;</InlineCode> for screen
-            reader announcements.
-          </>
-        }
+        description="Continuously rotating spinner that indicates loading."
       >
         <Spinner />
       </ComponentPreview>
@@ -72,14 +119,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode> (16px),{" "}
-            <InlineCode>md</InlineCode> (24px, default), or{" "}
-            <InlineCode>lg</InlineCode> (32px).
-          </>
-        }
+        description="Three sizes: sm (16px), md (24px, default), and lg (32px)."
       >
         <div className="flex items-center gap-[var(--layout-gap-2xl)]">
           <div className="flex flex-col items-center gap-[var(--layout-gap-md)]">
@@ -115,13 +155,7 @@ function OverviewTab() {
       <ComponentPreview
         id="custom-label"
         title="Custom Label"
-        description={
-          <>
-            Use the <InlineCode>label</InlineCode> prop to customize the
-            text announced to screen readers. Defaults to{" "}
-            <InlineCode>&quot;Loading&quot;</InlineCode>.
-          </>
-        }
+        description="Customizes the text announced to screen readers. Defaults to &quot;Loading&quot;."
       >
         <div className="flex items-center gap-[var(--layout-gap-2xl)]">
           <div className="flex items-center gap-[var(--layout-gap-md)]">
@@ -139,13 +173,7 @@ function OverviewTab() {
       <ComponentPreview
         id="in-a-button"
         title="In a Button"
-        description={
-          <>
-            Compose with <InlineCode>Button</InlineCode> for async action
-            feedback. The spinner inherits no conflicting styles and
-            maintains its size.
-          </>
-        }
+        description="Compose with Button for async action feedback."
       >
         <div className="flex items-center gap-[var(--layout-gap-lg)]">
           <Button
@@ -176,11 +204,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function SpinnerPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -191,18 +227,18 @@ export default function SpinnerPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Spinner
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A loading indicator that signals ongoing processes. Animated
-            circular spinner with semantic color tokens and built-in screen
-            reader support.
+            The Spinner component is an animated loading indicator that
+            communicates ongoing background processes. It provides visual
+            feedback to users while content or actions are being processed.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -242,6 +278,7 @@ export default function SpinnerPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -312,7 +349,7 @@ export default function SpinnerPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-4">
               <h2
                 className="text-heading-small font-accent"
@@ -322,11 +359,13 @@ export default function SpinnerPage() {
               </h2>
               <PropsTable propDefs={propDefs} />
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
     </>
   )
 }

@@ -25,13 +25,14 @@ import {
 } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -46,6 +47,108 @@ const overviewSections: TocSection[] = [
   { id: "badge", label: "Badge" },
   { id: "dot", label: "Dot" },
   { id: "grouped", label: "Grouped" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuItem icon={<Home />} shortcut="&#8984;H">Home</MenuItem>
+          <MenuItem icon={<Bell />} badge="3">Notifications</MenuItem>
+        </div>
+      ),
+      description:
+        "Use icon, badge, shortcut, and dot props on a standard MenuItem.",
+    },
+    dont: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuItem asChild icon={<Home />} shortcut="&#8984;H">
+            <a href="#">Home</a>
+          </MenuItem>
+        </div>
+      ),
+      description:
+        "Don't expect icon/badge/shortcut/dot slots to render when using asChild \u2014 they are skipped.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuGroup label="Navigation">
+            <MenuItem icon={<Home />} size="sm">Home</MenuItem>
+            <MenuItem icon={<FileText />} size="sm">Documents</MenuItem>
+          </MenuGroup>
+        </div>
+      ),
+      description:
+        "Use MenuGroup label for visible section headings.",
+    },
+    dont: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuGroup>
+            <span className="text-content-caption px-3 py-1" style={{ color: "var(--text-base-moderate)" }}>Navigation</span>
+            <MenuItem icon={<Home />} size="sm">Home</MenuItem>
+            <MenuItem icon={<FileText />} size="sm">Documents</MenuItem>
+          </MenuGroup>
+        </div>
+      ),
+      description:
+        "Don't add a plain text node as the first child of a MenuGroup for labeling.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuItem icon={<Home />}>Overview</MenuItem>
+          <MenuItem icon={<BarChart3 />} active>Analytics</MenuItem>
+          <MenuItem icon={<Settings />}>Settings</MenuItem>
+        </div>
+      ),
+      description:
+        'Use active for the currently active route \u2014 only one item at a time.',
+    },
+    dont: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuItem icon={<Home />} active>Overview</MenuItem>
+          <MenuItem icon={<BarChart3 />} active>Analytics</MenuItem>
+        </div>
+      ),
+      description:
+        "Don't use active on multiple items simultaneously.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuItem icon={<Home />}>Home</MenuItem>
+          <MenuItem icon={<Sparkles />} variant="accent">What&apos;s new</MenuItem>
+        </div>
+      ),
+      description:
+        'Use variant="accent" sparingly for one primary action in the menu.',
+    },
+    dont: {
+      preview: (
+        <div className="w-[240px] flex flex-col">
+          <MenuItem icon={<Home />} variant="accent">Home</MenuItem>
+          <MenuItem icon={<Settings />} variant="accent">Settings</MenuItem>
+        </div>
+      ),
+      description:
+        'Don\'t apply variant="accent" to all items in a group.',
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -112,14 +215,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use the <InlineCode>variant</InlineCode> prop.{" "}
-            <InlineCode>default</InlineCode> uses base text colors,{" "}
-            <InlineCode>accent</InlineCode> uses brand color for the label and
-            icon.
-          </>
-        }
+        description="Default uses base text colors, accent uses brand color for label and icon."
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Home />}>Default</MenuItem>
@@ -145,12 +241,7 @@ function OverviewTab() {
       <ComponentPreview
         id="active"
         title="Active"
-        description={
-          <>
-            Use <InlineCode>active</InlineCode> to highlight the current
-            page or selection. Adds a subtle background and border.
-          </>
-        }
+        description="Highlights the current page or selection with a subtle background and border."
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Home />}>Overview</MenuItem>
@@ -164,12 +255,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled"
         title="Disabled"
-        description={
-          <>
-            Use <InlineCode>disabled</InlineCode> to prevent interaction.
-            Text and icons are muted.
-          </>
-        }
+        description="Prevents interaction. Text and icons are muted."
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Star />}>Favorites</MenuItem>
@@ -185,12 +271,7 @@ function OverviewTab() {
       <ComponentPreview
         id="shortcut"
         title="Shortcut"
-        description={
-          <>
-            Pass a <InlineCode>shortcut</InlineCode> string to display a
-            keyboard shortcut badge on the trailing side.
-          </>
-        }
+        description="Displays a keyboard shortcut badge on the trailing side."
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Search />} shortcut="⌘K">
@@ -208,12 +289,7 @@ function OverviewTab() {
       <ComponentPreview
         id="badge"
         title="Badge"
-        description={
-          <>
-            Pass a <InlineCode>badge</InlineCode> to show a pill indicator
-            — useful for unread counts or status.
-          </>
-        }
+        description="Shows a pill indicator for unread counts or status."
       >
         <div className="w-[240px] flex flex-col">
           <MenuItem icon={<Bell />} badge="3">
@@ -243,14 +319,7 @@ function OverviewTab() {
       <ComponentPreview
         id="grouped"
         title="Grouped"
-        description={
-          <>
-            Compose with <InlineCode>Menu</InlineCode>,{" "}
-            <InlineCode>MenuGroup</InlineCode>, and{" "}
-            <InlineCode>MenuDivider</InlineCode> to build full navigation
-            panels.
-          </>
-        }
+        description="Full navigation panel with grouped sections, labels, and dividers."
       >
         <div
           className="w-[240px] h-[50rem] flex flex-col p-[var(--layout-padding-md)]"
@@ -300,11 +369,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function MenuPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -317,20 +394,18 @@ export default function MenuPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Menu
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A vertical navigation component for sidebars and panels. Menu
-            provides the container, MenuGroup organizes items with optional
-            labels, MenuItem renders interactive rows with icon, label, shortcut,
-            badge, and dot slots. Supports default and accent variants, active
-            and disabled states.
+            The Menu component provides a vertical navigation structure for
+            sidebars and panels. It organizes links and actions into logical
+            groups, helping users navigate through the application efficiently.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -370,6 +445,7 @@ export default function MenuPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -472,16 +548,26 @@ export default function MenuPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<"button">`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

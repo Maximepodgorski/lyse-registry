@@ -6,13 +6,13 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -22,6 +22,107 @@ const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "with-image", label: "With Image" },
   { id: "grid", label: "Grid Layout" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <div className="w-[12rem] h-48">
+          <SpotlightCard
+            title="Dashboard"
+            description="Overview of metrics."
+            className="h-full"
+            image={<img src="" alt="Dashboard preview" style={{ width: "100%", height: "100%", objectFit: "cover", background: "var(--background-brand-faint-default)" }} />}
+          />
+        </div>
+      ),
+      description:
+        'Use alt text on <img> elements passed to the image prop.',
+    },
+    dont: {
+      preview: (
+        <div className="w-[12rem] h-48">
+          <SpotlightCard
+            title="Dashboard"
+            description="Overview of metrics."
+            className="h-full"
+          />
+        </div>
+      ),
+      description:
+        "Don't pass an image without alt — it breaks accessibility.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-[12rem] h-48">
+          <SpotlightCard
+            title="Roadmap"
+            description="Plan what's next."
+            className="h-full"
+          />
+        </div>
+      ),
+      description:
+        "Set a fixed height on the card when images have inconsistent aspect ratios.",
+    },
+    dont: {
+      preview: (
+        <div className="flex gap-3">
+          <div className="w-[6rem] h-36">
+            <SpotlightCard
+              title="Short"
+              description="Brief."
+              className="h-full"
+            />
+          </div>
+          <div className="w-[6rem] h-52">
+            <SpotlightCard
+              title="Tall"
+              description="Much taller card."
+              className="h-full"
+            />
+          </div>
+        </div>
+      ),
+      description:
+        "Don't rely on intrinsic image height in a grid — cards will be uneven.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-[12rem] h-48">
+          <SpotlightCard
+            title="Analytics"
+            description="Measure what matters."
+            className="h-full"
+          />
+        </div>
+      ),
+      description:
+        'Keep title short (2-4 words) and description to one line.',
+    },
+    dont: {
+      preview: (
+        <div className="w-[12rem] h-56">
+          <SpotlightCard
+            title="Analytics and Reporting Dashboard"
+            description="This is a very long description that goes into extensive detail about the analytics feature and how it works across multiple lines of text."
+            className="h-full"
+          />
+        </div>
+      ),
+      description:
+        "Don't use long paragraphs in description — this is a spotlight, not an article.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -58,13 +159,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            The SpotlightCard displays a prominent image area above a
-            title and description. Without an image, a gradient fallback
-            is shown.
-          </>
-        }
+        description="Displays a prominent image area above a title and description. Falls back to a gradient without an image."
       >
         <div className="w-[16rem] h-64">
           <SpotlightCard
@@ -78,13 +173,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-image"
         title="With Image"
-        description={
-          <>
-            Pass an <InlineCode>image</InlineCode> slot with an{" "}
-            <InlineCode>{"<img>"}</InlineCode> element. The image is
-            rendered with <InlineCode>object-fit: cover</InlineCode>.
-          </>
-        }
+        description="Pass an image slot with an <img> element. Rendered with object-fit: cover."
       >
         <div className="w-[16rem] h-64">
           <SpotlightCard
@@ -129,11 +218,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function SpotlightCardPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -144,17 +241,18 @@ export default function SpotlightCardPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             SpotlightCard
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A vertical card with a prominent image area, title, and
-            description. Ideal for feature showcases, galleries, or content
+            The SpotlightCard component is a vertical card featuring a
+            prominent image area above a title and description. It provides an
+            engaging layout for showcasing features, products, or content
             highlights.
           </p>
           <div className="flex items-center gap-3 mt-2">
@@ -195,6 +293,7 @@ export default function SpotlightCardPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -279,16 +378,18 @@ export default function SpotlightCardPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<"div">`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
     </>
   )
 }

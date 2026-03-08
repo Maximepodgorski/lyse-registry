@@ -12,13 +12,13 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink, User, Filter, Settings } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -29,6 +29,74 @@ const overviewSections: TocSection[] = [
   { id: "with-icon", label: "With Icon" },
   { id: "with-dropdown", label: "With Dropdown" },
   { id: "disabled", label: "Disabled" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: <Chip variant="filled" hasDropdown>Status</Chip>,
+      description:
+        "Use hasDropdown when the chip opens a popover or menu.",
+    },
+    dont: {
+      preview: <Chip variant="filled" hasDropdown icon={<Filter />}>Filter</Chip>,
+      description:
+        "Don't show both icon and hasDropdown — the icon is hidden. Use one or the other.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-xs)]">
+          <Chip variant="filled" hasDropdown>Status</Chip>
+          <Chip variant="ghost" hasDropdown>Sort by</Chip>
+        </div>
+      ),
+      description:
+        'Use variant="ghost" for less prominent, secondary filters.',
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-xs)]">
+          <Chip variant="ghost" hasDropdown>Status</Chip>
+          <Chip variant="ghost" hasDropdown>Priority</Chip>
+        </div>
+      ),
+      description:
+        "Don't use ghost for the primary action in a filter bar — it's too subtle.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-xs)]">
+          <Chip variant="filled" hasDropdown>Status</Chip>
+          <Chip variant="outline" icon={<User />}>Assignee</Chip>
+        </div>
+      ),
+      description:
+        'Keep labels short (1-2 words): "Status", "Priority", "Date".',
+    },
+    dont: {
+      preview: <Chip variant="filled" hasDropdown>Filter by task priority level</Chip>,
+      description:
+        "Don't put long text in a chip — it breaks the compact layout.",
+    },
+  },
+  {
+    do: {
+      description:
+        'Use data-state="open" styling by wrapping in a DropdownMenuTrigger.',
+    },
+    dont: {
+      description:
+        "Don't manually toggle active styles — rely on Radix state attributes.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -80,15 +148,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use the <InlineCode>variant</InlineCode> prop to control the
-            visual style. <InlineCode>filled</InlineCode> (default) has a
-            neutral background, <InlineCode>outline</InlineCode> has a
-            border only, and <InlineCode>ghost</InlineCode> has no
-            background.
-          </>
-        }
+        description="Three visual styles: filled (default), outline (border only), and ghost (no background)."
       >
         <Chip variant="filled" hasDropdown>
           Filled
@@ -104,13 +164,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-icon"
         title="With Icon"
-        description={
-          <>
-            Pass an <InlineCode>icon</InlineCode> prop to display a leading
-            icon. Icons are rendered at 12px and only shown when{" "}
-            <InlineCode>hasDropdown</InlineCode> is false.
-          </>
-        }
+        description="Displays a leading icon at 12px. Only shown when hasDropdown is false."
       >
         <Chip variant="filled" icon={<User />}>
           Maxime
@@ -126,17 +180,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-dropdown"
         title="With Dropdown"
-        description={
-          <>
-            Compose with <InlineCode>DropdownMenu</InlineCode> for
-            selectable options. Wrap the Chip in{" "}
-            <InlineCode>DropdownMenuTrigger</InlineCode> with{" "}
-            <InlineCode>asChild</InlineCode> and set{" "}
-            <InlineCode>hasDropdown</InlineCode> to show the chevron. The
-            chip automatically shows a pressed state when the menu is open
-            via Radix&apos;s <InlineCode>data-state</InlineCode> attribute.
-          </>
-        }
+        description="Wrap in a DropdownMenuTrigger with asChild and set hasDropdown. Shows a pressed state when the menu is open."
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -181,12 +225,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled"
         title="Disabled"
-        description={
-          <>
-            Use the native <InlineCode>disabled</InlineCode> attribute to
-            disable the chip. All variants support the disabled state.
-          </>
-        }
+        description="All variants support the disabled state via the native disabled attribute."
       >
         <Chip variant="filled" hasDropdown disabled>
           Filled
@@ -202,11 +241,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function ChipPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -217,18 +264,19 @@ export default function ChipPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Chip
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A compact, inline selector styled as a clickable chip with an
-            optional dropdown chevron. Compose with DropdownMenu for
-            selectable options, or use standalone with an icon.
+            The Chip component is a compact, clickable selector used for
+            filtering or toggling options. It provides an inline way to make
+            quick selections, optionally paired with a dropdown for more
+            choices.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -268,6 +316,7 @@ export default function ChipPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -366,16 +415,18 @@ export default function ChipPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<"button">`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
     </>
   )
 }

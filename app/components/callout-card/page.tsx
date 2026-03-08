@@ -3,16 +3,16 @@
 import { useState } from "react"
 import { CalloutCard } from "@/registry/new-york/ui/callout-card/callout-card"
 import { toast } from "@/registry/new-york/ui/toast/toast"
-import { Copy, ExternalLink, Info, Sparkles, AlertTriangle } from "lucide-react"
+import { Copy, ExternalLink, Info, Sparkles, AlertTriangle, Gift } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -22,6 +22,120 @@ const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "with-action", label: "With Action" },
   { id: "dismissible", label: "Dismissible" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<Gift />}
+            title="Free offer"
+            description="100 tasks included."
+            action={<Button size="sm">Claim</Button>}
+          />
+        </div>
+      ),
+      description:
+        "Use inside menus and sidebars for contextual promotions.",
+    },
+    dont: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<AlertTriangle />}
+            title="System error"
+            description="Server is unreachable."
+          />
+        </div>
+      ),
+      description:
+        "Don't use for system alerts — use Toast or BannerInfo instead.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<Sparkles />}
+            title="New feature"
+            description="AI task creation is live."
+            action={<Button size="sm">Try it</Button>}
+          />
+        </div>
+      ),
+      description:
+        "Pass a Button component to the action slot.",
+    },
+    dont: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<Sparkles />}
+            title="New feature"
+            description="AI task creation is live."
+            action={<button>Try it</button>}
+          />
+        </div>
+      ),
+      description:
+        "Don't put raw <button> elements without proper styling.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<Info />}
+            title="Heads up"
+            description="This callout can be dismissed."
+            onDismiss={() => {}}
+          />
+        </div>
+      ),
+      description:
+        "Provide onDismiss for non-critical content users can close.",
+    },
+    dont: {
+      description:
+        "Don't make critical information dismissible.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<Info />}
+            title="Tip"
+            description="Use tokens for consistent spacing."
+          />
+        </div>
+      ),
+      description:
+        "Keep descriptions concise (1-2 lines).",
+    },
+    dont: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<Info />}
+            title="Design system update"
+            description="We have released a major update to our design token system that includes new color primitives, updated spacing scale, revised typography hierarchy, and dark mode improvements across all components."
+          />
+        </div>
+      ),
+      description:
+        "Don't use as a rich content container with long text.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -68,12 +182,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            The CalloutCard draws attention with an icon, branded title,
-            and description.
-          </>
-        }
+        description="Draws attention with an icon, branded title, and description."
       >
         <div className="max-w-[16rem]">
           <CalloutCard
@@ -87,12 +196,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-action"
         title="With Action"
-        description={
-          <>
-            Pass an <InlineCode>action</InlineCode> slot to add a CTA
-            below the description.
-          </>
-        }
+        description="Add a CTA below the description via the action slot."
       >
         <div className="max-w-[16rem] flex flex-col gap-4">
           <CalloutCard
@@ -113,13 +217,7 @@ function OverviewTab() {
       <ComponentPreview
         id="dismissible"
         title="Dismissible"
-        description={
-          <>
-            Pass an <InlineCode>onDismiss</InlineCode> callback to show a
-            close button. The callout doesn&apos;t manage its own visibility —
-            handle it in your state.
-          </>
-        }
+        description="Pass an onDismiss callback to show a close button. Visibility is managed externally."
       >
         <div className="max-w-[16rem]">
           <CalloutCard
@@ -134,11 +232,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function CalloutCardPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -149,18 +255,18 @@ export default function CalloutCardPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             CalloutCard
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A callout card for tips, announcements, or contextual messages.
-            Supports an icon, title, description, action slot, and a
-            dismiss button.
+            The CalloutCard component is a branded callout used to surface
+            tips, announcements, or contextual promotions. It draws attention
+            to important messages that complement the main content.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -200,6 +306,7 @@ export default function CalloutCardPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -286,16 +393,18 @@ export default function CalloutCardPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<"div">`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
     </>
   )
 }
