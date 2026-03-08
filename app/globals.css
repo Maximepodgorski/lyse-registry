@@ -203,6 +203,11 @@
   }
   * {
     @apply border-border outline-ring/50;
+    scrollbar-color: var(--border-default) transparent;
+    scrollbar-width: thin;
+  }
+  *:not(:hover, :focus-within) {
+    scrollbar-color: transparent transparent;
   }
   body {
     @apply bg-background text-foreground;
