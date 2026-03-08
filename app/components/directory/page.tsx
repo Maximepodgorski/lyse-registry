@@ -32,13 +32,13 @@ export default function DirectoryPage() {
   return (
     <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 px-8 lg:px-16 xl:px-20">
       <h1
-        className="text-heading-large"
-        style={{ color: "var(--text-base-strong)" }}
+        className="font-bold"
+        style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
       >
         Components
       </h1>
       <p
-        className="text-content-body leading-relaxed"
+        className="text-content-highlight leading-relaxed"
         style={{ color: "var(--text-base-moderate)" }}
       >
         Here you can find all the components available in the registry. We are

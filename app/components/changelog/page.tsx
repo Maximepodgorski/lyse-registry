@@ -4,13 +4,13 @@ export default function ChangelogPage() {
   return (
     <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 max-w-none px-8 lg:px-16 xl:px-20">
       <h1
-        className="text-heading-large"
-        style={{ color: "var(--text-base-strong)" }}
+        className="font-bold"
+        style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
       >
         Changelog
       </h1>
       <p
-        className="text-content-body leading-relaxed"
+        className="text-content-highlight leading-relaxed"
         style={{ color: "var(--text-base-moderate)" }}
       >
         Latest updates and releases.

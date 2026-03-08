@@ -11,15 +11,17 @@ export function CodeBlock({
   codeString,
   language = "tsx",
   fileName,
+  defaultExpanded = false,
 }: {
   preview?: React.ReactNode
   code: React.ReactNode
   codeString?: string
   language?: string
   fileName?: string
+  defaultExpanded?: boolean
 }) {
   const [copied, setCopied] = useState(false)
-  const [collapsed, setCollapsed] = useState(true)
+  const [collapsed, setCollapsed] = useState(!defaultExpanded)
   const [lineCount, setLineCount] = useState(0)
   const codeRef = React.useRef<HTMLElement>(null)
   const copyTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null)
