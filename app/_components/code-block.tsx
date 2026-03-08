@@ -20,25 +20,32 @@ export function CodeBlock({
 }) {
   const [copied, setCopied] = useState(false)
   const [collapsed, setCollapsed] = useState(true)
+  const [lineCount, setLineCount] = useState(0)
   const codeRef = React.useRef<HTMLElement>(null)
+  const copyTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null)
 
   const handleCopy = () => {
-    const text =
-      codeString ?? codeRef.current?.textContent ?? ""
+    const text = codeString ?? codeRef.current?.textContent ?? ""
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current)
+      copyTimeoutRef.current = setTimeout(() => setCopied(false), 2000)
+    }).catch(() => {})
   }
 
-  /* Count lines from rendered code for line numbers */
-  const [lineCount, setLineCount] = useState(0)
   React.useEffect(() => {
-    if (codeRef.current) {
+    return () => {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current)
+    }
+  }, [])
+
+  /* Count lines from rendered code for line numbers */
+  React.useLayoutEffect(() => {
+    if (!collapsed && codeRef.current) {
       const text = codeRef.current.textContent ?? ""
       setLineCount(text.split("\n").length)
     }
-  }, [code])
+  }, [code, collapsed])
 
   return (
     <div
