@@ -6,13 +6,14 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -24,6 +25,122 @@ const overviewSections: TocSection[] = [
   { id: "with-description", label: "With Description" },
   { id: "disabled", label: "Disabled" },
   { id: "indicator-only", label: "Indicator Only" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <RadioGroup defaultValue="a">
+          <Radio value="a" label="Option one" />
+          <Radio value="b" label="Option two" />
+        </RadioGroup>
+      ),
+      description:
+        "Use RadioGroup to wrap all related Radio items.",
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-md)]">
+          <Radio value="a" label="Orphan one" />
+          <Radio value="b" label="Orphan two" />
+        </div>
+      ),
+      description:
+        "Don't place Radio items outside a RadioGroup.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <RadioGroup defaultValue="a">
+          <Radio value="a" label="Email" />
+          <Radio value="b" label="SMS" />
+        </RadioGroup>
+      ),
+      description:
+        "Provide label for every radio in forms for clarity and accessibility.",
+    },
+    dont: {
+      preview: (
+        <RadioGroup defaultValue="a" className="flex flex-row gap-[var(--layout-gap-lg)]">
+          <Radio value="a" />
+          <Radio value="b" />
+        </RadioGroup>
+      ),
+      description:
+        "Don't use indicator-only mode in forms without aria-label.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <RadioGroup defaultValue="free">
+          <Radio value="free" label="Free" />
+          <Radio value="pro" label="Pro" />
+        </RadioGroup>
+      ),
+      description:
+        "Set defaultValue to pre-select a sensible option in required fields.",
+    },
+    dont: {
+      preview: (
+        <RadioGroup>
+          <Radio value="a" label="Plan A" />
+          <Radio value="b" label="Plan B" />
+        </RadioGroup>
+      ),
+      description:
+        "Don't leave the group without any default in required fields.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <RadioGroup defaultValue="comfort">
+          <Radio value="comfort" label="Comfort" description="Optimized for everyday use." />
+          <Radio value="compact" label="Compact" description="Reduced spacing for dense displays." />
+        </RadioGroup>
+      ),
+      description:
+        "Use description for choices that need explanation.",
+    },
+    dont: {
+      preview: (
+        <RadioGroup defaultValue="a">
+          <Radio value="a" label="Comfort — Optimized for everyday use with relaxed settings" />
+          <Radio value="b" label="Compact — Reduced spacing" />
+        </RadioGroup>
+      ),
+      description:
+        "Don't put long text in label — move it to description.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <RadioGroup defaultValue="enabled">
+          <Radio value="enabled" label="Enabled" />
+          <Radio value="disabled-item" label="Unavailable" disabled />
+        </RadioGroup>
+      ),
+      description:
+        "Use disabled on unavailable options to keep them visible.",
+    },
+    dont: {
+      preview: (
+        <RadioGroup defaultValue="enabled">
+          <Radio value="enabled" label="Enabled" />
+        </RadioGroup>
+      ),
+      description:
+        "Don't hide unavailable options — users lose context about what exists.",
+    },
+  },
 ]
 
 const radioGroupPropDefs: PropDef[] = [
@@ -108,13 +225,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            Wrap <InlineCode>Radio</InlineCode> items inside a{" "}
-            <InlineCode>RadioGroup</InlineCode>. Set{" "}
-            <InlineCode>defaultValue</InlineCode> to pre-select an option.
-          </>
-        }
+        description="Wrap Radio items inside a RadioGroup. Set defaultValue to pre-select an option."
       >
         <RadioGroup defaultValue="option-1">
           <Radio value="option-1" label="Option one" />
@@ -126,14 +237,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode> (default) or{" "}
-            <InlineCode>md</InlineCode>. The size adjusts the indicator,
-            label font size, and dot size.
-          </>
-        }
+        description="Two sizes: sm (default) and md. Adjusts indicator, label, and dot."
       >
         <div className="flex gap-16">
           <RadioGroup defaultValue="sm-1">
@@ -150,12 +254,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-description"
         title="With Description"
-        description={
-          <>
-            Add a <InlineCode>description</InlineCode> prop to display
-            supporting text below the label.
-          </>
-        }
+        description="Displays supporting text below the label."
       >
         <RadioGroup defaultValue="comfort">
           <Radio
@@ -179,13 +278,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled"
         title="Disabled"
-        description={
-          <>
-            Disable a single item with <InlineCode>disabled</InlineCode> on{" "}
-            <InlineCode>Radio</InlineCode>, or the entire group via{" "}
-            <InlineCode>RadioGroup</InlineCode>.
-          </>
-        }
+        description="Disable a single item or the entire group."
       >
         <div className="flex gap-16">
           <RadioGroup defaultValue="enabled">
@@ -203,14 +296,7 @@ function OverviewTab() {
       <ComponentPreview
         id="indicator-only"
         title="Indicator Only"
-        description={
-          <>
-            Omit the <InlineCode>label</InlineCode> prop to render only the
-            indicator. Always provide{" "}
-            <InlineCode>aria-label</InlineCode> for accessibility when using
-            this pattern.
-          </>
-        }
+        description="Renders only the indicator. Provide aria-label for accessibility."
       >
         <RadioGroup defaultValue="a" className="flex flex-row gap-[var(--layout-gap-lg)]">
           <Radio value="a" aria-label="Option A" />
@@ -222,11 +308,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function RadioPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -237,19 +331,18 @@ export default function RadioPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Radio
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            The Radio component allows users to select a single option from a
-            group. It supports two sizes, optional labels and descriptions,
-            and integrates with Radix for full keyboard and screen reader
-            accessibility.
+            The Radio component lets users select a single option from a
+            visible group of choices. It provides a clear and accessible way to
+            make mutually exclusive selections in forms and settings.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -289,6 +382,7 @@ export default function RadioPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -383,7 +477,7 @@ export default function RadioPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-12">
               <div className="flex flex-col gap-4">
                 <h2
@@ -410,11 +504,21 @@ export default function RadioPage() {
                 />
               </div>
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

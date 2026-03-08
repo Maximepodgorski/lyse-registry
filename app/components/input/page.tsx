@@ -21,13 +21,13 @@ import {
   Eye,
 } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -40,6 +40,112 @@ const overviewSections: TocSection[] = [
   { id: "with-icons", label: "With Icons" },
   { id: "input-field", label: "InputField" },
   { id: "disabled", label: "Disabled" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <InputField className="max-w-[280px]">
+          <InputLabel required>Email</InputLabel>
+          <Input
+            variant="destructive"
+            leading={<Mail />}
+            trailing={<AlertCircle />}
+            placeholder="registry@getlyse.com"
+          />
+          <InputHint variant="destructive">
+            Please enter a valid email address.
+          </InputHint>
+        </InputField>
+      ),
+      description:
+        "Match Input variant and InputHint variant (e.g. destructive + destructive).",
+    },
+    dont: {
+      preview: (
+        <InputField className="max-w-[280px]">
+          <InputLabel required>Email</InputLabel>
+          <Input
+            variant="destructive"
+            leading={<Mail />}
+            trailing={<AlertCircle />}
+            placeholder="registry@getlyse.com"
+          />
+          <InputHint>
+            Please enter a valid email address.
+          </InputHint>
+        </InputField>
+      ),
+      description:
+        "Don't use mismatched variants between input and hint.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Input leading={<Mail />} placeholder="Email address" className="max-w-[280px]" />
+      ),
+      description:
+        "Use leading for contextual icons (Mail, Search, Lock).",
+    },
+    dont: {
+      preview: (
+        <Input leading={<Button variant="terciary" size="xs">Go</Button>} placeholder="Email address" className="max-w-[280px]" />
+      ),
+      description:
+        "Don't put interactive elements (buttons) in leading — use trailing or external layout.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <InputField className="max-w-[280px]">
+          <InputLabel required>Email</InputLabel>
+          <Input leading={<Mail />} placeholder="registry@getlyse.com" />
+          <InputHint>We&apos;ll never share your email.</InputHint>
+        </InputField>
+      ),
+      description:
+        "Use InputField to compose label + input + hint with consistent spacing.",
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col gap-1 max-w-[280px]">
+          <InputLabel required>Email</InputLabel>
+          <div className="mt-3" />
+          <Input leading={<Mail />} placeholder="registry@getlyse.com" />
+          <div className="mt-4" />
+          <InputHint>We&apos;ll never share your email.</InputHint>
+        </div>
+      ),
+      description:
+        "Don't manually add spacing between label, input, and hint — use InputField instead.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Input size="lg" placeholder="Search..." leading={<Search />} className="max-w-[280px]" />
+      ),
+      description:
+        'Use size="lg" for prominent, standalone inputs.',
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col gap-3 max-w-[280px]">
+          <Input size="sm" placeholder="Name" leading={<Search />} />
+          <Input size="lg" placeholder="Email" leading={<Mail />} />
+        </div>
+      ),
+      description:
+        "Don't mix different input sizes in the same form.",
+    },
+  },
 ]
 
 const inputPropDefs: PropDef[] = [
@@ -130,7 +236,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description="A basic text input with placeholder."
+        description="Basic text input with placeholder."
       >
         <Input placeholder="Enter your email" className="max-w-[320px]" />
       </ComponentPreview>
@@ -138,13 +244,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop to control input
-            height. Available sizes: <InlineCode>sm</InlineCode>,{" "}
-            <InlineCode>md</InlineCode>, <InlineCode>lg</InlineCode>.
-          </>
-        }
+        description="Controls input height."
       >
         <div className="flex flex-col gap-4 max-w-[320px]">
           <Input size="sm" placeholder="Small" />
@@ -156,12 +256,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use <InlineCode>variant</InlineCode> to change border and focus
-            ring color for validation states.
-          </>
-        }
+        description="Border and focus ring color for validation states."
       >
         <div className="flex flex-col gap-4 max-w-[320px]">
           <Input variant="default" placeholder="Default" />
@@ -173,13 +268,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-icons"
         title="With Icons"
-        description={
-          <>
-            Use <InlineCode>leading</InlineCode> and{" "}
-            <InlineCode>trailing</InlineCode> props to add content before or
-            after the input.
-          </>
-        }
+        description="Add content before or after the input."
       >
         <div className="flex flex-col gap-4 max-w-[320px]">
           <Input
@@ -215,14 +304,7 @@ function OverviewTab() {
       <ComponentPreview
         id="input-field"
         title="InputField"
-        description={
-          <>
-            Compose <InlineCode>InputField</InlineCode>,{" "}
-            <InlineCode>InputLabel</InlineCode>, and{" "}
-            <InlineCode>InputHint</InlineCode> for a full form field with
-            label, input, and helper text.
-          </>
-        }
+        description="Full form field with label, input, and helper text."
       >
         <div className="flex flex-col gap-8 max-w-[320px]">
           <InputField>
@@ -266,7 +348,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled"
         title="Disabled"
-        description="Disable the input to prevent interaction."
+        description="Prevents interaction with muted styling."
       >
         <div className="flex flex-col gap-4 max-w-[320px]">
           <Input
@@ -291,11 +373,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function InputPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -306,18 +396,18 @@ export default function InputPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Input
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A text input component with optional leading and trailing addon
-            slots. Compose with InputField, InputLabel, and InputHint for
-            full form fields with labels, validation states, and helper text.
+            The Input component is a single-line text field for capturing user
+            data. It supports addon slots and validation states, providing a
+            flexible foundation for building form fields.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -357,6 +447,7 @@ export default function InputPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -456,7 +547,7 @@ export default function InputPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-12">
               <div>
                 <h3
@@ -495,11 +586,21 @@ export default function InputPage() {
                 />
               </div>
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

@@ -6,13 +6,14 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -25,6 +26,76 @@ const overviewSections: TocSection[] = [
   { id: "indeterminate", label: "Indeterminate" },
   { id: "disabled", label: "Disabled" },
   { id: "indicator-only", label: "Indicator Only" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: <Checkbox label="Accept terms and conditions" />,
+      description:
+        "Use the label prop for text — it wires htmlFor for accessibility.",
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Checkbox />
+          <span>Accept terms</span>
+        </div>
+      ),
+      description:
+        "Don't use a separate <label> without htmlFor association.",
+    },
+  },
+  {
+    do: {
+      preview: <Checkbox checked="indeterminate" label="Select all" />,
+      description:
+        'Use checked="indeterminate" for parent checkboxes in select-all patterns.',
+    },
+    dont: {
+      preview: <Checkbox defaultChecked label="Select all" />,
+      description:
+        "Don't use checked={true} with a custom half-filled icon for partial selection.",
+    },
+  },
+  {
+    do: {
+      preview: <Checkbox size="md" label="Receive notifications" />,
+      description:
+        'Use size="md" when the checkbox sits alongside text-content-body text.',
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Checkbox size="sm" />
+          <span className="text-content-body">Large body text</span>
+        </div>
+      ),
+      description:
+        'Don\'t mix size="sm" checkbox with large body text — sizes should match.',
+    },
+  },
+  {
+    do: {
+      preview: <Checkbox label="Unavailable option" disabled />,
+      description:
+        "Use disabled for unavailable options to preserve discoverability.",
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-md)]">
+          <Checkbox label="Available option" defaultChecked />
+          {/* Empty space where the hidden option would be */}
+        </div>
+      ),
+      description:
+        "Don't hide the checkbox entirely — show it disabled so users know the option exists.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -122,12 +193,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            A basic checkbox with a label. Click the label or the
-            indicator to toggle.
-          </>
-        }
+        description="Basic checkbox with a label. Click label or indicator to toggle."
       >
         <div className="flex flex-col gap-[var(--layout-gap-md)]">
           <Checkbox label="Accept terms and conditions" />
@@ -138,14 +204,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode> (default) or{" "}
-            <InlineCode>md</InlineCode>. The size adjusts the indicator,
-            label font size, and icon size.
-          </>
-        }
+        description="Two sizes: sm (default) and md. Adjusts indicator, label, and icon."
       >
         <div className="flex gap-16">
           <div className="flex flex-col gap-[var(--layout-gap-md)]">
@@ -162,12 +221,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-description"
         title="With Description"
-        description={
-          <>
-            Add a <InlineCode>description</InlineCode> prop to display
-            supporting text below the label.
-          </>
-        }
+        description="Displays supporting text below the label."
       >
         <div className="flex flex-col gap-[var(--layout-gap-md)]">
           <Checkbox
@@ -191,13 +245,7 @@ function OverviewTab() {
       <ComponentPreview
         id="indeterminate"
         title="Indeterminate"
-        description={
-          <>
-            Set <InlineCode>checked=&quot;indeterminate&quot;</InlineCode>{" "}
-            for a parent checkbox that controls a group. The parent
-            shows a minus icon when some children are checked.
-          </>
-        }
+        description="Parent checkbox shows a minus icon when some children are checked."
       >
         <div className="flex flex-col gap-[var(--layout-gap-md)]">
           <Checkbox
@@ -228,12 +276,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled"
         title="Disabled"
-        description={
-          <>
-            Use <InlineCode>disabled</InlineCode> to prevent interaction.
-            Works with all states: unchecked, checked, and indeterminate.
-          </>
-        }
+        description="Prevents interaction. Works with all states."
       >
         <div className="flex gap-16">
           <div className="flex flex-col gap-[var(--layout-gap-md)]">
@@ -253,14 +296,7 @@ function OverviewTab() {
       <ComponentPreview
         id="indicator-only"
         title="Indicator Only"
-        description={
-          <>
-            Omit the <InlineCode>label</InlineCode> prop to render only
-            the indicator. Always provide{" "}
-            <InlineCode>aria-label</InlineCode> for accessibility when
-            using this pattern.
-          </>
-        }
+        description="Renders only the indicator. Provide aria-label for accessibility."
       >
         <div className="flex items-center gap-[var(--layout-gap-lg)]">
           <Checkbox aria-label="Option A" />
@@ -272,11 +308,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function CheckboxPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -287,18 +331,19 @@ export default function CheckboxPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Checkbox
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A form control for toggling between checked, unchecked, and
-            indeterminate states. Supports labels, descriptions, two sizes,
-            and full keyboard and screen reader accessibility via Radix.
+            The Checkbox component is a form control that allows users to
+            toggle between checked, unchecked, and indeterminate states. It
+            provides a clear and accessible way to capture binary or
+            multi-select choices in forms.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -338,6 +383,7 @@ export default function CheckboxPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -420,7 +466,7 @@ export default function CheckboxPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-4">
               <h2
                 className="text-heading-small font-accent"
@@ -433,11 +479,21 @@ export default function CheckboxPage() {
                 extendsType="Radix Checkbox.Root"
               />
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

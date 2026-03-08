@@ -6,13 +6,14 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -24,6 +25,76 @@ const overviewSections: TocSection[] = [
   { id: "with-description", label: "With Description" },
   { id: "disabled", label: "Disabled" },
   { id: "toggle-only", label: "Toggle Only" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: <Toggle label="Enable notifications" />,
+      description:
+        "Use the label prop for text — it wires htmlFor for accessibility.",
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Toggle />
+          <span>Enable notifications</span>
+        </div>
+      ),
+      description:
+        "Don't use a separate <label> without proper association.",
+    },
+  },
+  {
+    do: {
+      preview: <Toggle label="Dark mode" defaultChecked />,
+      description:
+        "Use Toggle for settings that take effect immediately.",
+    },
+    dont: {
+      preview: <Toggle label="Accept terms" />,
+      description:
+        "Don't use Toggle for selections that require a submit action — use Checkbox instead.",
+    },
+  },
+  {
+    do: {
+      preview: <Toggle size="md" label="Receive updates" />,
+      description:
+        'Use size="md" when the toggle sits alongside text-content-body text.',
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Toggle size="sm" />
+          <span className="text-content-body">Large body text</span>
+        </div>
+      ),
+      description:
+        'Don\'t mix size="sm" toggle with large body text.',
+    },
+  },
+  {
+    do: {
+      preview: <Toggle label="Unavailable feature" disabled />,
+      description:
+        "Use disabled for unavailable features to preserve discoverability.",
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-lg)]">
+          <Toggle label="Available feature" defaultChecked />
+          {/* Empty space where the hidden toggle would be */}
+        </div>
+      ),
+      description:
+        "Don't hide the toggle entirely — show it disabled so users know the feature exists.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -100,12 +171,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            A basic toggle with a label. Click the label or the switch to
-            toggle.
-          </>
-        }
+        description="Basic toggle with a label. Click label or switch to toggle."
       >
         <div className="flex flex-col gap-[var(--layout-gap-lg)]">
           <Toggle label="Enable notifications" />
@@ -116,14 +182,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode> (default) or{" "}
-            <InlineCode>md</InlineCode>. The size adjusts the switch track,
-            thumb, and label font size.
-          </>
-        }
+        description="Two sizes: sm (default) and md. Adjusts track, thumb, and label."
       >
         <div className="flex gap-16">
           <div className="flex flex-col gap-[var(--layout-gap-lg)]">
@@ -140,12 +199,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-description"
         title="With Description"
-        description={
-          <>
-            Add a <InlineCode>description</InlineCode> prop to display
-            supporting text below the label.
-          </>
-        }
+        description="Displays supporting text below the label."
       >
         <div className="flex flex-col gap-[var(--layout-gap-lg)]">
           <Toggle
@@ -169,12 +223,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled"
         title="Disabled"
-        description={
-          <>
-            Use <InlineCode>disabled</InlineCode> to prevent interaction.
-            Works in both unchecked and checked states.
-          </>
-        }
+        description="Prevents interaction. Works in both states."
       >
         <div className="flex gap-16">
           <div className="flex flex-col gap-[var(--layout-gap-lg)]">
@@ -202,14 +251,7 @@ function OverviewTab() {
       <ComponentPreview
         id="toggle-only"
         title="Toggle Only"
-        description={
-          <>
-            Omit the <InlineCode>label</InlineCode> prop to render only
-            the switch control. Always provide{" "}
-            <InlineCode>aria-label</InlineCode> for accessibility when
-            using this pattern.
-          </>
-        }
+        description="Renders only the switch control. Provide aria-label for accessibility."
       >
         <div className="flex items-center gap-[var(--layout-gap-xl)]">
           <Toggle aria-label="Feature A" />
@@ -222,11 +264,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function TogglePage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -237,17 +287,18 @@ export default function TogglePage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Toggle
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A switch control that lets users turn a binary option on or off.
-            Commonly used in settings, preferences, and interactive forms.
+            The Toggle component is a switch control for turning a binary
+            option on or off. It provides an intuitive way to manage settings
+            and preferences with immediate visual feedback.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -287,6 +338,7 @@ export default function TogglePage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -369,7 +421,7 @@ export default function TogglePage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-4">
               <h2
                 className="text-heading-small font-accent"
@@ -382,11 +434,21 @@ export default function TogglePage() {
                 extendsType="Radix Switch.Root"
               />
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

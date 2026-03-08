@@ -12,13 +12,14 @@ import {
 import { Button } from "@/registry/new-york/ui/button/button"
 import { Copy, ExternalLink, Bold, Italic, Underline } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -29,6 +30,195 @@ const overviewSections: TocSection[] = [
   { id: "sizes", label: "Sizes" },
   { id: "with-shortcut", label: "With Shortcut" },
   { id: "placement", label: "Placement" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="secondary" size="sm">Hover me</Button>
+            </TooltipTrigger>
+            <TooltipContent>Copy link</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ),
+      description:
+        'Use asChild on TooltipTrigger to avoid a redundant wrapping element.',
+    },
+    dont: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button variant="secondary" size="sm">Hover me</Button>
+            </TooltipTrigger>
+            <TooltipContent>Copy link</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ),
+      description:
+        "Don't nest a <button> inside TooltipTrigger without asChild \u2014 it produces invalid HTML.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="secondary" size="sm" isIconOnly aria-label="Copy">
+                <Copy />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Copy link</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ),
+      description:
+        "Keep tooltip text to a single short phrase (under 10 words).",
+    },
+    dont: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="secondary" size="sm" isIconOnly aria-label="Copy">
+                <Copy />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Click here to copy the shareable link to your clipboard for sharing</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ),
+      description:
+        "Don't write multi-sentence explanations \u2014 use a Popover or inline hint instead.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-content-caption" style={{ color: "var(--text-base-moderate)" }}>App layout</span>
+          <div className="flex items-center gap-[var(--layout-gap-sm)]" style={{ border: "var(--layout-border-thin) dashed var(--border-default)", borderRadius: "var(--layout-radius-md)", padding: "var(--layout-padding-sm) var(--layout-padding-md)" }}>
+            <span className="text-content-caption font-accent" style={{ color: "var(--text-base-strong)" }}>TooltipProvider</span>
+          </div>
+        </div>
+      ),
+      description:
+        "Place TooltipProvider once at the app or layout level.",
+    },
+    dont: {
+      preview: (
+        <div className="flex flex-col items-center gap-1">
+          <div className="flex items-center gap-[var(--layout-gap-xs)]">
+            {["A", "B", "C"].map((label) => (
+              <div key={label} className="flex flex-col items-center gap-0.5" style={{ border: "var(--layout-border-thin) dashed var(--border-default)", borderRadius: "var(--layout-radius-md)", padding: "var(--layout-padding-xs) var(--layout-padding-sm)" }}>
+                <span className="text-content-caption" style={{ color: "var(--text-base-moderate)", fontSize: "9px" }}>Provider</span>
+                <span className="text-content-caption font-accent" style={{ color: "var(--text-base-strong)", fontSize: "10px" }}>{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+      description:
+        "Don't wrap every individual tooltip in its own TooltipProvider.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="secondary" size="sm" isIconOnly aria-label="Bold">
+                <Bold />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Bold</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ),
+      description:
+        "Provide aria-label on icon-only triggers for screen reader accessibility.",
+    },
+    dont: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="secondary" size="sm" isIconOnly>
+                <Bold />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Bold</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ),
+      description:
+        "Don't rely on the tooltip as the sole accessible name \u2014 it is not announced until hover/focus.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <div className="flex items-center gap-[var(--layout-gap-xs)]">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="sm" isIconOnly aria-label="Bold">
+                  <Bold />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent size="sm">Bold</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="sm" isIconOnly aria-label="Italic">
+                  <Italic />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent size="sm">Italic</TooltipContent>
+            </Tooltip>
+          </div>
+        </TooltipProvider>
+      ),
+      description:
+        'Use size="sm" in dense toolbars for compact tooltips.',
+    },
+    dont: {
+      preview: (
+        <TooltipProvider delayDuration={100}>
+          <div className="flex items-center gap-[var(--layout-gap-xs)]">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="sm" isIconOnly aria-label="Bold">
+                  <Bold />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent size="md">Bold</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="sm" isIconOnly aria-label="Italic">
+                  <Italic />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent size="sm">Italic</TooltipContent>
+            </Tooltip>
+          </div>
+        </TooltipProvider>
+      ),
+      description:
+        'Don\'t mix size="md" and size="sm" in the same toolbar.',
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -99,14 +289,7 @@ function OverviewTab() {
         <ComponentPreview
           id="sizes"
           title="Sizes"
-          description={
-            <>
-              Use the <InlineCode>size</InlineCode> prop on TooltipContent
-              with <InlineCode>md</InlineCode> (default) or{" "}
-              <InlineCode>sm</InlineCode>. Each size adjusts padding and font
-              size.
-            </>
-          }
+          description="Two sizes: md (default) and sm. Each adjusts padding and font size."
         >
           <Tooltip>
             <TooltipTrigger asChild>
@@ -125,13 +308,7 @@ function OverviewTab() {
         <ComponentPreview
           id="with-shortcut"
           title="With Shortcut"
-          description={
-            <>
-              Compose with <InlineCode>TooltipShortcut</InlineCode> to
-              display a keyboard shortcut indicator alongside the tooltip
-              label.
-            </>
-          }
+          description="Displays a keyboard shortcut indicator alongside the tooltip label."
         >
           <Tooltip>
             <TooltipTrigger asChild>
@@ -171,12 +348,7 @@ function OverviewTab() {
         <ComponentPreview
           id="placement"
           title="Placement"
-          description={
-            <>
-              Use the <InlineCode>side</InlineCode> prop to control
-              placement. Radix auto-flips when space is constrained.
-            </>
-          }
+          description="Controls which side the tooltip appears on. Auto-flips when space is constrained."
         >
           <Tooltip>
             <TooltipTrigger asChild>
@@ -208,11 +380,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function TooltipPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -225,19 +405,19 @@ export default function TooltipPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Tooltip
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            The Tooltip component is a non-interactive overlay used to
-            display additional information when users hover over, focus on,
-            or interact with a UI element. Built on Radix UI for accessible
-            positioning, delay management, and keyboard support.
+            The Tooltip component provides additional context or descriptions
+            through a non-interactive overlay. It appears on hover or keyboard
+            focus, helping users understand interface elements without
+            cluttering the layout.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -277,6 +457,7 @@ export default function TooltipPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -418,16 +599,26 @@ export default function TooltipPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType="React.ComponentProps<TooltipPrimitive.Content>"
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

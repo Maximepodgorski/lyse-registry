@@ -11,13 +11,13 @@ import {
 import { Button } from "@/registry/new-york/ui/button/button"
 import { Copy, ExternalLink } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -29,6 +29,104 @@ const overviewSections: TocSection[] = [
   { id: "variants", label: "Variants" },
   { id: "textarea-field", label: "TextareaField" },
   { id: "disabled", label: "Disabled" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <Textarea
+          variant="destructive"
+          aria-invalid="true"
+          placeholder="Error state"
+          className="max-w-[280px]"
+        />
+      ),
+      description:
+        'Use variant="destructive" with aria-invalid="true" for error states.',
+    },
+    dont: {
+      preview: (
+        <Textarea
+          variant="destructive"
+          placeholder="Styled only"
+          className="max-w-[280px]"
+        />
+      ),
+      description:
+        "Don't use destructive variant for visual styling without communicating error to screen readers.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <TextareaField className="max-w-[280px]">
+          <TextareaLabel>Message</TextareaLabel>
+          <Textarea placeholder="Type your message here..." />
+        </TextareaField>
+      ),
+      description:
+        "Pair with a <label> element using matching id/htmlFor.",
+    },
+    dont: {
+      preview: (
+        <Textarea placeholder="Enter your message" className="max-w-[280px]" />
+      ),
+      description:
+        "Don't use placeholder as a replacement for a label.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Textarea size="md" placeholder="Medium" className="max-w-[280px]" />
+      ),
+      description:
+        "Use the size prop to match the form context.",
+    },
+    dont: {
+      preview: (
+        <Textarea placeholder="Forced height" className="max-w-[280px] min-h-[200px]" />
+      ),
+      description:
+        "Don't override min-height with arbitrary values via className.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <TextareaField className="max-w-[280px]">
+          <TextareaLabel required>Message</TextareaLabel>
+          <Textarea
+            variant="destructive"
+            aria-invalid="true"
+            aria-describedby="msg-error"
+            placeholder="Type your message..."
+          />
+          <TextareaHint variant="destructive" id="msg-error">
+            Message is required.
+          </TextareaHint>
+        </TextareaField>
+      ),
+      description:
+        "Add aria-describedby pointing to hint/error text for screen reader context.",
+    },
+    dont: {
+      preview: (
+        <Textarea
+          variant="destructive"
+          placeholder="Something went wrong"
+          className="max-w-[280px]"
+        />
+      ),
+      description:
+        "Don't rely only on color to communicate validation state.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -114,7 +212,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description="A basic textarea with placeholder text."
+        description="Basic textarea with placeholder text."
       >
         <Textarea placeholder="Type your message here..." className="max-w-[320px]" />
       </ComponentPreview>
@@ -122,12 +220,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop to control min-height,
-            padding, and font size.
-          </>
-        }
+        description="Controls min-height, padding, and font size."
       >
         <div className="flex flex-col gap-4">
           <Textarea size="sm" placeholder="Small" className="max-w-[320px]" />
@@ -139,12 +232,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use <InlineCode>variant</InlineCode> to change the border and focus
-            ring color for validation states.
-          </>
-        }
+        description="Border and focus ring color for validation states."
       >
         <div className="flex flex-col gap-4">
           <Textarea variant="default" placeholder="Default" className="max-w-[320px]" />
@@ -155,14 +243,7 @@ function OverviewTab() {
       <ComponentPreview
         id="textarea-field"
         title="TextareaField"
-        description={
-          <>
-            Compose <InlineCode>TextareaField</InlineCode>,{" "}
-            <InlineCode>TextareaLabel</InlineCode>, and{" "}
-            <InlineCode>TextareaHint</InlineCode> for a full form field with
-            label, textarea, and helper text.
-          </>
-        }
+        description="Full form field with label, textarea, and helper text."
       >
         <div className="flex flex-col gap-8 max-w-[320px]">
           <TextareaField>
@@ -188,7 +269,7 @@ function OverviewTab() {
       <ComponentPreview
         id="disabled"
         title="Disabled"
-        description="Disable the textarea to prevent interaction."
+        description="Prevents interaction with muted styling."
       >
         <div className="flex flex-col gap-4 max-w-[320px]">
           <Textarea disabled placeholder="Disabled textarea" />
@@ -203,11 +284,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function TextareaPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -218,18 +307,18 @@ export default function TextareaPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Textarea
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A multi-line text input for collecting longer form content. Compose
-            with TextareaField, TextareaLabel, and TextareaHint for full form
-            fields with labels, validation states, and helper text.
+            The Textarea component is a multi-line text field for capturing
+            longer form content like comments, descriptions, or messages. It
+            provides a resizable area with validation support.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -269,6 +358,7 @@ export default function TextareaPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -357,7 +447,7 @@ export default function TextareaPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-12">
               <div>
                 <h3
@@ -396,11 +486,21 @@ export default function TextareaPage() {
                 />
               </div>
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

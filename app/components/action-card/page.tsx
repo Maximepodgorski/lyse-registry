@@ -4,16 +4,16 @@ import { useState } from "react"
 import { ActionCard } from "@/registry/new-york/ui/action-card/action-card"
 import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Toggle } from "@/registry/new-york/ui/toggle/toggle"
-import { Copy, ExternalLink, Zap, Globe, Shield, Bell, Lock } from "lucide-react"
+import { Copy, ExternalLink, Zap, Globe, Shield, Bell, Lock, Settings } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -50,7 +50,117 @@ const overviewSections: TocSection[] = [
   { id: "with-label", label: "With Label" },
 ]
 
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
 
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <div className="w-full max-w-sm">
+          <ActionCard
+            icon={<Zap className="size-5" />}
+            title="Integrations"
+            description="Connect your tools."
+            action={<Button size="sm" variant="secondary">Connect</Button>}
+          />
+        </div>
+      ),
+      description:
+        "Use the action slot for interactive elements (Button, Toggle).",
+    },
+    dont: {
+      preview: (
+        <div className="w-full max-w-sm">
+          <ActionCard
+            icon={<Zap className="size-5" />}
+            title="Integrations"
+            description="Connect your tools."
+          />
+        </div>
+      ),
+      description:
+        "Don't hardcode a button inside the card with custom markup — use the action slot.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-full max-w-sm">
+          <ActionCard
+            icon={<Shield className="size-5" />}
+            title="Security"
+            description="Enable two-factor auth."
+            action={<Toggle size="sm" />}
+          />
+        </div>
+      ),
+      description:
+        'Keep title short (1 line) and use description for supporting context.',
+    },
+    dont: {
+      preview: (
+        <div className="w-full max-w-sm">
+          <ActionCard
+            icon={<Shield className="size-5" />}
+            title="Security settings and two-factor authentication configuration"
+            description="Security settings and two-factor authentication configuration"
+            action={<Toggle size="sm" />}
+          />
+        </div>
+      ),
+      description:
+        "Don't use multi-paragraph titles or duplicate the title content in description.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-full max-w-sm">
+          <ActionCard
+            icon={<Globe className="size-5" />}
+            title="API access"
+            description="Programmatic access to your workspace."
+            action={<Button size="sm" variant="secondary">Configure</Button>}
+          />
+        </div>
+      ),
+      description:
+        "Use logo for recognizable brand icons (integrations, features).",
+    },
+    dont: {
+      description:
+        "Don't use logo for decorative illustrations — it's meant for compact brand marks.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-full max-w-sm flex flex-col gap-3">
+          <ActionCard
+            icon={<Bell className="size-5" />}
+            title="Notifications"
+            description="Get notified on new activity."
+            action={<Toggle size="sm" />}
+          />
+          <ActionCard
+            icon={<Settings className="size-5" />}
+            title="Preferences"
+            description="Configure your workspace."
+            action={<Button size="sm" variant="secondary">Edit</Button>}
+          />
+        </div>
+      ),
+      description:
+        "Stack multiple ActionCards in a flex-col list.",
+    },
+    dont: {
+      description:
+        "Don't nest ActionCards inside each other.",
+    },
+  },
+]
 
 const propDefs: PropDef[] = [
   {
@@ -103,12 +213,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            The ActionCard displays an icon, title, description, and an
-            optional trailing action. All slots are optional.
-          </>
-        }
+        description="Displays an icon, title, description, and an optional trailing action."
       >
         <div className="w-full max-w-md flex flex-col gap-4">
           <ActionCard
@@ -129,12 +234,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-logo"
         title="With Logo"
-        description={
-          <>
-            Use the <InlineCode>logo</InlineCode> prop for brand logos.
-            Takes priority over <InlineCode>icon</InlineCode>.
-          </>
-        }
+        description="Use logo for brand icons. Takes priority over icon."
       >
         <div className="w-full max-w-md flex flex-col gap-4">
           <ActionCard
@@ -155,12 +255,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-toggle"
         title="With Toggle"
-        description={
-          <>
-            Pass a <InlineCode>Toggle</InlineCode> in the{" "}
-            <InlineCode>action</InlineCode> slot for settings-style rows.
-          </>
-        }
+        description="Pass a Toggle in the action slot for settings-style rows."
       >
         <div className="w-full max-w-md flex flex-col gap-4">
           <ActionCard
@@ -181,12 +276,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-label"
         title="With Label"
-        description={
-          <>
-            Use the <InlineCode>label</InlineCode> prop to display trailing
-            text instead of an action. Useful for status or metadata.
-          </>
-        }
+        description="Displays trailing text instead of an action. Useful for status or metadata."
       >
         <div className="w-full max-w-md flex flex-col gap-4">
           <ActionCard
@@ -207,11 +297,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function ActionCardPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -222,18 +320,19 @@ export default function ActionCardPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             ActionCard
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A horizontal card with logo, title, description, and a trailing
-            action slot. Ideal for settings rows, integration lists, or
-            onboarding prompts.
+            The ActionCard component is a horizontal card that pairs
+            descriptive content with a trailing action. It provides a clean
+            layout for settings rows, integration lists, or any item that
+            requires an inline action.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -273,6 +372,7 @@ export default function ActionCardPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -385,16 +485,18 @@ export default function ActionCardPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<"div">`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
     </>
   )
 }

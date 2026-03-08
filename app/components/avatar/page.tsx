@@ -11,13 +11,14 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -32,6 +33,133 @@ const overviewSections: TocSection[] = [
   { id: "avatar-label", label: "AvatarLabel" },
   { id: "avatar-group", label: "AvatarGroup" },
   { id: "add-button", label: "AvatarAddButton" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <Avatar
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
+          alt="Jane Doe"
+        />
+      ),
+      description:
+        "Provide alt on standalone avatars for screen reader context.",
+    },
+    dont: {
+      preview: <Avatar src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face" />,
+      description:
+        "Don't leave alt empty when the avatar is the only identifier for a user.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <AvatarLabel
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
+          name="Jane Doe"
+          description="Product Designer"
+          size="md"
+        />
+      ),
+      description:
+        "Use AvatarLabel when showing name + description alongside the avatar.",
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Avatar
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
+            alt="Jane"
+            size="sm"
+          />
+          <div className="flex flex-col">
+            <span className="text-content-caption">Jane Doe</span>
+            <span className="text-content-caption" style={{ color: "var(--text-base-moderate)" }}>Designer</span>
+          </div>
+        </div>
+      ),
+      description:
+        "Don't manually compose Avatar + text with custom flex layout.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <AvatarGroup size="sm" max={3}>
+          <Avatar initials="JD" alt="Jane" />
+          <Avatar initials="JS" alt="John" />
+          <Avatar initials="AB" alt="Alice" />
+          <Avatar initials="CD" alt="Charlie" />
+          <Avatar initials="EF" alt="Eve" />
+        </AvatarGroup>
+      ),
+      description:
+        "Use AvatarGroup with max to limit visible avatars in tight spaces.",
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center -space-x-2">
+          <Avatar initials="JD" alt="Jane" size="sm" />
+          <Avatar initials="JS" alt="John" size="sm" />
+          <Avatar initials="AB" alt="Alice" size="sm" />
+          <Avatar initials="CD" alt="Charlie" size="sm" />
+          <Avatar initials="EF" alt="Eve" size="sm" />
+          <Avatar initials="FG" alt="Frank" size="sm" />
+          <Avatar initials="GH" alt="Grace" size="sm" />
+        </div>
+      ),
+      description:
+        "Don't render 10+ avatars without overflow — use max to cap display.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <AvatarGroup size="sm">
+          <Avatar initials="JD" alt="Jane" />
+          <Avatar initials="JS" alt="John" />
+        </AvatarGroup>
+      ),
+      description:
+        "Use size on AvatarGroup to control all children uniformly.",
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Avatar initials="JD" alt="Jane" size="xs" />
+          <Avatar initials="JS" alt="John" size="md" />
+          <Avatar initials="AB" alt="Alice" size="sm" />
+        </div>
+      ),
+      description:
+        "Don't mix different size props on individual avatars inside a group.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Avatar
+          initials="AB"
+          alt="Company user"
+          status="company"
+          companySrc="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=40&h=40&fit=crop"
+        />
+      ),
+      description:
+        'Pass companySrc when using status="company".',
+    },
+    dont: {
+      preview: <Avatar initials="AB" alt="Company user" status="company" />,
+      description:
+        'Don\'t use status="company" without a logo URL — renders an empty circle.',
+    },
+  },
 ]
 
 const avatarPropDefs: PropDef[] = [
@@ -163,13 +291,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            A basic avatar with an image. Provide{" "}
-            <InlineCode>src</InlineCode> and <InlineCode>alt</InlineCode> for
-            the photo.
-          </>
-        }
+        description="Basic avatar with an image."
       >
         <div className="flex items-center gap-[var(--layout-gap-lg)]">
           <Avatar
@@ -190,14 +312,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>xs</InlineCode>, <InlineCode>sm</InlineCode>,{" "}
-            <InlineCode>md</InlineCode> (default),{" "}
-            <InlineCode>lg</InlineCode>, or <InlineCode>xl</InlineCode>.
-          </>
-        }
+        description="Five sizes: xs, sm, md (default), lg, and xl."
       >
         <div className="flex items-end gap-[var(--layout-gap-lg)]">
           <Avatar
@@ -231,13 +346,7 @@ function OverviewTab() {
       <ComponentPreview
         id="initials"
         title="Initials"
-        description={
-          <>
-            Use the <InlineCode>initials</InlineCode> prop to display 1–2
-            character initials when no image is available. Long strings are
-            truncated to 2 characters.
-          </>
-        }
+        description="Displays 1-2 character initials when no image is available."
       >
         <div className="flex items-center gap-[var(--layout-gap-lg)]">
           <Avatar initials="JD" alt="Jane Doe" />
@@ -249,13 +358,7 @@ function OverviewTab() {
       <ComponentPreview
         id="placeholder"
         title="Placeholder"
-        description={
-          <>
-            When no <InlineCode>src</InlineCode> or{" "}
-            <InlineCode>initials</InlineCode> are provided, a generic user icon
-            is shown as a placeholder.
-          </>
-        }
+        description="Shows a generic user icon when no src or initials are provided."
       >
         <div className="flex items-center gap-[var(--layout-gap-lg)]">
           <Avatar alt="Unknown user" />
@@ -265,15 +368,7 @@ function OverviewTab() {
       <ComponentPreview
         id="status"
         title="Status"
-        description={
-          <>
-            Use the <InlineCode>status</InlineCode> prop to show a presence
-            indicator at the bottom-right. Use{" "}
-            <InlineCode>companySrc</InlineCode> with{" "}
-            <InlineCode>status=&quot;company&quot;</InlineCode> for a company
-            logo badge.
-          </>
-        }
+        description="Presence indicator at bottom-right. Use companySrc for a company logo badge."
       >
         <div className="flex items-center gap-[var(--layout-gap-xl)]">
           <Avatar
@@ -306,13 +401,7 @@ function OverviewTab() {
       <ComponentPreview
         id="avatar-label"
         title="AvatarLabel"
-        description={
-          <>
-            <InlineCode>AvatarLabel</InlineCode> pairs an avatar with a name
-            and optional description. Use the <InlineCode>size</InlineCode>{" "}
-            prop to control the text scale.
-          </>
-        }
+        description="Pairs an avatar with a name and optional description."
       >
         <div className="flex flex-col gap-[var(--layout-gap-xl)]">
           <AvatarLabel
@@ -344,13 +433,7 @@ function OverviewTab() {
       <ComponentPreview
         id="avatar-group"
         title="AvatarGroup"
-        description={
-          <>
-            <InlineCode>AvatarGroup</InlineCode> stacks avatars with overlap.
-            Use <InlineCode>max</InlineCode> to limit visible avatars — the
-            rest appear as a &quot;+N&quot; overflow count.
-          </>
-        }
+        description="Stacks avatars with overlap. Use max to limit visible count."
       >
         <div className="flex flex-col gap-[var(--layout-gap-xl)]">
           <AvatarGroup size="xs" max={3}>
@@ -397,14 +480,7 @@ function OverviewTab() {
       <ComponentPreview
         id="add-button"
         title="AvatarAddButton"
-        description={
-          <>
-            A circular button with a plus icon. Can be used standalone or
-            inside <InlineCode>AvatarGroup</InlineCode>. Supports{" "}
-            <InlineCode>disabled</InlineCode> and{" "}
-            <InlineCode>asChild</InlineCode>.
-          </>
-        }
+        description="Circular button with a plus icon. Works standalone or inside AvatarGroup."
       >
         <div className="flex items-center gap-[var(--layout-gap-lg)]">
           <AvatarAddButton
@@ -417,11 +493,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function AvatarPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -432,18 +516,19 @@ export default function AvatarPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Avatar
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A compound component system for displaying user photos, initials, or
-            placeholders with optional status indicators, labels, grouping, and
-            an add action.
+            The Avatar component displays a user&apos;s profile picture,
+            initials, or placeholder in a recognizable format. It helps
+            personalize the interface and identify users across different parts
+            of the application.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -483,6 +568,7 @@ export default function AvatarPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -574,7 +660,7 @@ export default function AvatarPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-12">
               <div className="flex flex-col gap-4">
                 <h2
@@ -625,11 +711,21 @@ export default function AvatarPage() {
                 />
               </div>
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }

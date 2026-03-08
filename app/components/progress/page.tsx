@@ -8,13 +8,13 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
 
 /* ----------------------------------------------------------------
  * Data
@@ -26,6 +26,94 @@ const overviewSections: TocSection[] = [
   { id: "steps", label: "Steps" },
   { id: "label-position", label: "Label Position" },
   { id: "interactive", label: "Interactive" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <div className="w-full max-w-xs">
+          <ProgressIndicator value={60} labelPosition="right" />
+        </div>
+      ),
+      description:
+        'Use labelPosition="right" when horizontal space allows.',
+    },
+    dont: {
+      preview: (
+        <div style={{ width: "120px" }}>
+          <ProgressIndicator value={60} labelPosition="bottom" />
+        </div>
+      ),
+      description:
+        'Don\'t use labelPosition="bottom" in tight horizontal layouts.',
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-full max-w-xs">
+          <ProgressIndicator value={60} steps={5} />
+        </div>
+      ),
+      description:
+        "Use steps={5} (default) for general progress indicators.",
+    },
+    dont: {
+      preview: (
+        <div className="w-full max-w-xs">
+          <ProgressIndicator value={70} steps={15} />
+        </div>
+      ),
+      description:
+        "Don't use many steps (>10) — segments become too thin to read.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="flex flex-col gap-[var(--layout-gap-sm)] w-full max-w-xs">
+          <span className="text-content-caption font-accent" style={{ color: "var(--text-base-moderate)" }}>Profile setup</span>
+          <ProgressIndicator value={60} labelPosition="right" />
+        </div>
+      ),
+      description:
+        "Pair with a text label above for context.",
+    },
+    dont: {
+      preview: (
+        <div className="w-full max-w-xs">
+          <ProgressIndicator value={40} />
+        </div>
+      ),
+      description:
+        "Don't rely on the bar alone without surrounding context.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <div className="w-full max-w-xs">
+          <ProgressIndicator value={80} size="sm" labelPosition="right" />
+        </div>
+      ),
+      description:
+        'Use size="sm" for compact inline metrics.',
+    },
+    dont: {
+      preview: (
+        <div className="w-full max-w-xs">
+          <ProgressIndicator value={80} size="md" />
+        </div>
+      ),
+      description:
+        'Don\'t use size="md" inside dense data tables.',
+    },
+  },
 ]
 
 const indicatorPropDefs: PropDef[] = [
@@ -79,13 +167,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description={
-          <>
-            A segmented progress bar with discrete steps. Uses{" "}
-            <InlineCode>role=&quot;progressbar&quot;</InlineCode> with
-            proper ARIA attributes.
-          </>
-        }
+        description="A segmented progress bar with discrete steps and ARIA progressbar semantics."
       >
         <div className="w-full max-w-sm">
           <ProgressIndicator value={60} />
@@ -95,13 +177,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode> (4px) or{" "}
-            <InlineCode>md</InlineCode> (8px, default).
-          </>
-        }
+        description="Two heights: sm (4px) and md (8px, default)."
       >
         <div className="flex flex-col gap-[var(--layout-gap-2xl)] w-full max-w-sm">
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
@@ -128,13 +204,7 @@ function OverviewTab() {
       <ComponentPreview
         id="steps"
         title="Steps"
-        description={
-          <>
-            Use the <InlineCode>steps</InlineCode> prop to control the
-            number of discrete segments. Defaults to{" "}
-            <InlineCode>5</InlineCode>.
-          </>
-        }
+        description="Controls the number of discrete segments. Defaults to 5."
       >
         <div className="flex flex-col gap-[var(--layout-gap-2xl)] w-full max-w-sm">
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
@@ -170,13 +240,7 @@ function OverviewTab() {
       <ComponentPreview
         id="label-position"
         title="Label Position"
-        description={
-          <>
-            Use <InlineCode>labelPosition</InlineCode> to show the
-            percentage label to the <InlineCode>right</InlineCode> or{" "}
-            <InlineCode>bottom</InlineCode> of the bar.
-          </>
-        }
+        description="Shows the percentage label to the right or bottom of the bar."
       >
         <div className="flex flex-col gap-[var(--layout-gap-2xl)] w-full max-w-sm">
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
@@ -248,11 +312,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function ProgressPage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -263,18 +335,18 @@ export default function ProgressPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Progress
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            A segmented progress indicator that visualizes completion
-            with discrete steps. Supports sizes, label positions, and
-            custom step counts.
+            The Progress component visualizes task completion through a
+            segmented bar. It helps users understand how far along a process
+            is, providing clear feedback on multi-step workflows.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -314,6 +386,7 @@ export default function ProgressPage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -402,7 +475,7 @@ export default function ProgressPage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <div className="flex flex-col gap-4">
               <h2
                 className="text-heading-small font-accent"
@@ -412,11 +485,13 @@ export default function ProgressPage() {
               </h2>
               <PropsTable propDefs={indicatorPropDefs} />
             </div>
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
     </>
   )
 }

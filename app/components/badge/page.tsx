@@ -6,13 +6,14 @@ import { toast } from "@/registry/new-york/ui/toast/toast"
 import { Copy, ExternalLink } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
 import { ComponentPreview } from "@/app/_components/component-preview"
+import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
 import {
   TableOfContents,
   type TocSection,
 } from "@/app/_components/table-of-contents"
 import { CodeBlock } from "@/app/_components/code-block"
-import { InlineCode } from "@/app/_components/inline-code"
+
 
 /* ----------------------------------------------------------------
  * Data
@@ -24,6 +25,85 @@ const overviewSections: TocSection[] = [
   { id: "types", label: "Types" },
   { id: "filled", label: "Filled" },
   { id: "with-dot", label: "With Dot" },
+]
+
+const docSections: TocSection[] = [
+  { id: "dos-donts", label: "Do / Don't" },
+]
+
+const dosDontsItems: DosDontsItem[] = [
+  {
+    do: {
+      preview: (
+        <Badge variant="danger" isFilled>Critical</Badge>
+      ),
+      description:
+        "Use isFilled to highlight a critical or primary status.",
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Badge variant="brand" isFilled>Brand</Badge>
+          <Badge variant="neutral" isFilled>Neutral</Badge>
+          <Badge variant="success" isFilled>Success</Badge>
+        </div>
+      ),
+      description:
+        "Don't use isFilled on every badge — it loses meaning when overused.",
+    },
+  },
+  {
+    do: {
+      preview: <Badge variant="neutral" type="dash">Draft</Badge>,
+      description:
+        'Use type="dash" to signal a provisional or draft state.',
+    },
+    dont: {
+      preview: (
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <Badge type="dash">Active</Badge>
+          <Badge type="light">Pending</Badge>
+          <Badge type="fill">Draft</Badge>
+        </div>
+      ),
+      description:
+        "Don't mix type values across badges in the same list without intent.",
+    },
+  },
+  {
+    do: {
+      preview: (
+        <Badge variant="success">
+          <BadgeDot />
+          Active
+        </Badge>
+      ),
+      description:
+        "Use BadgeDot to reinforce status with a visual signal paired with a semantic variant.",
+    },
+    dont: {
+      preview: (
+        <Badge variant="neutral">
+          <BadgeDot />
+          Label
+        </Badge>
+      ),
+      description:
+        "Don't add a dot without pairing it with a status variant — a neutral dot conveys no meaning.",
+    },
+  },
+  {
+    do: {
+      preview: <Badge variant="success">Active</Badge>,
+      description:
+        "Keep badge text to 1\u20132 words for quick scanning.",
+    },
+    dont: {
+      preview: <Badge variant="success">This item is currently active and running</Badge>,
+      description:
+        "Don't put sentences or long phrases inside a badge.",
+    },
+  },
 ]
 
 const propDefs: PropDef[] = [
@@ -76,15 +156,7 @@ function OverviewTab() {
       <ComponentPreview
         id="variants"
         title="Variants"
-        description={
-          <>
-            Use the <InlineCode>variant</InlineCode> prop to change the
-            color. <InlineCode>brand</InlineCode> for branding,{" "}
-            <InlineCode>neutral</InlineCode> (default) for general use,{" "}
-            <InlineCode>success</InlineCode>, <InlineCode>danger</InlineCode>,
-            and <InlineCode>warning</InlineCode> for semantic states.
-          </>
-        }
+        description="Brand, neutral (default), success, danger, and warning for semantic states."
       >
         <Badge variant="brand">Brand</Badge>
         <Badge variant="neutral">Neutral</Badge>
@@ -96,14 +168,7 @@ function OverviewTab() {
       <ComponentPreview
         id="sizes"
         title="Sizes"
-        description={
-          <>
-            Use the <InlineCode>size</InlineCode> prop with{" "}
-            <InlineCode>sm</InlineCode>, <InlineCode>md</InlineCode>{" "}
-            (default), or <InlineCode>lg</InlineCode>. Each size adjusts
-            height, padding, gap, and font size.
-          </>
-        }
+        description="Three sizes from sm to lg. Each adjusts height, padding, gap, and font size."
       >
         <Badge size="sm">Small</Badge>
         <Badge size="md">Medium</Badge>
@@ -113,14 +178,7 @@ function OverviewTab() {
       <ComponentPreview
         id="types"
         title="Types"
-        description={
-          <>
-            Use the <InlineCode>type</InlineCode> prop to control the border
-            style. <InlineCode>fill</InlineCode> (default) has no border,{" "}
-            <InlineCode>light</InlineCode> adds a solid border, and{" "}
-            <InlineCode>dash</InlineCode> adds a dashed border.
-          </>
-        }
+        description="Fill (default) has no border, light adds a solid border, and dash adds a dashed border."
       >
         <Badge type="fill">Fill</Badge>
         <Badge type="light">Light</Badge>
@@ -130,13 +188,7 @@ function OverviewTab() {
       <ComponentPreview
         id="filled"
         title="Filled"
-        description={
-          <>
-            Use the <InlineCode>isFilled</InlineCode> prop for a strong
-            background with inverse text. Compare the default overlay style
-            (top row) with the filled variant (bottom row).
-          </>
-        }
+        description="Strong background with inverse text. Compare default overlay (top) with filled (bottom)."
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-center flex-wrap gap-4">
@@ -169,13 +221,7 @@ function OverviewTab() {
       <ComponentPreview
         id="with-dot"
         title="With Dot"
-        description={
-          <>
-            Compose with <InlineCode>BadgeDot</InlineCode> to add a status
-            indicator. The dot color matches the variant and scales with the
-            badge size.
-          </>
-        }
+        description="Adds a status indicator dot. Color matches the variant and scales with badge size."
       >
         <Badge variant="brand">
           <BadgeDot />
@@ -202,11 +248,19 @@ function OverviewTab() {
   )
 }
 
+function DocumentationTab() {
+  return (
+    <div className="flex flex-col gap-12">
+      <DosDonts id="dos-donts" items={dosDontsItems} />
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------
  * Page
  * ---------------------------------------------------------------- */
 
-type Tab = "overview" | "props"
+type Tab = "overview" | "props" | "documentation"
 
 export default function BadgePage() {
   const [tab, setTab] = useState<Tab>("overview")
@@ -219,19 +273,19 @@ export default function BadgePage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Badge
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            The Badge component is a compact label used to categorize, filter,
-            or display metadata. It supports five color variants, three
-            sizes, three border types (fill, light, dash), a filled state
-            for emphasis, and an optional dot indicator for status.
+            The Badge component is a compact visual indicator used to
+            communicate status, category, or count at a glance. It helps users
+            quickly identify the state of an item without reading full
+            descriptions.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button
@@ -271,6 +325,7 @@ export default function BadgePage() {
               [
                 { key: "overview" as Tab, label: "Overview" },
                 { key: "props" as Tab, label: "Props" },
+                { key: "documentation" as Tab, label: "Best practices" },
               ] as const
             ).map((t) => (
               <button
@@ -359,16 +414,26 @@ export default function BadgePage() {
           {/* Tab content */}
           {tab === "overview" ? (
             <OverviewTab />
-          ) : (
+          ) : tab === "props" ? (
             <PropsTable
               propDefs={propDefs}
               extendsType={`React.ComponentProps<"span">`}
             />
+          ) : (
+            <DocumentationTab />
           )}
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
+      <TableOfContents
+        sections={
+          tab === "overview"
+            ? overviewSections
+            : tab === "documentation"
+              ? docSections
+              : []
+        }
+      />
     </>
   )
 }
