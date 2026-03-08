@@ -1,6 +1,7 @@
 "use client"
 
 import { InlineCode } from "@/app/_components/inline-code"
+import { CodeBlock } from "@/app/_components/code-block"
 import {
   TableOfContents,
   type TocSection,
@@ -15,20 +16,58 @@ const sections: TocSection[] = [
   { id: "dark-mode", label: "Dark mode" },
 ]
 
-function CodeSnippet({ code }: { code: string }) {
-  return (
-    <pre
-      className="text-content-caption font-mono p-[var(--layout-padding-xl)] rounded-[var(--layout-radius-lg)] overflow-x-auto leading-relaxed"
-      style={{
-        background: "var(--background-neutral-faint-default)",
-        color: "var(--text-base-moderate)",
-        border: "var(--layout-border-thin) solid var(--border-default)",
-      }}
-    >
-      <code>{code}</code>
-    </pre>
-  )
+const architectureCode = `Layer 1: Primitives (root-*.css)
+  --root-color-brand-500, --root-space-4, --root-font-size-base
+         ↓
+Layer 2: Semantics (semantic-*.css)
+  --background-brand-strong-default, --text-base-strong
+         ↓
+Layer 3: Bridge (shadcn-bridge.css)
+  --primary, --foreground, --ring`
+
+const primitivesCode = `/* Examples */
+--root-color-brand-500: #6366f1;
+--root-space-4: 1rem;
+--root-font-size-base: 0.875rem;
+--root-radius-md: 8px;`
+
+const semanticsCode = `/* Light mode (:root) */
+--background-brand-strong-default: var(--root-color-brand-500);
+--text-base-strong: var(--root-color-neutral-900);
+
+/* Dark mode (.dark) */
+--background-brand-strong-default: var(--root-color-brand-400);
+--text-base-strong: var(--root-color-neutral-50);`
+
+const bridgeCode = `/* shadcn-bridge.css */
+--primary: var(--background-brand-strong-default);
+--foreground: var(--text-base-strong);
+--ring: var(--border-brand-default);
+--destructive: var(--background-danger-strong-default);`
+
+const usageCssCode = `/* button.css — Layer 2 tokens for theming */
+.button-primary {
+  background: var(--background-brand-strong-default);
+  color: var(--text-inverse);
 }
+.button-primary:hover {
+  background: var(--background-brand-strong-hover);
+}`
+
+const usageTsxCode = `{/* button.tsx — Layer 3 via Tailwind */}
+<button className="rounded-md bg-primary text-primary-foreground">
+  Click me
+</button>`
+
+const darkModeCode = `/* :root = light mode (default) */
+:root {
+  --text-base-strong: var(--root-color-neutral-900);
+}
+
+/* .dark = dark mode */
+.dark {
+  --text-base-strong: var(--root-color-neutral-50);
+}`
 
 export default function TokensPage() {
   return (
@@ -37,13 +76,13 @@ export default function TokensPage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="text-heading-large"
-            style={{ color: "var(--text-base-strong)" }}
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
           >
             Design Tokens
           </h1>
           <p
-            className="text-content-body"
+            className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
             Lyse UI uses a 3-layer token architecture built with CSS custom
@@ -67,15 +106,11 @@ export default function TokensPage() {
             Tokens flow through 3 layers. Each layer adds meaning and
             abstraction:
           </p>
-          <CodeSnippet
-            code={`Layer 1: Primitives (root-*.css)
-  --root-color-brand-500, --root-space-4, --root-font-size-base
-         ↓
-Layer 2: Semantics (semantic-*.css)
-  --background-brand-strong-default, --text-base-strong
-         ↓
-Layer 3: Bridge (shadcn-bridge.css)
-  --primary, --foreground, --ring`}
+          <CodeBlock
+            code={<>{architectureCode}</>}
+            codeString={architectureCode}
+            language="text"
+            defaultExpanded
           />
           <p
             className="text-content-body"
@@ -149,12 +184,12 @@ Layer 3: Bridge (shadcn-bridge.css)
               </span>
             </div>
           </div>
-          <CodeSnippet
-            code={`/* Examples */
---root-color-brand-500: #6366f1;
---root-space-4: 1rem;
---root-font-size-base: 0.875rem;
---root-radius-md: 8px;`}
+          <CodeBlock
+            code={<>{primitivesCode}</>}
+            codeString={primitivesCode}
+            language="css"
+            fileName="root-colors.css"
+            defaultExpanded
           />
         </section>
 
@@ -222,14 +257,12 @@ Layer 3: Bridge (shadcn-bridge.css)
               </span>
             </div>
           </div>
-          <CodeSnippet
-            code={`/* Light mode (:root) */
---background-brand-strong-default: var(--root-color-brand-500);
---text-base-strong: var(--root-color-neutral-900);
-
-/* Dark mode (.dark) */
---background-brand-strong-default: var(--root-color-brand-400);
---text-base-strong: var(--root-color-neutral-50);`}
+          <CodeBlock
+            code={<>{semanticsCode}</>}
+            codeString={semanticsCode}
+            language="css"
+            fileName="semantic-colors.css"
+            defaultExpanded
           />
         </section>
 
@@ -249,12 +282,12 @@ Layer 3: Bridge (shadcn-bridge.css)
             makes Lyse components compatible with the shadcn ecosystem and
             Tailwind utilities.
           </p>
-          <CodeSnippet
-            code={`/* shadcn-bridge.css */
---primary: var(--background-brand-strong-default);
---foreground: var(--text-base-strong);
---ring: var(--border-brand-default);
---destructive: var(--background-danger-strong-default);`}
+          <CodeBlock
+            code={<>{bridgeCode}</>}
+            codeString={bridgeCode}
+            language="css"
+            fileName="shadcn-bridge.css"
+            defaultExpanded
           />
           <p
             className="text-content-body"
@@ -284,21 +317,19 @@ Layer 3: Bridge (shadcn-bridge.css)
             Components use Layer 2 tokens in their CSS files for theming, and
             Layer 3 tokens via Tailwind utilities for layout:
           </p>
-          <CodeSnippet
-            code={`/* button.css — Layer 2 tokens for theming */
-.button-primary {
-  background: var(--background-brand-strong-default);
-  color: var(--text-inverse);
-}
-.button-primary:hover {
-  background: var(--background-brand-strong-hover);
-}`}
+          <CodeBlock
+            code={<>{usageCssCode}</>}
+            codeString={usageCssCode}
+            language="css"
+            fileName="button.css"
+            defaultExpanded
           />
-          <CodeSnippet
-            code={`{/* button.tsx — Layer 3 via Tailwind */}
-<button className="rounded-md bg-primary text-primary-foreground">
-  Click me
-</button>`}
+          <CodeBlock
+            code={<>{usageTsxCode}</>}
+            codeString={usageTsxCode}
+            language="tsx"
+            fileName="button.tsx"
+            defaultExpanded
           />
           <p
             className="text-content-body"
@@ -328,16 +359,12 @@ Layer 3: Bridge (shadcn-bridge.css)
             element. No component changes needed — the token layer handles
             everything.
           </p>
-          <CodeSnippet
-            code={`/* :root = light mode (default) */
-:root {
-  --text-base-strong: var(--root-color-neutral-900);
-}
-
-/* .dark = dark mode */
-.dark {
-  --text-base-strong: var(--root-color-neutral-50);
-}`}
+          <CodeBlock
+            code={<>{darkModeCode}</>}
+            codeString={darkModeCode}
+            language="css"
+            fileName="semantic-colors.css"
+            defaultExpanded
           />
         </section>
       </main>

@@ -1,61 +1,56 @@
 "use client"
 
-import { Copy } from "lucide-react"
-import { toast } from "@/registry/new-york/ui/toast/toast"
+import { CodeBlock } from "@/app/_components/code-block"
 
-function CopyButton({ text }: { text: string }) {
-  return (
-    <button
-      onClick={() => {
-        navigator.clipboard
-          .writeText(text)
-          .then(() => toast.success("Copied to clipboard"))
-          .catch(() => {})
-      }}
-      className="absolute top-3 right-3 p-1.5 rounded-[var(--layout-radius-sm)] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-      style={{
-        color: "var(--text-base-moderate)",
-        background: "var(--background-neutral-faint-default)",
-      }}
-      aria-label="Copy to clipboard"
-    >
-      <Copy className="size-3.5" />
-    </button>
-  )
-}
+const registryUrl = "https://lyse-registry.vercel.app/r"
 
-function CommandBlock({ command }: { command: string }) {
-  return (
-    <div className="relative group">
-      <pre
-        className="text-content-caption font-mono p-[var(--layout-padding-xl)] rounded-[var(--layout-radius-lg)] overflow-x-auto leading-relaxed"
-        style={{
-          background: "var(--background-neutral-faint-default)",
-          color: "var(--text-base-moderate)",
-          border: "var(--layout-border-thin) solid var(--border-default)",
-        }}
-      >
-        <code>{command}</code>
-      </pre>
-      <CopyButton text={command} />
-    </div>
-  )
-}
+const installCommand = `npx shadcn@latest add ${registryUrl}/button.json`
 
-const installCommand =
-  "npx shadcn@latest add https://lyse-registry.vercel.app/r/button.json"
+const allComponents = [
+  "button",
+  "badge",
+  "tag",
+  "tooltip",
+  "toast",
+  "menu",
+  "checkbox",
+  "radio",
+  "toggle",
+  "banner-info",
+  "avatar",
+  "dropdown-menu",
+  "select",
+  "input",
+  "textarea",
+  "modal",
+  "spinner",
+  "progress",
+  "action-card",
+  "spotlight-card",
+  "callout-card",
+  "chip",
+  "tabs",
+]
+
+const installAllCommand = `npx shadcn@latest add \\\n${allComponents.map((c) => `  ${registryUrl}/${c}.json`).join(" \\\n")}`
+
+const usageCode = `import { Button } from '@/components/ui/button'
+
+export default function App() {
+  return <Button>Click me</Button>
+}`
 
 export default function InstallationPage() {
   return (
     <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 max-w-none px-8 lg:px-16 xl:px-20">
       <h1
-        className="text-heading-large"
-        style={{ color: "var(--text-base-strong)" }}
+        className="font-bold"
+        style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
       >
         Installation
       </h1>
       <p
-        className="text-content-body leading-relaxed"
+        className="text-content-highlight"
         style={{ color: "var(--text-base-moderate)" }}
       >
         How to install components from the Lyse UI registry.
@@ -70,7 +65,13 @@ export default function InstallationPage() {
         and design tokens are resolved automatically.
       </p>
 
-      <CommandBlock command={installCommand} />
+      <CodeBlock
+        code={<>{installCommand}</>}
+        codeString={installCommand}
+        language="bash"
+        fileName="Terminal"
+        defaultExpanded
+      />
 
       <p
         className="text-content-body leading-relaxed"
@@ -85,7 +86,7 @@ export default function InstallationPage() {
             color: "var(--text-base-strong)",
           }}
         >
-          button
+          button.json
         </code>{" "}
         with any component name. See the full list on the{" "}
         <a
@@ -97,6 +98,28 @@ export default function InstallationPage() {
         </a>{" "}
         page.
       </p>
+
+      {/* Install all */}
+      <h2
+        className="text-heading-small mt-6"
+        style={{ color: "var(--text-base-strong)" }}
+      >
+        Install all components
+      </h2>
+      <p
+        className="text-content-body leading-relaxed"
+        style={{ color: "var(--text-base-moderate)" }}
+      >
+        To add every component at once, run the following command. Design tokens
+        and dependencies are resolved automatically.
+      </p>
+      <CodeBlock
+        code={<>{installAllCommand}</>}
+        codeString={installAllCommand}
+        language="bash"
+        fileName="Terminal"
+        defaultExpanded
+      />
 
       {/* Usage */}
       <h2
@@ -111,29 +134,13 @@ export default function InstallationPage() {
       >
         Import the component and use it in your app:
       </p>
-      <div className="relative group">
-        <pre
-          className="text-content-caption font-mono p-[var(--layout-padding-xl)] rounded-[var(--layout-radius-lg)] overflow-x-auto leading-relaxed"
-          style={{
-            background: "var(--background-neutral-faint-default)",
-            color: "var(--text-base-moderate)",
-            border: "var(--layout-border-thin) solid var(--border-default)",
-          }}
-        >
-          <code>{`import { Button } from '@/components/ui/button'
-
-export default function App() {
-  return <Button>Click me</Button>
-}`}</code>
-        </pre>
-        <CopyButton
-          text={`import { Button } from '@/components/ui/button'
-
-export default function App() {
-  return <Button>Click me</Button>
-}`}
-        />
-      </div>
+      <CodeBlock
+        code={<>{usageCode}</>}
+        codeString={usageCode}
+        language="tsx"
+        fileName="app.tsx"
+        defaultExpanded
+      />
     </main>
   )
 }
