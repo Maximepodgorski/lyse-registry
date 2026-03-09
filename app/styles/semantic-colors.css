@@ -321,7 +321,7 @@
   --background-danger-bolder-hover: var(--root-color-danger-700);
   --background-danger-bolder-pressed: var(--root-color-danger-700);
   --background-danger-faint-default: var(--root-color-danger-950);
-  --background-danger-faint-hover: var(--root-color-danger-900);
+  --background-danger-faint-hover: color-mix(in srgb, var(--root-color-danger-900) 50%, var(--root-color-danger-950));
   --background-danger-faint-pressed: var(--root-color-danger-800);
   --background-danger-lighter-default: var(--root-color-danger-900);
   --background-danger-lighter-hover: var(--root-color-danger-800);
