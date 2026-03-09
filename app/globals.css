@@ -34,6 +34,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Override font families with next/font optimized variables (doc site only) */
+:root {
+  --root-font-family-primary: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --root-font-family-secondary: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
 /* ================================================================
  * TAILWIND THEME
  * Registers tokens as Tailwind utilities.

@@ -3,7 +3,7 @@
   "name": "action-card",
   "type": "registry:ui",
   "registryDependencies": [
-    "lyse-tokens"
+    "https://ui.getlyse.com/r/lyse-tokens.json"
   ],
   "files": [
     {

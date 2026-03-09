@@ -8,7 +8,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "lyse-tokens"
+    "https://ui.getlyse.com/r/lyse-tokens.json"
   ],
   "files": [
     {

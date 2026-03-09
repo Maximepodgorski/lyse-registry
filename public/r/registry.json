@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "lyse",
-  "homepage": "https://lyse-registry.vercel.app",
+  "homepage": "https://ui.getlyse.com",
   "items": [
     {
       "name": "lyse-tokens",
@@ -53,7 +53,7 @@
         "class-variance-authority",
         "@radix-ui/react-slot"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/button/button.tsx",
@@ -71,7 +71,7 @@
       "dependencies": [
         "class-variance-authority"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/badge/badge.tsx",
@@ -89,7 +89,7 @@
       "dependencies": [
         "class-variance-authority"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/tag/tag.tsx",
@@ -108,7 +108,7 @@
         "class-variance-authority",
         "@radix-ui/react-tooltip"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/tooltip/tooltip.tsx",
@@ -127,7 +127,7 @@
         "class-variance-authority",
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/toast/toast.tsx",
@@ -146,7 +146,7 @@
         "class-variance-authority",
         "@radix-ui/react-slot"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/menu/menu.tsx",
@@ -166,7 +166,7 @@
         "@radix-ui/react-checkbox",
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/checkbox/checkbox.tsx",
@@ -185,7 +185,7 @@
         "class-variance-authority",
         "@radix-ui/react-radio-group"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/radio/radio.tsx",
@@ -204,7 +204,7 @@
         "class-variance-authority",
         "@radix-ui/react-switch"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/toggle/toggle.tsx",
@@ -223,7 +223,7 @@
         "class-variance-authority",
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/banner-info/banner-info.tsx",
@@ -243,7 +243,7 @@
         "@radix-ui/react-slot",
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/avatar/avatar.tsx",
@@ -262,7 +262,7 @@
         "class-variance-authority",
         "@radix-ui/react-dropdown-menu"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/dropdown-menu/dropdown-menu.tsx",
@@ -282,7 +282,7 @@
         "@radix-ui/react-select",
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/select/select.tsx",
@@ -300,7 +300,7 @@
       "dependencies": [
         "class-variance-authority"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/input/input.tsx",
@@ -318,7 +318,7 @@
       "dependencies": [
         "class-variance-authority"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/textarea/textarea.tsx",
@@ -338,7 +338,7 @@
         "@radix-ui/react-dialog",
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/modal/modal.tsx",
@@ -356,7 +356,7 @@
       "dependencies": [
         "class-variance-authority"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/spinner/spinner.tsx",
@@ -374,7 +374,7 @@
       "dependencies": [
         "class-variance-authority"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/progress/progress.tsx",
@@ -389,7 +389,7 @@
     {
       "name": "action-card",
       "type": "registry:ui",
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/action-card/action-card.tsx",
@@ -404,7 +404,7 @@
     {
       "name": "spotlight-card",
       "type": "registry:ui",
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/spotlight-card/spotlight-card.tsx",
@@ -422,7 +422,7 @@
       "dependencies": [
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/callout-card/callout-card.tsx",
@@ -441,7 +441,7 @@
         "class-variance-authority",
         "lucide-react"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/chip/chip.tsx",
@@ -460,7 +460,7 @@
         "class-variance-authority",
         "@radix-ui/react-tabs"
       ],
-      "registryDependencies": ["lyse-tokens"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
         {
           "path": "registry/new-york/ui/tabs/tabs.tsx",

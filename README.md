@@ -7,7 +7,7 @@ Production-ready React components built from the [Lyse Figma Design System](http
 ### 1. Install tokens (required)
 
 ```bash
-npx shadcn@latest add https://lyse-registry.vercel.app/r/lyse-tokens.json
+npx shadcn@latest add https://ui.getlyse.com/r/lyse-tokens.json
 ```
 
 Import all token files in your main CSS entry point (e.g. `globals.css`):
@@ -25,36 +25,36 @@ Import all token files in your main CSS entry point (e.g. `globals.css`):
 ### 2. Add components
 
 ```bash
-npx shadcn@latest add https://lyse-registry.vercel.app/r/button.json
+npx shadcn@latest add https://ui.getlyse.com/r/button.json
 ```
 
 ## Components
 
 | Component | Install |
 |-----------|---------|
-| Button | `npx shadcn@latest add https://lyse-registry.vercel.app/r/button.json` |
-| Badge | `npx shadcn@latest add https://lyse-registry.vercel.app/r/badge.json` |
-| Tag | `npx shadcn@latest add https://lyse-registry.vercel.app/r/tag.json` |
-| Tooltip | `npx shadcn@latest add https://lyse-registry.vercel.app/r/tooltip.json` |
-| Toast | `npx shadcn@latest add https://lyse-registry.vercel.app/r/toast.json` |
-| Menu | `npx shadcn@latest add https://lyse-registry.vercel.app/r/menu.json` |
-| Checkbox | `npx shadcn@latest add https://lyse-registry.vercel.app/r/checkbox.json` |
-| Radio | `npx shadcn@latest add https://lyse-registry.vercel.app/r/radio.json` |
-| Toggle | `npx shadcn@latest add https://lyse-registry.vercel.app/r/toggle.json` |
-| BannerInfo | `npx shadcn@latest add https://lyse-registry.vercel.app/r/banner-info.json` |
-| Avatar | `npx shadcn@latest add https://lyse-registry.vercel.app/r/avatar.json` |
-| DropdownMenu | `npx shadcn@latest add https://lyse-registry.vercel.app/r/dropdown-menu.json` |
-| Select | `npx shadcn@latest add https://lyse-registry.vercel.app/r/select.json` |
-| Input | `npx shadcn@latest add https://lyse-registry.vercel.app/r/input.json` |
-| Textarea | `npx shadcn@latest add https://lyse-registry.vercel.app/r/textarea.json` |
-| Modal | `npx shadcn@latest add https://lyse-registry.vercel.app/r/modal.json` |
-| Spinner | `npx shadcn@latest add https://lyse-registry.vercel.app/r/spinner.json` |
-| Progress | `npx shadcn@latest add https://lyse-registry.vercel.app/r/progress.json` |
-| ActionCard | `npx shadcn@latest add https://lyse-registry.vercel.app/r/action-card.json` |
-| SpotlightCard | `npx shadcn@latest add https://lyse-registry.vercel.app/r/spotlight-card.json` |
-| CalloutCard | `npx shadcn@latest add https://lyse-registry.vercel.app/r/callout-card.json` |
-| Chip | `npx shadcn@latest add https://lyse-registry.vercel.app/r/chip.json` |
-| Tabs | `npx shadcn@latest add https://lyse-registry.vercel.app/r/tabs.json` |
+| Button | `npx shadcn@latest add https://ui.getlyse.com/r/button.json` |
+| Badge | `npx shadcn@latest add https://ui.getlyse.com/r/badge.json` |
+| Tag | `npx shadcn@latest add https://ui.getlyse.com/r/tag.json` |
+| Tooltip | `npx shadcn@latest add https://ui.getlyse.com/r/tooltip.json` |
+| Toast | `npx shadcn@latest add https://ui.getlyse.com/r/toast.json` |
+| Menu | `npx shadcn@latest add https://ui.getlyse.com/r/menu.json` |
+| Checkbox | `npx shadcn@latest add https://ui.getlyse.com/r/checkbox.json` |
+| Radio | `npx shadcn@latest add https://ui.getlyse.com/r/radio.json` |
+| Toggle | `npx shadcn@latest add https://ui.getlyse.com/r/toggle.json` |
+| BannerInfo | `npx shadcn@latest add https://ui.getlyse.com/r/banner-info.json` |
+| Avatar | `npx shadcn@latest add https://ui.getlyse.com/r/avatar.json` |
+| DropdownMenu | `npx shadcn@latest add https://ui.getlyse.com/r/dropdown-menu.json` |
+| Select | `npx shadcn@latest add https://ui.getlyse.com/r/select.json` |
+| Input | `npx shadcn@latest add https://ui.getlyse.com/r/input.json` |
+| Textarea | `npx shadcn@latest add https://ui.getlyse.com/r/textarea.json` |
+| Modal | `npx shadcn@latest add https://ui.getlyse.com/r/modal.json` |
+| Spinner | `npx shadcn@latest add https://ui.getlyse.com/r/spinner.json` |
+| Progress | `npx shadcn@latest add https://ui.getlyse.com/r/progress.json` |
+| ActionCard | `npx shadcn@latest add https://ui.getlyse.com/r/action-card.json` |
+| SpotlightCard | `npx shadcn@latest add https://ui.getlyse.com/r/spotlight-card.json` |
+| CalloutCard | `npx shadcn@latest add https://ui.getlyse.com/r/callout-card.json` |
+| Chip | `npx shadcn@latest add https://ui.getlyse.com/r/chip.json` |
+| Tabs | `npx shadcn@latest add https://ui.getlyse.com/r/tabs.json` |
 
 ## Requirements
 

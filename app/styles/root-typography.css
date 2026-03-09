@@ -55,7 +55,7 @@
   --root-font-weight-800: 800;
   --root-font-weight-900: 900;
 
-  /* Font Family (injected by next/font/google) */
-  --root-font-family-primary: var(--font-dm-sans);
-  --root-font-family-secondary: var(--font-inter);
+  /* Font Family */
+  --root-font-family-primary: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --root-font-family-secondary: "Inter", ui-sans-serif, system-ui, sans-serif;
 }

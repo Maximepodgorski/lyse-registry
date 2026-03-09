@@ -7,7 +7,7 @@
     "@radix-ui/react-tooltip"
   ],
   "registryDependencies": [
-    "lyse-tokens"
+    "https://ui.getlyse.com/r/lyse-tokens.json"
   ],
   "files": [
     {

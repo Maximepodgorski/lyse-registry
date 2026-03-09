@@ -2,7 +2,7 @@
 
 import { CodeBlock } from "@/app/_components/code-block"
 
-const registryUrl = "https://lyse-registry.vercel.app/r"
+const registryUrl = "https://ui.getlyse.com/r"
 
 const installCommand = `npx shadcn@latest add ${registryUrl}/button.json`
 

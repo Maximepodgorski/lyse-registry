@@ -274,7 +274,7 @@ export default function CalloutCardPage() {
               size="sm"
               onClick={() => {
                 navigator.clipboard
-                  .writeText("npx shadcn@latest add https://lyse-registry.vercel.app/r/callout-card.json")
+                  .writeText("npx shadcn@latest add https://ui.getlyse.com/r/callout-card.json")
                   .then(() => toast.success("Copied to clipboard"))
                   .catch(() => {})
               }}
@@ -283,7 +283,7 @@ export default function CalloutCardPage() {
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
-                href="https://v0.dev"
+                href="https://v0.app/chat?q=add%20component%20from%20https%3A%2F%2Fui.getlyse.com%2Fr%2Fcallout-card.json"
                 target="_blank"
                 rel="noopener noreferrer"
               >
