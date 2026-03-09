@@ -4,6 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import { Check, ChevronDown, ChevronUp, Copy, FileCode } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
+import { getHighlighter } from "@/lib/shiki"
 
 export function CodeBlock({
   preview,
@@ -14,7 +15,7 @@ export function CodeBlock({
   defaultExpanded = false,
 }: {
   preview?: React.ReactNode
-  code: React.ReactNode
+  code?: React.ReactNode
   codeString?: string
   language?: string
   fileName?: string
@@ -23,6 +24,7 @@ export function CodeBlock({
   const [copied, setCopied] = useState(false)
   const [collapsed, setCollapsed] = useState(!defaultExpanded)
   const [lineCount, setLineCount] = useState(0)
+  const [highlightedCode, setHighlightedCode] = useState<React.ReactNode>(null)
   const codeRef = React.useRef<HTMLElement>(null)
   const copyTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null)
 
@@ -41,13 +43,41 @@ export function CodeBlock({
     }
   }, [])
 
+  /* Syntax highlight via Shiki */
+  React.useEffect(() => {
+    if (!codeString || language === "text") return
+    let cancelled = false
+    getHighlighter().then((hl) => {
+      if (cancelled) return
+      const lines = hl.codeToTokensBase(codeString, {
+        lang: language as "tsx" | "css" | "bash",
+        theme: "lyse",
+      })
+      const jsx = lines.map((line, i) => (
+        <React.Fragment key={i}>
+          {line.map((token, j) => (
+            <span key={j} style={token.color ? { color: token.color } : undefined}>
+              {token.content}
+            </span>
+          ))}
+          {i < lines.length - 1 ? "\n" : ""}
+        </React.Fragment>
+      ))
+      setHighlightedCode(jsx)
+    }).catch(() => {})
+    return () => { cancelled = true }
+  }, [codeString, language])
+
+  /* Determine what to render */
+  const renderedCode = highlightedCode ?? code ?? codeString
+
   /* Count lines from rendered code for line numbers */
   React.useLayoutEffect(() => {
     if (!collapsed && codeRef.current) {
       const text = codeRef.current.textContent ?? ""
       setLineCount(text.split("\n").length)
     }
-  }, [code, collapsed])
+  }, [renderedCode, collapsed])
 
   return (
     <div
@@ -142,7 +172,7 @@ export function CodeBlock({
                 lineHeight: "1.75",
               }}
             >
-              <code ref={codeRef}>{code}</code>
+              <code ref={codeRef}>{renderedCode}</code>
             </pre>
           </div>
         </div>

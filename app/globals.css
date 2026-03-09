@@ -40,6 +40,26 @@
   --root-font-family-secondary: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Shiki syntax highlighting tokens */
+:root {
+  --shiki-foreground: var(--text-base-moderate);
+  --shiki-background: transparent;
+  --shiki-token-keyword: var(--root-color-brand-600);
+  --shiki-token-string: var(--root-color-warning-600);
+  --shiki-token-comment: var(--text-base-medium);
+  --shiki-token-constant: var(--root-color-danger-600);
+  --shiki-token-function: var(--root-color-success-700);
+  --shiki-token-parameter: var(--text-base-moderate);
+  --shiki-token-punctuation: var(--text-base-moderate);
+  --shiki-token-link: var(--text-brand-moderate);
+}
+.dark {
+  --shiki-token-keyword: var(--root-color-brand-400);
+  --shiki-token-string: var(--root-color-warning-400);
+  --shiki-token-constant: var(--root-color-danger-400);
+  --shiki-token-function: var(--root-color-success-400);
+}
+
 /* ================================================================
  * TAILWIND THEME
  * Registers tokens as Tailwind utilities.
