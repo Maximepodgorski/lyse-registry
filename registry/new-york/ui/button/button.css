@@ -61,7 +61,7 @@
   color: var(--text-danger-moderate);
 }
 .btn-destructive:hover {
-  background: var(--background-danger-faint-hover);
+  background: color-mix(in srgb, var(--background-danger-faint-hover) 50%, transparent);
 }
 .btn-destructive:active {
   background: var(--background-danger-faint-pressed);
