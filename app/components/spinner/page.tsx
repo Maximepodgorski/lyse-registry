@@ -19,6 +19,12 @@ import { CodeBlock } from "@/app/_components/code-block"
  * Data
  * ---------------------------------------------------------------- */
 
+const importCode = `import { Spinner } from '@/components/ui/spinner'
+
+export default function Example() {
+  return <Spinner />
+}`
+
 const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "sizes", label: "Sizes" },
@@ -308,41 +314,8 @@ export default function SpinnerPage() {
               preview={
                 <Spinner />
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Spinner
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/spinner'`}</span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Spinner
-                  </span>
-                  {" />\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

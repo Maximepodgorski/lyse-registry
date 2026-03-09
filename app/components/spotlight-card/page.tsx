@@ -18,6 +18,12 @@ import { CodeBlock } from "@/app/_components/code-block"
  * Data
  * ---------------------------------------------------------------- */
 
+const importCode = `import { SpotlightCard } from '@/components/ui/spotlight-card'
+
+export default function Example() {
+  return <SpotlightCard title="Slack integration" description="Turn conversations into tasks." />
+}`
+
 const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "with-image", label: "With Image" },
@@ -140,7 +146,7 @@ const propDefs: PropDef[] = [
     name: "image",
     type: ["ReactNode"],
     description:
-      "Image slot. Falls back to a gradient placeholder if not provided.",
+      "Image slot. Falls back to a neutral dark placeholder if not provided.",
   },
   {
     name: "className",
@@ -159,7 +165,7 @@ function OverviewTab() {
       <ComponentPreview
         id="default"
         title="Default"
-        description="Displays a prominent image area above a title and description. Falls back to a gradient without an image."
+        description="Displays a prominent image area above a title and description. Falls back to a neutral dark background without an image."
       >
         <div className="w-[16rem] h-64">
           <SpotlightCard
@@ -181,12 +187,10 @@ function OverviewTab() {
             description="Recap what shipped this week."
             className="h-full"
             image={
-              <div
-                className="w-full h-full"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--background-brand-faint-default), var(--background-brand-lighter-default))",
-                }}
+              <img
+                src="/ascii-background.png"
+                alt="ASCII art background"
+                className="w-full h-full object-cover"
               />
             }
           />
@@ -329,49 +333,8 @@ export default function SpotlightCardPage() {
                   />
                 </div>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    SpotlightCard
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/spotlight-card'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>{" "}
-                  {"<"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    SpotlightCard
-                  </span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    title
-                  </span>
-                  {`="Slack integration" `}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    description
-                  </span>
-                  {`="Turn conversations into tasks." />\n`}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

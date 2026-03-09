@@ -257,6 +257,19 @@ function DocumentationTab() {
  * Page
  * ---------------------------------------------------------------- */
 
+const importCode = `import { toast, Toaster } from '@/components/ui/toast'
+
+export default function Example() {
+  return (
+    <>
+      <Toaster />
+      <button onClick={() => toast.success('Saved!')}>
+        Save
+      </button>
+    </>
+  )
+}`
+
 type Tab = "overview" | "props" | "documentation"
 
 export default function ToastPage() {
@@ -355,88 +368,8 @@ export default function ToastPage() {
                   Saved
                 </Toast>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    toast
-                  </span>
-                  {", "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Toaster
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/toast'`}</span>
-                  {"\n\n"}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    export default
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    function
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    return
-                  </span>
-                  {" (\n    <>\n      <"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Toaster
-                  </span>
-                  {" />\n      <"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    button
-                  </span>
-                  {" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    onClick
-                  </span>
-                  {"={() => "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    toast
-                  </span>
-                  {".success("}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >
-                    {`'Saved!'`}
-                  </span>
-                  {")}>\n        Save\n      </"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    button
-                  </span>
-                  {">\n    </>\n  )\n}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

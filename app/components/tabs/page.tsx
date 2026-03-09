@@ -22,6 +22,15 @@ import { CodeBlock } from "@/app/_components/code-block"
  * Data
  * ---------------------------------------------------------------- */
 
+const importCode = `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+
+<Tabs defaultValue="tab1">
+  <TabsList>
+    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+  </TabsList>
+</Tabs>`
+
 const overviewSections: TocSection[] = [
   { id: "underline", label: "Underline" },
   { id: "pill", label: "Pill" },
@@ -381,65 +390,8 @@ export default function TabsPage() {
                   </TabsList>
                 </Tabs>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Tabs, TabsList, TabsTrigger, TabsContent
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/tabs'`}</span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    {"<"}
-                  </span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Tabs
-                  </span>
-                  {' defaultValue="tab1">\n  '}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    {"<"}
-                  </span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    TabsList
-                  </span>
-                  {">\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    {"<"}
-                  </span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    TabsTrigger
-                  </span>
-                  {' value="tab1">Tab 1</'}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    TabsTrigger
-                  </span>
-                  {">\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    {"<"}
-                  </span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    TabsTrigger
-                  </span>
-                  {' value="tab2">Tab 2</'}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    TabsTrigger
-                  </span>
-                  {">\n  </"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    TabsList
-                  </span>
-                  {">\n</"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Tabs
-                  </span>
-                  {">"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

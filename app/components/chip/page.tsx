@@ -24,6 +24,12 @@ import { CodeBlock } from "@/app/_components/code-block"
  * Data
  * ---------------------------------------------------------------- */
 
+const importCode = `import { Chip } from '@/components/ui/chip'
+
+export default function Example() {
+  return <Chip hasDropdown>Label</Chip>
+}`
+
 const overviewSections: TocSection[] = [
   { id: "variants", label: "Variants" },
   { id: "with-icon", label: "With Icon" },
@@ -348,67 +354,8 @@ export default function ChipPage() {
                   Label
                 </Chip>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Chip
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/chip'`}</span>
-                  {"\n\n"}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    export default
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    function
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    return
-                  </span>{" "}
-                  {"<"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Chip
-                  </span>
-                  {" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    hasDropdown
-                  </span>
-                  {">"}
-                  Label
-                  {"</"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Chip
-                  </span>
-                  {">\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

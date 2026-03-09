@@ -392,6 +392,19 @@ function DocumentationTab() {
  * Page
  * ---------------------------------------------------------------- */
 
+const importCode = `import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+
+export default function Example() {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>Hover me</TooltipTrigger>
+        <TooltipContent>Tooltip</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+}`
+
 type Tab = "overview" | "props" | "documentation"
 
 export default function TooltipPage() {
@@ -497,102 +510,8 @@ export default function TooltipPage() {
                   </Tooltip>
                 </TooltipProvider>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Tooltip, TooltipContent, TooltipProvider, TooltipTrigger
-                  </span>
-                  {" }\n"}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/tooltip'`}</span>
-                  {"\n\n"}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    export default
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    function
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    return
-                  </span>
-                  {" (\n"}
-                  {"    <"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    TooltipProvider
-                  </span>
-                  {">\n"}
-                  {"      <"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Tooltip
-                  </span>
-                  {">\n"}
-                  {"        <"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    TooltipTrigger
-                  </span>
-                  {">Hover me</"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    TooltipTrigger
-                  </span>
-                  {">\n"}
-                  {"        <"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    TooltipContent
-                  </span>
-                  {">Tooltip</"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    TooltipContent
-                  </span>
-                  {">\n"}
-                  {"      </"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Tooltip
-                  </span>
-                  {">\n"}
-                  {"    </"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    TooltipProvider
-                  </span>
-                  {">\n"}
-                  {"  )\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

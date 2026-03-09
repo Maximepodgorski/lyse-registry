@@ -20,6 +20,12 @@ import { CodeBlock } from "@/app/_components/code-block"
  * Data
  * ---------------------------------------------------------------- */
 
+const importCode = `import { ProgressIndicator } from '@/components/ui/progress'
+
+export default function Example() {
+  return <ProgressIndicator value={60} labelPosition="right" />
+}`
+
 const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "sizes", label: "Sizes" },
@@ -418,57 +424,8 @@ export default function ProgressPage() {
                   <ProgressIndicator value={60} labelPosition="right" />
                 </div>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    ProgressIndicator
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/progress'`}</span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    ProgressIndicator
-                  </span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>
-                    value
-                  </span>
-                  {"={"}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    60
-                  </span>
-                  {"} "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>
-                    labelPosition
-                  </span>
-                  {"="}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {'"right"'}
-                  </span>
-                  {" />\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

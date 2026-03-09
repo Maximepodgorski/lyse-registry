@@ -281,6 +281,18 @@ const avatarAddButtonPropDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import { Avatar } from '@/components/ui/avatar'
+
+export default function Example() {
+  return (
+    <>
+      <Avatar src="/photo.jpg" alt="Jane Doe" />
+      <Avatar initials="JS" alt="John Smith" />
+      <Avatar alt="Unknown" />
+    </>
+  )
+}`
+
 /* ----------------------------------------------------------------
  * Tabs
  * ---------------------------------------------------------------- */
@@ -605,55 +617,8 @@ export default function AvatarPage() {
                   <Avatar alt="Unknown" />
                 </div>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Avatar
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/avatar'`}</span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" (\n"}
-                  {"    <>\n"}
-                  {"      <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Avatar
-                  </span>
-                  {' src="/photo.jpg" alt="Jane Doe" />\n'}
-                  {"      <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Avatar
-                  </span>
-                  {' initials="JS" alt="John Smith" />\n'}
-                  {"      <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Avatar
-                  </span>
-                  {' alt="Unknown" />\n'}
-                  {"    </>\n"}
-                  {"  )\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

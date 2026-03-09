@@ -15,7 +15,6 @@ import {
   Mail,
   HelpCircle,
   AlertCircle,
-  CheckCircle2,
   Search,
   Lock,
   Eye,
@@ -50,7 +49,7 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <InputField className="max-w-[280px]">
+        <InputField className="w-[420px]">
           <InputLabel required>Email</InputLabel>
           <Input
             variant="destructive"
@@ -68,7 +67,7 @@ const dosDontsItems: DosDontsItem[] = [
     },
     dont: {
       preview: (
-        <InputField className="max-w-[280px]">
+        <InputField className="w-[420px]">
           <InputLabel required>Email</InputLabel>
           <Input
             variant="destructive"
@@ -88,14 +87,14 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <Input leading={<Mail />} placeholder="Email address" className="max-w-[280px]" />
+        <Input leading={<Mail />} placeholder="Email address" className="w-[420px]" />
       ),
       description:
         "Use leading for contextual icons (Mail, Search, Lock).",
     },
     dont: {
       preview: (
-        <Input leading={<Button variant="terciary" size="xs">Go</Button>} placeholder="Email address" className="max-w-[280px]" />
+        <Input leading={<Button variant="terciary" size="xs">Go</Button>} placeholder="Email address" className="w-[420px]" />
       ),
       description:
         "Don't put interactive elements (buttons) in leading — use trailing or external layout.",
@@ -104,7 +103,7 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <InputField className="max-w-[280px]">
+        <InputField className="w-[420px]">
           <InputLabel required>Email</InputLabel>
           <Input leading={<Mail />} placeholder="registry@getlyse.com" />
           <InputHint>We&apos;ll never share your email.</InputHint>
@@ -115,7 +114,7 @@ const dosDontsItems: DosDontsItem[] = [
     },
     dont: {
       preview: (
-        <div className="flex flex-col gap-1 max-w-[280px]">
+        <div className="flex flex-col gap-1 w-[420px]">
           <InputLabel required>Email</InputLabel>
           <div className="mt-3" />
           <Input leading={<Mail />} placeholder="registry@getlyse.com" />
@@ -130,14 +129,14 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <Input size="lg" placeholder="Search..." leading={<Search />} className="max-w-[280px]" />
+        <Input size="lg" placeholder="Search..." leading={<Search />} className="w-[420px]" />
       ),
       description:
         'Use size="lg" for prominent, standalone inputs.',
     },
     dont: {
       preview: (
-        <div className="flex flex-col gap-3 max-w-[280px]">
+        <div className="flex flex-col gap-3 w-[420px]">
           <Input size="sm" placeholder="Name" leading={<Search />} />
           <Input size="lg" placeholder="Email" leading={<Mail />} />
         </div>
@@ -151,7 +150,7 @@ const dosDontsItems: DosDontsItem[] = [
 const inputPropDefs: PropDef[] = [
   {
     name: "variant",
-    type: ["default", "destructive", "success"],
+    type: ["default", "destructive"],
     default: "default",
     description:
       "Visual variant. Controls border and focus ring color.",
@@ -208,10 +207,10 @@ const labelPropDefs: PropDef[] = [
 const hintPropDefs: PropDef[] = [
   {
     name: "variant",
-    type: ["default", "destructive", "success"],
+    type: ["default", "destructive"],
     default: "default",
     description:
-      "Text color. Use destructive for error messages, success for confirmation.",
+      "Text color. Use destructive for error messages.",
   },
   {
     name: "children",
@@ -226,6 +225,20 @@ const hintPropDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import {
+  Input, InputField,
+  InputLabel, InputHint
+} from '@/components/ui/input'
+
+<InputField>
+  <InputLabel required>Email</InputLabel>
+  <Input
+    leading={<Mail />}
+    placeholder="Enter email"
+  />
+  <InputHint>Helper text</InputHint>
+</InputField>`
+
 /* ----------------------------------------------------------------
  * Tabs
  * ---------------------------------------------------------------- */
@@ -238,7 +251,7 @@ function OverviewTab() {
         title="Default"
         description="Basic text input with placeholder."
       >
-        <Input placeholder="Enter your email" className="max-w-[320px]" />
+        <Input placeholder="Enter your email" className="w-[420px]" />
       </ComponentPreview>
 
       <ComponentPreview
@@ -246,7 +259,7 @@ function OverviewTab() {
         title="Sizes"
         description="Controls input height."
       >
-        <div className="flex flex-col gap-4 max-w-[320px]">
+        <div className="flex flex-col gap-4 w-[420px]">
           <Input size="sm" placeholder="Small" />
           <Input size="md" placeholder="Medium (default)" />
           <Input size="lg" placeholder="Large" />
@@ -258,10 +271,9 @@ function OverviewTab() {
         title="Variants"
         description="Border and focus ring color for validation states."
       >
-        <div className="flex flex-col gap-4 max-w-[320px]">
+        <div className="flex flex-col gap-4 w-[420px]">
           <Input variant="default" placeholder="Default" />
           <Input variant="destructive" placeholder="Destructive" />
-          <Input variant="success" placeholder="Success" />
         </div>
       </ComponentPreview>
 
@@ -270,7 +282,7 @@ function OverviewTab() {
         title="With Icons"
         description="Add content before or after the input."
       >
-        <div className="flex flex-col gap-4 max-w-[320px]">
+        <div className="flex flex-col gap-4 w-[420px]">
           <Input
             leading={<Mail />}
             trailing={<HelpCircle />}
@@ -292,12 +304,6 @@ function OverviewTab() {
             trailing={<AlertCircle />}
             placeholder="Invalid email"
           />
-          <Input
-            variant="success"
-            leading={<Mail />}
-            trailing={<CheckCircle2 />}
-            placeholder="Valid email"
-          />
         </div>
       </ComponentPreview>
 
@@ -306,7 +312,7 @@ function OverviewTab() {
         title="InputField"
         description="Full form field with label, input, and helper text."
       >
-        <div className="flex flex-col gap-8 max-w-[320px]">
+        <div className="flex flex-col gap-8 w-[420px]">
           <InputField>
             <InputLabel required>Email</InputLabel>
             <Input
@@ -330,18 +336,6 @@ function OverviewTab() {
             </InputHint>
           </InputField>
 
-          <InputField>
-            <InputLabel required>Email</InputLabel>
-            <Input
-              variant="success"
-              leading={<Mail />}
-              trailing={<CheckCircle2 />}
-              placeholder="registry@getlyse.com"
-            />
-            <InputHint variant="success">
-              Email address verified.
-            </InputHint>
-          </InputField>
         </div>
       </ComponentPreview>
 
@@ -350,7 +344,7 @@ function OverviewTab() {
         title="Disabled"
         description="Prevents interaction with muted styling."
       >
-        <div className="flex flex-col gap-4 max-w-[320px]">
+        <div className="flex flex-col gap-4 w-[420px]">
           <Input
             disabled
             leading={<Mail />}
@@ -475,7 +469,7 @@ export default function InputPage() {
           {tab === "overview" && (
             <CodeBlock
               preview={
-                <InputField className="max-w-[320px]">
+                <InputField className="w-[420px]">
                   <InputLabel required>Email</InputLabel>
                   <Input
                     leading={<Mail />}
@@ -485,62 +479,8 @@ export default function InputPage() {
                   <InputHint>We&apos;ll never share your email.</InputHint>
                 </InputField>
               }
-              code={
-                <>
-                  <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Input, InputField,{"\n"}
-                    {"  "}InputLabel, InputHint
-                  </span>
-                  {" } "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/input'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>InputField</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>InputLabel</span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>required</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"Email"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>InputLabel</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Input</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>leading</span>
-                  {"={"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Mail</span>
-                  {" />"}
-                  {"}"}
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>placeholder</span>
-                  {"="}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>{`"Enter email"`}</span>
-                  {"\n  />"}
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>InputHint</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"Helper text"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>InputHint</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>InputField</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

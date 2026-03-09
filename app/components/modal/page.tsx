@@ -244,6 +244,28 @@ const closePropDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import {
+  Modal, ModalTrigger,
+  ModalContent, ModalBody,
+  ModalTitle, ModalDescription,
+  ModalFooter, ModalClose, ModalIcon
+} from '@/components/ui/modal'
+
+<Modal>
+  <ModalTrigger asChild>
+    ...
+  </ModalTrigger>
+  <ModalContent>
+    <ModalBody>
+      <ModalIcon variant="brand">...</ModalIcon>
+      <ModalTitle>...</ModalTitle>
+    </ModalBody>
+    <ModalFooter>
+      ...buttons
+    </ModalFooter>
+  </ModalContent>
+</Modal>`
+
 /* ----------------------------------------------------------------
  * Helper: confirmation modal pattern
  * ---------------------------------------------------------------- */
@@ -671,89 +693,8 @@ export default function ModalPage() {
                   </ModalContent>
                 </Modal>
               }
-              code={
-                <>
-                  <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Modal, ModalTrigger,{"\n"}
-                    {"  "}ModalContent, ModalBody,{"\n"}
-                    {"  "}ModalTitle, ModalDescription,{"\n"}
-                    {"  "}ModalFooter, ModalClose, ModalIcon
-                  </span>
-                  {" } "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/modal'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Modal</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalTrigger</span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>asChild</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  {"..."}
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalTrigger</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalContent</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalBody</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n      "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalIcon</span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>variant</span>
-                  {"="}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>{`"brand"`}</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"..."}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalIcon</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n      "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalTitle</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"..."}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalTitle</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalBody</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalFooter</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n      "}
-                  {"...buttons"}
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalFooter</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>ModalContent</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Modal</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

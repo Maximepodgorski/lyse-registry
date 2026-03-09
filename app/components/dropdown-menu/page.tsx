@@ -246,6 +246,20 @@ const propDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import {
+  DropdownMenu, DropdownMenuTrigger,
+  DropdownMenuContent, DropdownMenuItem
+} from '@/components/ui/dropdown-menu'
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    ...
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`
+
 /* ----------------------------------------------------------------
  * Tabs
  * ---------------------------------------------------------------- */
@@ -505,57 +519,8 @@ export default function DropdownMenuPage() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               }
-              code={
-                <>
-                  <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    DropdownMenu, DropdownMenuTrigger,{"\n"}
-                    {"  "}DropdownMenuContent, DropdownMenuItem
-                  </span>
-                  {" } "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/dropdown-menu'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenu</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenuTrigger</span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>asChild</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  {"..."}
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenuTrigger</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenuContent</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenuItem</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"Profile"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenuItem</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenuContent</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>DropdownMenu</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

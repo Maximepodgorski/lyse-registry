@@ -18,6 +18,17 @@ import { CodeBlock } from "@/app/_components/code-block"
  * Data
  * ---------------------------------------------------------------- */
 
+const importCode = `import { CalloutCard } from '@/components/ui/callout-card'
+
+export default function Example() {
+  return (
+    <CalloutCard
+      title="Tip"
+      description="Use tokens for consistent spacing."
+    />
+  )
+}`
+
 const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "with-action", label: "With Action" },
@@ -342,51 +353,8 @@ export default function CalloutCardPage() {
                   />
                 </div>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    CalloutCard
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/callout-card'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    CalloutCard
-                  </span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    title
-                  </span>
-                  {`="Tip"\n`}
-                  {"    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    description
-                  </span>
-                  {`="Use tokens for consistent spacing."\n`}
-                  {"  />\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

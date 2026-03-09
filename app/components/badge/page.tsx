@@ -260,6 +260,12 @@ function DocumentationTab() {
  * Page
  * ---------------------------------------------------------------- */
 
+const importCode = `import { Badge } from '@/components/ui/badge'
+
+export default function Example() {
+  return <Badge>Badge</Badge>
+}`
+
 type Tab = "overview" | "props" | "documentation"
 
 export default function BadgePage() {
@@ -353,61 +359,8 @@ export default function BadgePage() {
           {tab === "overview" && (
             <CodeBlock
               preview={<Badge>Badge</Badge>}
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Badge
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/badge'`}</span>
-                  {"\n\n"}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    export default
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    function
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    return
-                  </span>{" "}
-                  {"<"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Badge
-                  </span>
-                  {">"}
-                  Badge
-                  {"</"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Badge
-                  </span>
-                  {">\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

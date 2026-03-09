@@ -43,7 +43,7 @@ const dosDontsItems: DosDontsItem[] = [
           variant="destructive"
           aria-invalid="true"
           placeholder="Error state"
-          className="max-w-[280px]"
+          className="w-[420px]"
         />
       ),
       description:
@@ -54,7 +54,7 @@ const dosDontsItems: DosDontsItem[] = [
         <Textarea
           variant="destructive"
           placeholder="Styled only"
-          className="max-w-[280px]"
+          className="w-[420px]"
         />
       ),
       description:
@@ -64,7 +64,7 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <TextareaField className="max-w-[280px]">
+        <TextareaField className="w-[420px]">
           <TextareaLabel>Message</TextareaLabel>
           <Textarea placeholder="Type your message here..." />
         </TextareaField>
@@ -74,7 +74,7 @@ const dosDontsItems: DosDontsItem[] = [
     },
     dont: {
       preview: (
-        <Textarea placeholder="Enter your message" className="max-w-[280px]" />
+        <Textarea placeholder="Enter your message" className="w-[420px]" />
       ),
       description:
         "Don't use placeholder as a replacement for a label.",
@@ -83,14 +83,14 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <Textarea size="md" placeholder="Medium" className="max-w-[280px]" />
+        <Textarea size="md" placeholder="Medium" className="w-[420px]" />
       ),
       description:
         "Use the size prop to match the form context.",
     },
     dont: {
       preview: (
-        <Textarea placeholder="Forced height" className="max-w-[280px] min-h-[200px]" />
+        <Textarea placeholder="Forced height" className="w-[420px] min-h-[200px]" />
       ),
       description:
         "Don't override min-height with arbitrary values via className.",
@@ -99,7 +99,7 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <TextareaField className="max-w-[280px]">
+        <TextareaField className="w-[420px]">
           <TextareaLabel required>Message</TextareaLabel>
           <Textarea
             variant="destructive"
@@ -120,7 +120,7 @@ const dosDontsItems: DosDontsItem[] = [
         <Textarea
           variant="destructive"
           placeholder="Something went wrong"
-          className="max-w-[280px]"
+          className="w-[420px]"
         />
       ),
       description:
@@ -202,6 +202,19 @@ const hintPropDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import {
+  Textarea, TextareaField,
+  TextareaLabel, TextareaHint
+} from '@/components/ui/textarea'
+
+<TextareaField>
+  <TextareaLabel required>Message</TextareaLabel>
+  <Textarea
+    placeholder="Type your message..."
+  />
+  <TextareaHint>Helper text</TextareaHint>
+</TextareaField>`
+
 /* ----------------------------------------------------------------
  * Tabs
  * ---------------------------------------------------------------- */
@@ -214,7 +227,7 @@ function OverviewTab() {
         title="Default"
         description="Basic textarea with placeholder text."
       >
-        <Textarea placeholder="Type your message here..." className="max-w-[320px]" />
+        <Textarea placeholder="Type your message here..." className="w-[420px]" />
       </ComponentPreview>
 
       <ComponentPreview
@@ -222,10 +235,10 @@ function OverviewTab() {
         title="Sizes"
         description="Controls min-height, padding, and font size."
       >
-        <div className="flex flex-col gap-4">
-          <Textarea size="sm" placeholder="Small" className="max-w-[320px]" />
-          <Textarea size="md" placeholder="Medium" className="max-w-[320px]" />
-          <Textarea size="lg" placeholder="Large" className="max-w-[320px]" />
+        <div className="flex flex-col gap-4 w-[420px]">
+          <Textarea size="sm" placeholder="Small" />
+          <Textarea size="md" placeholder="Medium" />
+          <Textarea size="lg" placeholder="Large" />
         </div>
       </ComponentPreview>
 
@@ -234,9 +247,9 @@ function OverviewTab() {
         title="Variants"
         description="Border and focus ring color for validation states."
       >
-        <div className="flex flex-col gap-4">
-          <Textarea variant="default" placeholder="Default" className="max-w-[320px]" />
-          <Textarea variant="destructive" placeholder="Destructive" className="max-w-[320px]" />
+        <div className="flex flex-col gap-4 w-[420px]">
+          <Textarea variant="default" placeholder="Default" />
+          <Textarea variant="destructive" placeholder="Destructive" />
         </div>
       </ComponentPreview>
 
@@ -245,7 +258,7 @@ function OverviewTab() {
         title="TextareaField"
         description="Full form field with label, textarea, and helper text."
       >
-        <div className="flex flex-col gap-8 max-w-[320px]">
+        <div className="flex flex-col gap-8 w-[420px]">
           <TextareaField>
             <TextareaLabel required>Message</TextareaLabel>
             <Textarea placeholder="Type your message here..." />
@@ -271,7 +284,7 @@ function OverviewTab() {
         title="Disabled"
         description="Prevents interaction with muted styling."
       >
-        <div className="flex flex-col gap-4 max-w-[320px]">
+        <div className="flex flex-col gap-4 w-[420px]">
           <Textarea disabled placeholder="Disabled textarea" />
           <TextareaField>
             <TextareaLabel required>Message</TextareaLabel>
@@ -386,61 +399,14 @@ export default function TextareaPage() {
           {tab === "overview" && (
             <CodeBlock
               preview={
-                <TextareaField className="max-w-[320px]">
+                <TextareaField className="w-[420px]">
                   <TextareaLabel required>Message</TextareaLabel>
                   <Textarea placeholder="Type your message here..." />
                   <TextareaHint>Maximum 500 characters.</TextareaHint>
                 </TextareaField>
               }
-              code={
-                <>
-                  <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Textarea, TextareaField,{"\n"}
-                    {"  "}TextareaLabel, TextareaHint
-                  </span>
-                  {" } "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/textarea'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaField</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaLabel</span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>required</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"Message"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaLabel</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Textarea</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>placeholder</span>
-                  {"="}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>{`"Type your message..."`}</span>
-                  {"\n  />"}
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaHint</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"Helper text"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaHint</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>TextareaField</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

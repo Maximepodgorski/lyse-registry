@@ -161,6 +161,17 @@ const propDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import { Toggle } from '@/components/ui/toggle'
+
+export default function Example() {
+  return (
+    <>
+      <Toggle label="Enable notifications" defaultChecked />
+      <Toggle label="Dark mode" />
+    </>
+  )
+}`
+
 /* ----------------------------------------------------------------
  * Tabs
  * ---------------------------------------------------------------- */
@@ -371,50 +382,8 @@ export default function TogglePage() {
                   <Toggle label="Dark mode" />
                 </div>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Toggle
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/toggle'`}</span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" (\n"}
-                  {"    <>\n"}
-                  {"      <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Toggle
-                  </span>
-                  {' label="Enable notifications" defaultChecked />\n'}
-                  {"      <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Toggle
-                  </span>
-                  {' label="Dark mode" />\n'}
-                  {"    </>\n"}
-                  {"  )\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

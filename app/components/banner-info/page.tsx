@@ -147,6 +147,16 @@ const propDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import { BannerInfo } from '@/components/ui/banner-info'
+
+export default function Example() {
+  return (
+    <BannerInfo variant="success">
+      Your changes have been saved successfully.
+    </BannerInfo>
+  )
+}`
+
 /* ----------------------------------------------------------------
  * Tabs
  * ---------------------------------------------------------------- */
@@ -324,49 +334,8 @@ export default function BannerInfoPage() {
                   Your changes have been saved successfully.
                 </BannerInfo>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    BannerInfo
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/banner-info'`}</span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" (\n"}
-                  {"    <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    BannerInfo
-                  </span>
-                  {' variant="success">\n'}
-                  {"      Your changes have been saved successfully.\n"}
-                  {"    </"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    BannerInfo
-                  </span>
-                  {">\n"}
-                  {"  )\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

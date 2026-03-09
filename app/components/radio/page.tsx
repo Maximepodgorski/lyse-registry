@@ -320,6 +320,17 @@ function DocumentationTab() {
  * Page
  * ---------------------------------------------------------------- */
 
+const importCode = `import { RadioGroup, Radio } from '@/components/ui/radio'
+
+export default function Example() {
+  return (
+    <RadioGroup defaultValue="one">
+      <Radio value="one" label="Option one" />
+      <Radio value="two" label="Option two" />
+    </RadioGroup>
+  )
+}`
+
 type Tab = "overview" | "props" | "documentation"
 
 export default function RadioPage() {
@@ -415,62 +426,8 @@ export default function RadioPage() {
                   <Radio value="two" label="Option two" />
                 </RadioGroup>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    RadioGroup
-                  </span>
-                  {", "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Radio
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/radio'`}</span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" (\n"}
-                  {"    <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    RadioGroup
-                  </span>
-                  {' defaultValue="one">\n'}
-                  {"      <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Radio
-                  </span>
-                  {' value="one" label="Option one" />\n'}
-                  {"      <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Radio
-                  </span>
-                  {' value="two" label="Option two" />\n'}
-                  {"    </"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    RadioGroup
-                  </span>
-                  {">\n"}
-                  {"  )\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

@@ -19,6 +19,19 @@ import { CodeBlock } from "@/app/_components/code-block"
  * Data
  * ---------------------------------------------------------------- */
 
+const importCode = `import { ActionCard } from '@/components/ui/action-card'
+
+export default function Example() {
+  return (
+    <ActionCard
+      icon={<Zap />}
+      title="Integrations"
+      description="Connect your tools."
+      action={<Button size="sm">Connect</Button>}
+    />
+  )
+}`
+
 /* Brand logos (colored) */
 function FigmaLogo({ className }: { className?: string }) {
   return (
@@ -409,76 +422,8 @@ export default function ActionCardPage() {
                   />
                 </div>
               }
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    ActionCard
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/action-card'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    export default
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    function
-                  </span>{" "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    return
-                  </span>
-                  {" <"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    ActionCard
-                  </span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    icon
-                  </span>
-                  {"={<"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Zap
-                  </span>
-                  {" />}\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    title
-                  </span>
-                  {`="Integrations"\n`}
-                  {"    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    description
-                  </span>
-                  {`="Connect your tools."\n`}
-                  {"    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    action
-                  </span>
-                  {"={<"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Button
-                  </span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>
-                    size
-                  </span>
-                  {`="sm"`}
-                  {">Connect</"}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Button
-                  </span>
-                  {">}\n  />\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

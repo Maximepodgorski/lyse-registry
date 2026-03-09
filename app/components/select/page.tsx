@@ -219,6 +219,20 @@ const itemPropDefs: PropDef[] = [
   },
 ]
 
+const importCode = `import {
+  Select, SelectTrigger,
+  SelectContent, SelectItem, SelectValue
+} from '@/components/ui/select'
+
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select..." />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="a">Option A</SelectItem>
+  </SelectContent>
+</Select>`
+
 /* ----------------------------------------------------------------
  * Tabs
  * ---------------------------------------------------------------- */
@@ -488,65 +502,8 @@ export default function SelectPage() {
                   </SelectContent>
                 </Select>
               }
-              code={
-                <>
-                  <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
-                  {" { "}
-                  <span style={{ color: "var(--root-color-success-400)" }}>
-                    Select, SelectTrigger,{"\n"}
-                    {"  "}SelectContent, SelectItem, SelectValue
-                  </span>
-                  {" } "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>
-                    {`'@/components/ui/select'`}
-                  </span>
-                  {"\n\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Select</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>SelectTrigger</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>SelectValue</span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>placeholder</span>
-                  {"="}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>{`"Select..."`}</span>
-                  {" />"}
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>SelectTrigger</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>SelectContent</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n    "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"<"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>SelectItem</span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>value</span>
-                  {"="}
-                  <span style={{ color: "var(--root-color-warning-400)" }}>{`"a"`}</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"Option A"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>SelectItem</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n  "}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>SelectContent</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                  {"\n"}
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{"</"}</span>
-                  <span style={{ color: "var(--root-color-success-400)" }}>Select</span>
-                  <span style={{ color: "var(--root-color-brand-400)" }}>{">"}</span>
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

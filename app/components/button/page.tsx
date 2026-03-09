@@ -245,6 +245,12 @@ function DocumentationTab() {
  * Page
  * ---------------------------------------------------------------- */
 
+const importCode = `import { Button } from '@/components/ui/button'
+
+export default function Example() {
+  return <Button>Button</Button>
+}`
+
 type Tab = "overview" | "props" | "documentation"
 
 export default function ButtonPage() {
@@ -338,61 +344,8 @@ export default function ButtonPage() {
           {tab === "overview" && (
             <CodeBlock
               preview={<Button>Button</Button>}
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Button
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/button'`}</span>
-                  {"\n\n"}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    export default
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    function
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    return
-                  </span>{" "}
-                  {"<"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Button
-                  </span>
-                  {">"}
-                  Button
-                  {"</"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Button
-                  </span>
-                  {">\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

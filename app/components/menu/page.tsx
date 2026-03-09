@@ -381,6 +381,12 @@ function DocumentationTab() {
  * Page
  * ---------------------------------------------------------------- */
 
+const importCode = `import { MenuItem } from '@/components/ui/menu'
+
+export default function Example() {
+  return <MenuItem icon={<Home />}>Home</MenuItem>
+}`
+
 type Tab = "overview" | "props" | "documentation"
 
 export default function MenuPage() {
@@ -477,71 +483,8 @@ export default function MenuPage() {
                   <MenuItem icon={<Home />}>Home</MenuItem>
                 </div>
               }
-              code={
-                <>
-                  <span style={{ color: "var(--root-color-brand-300)" }}>import</span>
-                  {" { "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    MenuItem
-                  </span>
-                  {" } "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/menu'`}</span>
-                  {"\n\n"}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    export default
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    function
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    return
-                  </span>{" "}
-                  {"<"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    MenuItem
-                  </span>
-                  {" "}
-                  <span style={{ color: "var(--root-color-brand-300)" }}>
-                    icon
-                  </span>
-                  {"={<"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Home
-                  </span>
-                  {" />}>"}
-                  Home
-                  {"</"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    MenuItem
-                  </span>
-                  {">\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 

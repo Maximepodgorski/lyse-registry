@@ -307,6 +307,12 @@ function DocumentationTab() {
  * Page
  * ---------------------------------------------------------------- */
 
+const importCode = `import { Tag } from '@/components/ui/tag'
+
+export default function Example() {
+  return <Tag>Tag</Tag>
+}`
+
 type Tab = "overview" | "props" | "documentation"
 
 export default function TagPage() {
@@ -400,61 +406,8 @@ export default function TagPage() {
           {tab === "overview" && (
             <CodeBlock
               preview={<Tag size="md">Tag</Tag>}
-              code={
-                <>
-                  <span style={{ color: "#c084fc" }}>import</span>
-                  {" { "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Tag
-                  </span>
-                  {" } "}
-                  <span style={{ color: "#c084fc" }}>from</span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-warning-400)" }}
-                  >{`'@/components/ui/tag'`}</span>
-                  {"\n\n"}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    export default
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    function
-                  </span>{" "}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Example
-                  </span>
-                  {"() {\n"}
-                  {"  "}
-                  <span
-                    style={{ color: "var(--root-color-brand-400)" }}
-                  >
-                    return
-                  </span>{" "}
-                  {"<"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Tag
-                  </span>
-                  {">"}
-                  Tag
-                  {"</"}
-                  <span
-                    style={{ color: "var(--root-color-success-400)" }}
-                  >
-                    Tag
-                  </span>
-                  {">\n"}
-                  {"}"}
-                </>
-              }
+              codeString={importCode}
+              language="tsx"
             />
           )}
 
