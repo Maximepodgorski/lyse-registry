@@ -1,60 +1,138 @@
-# Lyse UI
+```
+██╗     ██╗   ██╗███████╗███████╗
+██║     ╚██╗ ██╔╝██╔════╝██╔════╝
+██║      ╚████╔╝ ███████╗█████╗
+██║       ╚██╔╝  ╚════██║██╔══╝
+███████╗   ██║   ███████║███████╗
+╚══════╝   ╚═╝   ╚══════╝╚══════╝
 
-Production-ready React components built from the [Lyse Figma Design System](https://www.figma.com/community/file/lyse-design-system). Distributed as a [shadcn registry](https://ui.shadcn.com/docs/registry).
+██████╗ ███████╗ ██████╗ ██╗███████╗████████╗██████╗ ██╗   ██╗
+██╔══██╗██╔════╝██╔════╝ ██║██╔════╝╚══██╔══╝██╔══██╗╚██╗ ██╔╝
+██████╔╝█████╗  ██║  ███╗██║███████╗   ██║   ██████╔╝ ╚████╔╝
+██╔══██╗██╔══╝  ██║   ██║██║╚════██║   ██║   ██╔══██╗  ╚██╔╝
+██║  ██║███████╗╚██████╔╝██║███████║   ██║   ██║  ██║   ██║
+╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝
+```
 
-## Install
+Production-ready React components built from a real design system.
+Open source, open code.
 
-### 1. Install tokens (required)
+[Documentation](https://ui.getlyse.com) | [Figma Library](https://www.figma.com/community/file/1470884424474781212/lyse-library-v2) | [GitHub](https://github.com/Maximepodgorski/lyse-registry)
+
+---
+
+## What is this?
+
+Lyse Registry is a collection of **23 components** you can add to any React project with a single command. No package to install, no version to manage. The components live in your codebase, fully editable.
+
+It works with the [shadcn CLI](https://ui.shadcn.com/docs/cli) — the same tool used by shadcn/ui.
+
+## Get started
+
+### 1. Add a component
+
+Open your terminal and run:
+
+```bash
+npx shadcn@latest add https://ui.getlyse.com/r/[component].json
+```
+
+Replace `[component]` with any name from the list below (e.g. `button`, `toast`, `modal`).
+
+The component files, design tokens, and dependencies are added to your project automatically.
+
+### 2. Use it
+
+```tsx
+import { Button } from '@/components/ui/button'
+
+export default function App() {
+  return <Button>Click me</Button>
+}
+```
+
+### 3. Install all components at once (optional)
+
+```bash
+npx shadcn@latest add \
+  https://ui.getlyse.com/r/button.json \
+  https://ui.getlyse.com/r/badge.json \
+  https://ui.getlyse.com/r/tag.json \
+  https://ui.getlyse.com/r/tooltip.json \
+  https://ui.getlyse.com/r/toast.json \
+  https://ui.getlyse.com/r/menu.json \
+  https://ui.getlyse.com/r/checkbox.json \
+  https://ui.getlyse.com/r/radio.json \
+  https://ui.getlyse.com/r/toggle.json \
+  https://ui.getlyse.com/r/banner-info.json \
+  https://ui.getlyse.com/r/avatar.json \
+  https://ui.getlyse.com/r/dropdown-menu.json \
+  https://ui.getlyse.com/r/select.json \
+  https://ui.getlyse.com/r/input.json \
+  https://ui.getlyse.com/r/textarea.json \
+  https://ui.getlyse.com/r/modal.json \
+  https://ui.getlyse.com/r/spinner.json \
+  https://ui.getlyse.com/r/progress.json \
+  https://ui.getlyse.com/r/action-card.json \
+  https://ui.getlyse.com/r/spotlight-card.json \
+  https://ui.getlyse.com/r/callout-card.json \
+  https://ui.getlyse.com/r/chip.json \
+  https://ui.getlyse.com/r/tabs.json
+```
+
+## Components
+
+| Component | Description |
+|-----------|-------------|
+| **Button** | Primary actions, links, icon-only |
+| **Badge** | Status indicators with dot, fill, and dash styles |
+| **Tag** | Removable labels and filters |
+| **Tooltip** | Contextual hints on hover |
+| **Toast** | Temporary notifications with auto-dismiss |
+| **Menu** | Vertical navigation with groups and dividers |
+| **Checkbox** | Single or grouped selection |
+| **Radio** | Mutually exclusive choices |
+| **Toggle** | On/off switches |
+| **BannerInfo** | Informational banners with icon and action |
+| **Avatar** | User profile images with fallback |
+| **DropdownMenu** | Contextual menus triggered by a button |
+| **Select** | Single-value dropdown selection |
+| **Input** | Text fields with labels, hints, and icons |
+| **Textarea** | Multi-line text fields |
+| **Modal** | Dialog overlays for confirmations and forms |
+| **Spinner** | Loading indicators |
+| **Progress** | Determinate progress bars |
+| **ActionCard** | Clickable cards with title and description |
+| **SpotlightCard** | Image cards for showcasing features |
+| **CalloutCard** | Highlighted content blocks with icon |
+| **Chip** | Compact toggleable elements |
+| **Tabs** | Tabbed content navigation |
+
+Browse live previews and usage examples on the [documentation site](https://ui.getlyse.com).
+
+## Design tokens
+
+Every component uses a 3-layer token system for colors, typography, spacing, and radius. Light and dark mode are built in.
+
+```
+Primitives     →  raw values (oklch colors, sizes, fonts)
+Semantics      →  named by purpose (--background-brand-strong-default)
+Bridge         →  maps to shadcn/Tailwind (--primary, --foreground)
+```
+
+Tokens are installed automatically with your first component. To install them standalone:
 
 ```bash
 npx shadcn@latest add https://ui.getlyse.com/r/lyse-tokens.json
 ```
 
-Import all token files in your main CSS entry point (e.g. `globals.css`):
+## Dark mode
 
-```css
-@import './styles/lyse/root-colors.css';
-@import './styles/lyse/root-typography.css';
-@import './styles/lyse/root-layout.css';
-@import './styles/lyse/semantic-global.css';
-@import './styles/lyse/semantic-colors.css';
-@import './styles/lyse/shadcn-bridge.css';
-@import './styles/lyse/typography.css';
+Add the `dark` class to your HTML root. Tokens remap automatically.
+
+```html
+<html class="dark">
 ```
-
-### 2. Add components
-
-```bash
-npx shadcn@latest add https://ui.getlyse.com/r/button.json
-```
-
-## Components
-
-| Component | Install |
-|-----------|---------|
-| Button | `npx shadcn@latest add https://ui.getlyse.com/r/button.json` |
-| Badge | `npx shadcn@latest add https://ui.getlyse.com/r/badge.json` |
-| Tag | `npx shadcn@latest add https://ui.getlyse.com/r/tag.json` |
-| Tooltip | `npx shadcn@latest add https://ui.getlyse.com/r/tooltip.json` |
-| Toast | `npx shadcn@latest add https://ui.getlyse.com/r/toast.json` |
-| Menu | `npx shadcn@latest add https://ui.getlyse.com/r/menu.json` |
-| Checkbox | `npx shadcn@latest add https://ui.getlyse.com/r/checkbox.json` |
-| Radio | `npx shadcn@latest add https://ui.getlyse.com/r/radio.json` |
-| Toggle | `npx shadcn@latest add https://ui.getlyse.com/r/toggle.json` |
-| BannerInfo | `npx shadcn@latest add https://ui.getlyse.com/r/banner-info.json` |
-| Avatar | `npx shadcn@latest add https://ui.getlyse.com/r/avatar.json` |
-| DropdownMenu | `npx shadcn@latest add https://ui.getlyse.com/r/dropdown-menu.json` |
-| Select | `npx shadcn@latest add https://ui.getlyse.com/r/select.json` |
-| Input | `npx shadcn@latest add https://ui.getlyse.com/r/input.json` |
-| Textarea | `npx shadcn@latest add https://ui.getlyse.com/r/textarea.json` |
-| Modal | `npx shadcn@latest add https://ui.getlyse.com/r/modal.json` |
-| Spinner | `npx shadcn@latest add https://ui.getlyse.com/r/spinner.json` |
-| Progress | `npx shadcn@latest add https://ui.getlyse.com/r/progress.json` |
-| ActionCard | `npx shadcn@latest add https://ui.getlyse.com/r/action-card.json` |
-| SpotlightCard | `npx shadcn@latest add https://ui.getlyse.com/r/spotlight-card.json` |
-| CalloutCard | `npx shadcn@latest add https://ui.getlyse.com/r/callout-card.json` |
-| Chip | `npx shadcn@latest add https://ui.getlyse.com/r/chip.json` |
-| Tabs | `npx shadcn@latest add https://ui.getlyse.com/r/tabs.json` |
 
 ## Requirements
 
@@ -62,25 +140,6 @@ npx shadcn@latest add https://ui.getlyse.com/r/button.json
 - Tailwind CSS v4+
 - [shadcn CLI](https://ui.shadcn.com/docs/cli) v3+
 
-## Dark mode
-
-Add the `dark` class to your HTML root element:
-
-```html
-<html class="dark">
-```
-
-Tokens auto-remap — no extra config needed.
-
-## Development
-
-```bash
-pnpm install
-pnpm dev              # Dev server (port 3000)
-pnpm registry:build   # Build registry → public/r/
-pnpm build            # Production build
-```
-
 ## License
 
-[MIT](./LICENSE) — Lyse Labs
+[MIT](./LICENSE) — Built by [Lyse Labs](https://getlyse.com)
