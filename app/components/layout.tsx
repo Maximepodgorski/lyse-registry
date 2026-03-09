@@ -153,7 +153,7 @@ export default function ComponentsLayout({
           ))}
           </Menu>
           <div
-            className="pointer-events-none absolute bottom-0 left-0 right-0 h-20 backdrop-blur-[1px]"
+            className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 backdrop-blur-[1px]"
             style={{
               background:
                 "linear-gradient(to top, var(--background-base) 25%, transparent)",
