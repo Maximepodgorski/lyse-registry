@@ -4,11 +4,13 @@ export function ComponentPreview({
   id,
   title,
   description,
+  previewBackground,
   children,
 }: {
   id: string
   title: string
   description?: React.ReactNode
+  previewBackground?: string
   children: React.ReactNode
 }) {
   return (
@@ -36,7 +38,7 @@ export function ComponentPreview({
         <div
           className="flex items-center flex-wrap gap-[var(--layout-gap-xl)] px-[var(--layout-padding-3xl)] py-[var(--layout-padding-4xl)]"
           style={{
-            background: "var(--background-neutral-faint-default)",
+            background: previewBackground ?? "var(--background-neutral-faint-default)",
           }}
         >
           {children}

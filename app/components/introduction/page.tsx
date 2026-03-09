@@ -1,6 +1,9 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { Tag } from "@/registry/new-york/ui/tag/tag"
 import {
   TableOfContents,
   type TocSection,
@@ -11,30 +14,29 @@ const sections: TocSection[] = [
   { id: "token-driven", label: "Token-Driven" },
   { id: "composition", label: "Composition" },
   { id: "distribution", label: "Distribution" },
-  { id: "beautiful-defaults", label: "Beautiful Defaults" },
+  { id: "figma-library", label: "Figma Library" },
 ]
 
 export default function IntroductionPage() {
   return (
     <>
       <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 max-w-none px-8 lg:px-16 xl:px-20">
-        {/* Title */}
-        <h1
-          className="font-bold"
-          style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
-        >
-          Introduction
-        </h1>
-
-        {/* Description */}
-        <p
-          className="text-content-highlight leading-relaxed"
-          style={{ color: "var(--text-base-moderate)" }}
-        >
-          Lyse UI is a set of beautifully-designed, accessible components and a
-          design system distribution platform. Works with React 19, Tailwind CSS
-          v4, and Radix UI. Open Source. Open Code.
-        </p>
+        {/* Hero */}
+        <div className="flex flex-col gap-2">
+          <h1
+            className="font-bold"
+            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
+          >
+            Introduction
+          </h1>
+          <p
+            className="text-content-highlight leading-relaxed"
+            style={{ color: "var(--text-base-moderate)" }}
+          >
+            Production-ready components built from a real design system. Open
+            source, open code.
+          </p>
+        </div>
 
         {/* Bold statement */}
         <p
@@ -51,7 +53,11 @@ export default function IntroductionPage() {
           style={{ color: "var(--text-base-moderate)" }}
         >
           You know how most traditional component libraries work: you install a
-          package from NPM, import the components, and use them in your app.
+          package from{" "}
+            <code className="text-content-caption px-1 py-0.5 rounded-[var(--layout-radius-sm)]" style={{ fontFamily: "var(--font-geist-mono)", background: "var(--background-neutral-faint-default)", color: "var(--text-base-strong)" }}>
+              npm
+            </code>
+            , import the components, and use them in your app.
         </p>
 
         <p
@@ -103,12 +109,6 @@ export default function IntroductionPage() {
             </strong>{" "}
             A flat-file schema and the shadcn CLI make it easy to distribute
             components.
-          </li>
-          <li>
-            <strong style={{ color: "var(--text-base-strong)" }}>
-              Beautiful Defaults:
-            </strong>{" "}
-            Great design from the Lyse Design System, out of the box.
           </li>
         </ul>
 
@@ -172,7 +172,7 @@ export default function IntroductionPage() {
             <Link
               href="/components/tokens"
               className="underline underline-offset-4"
-              style={{ color: "var(--text-base-strong)" }}
+              style={{ color: "var(--text-brand-moderate)" }}
             >
               Tokens
             </Link>{" "}
@@ -220,23 +220,78 @@ export default function IntroductionPage() {
           </p>
         </section>
 
-        {/* Section: Beautiful Defaults */}
-        <section id="beautiful-defaults" className="flex flex-col gap-4 mt-6">
+        {/* Section: Figma Library */}
+        <section id="figma-library" className="flex flex-col gap-4 mt-6">
           <h2
             className="text-heading-small"
             style={{ color: "var(--text-base-strong)" }}
           >
-            Beautiful Defaults
+            Figma Library
           </h2>
           <p
             className="text-content-body leading-relaxed"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Components ship with carefully chosen default styles from the Lyse
-            Design System. You get clean, minimal aesthetics with consistent
-            spacing, typography, and color out of the box. Every detail has been
-            considered so you can start building immediately.
+            This file contains the library used to build Lyse, shared openly
+            with the community. You{"'"}ll find production-ready components and
+            foundations, structured and maintained as they are in a real product.
           </p>
+          <p
+            className="text-content-body leading-relaxed"
+            style={{ color: "var(--text-base-moderate)" }}
+          >
+            This library is also a practical way to explore Lyse, an AI
+            assistant that turns component changes in Figma into tickets
+            automatically. By modifying components and publishing the library,
+            you can see how real design changes are detected and transformed
+            into structured tickets.
+          </p>
+          <p
+            className="text-content-body leading-relaxed"
+            style={{ color: "var(--text-base-moderate)" }}
+          >
+            Use it as a solid base for your own design system, a reference for
+            structuring components and variants, or a sandbox to test how Lyse
+            works on real component updates.
+          </p>
+          <a
+            href="https://www.figma.com/community/file/1470884424474781212/lyse-library-v2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-md)] transition-colors bg-[var(--background-neutral-faint-default)] hover:bg-[var(--background-neutral-faint-hover)] overflow-hidden"
+            style={{
+              border: "var(--layout-border-thin) solid var(--border-default)",
+            }}
+          >
+            <Image
+              src="/lyse-thumbnail.png"
+              alt="Lyse UI Library preview"
+              width={160}
+              height={90}
+              className="shrink-0 rounded-[var(--layout-radius-md)] object-cover"
+            />
+            <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+              <span className="flex items-center gap-2">
+                <span
+                  className="text-content-body font-accent"
+                  style={{ color: "var(--text-base-strong)" }}
+                >
+                  Lyse UI Library
+                </span>
+                <Tag variant="neutral" size="sm">v2.0</Tag>
+              </span>
+              <span
+                className="text-content-note"
+                style={{ color: "var(--text-base-moderate)" }}
+              >
+                Browse the full design system on Figma Community
+              </span>
+            </div>
+            <ArrowUpRight
+              className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              style={{ color: "var(--text-base-moderate)" }}
+            />
+          </a>
         </section>
       </main>
 

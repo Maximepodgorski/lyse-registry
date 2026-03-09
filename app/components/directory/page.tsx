@@ -31,19 +31,21 @@ const components = [
 export default function DirectoryPage() {
   return (
     <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 px-8 lg:px-16 xl:px-20">
-      <h1
-        className="font-bold"
-        style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
-      >
-        Components
-      </h1>
-      <p
-        className="text-content-highlight leading-relaxed"
-        style={{ color: "var(--text-base-moderate)" }}
-      >
-        Here you can find all the components available in the registry. We are
-        working on adding more components.
-      </p>
+      <div className="flex flex-col gap-2">
+        <h1
+          className="font-bold"
+          style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
+        >
+          Components
+        </h1>
+        <p
+          className="text-content-highlight leading-relaxed"
+          style={{ color: "var(--text-base-moderate)" }}
+        >
+          Here you can find all the components available in the registry. We are
+          working on adding more components.
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 mt-4">
         {components.map((c) => (

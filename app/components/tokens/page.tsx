@@ -9,43 +9,45 @@ import {
 
 const sections: TocSection[] = [
   { id: "architecture", label: "Architecture" },
-  { id: "primitives", label: "Layer 1: Primitives" },
-  { id: "semantics", label: "Layer 2: Semantics" },
-  { id: "bridge", label: "Layer 3: Bridge" },
-  { id: "usage", label: "Usage" },
+  { id: "primitives", label: "Primitives" },
+  { id: "semantics", label: "Semantics" },
+  { id: "bridge", label: "Bridge" },
+  { id: "usage", label: "Usage in components" },
   { id: "dark-mode", label: "Dark mode" },
 ]
 
-const architectureCode = `Layer 1: Primitives (root-*.css)
-  --root-color-brand-500, --root-space-4, --root-font-size-base
+const architectureCode = `Primitives (root-*.css)
+  --root-color-brand-500, --root-space-4, --root-font-size-md
          ↓
-Layer 2: Semantics (semantic-*.css)
+Semantics (semantic-*.css)
   --background-brand-strong-default, --text-base-strong
          ↓
-Layer 3: Bridge (shadcn-bridge.css)
+Bridge (shadcn-bridge.css)
   --primary, --foreground, --ring`
 
-const primitivesCode = `/* Examples */
---root-color-brand-500: #6366f1;
---root-space-4: 1rem;
---root-font-size-base: 0.875rem;
---root-radius-md: 8px;`
+const primitivesCode = `--root-color-brand-500: oklch(61.87% 0.2067 259.23);
+--root-color-neutral-950: oklch(16.84% 0.0000 none);
+--root-font-size-md: 1rem;
+--root-space-4: 0.5rem;
+--root-radius-4: 0.5rem;`
 
-const semanticsCode = `/* Light mode (:root) */
---background-brand-strong-default: var(--root-color-brand-500);
---text-base-strong: var(--root-color-neutral-900);
+const semanticsCode = `/* Light (:root) */
+--background-base: var(--root-color-neutral-050);
+--text-base-strong: var(--root-color-neutral-950);
+--border-default: var(--root-opacity-neutral-300);
 
-/* Dark mode (.dark) */
---background-brand-strong-default: var(--root-color-brand-400);
---text-base-strong: var(--root-color-neutral-50);`
+/* Dark (.dark) */
+--background-base: var(--root-color-neutral-950);
+--text-base-strong: var(--root-color-neutral-050);
+--border-default: var(--root-opacity-inverse-300);`
 
-const bridgeCode = `/* shadcn-bridge.css */
---primary: var(--background-brand-strong-default);
+const bridgeCode = `--background: var(--background-base);
 --foreground: var(--text-base-strong);
---ring: var(--border-brand-default);
---destructive: var(--background-danger-strong-default);`
+--primary: var(--background-brand-strong-default);
+--destructive: var(--background-danger-strong-default);
+--ring: var(--border-selected);`
 
-const usageCssCode = `/* button.css — Layer 2 tokens for theming */
+const usageCssCode = `/* button.css — theming via Layer 2 tokens */
 .button-primary {
   background: var(--background-brand-strong-default);
   color: var(--text-inverse);
@@ -54,19 +56,16 @@ const usageCssCode = `/* button.css — Layer 2 tokens for theming */
   background: var(--background-brand-strong-hover);
 }`
 
-const usageTsxCode = `{/* button.tsx — Layer 3 via Tailwind */}
-<button className="rounded-md bg-primary text-primary-foreground">
-  Click me
-</button>`
+const usageLayoutCode = `/* Structure via layout tokens */
+padding: var(--layout-padding-md);
+gap: var(--layout-gap-sm);
+border-radius: var(--layout-radius-lg);`
 
-const darkModeCode = `/* :root = light mode (default) */
-:root {
-  --text-base-strong: var(--root-color-neutral-900);
+const darkModeCode = `:root {
+  --text-base-strong: var(--root-color-neutral-950);
 }
-
-/* .dark = dark mode */
 .dark {
-  --text-base-strong: var(--root-color-neutral-50);
+  --text-base-strong: var(--root-color-neutral-050);
 }`
 
 export default function TokensPage() {
@@ -85,14 +84,14 @@ export default function TokensPage() {
             className="text-content-highlight"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Lyse UI uses a 3-layer token architecture built with CSS custom
-            properties. Tokens handle colors, typography, spacing, and layout
-            across light and dark modes.
+            A 3-layer token system built on CSS custom properties. Colors,
+            typography, spacing, and layout — with automatic light/dark mode
+            support.
           </p>
         </div>
 
         {/* Architecture */}
-        <section id="architecture" className="flex flex-col gap-4">
+        <section id="architecture" className="flex flex-col gap-3">
           <h2
             className="text-heading-small"
             style={{ color: "var(--text-base-strong)" }}
@@ -103,247 +102,146 @@ export default function TokensPage() {
             className="text-content-body"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Tokens flow through 3 layers. Each layer adds meaning and
-            abstraction:
+            Each layer adds meaning. Primitives hold raw values, semantics
+            assign purpose, and the bridge maps to shadcn/Tailwind utilities.
           </p>
-          <CodeBlock
-            code={<>{architectureCode}</>}
-            codeString={architectureCode}
-            language="text"
-            defaultExpanded
-          />
-          <p
-            className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
-          >
-            Components consume Layer 2 tokens in their{" "}
-            <InlineCode>.css</InlineCode> files and Layer 3 tokens via Tailwind
-            utilities.
-          </p>
+          <div className="mt-1">
+            <CodeBlock
+              codeString={architectureCode}
+              language="text"
+              defaultExpanded
+            />
+          </div>
         </section>
 
         {/* Primitives */}
-        <section id="primitives" className="flex flex-col gap-4">
+        <section id="primitives" className="flex flex-col gap-3">
           <h2
             className="text-heading-small"
             style={{ color: "var(--text-base-strong)" }}
           >
-            Layer 1: Primitives
+            Primitives
           </h2>
           <p
             className="text-content-body"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Raw values with no semantic meaning. These are the foundation that
-            everything builds on.
+            Raw values with no semantic meaning. Five color scales (brand,
+            danger, neutral, success, warning) with 50–950 steps, plus
+            typography and layout values.
           </p>
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1">
-              <span
-                className="text-content-note font-accent"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                Colors
-              </span>
-              <span
-                className="text-content-note"
-                style={{ color: "var(--text-base-moderate)" }}
-              >
-                <InlineCode>root-colors.css</InlineCode> — 5 scales (brand,
-                danger, neutral, success, warning) with 50–950 steps each.
-              </span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span
-                className="text-content-note font-accent"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                Typography
-              </span>
-              <span
-                className="text-content-note"
-                style={{ color: "var(--text-base-moderate)" }}
-              >
-                <InlineCode>root-typography.css</InlineCode> — Font sizes,
-                weights, and line heights.
-              </span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span
-                className="text-content-note font-accent"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                Layout
-              </span>
-              <span
-                className="text-content-note"
-                style={{ color: "var(--text-base-moderate)" }}
-              >
-                <InlineCode>root-layout.css</InlineCode> — Spacing, radius,
-                borders, opacity, and sizing.
-              </span>
-            </div>
+          <div
+            className="flex flex-col gap-2 text-content-note"
+            style={{ color: "var(--text-base-moderate)" }}
+          >
+            <span><InlineCode>root-colors.css</InlineCode> — Color palette (oklch)</span>
+            <span><InlineCode>root-typography.css</InlineCode> — Font sizes, weights, line heights</span>
+            <span><InlineCode>root-layout.css</InlineCode> — Spacing, radius, borders, sizing</span>
           </div>
-          <CodeBlock
-            code={<>{primitivesCode}</>}
-            codeString={primitivesCode}
-            language="css"
-            fileName="root-colors.css"
-            defaultExpanded
-          />
+          <div className="mt-1">
+            <CodeBlock
+              codeString={primitivesCode}
+              language="css"
+              fileName="root-*.css"
+              defaultExpanded
+            />
+          </div>
         </section>
 
         {/* Semantics */}
-        <section id="semantics" className="flex flex-col gap-4">
+        <section id="semantics" className="flex flex-col gap-3">
           <h2
             className="text-heading-small"
             style={{ color: "var(--text-base-strong)" }}
           >
-            Layer 2: Semantics
+            Semantics
           </h2>
           <p
             className="text-content-body"
             style={{ color: "var(--text-base-moderate)" }}
           >
             Named by purpose, not value. Semantic tokens reference primitives
-            and remap between light and dark mode.
+            and remap automatically between light and dark mode. Components
+            consume these in their <InlineCode>.css</InlineCode> files.
           </p>
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1">
-              <span
-                className="text-content-note font-accent"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                Colors
-              </span>
-              <span
-                className="text-content-note"
-                style={{ color: "var(--text-base-moderate)" }}
-              >
-                <InlineCode>semantic-colors.css</InlineCode> — Background, text,
-                border, and icon tokens with light/dark values.
-              </span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span
-                className="text-content-note font-accent"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                Global
-              </span>
-              <span
-                className="text-content-note"
-                style={{ color: "var(--text-base-moderate)" }}
-              >
-                <InlineCode>semantic-global.css</InlineCode> —
-                Mode-independent aliases for spacing, sizing, and layout.
-              </span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span
-                className="text-content-note font-accent"
-                style={{ color: "var(--text-base-strong)" }}
-              >
-                Typography
-              </span>
-              <span
-                className="text-content-note"
-                style={{ color: "var(--text-base-moderate)" }}
-              >
-                <InlineCode>typography.css</InlineCode> — Composite utility
-                classes like{" "}
-                <InlineCode>.text-content-body</InlineCode> and{" "}
-                <InlineCode>.text-heading-small</InlineCode>.
-              </span>
-            </div>
+          <div
+            className="flex flex-col gap-2 text-content-note"
+            style={{ color: "var(--text-base-moderate)" }}
+          >
+            <span><InlineCode>semantic-colors.css</InlineCode> — Background, text, border, icon tokens</span>
+            <span><InlineCode>semantic-global.css</InlineCode> — Mode-independent layout aliases</span>
+            <span><InlineCode>typography.css</InlineCode> — Composite classes (<InlineCode>.text-content-body</InlineCode>, <InlineCode>.text-heading-small</InlineCode>)</span>
           </div>
-          <CodeBlock
-            code={<>{semanticsCode}</>}
-            codeString={semanticsCode}
-            language="css"
-            fileName="semantic-colors.css"
-            defaultExpanded
-          />
+          <div className="mt-1">
+            <CodeBlock
+              codeString={semanticsCode}
+              language="css"
+              fileName="semantic-colors.css"
+              defaultExpanded
+            />
+          </div>
         </section>
 
         {/* Bridge */}
-        <section id="bridge" className="flex flex-col gap-4">
+        <section id="bridge" className="flex flex-col gap-3">
           <h2
             className="text-heading-small"
             style={{ color: "var(--text-base-strong)" }}
           >
-            Layer 3: Bridge
+            Bridge
           </h2>
           <p
             className="text-content-body"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Maps Lyse semantic tokens to shadcn variable names. This is what
-            makes Lyse components compatible with the shadcn ecosystem and
-            Tailwind utilities.
-          </p>
-          <CodeBlock
-            code={<>{bridgeCode}</>}
-            codeString={bridgeCode}
-            language="css"
-            fileName="shadcn-bridge.css"
-            defaultExpanded
-          />
-          <p
-            className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
-          >
-            These bridge variables are registered in{" "}
-            <InlineCode>globals.css</InlineCode> via{" "}
-            <InlineCode>@theme inline</InlineCode>, making them available as
-            Tailwind utilities like{" "}
-            <InlineCode>bg-primary</InlineCode> and{" "}
+            Maps Lyse semantic tokens to shadcn variable names. This makes
+            components compatible with the shadcn ecosystem and Tailwind
+            utilities like <InlineCode>bg-primary</InlineCode> or{" "}
             <InlineCode>text-foreground</InlineCode>.
           </p>
+          <div className="mt-1">
+            <CodeBlock
+              codeString={bridgeCode}
+              language="css"
+              fileName="shadcn-bridge.css"
+              defaultExpanded
+            />
+          </div>
         </section>
 
         {/* Usage */}
-        <section id="usage" className="flex flex-col gap-4">
+        <section id="usage" className="flex flex-col gap-3">
           <h2
             className="text-heading-small"
             style={{ color: "var(--text-base-strong)" }}
           >
-            Usage
+            Usage in components
           </h2>
           <p
             className="text-content-body"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Components use Layer 2 tokens in their CSS files for theming, and
-            Layer 3 tokens via Tailwind utilities for layout:
+            Component CSS files use Layer 2 tokens for theming (colors,
+            borders, shadows). Layout properties use dedicated layout tokens.
           </p>
-          <CodeBlock
-            code={<>{usageCssCode}</>}
-            codeString={usageCssCode}
-            language="css"
-            fileName="button.css"
-            defaultExpanded
-          />
-          <CodeBlock
-            code={<>{usageTsxCode}</>}
-            codeString={usageTsxCode}
-            language="tsx"
-            fileName="button.tsx"
-            defaultExpanded
-          />
-          <p
-            className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
-          >
-            For spacing and layout, use the layout tokens:{" "}
-            <InlineCode>var(--layout-padding-*)</InlineCode>,{" "}
-            <InlineCode>var(--layout-gap-*)</InlineCode>,{" "}
-            <InlineCode>var(--layout-radius-*)</InlineCode>.
-          </p>
+          <div className="mt-1 flex flex-col gap-3">
+            <CodeBlock
+              codeString={usageCssCode}
+              language="css"
+              fileName="button.css"
+              defaultExpanded
+            />
+            <CodeBlock
+              codeString={usageLayoutCode}
+              language="css"
+              fileName="layout tokens"
+              defaultExpanded
+            />
+          </div>
         </section>
 
         {/* Dark mode */}
-        <section id="dark-mode" className="flex flex-col gap-4">
+        <section id="dark-mode" className="flex flex-col gap-3">
           <h2
             className="text-heading-small"
             style={{ color: "var(--text-base-strong)" }}
@@ -354,18 +252,17 @@ export default function TokensPage() {
             className="text-content-body"
             style={{ color: "var(--text-base-moderate)" }}
           >
-            Semantic tokens automatically remap when the{" "}
-            <InlineCode>dark</InlineCode> class is present on any ancestor
-            element. No component changes needed — the token layer handles
-            everything.
+            Add the <InlineCode>dark</InlineCode> class to any ancestor.
+            Semantic tokens remap automatically — no component changes needed.
           </p>
-          <CodeBlock
-            code={<>{darkModeCode}</>}
-            codeString={darkModeCode}
-            language="css"
-            fileName="semantic-colors.css"
-            defaultExpanded
-          />
+          <div className="mt-1">
+            <CodeBlock
+              codeString={darkModeCode}
+              language="css"
+              fileName="semantic-colors.css"
+              defaultExpanded
+            />
+          </div>
         </section>
       </main>
 

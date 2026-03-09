@@ -3,7 +3,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronLeft, ChevronRight, Github } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
+import { GitHubLogo } from "@/app/_components/github-logo"
 import { Button } from "@/registry/new-york/ui/button/button"
 import {
   Menu,
@@ -19,35 +21,36 @@ const navGroups = [
       { label: "Introduction", href: "/components/introduction" },
       { label: "Components", href: "/components/directory" },
       { label: "Installation", href: "/components/installation" },
+      { label: "Design Tokens", href: "/components/tokens" },
       { label: "Changelog", href: "/components/changelog" },
     ],
   },
   {
     label: "Components",
     items: [
-      { label: "Button", href: "/components/button" },
-      { label: "Badge", href: "/components/badge" },
-      { label: "Tag", href: "/components/tag" },
-      { label: "Tooltip", href: "/components/tooltip" },
-      { label: "Toast", href: "/components/toast" },
-      { label: "Menu", href: "/components/menu" },
-      { label: "Checkbox", href: "/components/checkbox" },
-      { label: "Radio", href: "/components/radio" },
-      { label: "Toggle", href: "/components/toggle" },
-      { label: "BannerInfo", href: "/components/banner-info" },
-      { label: "Avatar", href: "/components/avatar" },
-      { label: "DropdownMenu", href: "/components/dropdown-menu" },
-      { label: "Select", href: "/components/select" },
-      { label: "Input", href: "/components/input" },
-      { label: "Textarea", href: "/components/textarea" },
-      { label: "Modal", href: "/components/modal" },
-      { label: "Spinner", href: "/components/spinner" },
-      { label: "Progress", href: "/components/progress" },
-      { label: "Chip", href: "/components/chip" },
-      { label: "Tabs", href: "/components/tabs" },
       { label: "ActionCard", href: "/components/action-card" },
-      { label: "SpotlightCard", href: "/components/spotlight-card" },
+      { label: "Avatar", href: "/components/avatar" },
+      { label: "Badge", href: "/components/badge" },
+      { label: "BannerInfo", href: "/components/banner-info" },
+      { label: "Button", href: "/components/button" },
       { label: "CalloutCard", href: "/components/callout-card" },
+      { label: "Checkbox", href: "/components/checkbox" },
+      { label: "Chip", href: "/components/chip" },
+      { label: "DropdownMenu", href: "/components/dropdown-menu" },
+      { label: "Input", href: "/components/input" },
+      { label: "Menu", href: "/components/menu" },
+      { label: "Modal", href: "/components/modal" },
+      { label: "Progress", href: "/components/progress" },
+      { label: "Radio", href: "/components/radio" },
+      { label: "Select", href: "/components/select" },
+      { label: "Spinner", href: "/components/spinner" },
+      { label: "SpotlightCard", href: "/components/spotlight-card" },
+      { label: "Tabs", href: "/components/tabs" },
+      { label: "Tag", href: "/components/tag" },
+      { label: "Textarea", href: "/components/textarea" },
+      { label: "Toast", href: "/components/toast" },
+      { label: "Toggle", href: "/components/toggle" },
+      { label: "Tooltip", href: "/components/tooltip" },
     ],
   },
 ] as const
@@ -106,7 +109,7 @@ export default function ComponentsLayout({
             rel="noopener noreferrer"
             aria-label="View source on GitHub"
           >
-            <Github /> GitHub
+            <GitHubLogo className="size-4" /> GitHub
           </a>
         </Button>
       </header>
@@ -255,7 +258,7 @@ export default function ComponentsLayout({
         <a
           href="https://getlyse.com"
           className="underline underline-offset-4"
-          style={{ color: "var(--text-base-strong)" }}
+          style={{ color: "var(--text-brand-moderate)" }}
         >
           Lyse Labs
         </a>
