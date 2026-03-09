@@ -15,7 +15,6 @@ const inputVariants = cva(
       variant: {
         default: "",
         destructive: "input-destructive",
-        success: "input-success",
       },
       size: {
         sm: "h-[var(--layout-size-lg)] gap-[var(--layout-gap-sm)] px-[var(--layout-padding-md)] rounded-[var(--layout-radius-lg)] text-content-note [&_svg]:h-[var(--layout-size-xs)] [&_svg]:w-[var(--layout-size-xs)]",
@@ -35,7 +34,6 @@ const inputHintVariants = cva("input-hint text-content-note", {
     variant: {
       default: "",
       destructive: "input-hint-destructive",
-      success: "input-hint-success",
     },
   },
   defaultVariants: {

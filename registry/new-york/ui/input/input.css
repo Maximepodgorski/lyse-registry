@@ -85,21 +85,6 @@
 }
 
 /* --------------------------------
- * Input — success variant
- * -------------------------------- */
-.input-success {
-  border-color: var(--border-success-strong);
-}
-
-.input-success:focus-within {
-  box-shadow: 0 0 0 2px var(--shadow-success-moderate);
-}
-
-.input-success .input-trailing {
-  color: var(--icon-success-moderate);
-}
-
-/* --------------------------------
  * InputLabel
  * -------------------------------- */
 .input-label {
@@ -121,6 +106,3 @@
   color: var(--text-danger-moderate);
 }
 
-.input-hint-success {
-  color: var(--text-success-moderate);
-}
