@@ -29,11 +29,11 @@
   --root-color-danger-200: oklch(88.34% 0.0616 18.39);
   --root-color-danger-300: oklch(80.53% 0.1109 19.78);
   --root-color-danger-400: oklch(70.22% 0.1892 22.23);
-  --root-color-danger-500: oklch(63.78% 0.2373 25.44);
+  --root-color-danger-500: oklch(61% 0.2373 25.44);
   --root-color-danger-600: oklch(58.30% 0.2387 28.48);
   --root-color-danger-700: oklch(50.95% 0.2086 28.51);
   --root-color-danger-800: oklch(44.46% 0.1774 26.79);
-  --root-color-danger-900: oklch(39.67% 0.1408 25.71);
+  --root-color-danger-900: oklch(29% 0.10 25.71);
   --root-color-danger-950: oklch(25.75% 0.0918 25.84);
 
   /* Neutral */
@@ -88,16 +88,16 @@
   --root-opacity-brand-900: oklch(61.87% 0.2067 259.23);
 
   /* Opacity — Danger */
-  --root-opacity-danger-050: oklch(63.78% 0.2373 25.44 / 2%);
-  --root-opacity-danger-100: oklch(63.78% 0.2373 25.44 / 3%);
-  --root-opacity-danger-200: oklch(63.78% 0.2373 25.44 / 5%);
-  --root-opacity-danger-300: oklch(63.78% 0.2373 25.44 / 8%);
-  --root-opacity-danger-400: oklch(63.78% 0.2373 25.44 / 13%);
-  --root-opacity-danger-500: oklch(63.78% 0.2373 25.44 / 21%);
-  --root-opacity-danger-600: oklch(63.78% 0.2373 25.44 / 34%);
-  --root-opacity-danger-700: oklch(63.78% 0.2373 25.44 / 55%);
-  --root-opacity-danger-800: oklch(63.78% 0.2373 25.44 / 80%);
-  --root-opacity-danger-900: oklch(63.78% 0.2373 25.44);
+  --root-opacity-danger-050: oklch(61% 0.2373 25.44 / 2%);
+  --root-opacity-danger-100: oklch(61% 0.2373 25.44 / 3%);
+  --root-opacity-danger-200: oklch(61% 0.2373 25.44 / 5%);
+  --root-opacity-danger-300: oklch(61% 0.2373 25.44 / 8%);
+  --root-opacity-danger-400: oklch(61% 0.2373 25.44 / 13%);
+  --root-opacity-danger-500: oklch(61% 0.2373 25.44 / 21%);
+  --root-opacity-danger-600: oklch(61% 0.2373 25.44 / 34%);
+  --root-opacity-danger-700: oklch(61% 0.2373 25.44 / 55%);
+  --root-opacity-danger-800: oklch(61% 0.2373 25.44 / 80%);
+  --root-opacity-danger-900: oklch(61% 0.2373 25.44);
 
   /* Opacity — Inverse */
   --root-opacity-inverse-050: oklch(98.51% 0.0000 none / 2%);

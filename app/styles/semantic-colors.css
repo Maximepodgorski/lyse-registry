@@ -245,16 +245,30 @@
   --shadow-warning-moderate: var(--root-opacity-warning-600);
   --shadow-warning-strong: var(--root-opacity-warning-900);
 
+  /* Shadow — Elevation (composite, auto-remap light/dark) */
+  --shadow-elevation-sm:
+    0 0 1px rgba(0, 0, 0, 0.05),
+    0 2px 2px rgba(0, 0, 0, 0.05),
+    0 4px 3px rgba(0, 0, 0, 0.03);
+  --shadow-elevation-md:
+    0 3px 8px 0 rgba(0, 0, 0, 0.04),
+    0 14px 14px 0 rgba(0, 0, 0, 0.03),
+    0 31px 19px 0 rgba(0, 0, 0, 0.02),
+    0 55px 22px 0 rgba(0, 0, 0, 0.01);
+
+  /* Background — Surface */
+  --background-surface-raised: var(--root-color-base-white);
+
   /* Text — Base */
   --text-disabled: var(--root-opacity-neutral-500);
   --text-fixed: var(--root-color-neutral-050);
   --text-inverse: var(--root-color-base-white);
   --text-selected: var(--root-color-brand-500);
-  --text-base-bolder: var(--root-color-neutral-800);
+  --text-base-bolder: var(--root-color-neutral-700);
   --text-base-lighter: var(--root-color-neutral-200);
   --text-base-medium: var(--root-color-neutral-400);
   --text-base-moderate: var(--root-color-neutral-600);
-  --text-base-strong: var(--root-color-neutral-950);
+  --text-base-strong: var(--root-color-neutral-900);
 
   /* Text — Brand */
   --text-brand-bolder: var(--root-color-brand-800);
@@ -321,7 +335,7 @@
   --background-danger-bolder-hover: var(--root-color-danger-700);
   --background-danger-bolder-pressed: var(--root-color-danger-700);
   --background-danger-faint-default: var(--root-color-danger-950);
-  --background-danger-faint-hover: color-mix(in srgb, var(--root-color-danger-900) 50%, var(--root-color-danger-950));
+  --background-danger-faint-hover: var(--root-color-danger-900);
   --background-danger-faint-pressed: var(--root-color-danger-800);
   --background-danger-lighter-default: var(--root-color-danger-900);
   --background-danger-lighter-hover: var(--root-color-danger-800);
@@ -525,16 +539,30 @@
   --shadow-warning-moderate: var(--root-opacity-warning-600);
   --shadow-warning-strong: var(--root-opacity-warning-900);
 
+  /* Shadow — Elevation (composite, auto-remap light/dark) */
+  --shadow-elevation-sm:
+    0 0 1px rgba(0, 0, 0, 0.3),
+    0 2px 2px rgba(0, 0, 0, 0.2),
+    0 4px 3px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-md:
+    0 3px 8px 0 rgba(0, 0, 0, 0.2),
+    0 14px 14px 0 rgba(0, 0, 0, 0.18),
+    0 31px 19px 0 rgba(0, 0, 0, 0.1),
+    0 55px 22px 0 rgba(0, 0, 0, 0.05);
+
+  /* Background — Surface */
+  --background-surface-raised: var(--root-color-neutral-700);
+
   /* Text — Base */
   --text-disabled: var(--root-opacity-inverse-500);
   --text-fixed: var(--root-color-neutral-050);
   --text-inverse: var(--root-color-base-black);
   --text-selected: var(--root-color-brand-500);
-  --text-base-bolder: var(--root-color-neutral-200);
+  --text-base-bolder: var(--root-color-neutral-300);
   --text-base-lighter: var(--root-color-neutral-800);
   --text-base-medium: var(--root-color-neutral-600);
   --text-base-moderate: var(--root-color-neutral-400);
-  --text-base-strong: var(--root-color-neutral-050);
+  --text-base-strong: var(--root-color-neutral-100);
 
   /* Text — Brand */
   --text-brand-bolder: var(--root-color-brand-200);
