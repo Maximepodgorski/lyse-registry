@@ -18,15 +18,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lyse Design System",
+  title: {
+    default: "Lyse UI",
+    template: "Lyse UI - %s",
+  },
   description:
     "A production-ready React component registry built from the Lyse Figma Design System. Install components with shadcn CLI.",
   openGraph: {
-    title: "Lyse Design System",
+    title: "Lyse UI",
     description:
       "Production-ready React components from the Lyse Figma Design System.",
     url: "https://ui.getlyse.com",
-    siteName: "Lyse Design System",
+    siteName: "Lyse UI",
     type: "website",
   },
 };
