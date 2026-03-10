@@ -1,7 +1,7 @@
 # Lyse Registry
 
 **shadcn-compatible React component registry** implementing the Lyse Figma Design System.
-Public, MIT-licensed. Target: `ui.lyse.dev`.
+Public, MIT-licensed. Live at `ui.getlyse.com`.
 
 ## Stack
 
@@ -16,6 +16,7 @@ Public, MIT-licensed. Target: `ui.lyse.dev`.
 | Fonts | DM Sans (headings) + Inter (body) + Geist Mono (code) via next/font |
 | Icons | lucide-react |
 | Animations | tw-animate-css |
+| Syntax highlighting | Shiki (JS regex engine, CSS variables theme) |
 
 ## Commands
 
@@ -30,24 +31,29 @@ pnpm registry:build     # shadcn build → public/r/
 
 ```
 app/
-├── globals.css              # Tailwind v4 imports + @theme inline
+├── globals.css              # Tailwind v4 imports + @theme inline + Shiki token vars
 ├── layout.tsx               # Root layout (fonts, metadata, dark class)
-├── page.tsx                 # Homepage → redirect to /components/button
+├── page.tsx                 # Homepage → redirect to /components/introduction
 ├── _components/             # Doc site internal components
-│   ├── component-preview.tsx   # Section with title + preview box
-│   ├── code-block.tsx          # Preview + code snippet block
+│   ├── code-block.tsx          # Preview + code block with Shiki syntax highlighting
+│   ├── component-preview.tsx   # Section with title + preview box (optional previewBackground)
+│   ├── dos-donts.tsx           # Do/don't pattern showcase
+│   ├── github-logo.tsx         # GitHub SVG icon component
 │   ├── inline-code.tsx         # Inline <code> styled element
 │   ├── props-table.tsx         # Auto-generated props documentation
-│   ├── table-of-contents.tsx   # Sticky ToC with IntersectionObserver
-│   └── sidebar-nav.tsx         # (legacy, replaced by Menu)
+│   ├── sidebar-nav.tsx         # (legacy, replaced by Menu)
+│   └── table-of-contents.tsx   # Sticky ToC with IntersectionObserver
 ├── components/              # Doc pages (one per component)
 │   ├── layout.tsx              # Shared layout: header, sidebar, prev/next, footer
+│   ├── introduction/page.tsx
+│   ├── directory/page.tsx
+│   ├── installation/page.tsx
+│   ├── tokens/page.tsx
+│   ├── changelog/page.tsx
 │   ├── button/page.tsx
 │   ├── badge/page.tsx
-│   ├── tag/page.tsx
-│   ├── tooltip/page.tsx
-│   ├── toast/page.tsx
-│   └── menu/page.tsx
+│   ├── ... (23 component pages total)
+│   └── tooltip/page.tsx
 └── styles/                  # Design tokens (CSS custom properties)
     ├── root-colors.css         # Primitive palette (brand, danger, neutral, success, warning)
     ├── root-typography.css     # Font sizes, weights, line-heights
@@ -58,31 +64,47 @@ app/
     └── typography.css          # Composite text-style utility classes
 
 lib/
-└── utils.ts                 # cn() helper (clsx + tailwind-merge)
+├── utils.ts                 # cn() helper (clsx + tailwind-merge)
+└── shiki.ts                 # Singleton Shiki highlighter (tsx, css, bash grammars)
 
 registry/
 └── new-york/ui/             # Registry component source files
-    ├── button/    (button.tsx + button.css)
-    ├── badge/     (badge.tsx + badge.css)
-    ├── tag/       (tag.tsx + tag.css)
-    ├── tooltip/   (tooltip.tsx + tooltip.css)
-    ├── toast/     (toast.tsx + toast.css)
-    └── menu/      (menu.tsx + menu.css)
+    ├── action-card/   (action-card.tsx + action-card.css)
+    ├── avatar/        (avatar.tsx + avatar.css)
+    ├── badge/         (badge.tsx + badge.css)
+    ├── banner-info/   (banner-info.tsx + banner-info.css)
+    ├── button/        (button.tsx + button.css)
+    ├── callout-card/  (callout-card.tsx + callout-card.css)
+    ├── checkbox/      (checkbox.tsx + checkbox.css)
+    ├── chip/          (chip.tsx + chip.css)
+    ├── dropdown-menu/ (dropdown-menu.tsx + dropdown-menu.css)
+    ├── input/         (input.tsx + input.css)
+    ├── menu/          (menu.tsx + menu.css)
+    ├── modal/         (modal.tsx + modal.css)
+    ├── progress/      (progress.tsx + progress.css)
+    ├── radio/         (radio.tsx + radio.css)
+    ├── select/        (select.tsx + select.css)
+    ├── spinner/       (spinner.tsx + spinner.css)
+    ├── spotlight-card/ (spotlight-card.tsx + spotlight-card.css)
+    ├── tabs/          (tabs.tsx + tabs.css)
+    ├── tag/           (tag.tsx + tag.css)
+    ├── textarea/      (textarea.tsx + textarea.css)
+    ├── toast/         (toast.tsx + toast.css)
+    ├── toggle/        (toggle.tsx + toggle.css)
+    └── tooltip/       (tooltip.tsx + tooltip.css)
 
 public/
-├── r/                       # Built registry JSON output
+├── r/                       # Built registry JSON output (25 files)
 │   ├── registry.json           # Master manifest
-│   ├── button.json
-│   ├── badge.json
-│   ├── tag.json
-│   ├── tooltip.json
-│   ├── toast.json
-│   └── menu.json
+│   ├── lyse-tokens.json        # Token-only install
+│   └── [component].json        # One per shipped component
 ├── logo.svg
-└── logotype.svg
+├── logotype.svg
+├── ascii-background.png
+└── lyse-thumbnail.png
 
 specs/
-├── active/                  # Current phase specs
+├── active/                  # Next components (13 specs: alert, card, popover, etc.)
 ├── backlog/                 # Future phase specs
 └── shipped/                 # Completed phase specs
 ```
@@ -91,7 +113,7 @@ specs/
 
 ```
 Layer 1: Primitives (root-*.css)
-  --root-color-brand-500, --root-space-4, --root-font-size-base
+  --root-color-brand-500, --root-space-4, --root-font-size-md
          ↓
 Layer 2: Semantics (semantic-*.css)
   --background-brand-strong-default, --text-base-strong
@@ -172,46 +194,80 @@ export { Component, componentVariants }
 - `React.forwardRef` when the component uses Radix or needs ref forwarding
 - For simple components, plain function components with `React.ComponentProps` pattern
 
-## Shipped Components
+## Shipped Components (23)
 
 | Component | Variants | Sizes | Extras | Radix |
 |-----------|----------|-------|--------|-------|
-| **Button** | primary, secondary, terciary, destructive | xs, sm, md, lg | `asChild`, `isIconOnly` | Slot |
+| **ActionCard** | — | — | `onClick`, hover state | — |
+| **Avatar** | — | xs, sm, md, lg, xl | `fallback`, `src`, `AvatarGroup` | — |
 | **Badge** | brand, neutral, success, danger, warning | sm, md, lg | `type` (fill/light/dash), `isFilled`, `BadgeDot` | — |
-| **Tag** | brand, neutral, success, danger, warning | sm, md, lg | `type` (fill/dash/emphasis/ghost), `TagDot`, `TagClose` | — |
-| **Tooltip** | — | sm, md | `TooltipProvider`, `TooltipTrigger`, `TooltipContent`, `TooltipShortcut` | Tooltip |
-| **Toast** | brand, success, danger, warning | — | `Toaster` (stacking), `toast()` pub/sub API, auto-dismiss, hover-pause | — |
+| **BannerInfo** | brand, success, danger, warning | — | `icon`, `action`, dismissible | — |
+| **Button** | primary, secondary, terciary, destructive | xs, sm, md, lg | `asChild`, `isIconOnly` | Slot |
+| **CalloutCard** | brand, neutral, success, danger, warning | — | `icon`, `title`, `description` | — |
+| **Checkbox** | — | sm, md | `CheckboxGroup`, `indeterminate` | — |
+| **Chip** | — | sm, md | toggleable, `selected` | — |
+| **DropdownMenu** | — | — | Full Radix DropdownMenu compound | DropdownMenu |
+| **Input** | default, destructive | sm, md, lg | `InputField`, `InputLabel`, `InputHint`, `leading`/`trailing` | — |
 | **Menu** | default, accent | sm, md | `Menu`, `MenuGroup`, `MenuItem`, `MenuDivider`, icon/badge/shortcut/dot slots | Slot |
+| **Modal** | — | sm, md, lg, xl, full | `ModalHeader`, `ModalFooter`, `ModalClose` | Dialog |
+| **Progress** | brand, success, danger, warning | sm, md, lg | determinate | — |
+| **Radio** | — | sm, md | `RadioGroup` | — |
+| **Select** | — | sm, md, lg | `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectGroup` | Select |
+| **Spinner** | — | xs, sm, md, lg | — | — |
+| **SpotlightCard** | — | — | `image` slot, fallback bg | — |
+| **Tabs** | — | sm, md | `TabsList`, `TabsTrigger`, `TabsContent` | Tabs |
+| **Tag** | brand, neutral, success, danger, warning | sm, md, lg | `type` (fill/dash/emphasis/ghost), `TagDot`, `TagClose` | — |
+| **Textarea** | default, destructive | sm, md, lg | `TextareaField`, `TextareaLabel`, `TextareaHint`, auto-resize | — |
+| **Toast** | brand, success, danger, warning | — | `Toaster` (stacking), `toast()` pub/sub API, auto-dismiss, hover-pause | — |
+| **Toggle** | — | sm, md | — | — |
+| **Tooltip** | — | sm, md | `TooltipProvider`, `TooltipTrigger`, `TooltipContent`, `TooltipShortcut` | Tooltip |
 
 ## Doc Site Architecture
 
 The doc site lives at `app/components/` with a shared layout.
 
 ### Layout (`app/components/layout.tsx`)
-- Header: logo + GitHub link
-- Left sidebar: `Menu` component with nav groups (Getting Started + Components)
+- Header: logo + GitHub link (custom SVG via `github-logo.tsx`)
+- Left sidebar: `Menu` component with nav groups (Getting Started + Components, alphabetized)
 - Breadcrumb: auto-generated from pathname
 - Prev/Next: auto-generated from flat page list
 - Footer: MIT + Lyse Labs link
 
+### Getting Started Pages
+- **Introduction**: principles, Figma Library section with thumbnail card
+- **Components (Directory)**: grid of all component links
+- **Installation**: step-by-step with CodeBlocks (single, tokens-only, install-all)
+- **Design Tokens**: 3-layer architecture with real oklch values
+- **Changelog**: card-based layout with Tag v1.0
+
 ### Component Page Pattern (`app/components/{name}/page.tsx`)
 Each page is a `"use client"` component with:
-1. **Hero**: title, description, copy install command button
-2. **Tabs**: Overview | Props (client-side state)
-3. **CodeBlock**: preview + code snippet
+1. **Hero**: title, description, copy install command + v0.dev link buttons
+2. **Tabs**: Overview | Props | Best practices (client-side state)
+3. **CodeBlock**: preview + syntax-highlighted code snippet (via Shiki)
 4. **Overview tab**: `ComponentPreview` sections with live demos
 5. **Props tab**: `PropsTable` with type badges
-6. **TableOfContents**: sticky sidebar (Overview tab only, xl+ breakpoint)
+6. **Best practices tab**: `DosDonts` component with do/don't pairs
+7. **TableOfContents**: sticky sidebar (Overview + Best practices tabs, xl+ breakpoint)
 
 ### Internal Components (`app/_components/`)
 
 | Component | Purpose |
 |-----------|---------|
+| `CodeBlock` | Two-panel: preview area + syntax-highlighted `<pre>` code block (Shiki) |
 | `ComponentPreview` | Section wrapper with `id`, `title`, description, bordered preview box |
-| `CodeBlock` | Two-panel: preview area + `<pre>` code block |
+| `DosDonts` | Side-by-side do/don't cards with previews and descriptions |
+| `GitHubLogo` | GitHub SVG icon component |
 | `InlineCode` | Styled `<code>` element for inline references |
 | `PropsTable` | Table with prop name, type badges, default, description. Uses `Badge` component |
 | `TableOfContents` | Sticky sidebar with IntersectionObserver-based active state tracking |
+
+### Syntax Highlighting (Shiki)
+- Singleton highlighter in `lib/shiki.ts` (JS regex engine, no WASM)
+- CSS variables theme (`--shiki-token-*`) in `app/globals.css`, mapped to Lyse tokens
+- Automatic light/dark mode via CSS custom properties
+- Supports `tsx`, `css`, `bash` grammars
+- CodeBlock uses `codeString` + `language` props (no manual `<span style>` coloring)
 
 ## Registry Conventions
 
@@ -244,8 +300,8 @@ Specs live in `specs/` with date-prefixed filenames. Check `specs/active/` befor
 |-------|------|--------|
 | 1 | Scaffold + registry init | Shipped |
 | 2 | Design tokens (CSS vars) | Shipped |
-| 3 | Components (batched) | In progress — 6 shipped |
-| 4 | Docsite + deploy to Vercel | In progress — pages built, needs deploy |
+| 3 | Components (batched) | In progress — 23 shipped, 13 in specs |
+| 4 | Docsite + deploy to Vercel | Shipped — live at ui.getlyse.com |
 
 ## Path Aliases
 
