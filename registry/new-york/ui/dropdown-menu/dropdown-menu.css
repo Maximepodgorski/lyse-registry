@@ -13,6 +13,13 @@
 }
 
 /* --------------------------------
+ * Icon
+ * -------------------------------- */
+.dropdown-menu-item-icon {
+  color: var(--icon-neutral-moderate);
+}
+
+/* --------------------------------
  * Item — base
  * -------------------------------- */
 .dropdown-menu-item {
@@ -33,6 +40,10 @@
   outline: none;
 }
 
+.dropdown-menu-item[data-highlighted] .dropdown-menu-item-icon {
+  color: var(--icon-neutral-strong);
+}
+
 .dropdown-menu-item:active {
   background: var(--background-neutral-faint-pressed);
 }
@@ -40,7 +51,6 @@
 .dropdown-menu-item:focus-visible {
   background: var(--background-neutral-faint-hover);
   outline: none;
-  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
 }
 
 /* --------------------------------
@@ -51,11 +61,24 @@
 }
 
 .dropdown-menu-item-destructive .dropdown-menu-item-icon {
+  color: var(--icon-danger-moderate);
+}
+
+.dropdown-menu-item-destructive[data-highlighted] {
+  background: var(--background-danger-faint-hover);
   color: var(--text-danger-moderate);
 }
 
+.dropdown-menu-item-destructive[data-highlighted] .dropdown-menu-item-icon {
+  color: var(--icon-danger-moderate);
+}
+
+.dropdown-menu-item-destructive:active {
+  background: var(--background-danger-faint-pressed);
+}
+
 .dropdown-menu-item-destructive:focus-visible {
-  box-shadow: 0 0 0 2px var(--shadow-danger-moderate);
+  outline: none;
 }
 
 /* --------------------------------
@@ -73,17 +96,6 @@
 
 .dropdown-menu-item[data-disabled] .dropdown-menu-shortcut {
   color: var(--text-disabled);
-}
-
-/* --------------------------------
- * Icon
- * -------------------------------- */
-.dropdown-menu-item-icon {
-  color: var(--text-base-moderate);
-}
-
-.dropdown-menu-item[data-highlighted] .dropdown-menu-item-icon {
-  color: var(--text-base-strong);
 }
 
 /* --------------------------------

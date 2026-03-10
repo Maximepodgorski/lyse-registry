@@ -33,6 +33,11 @@
 .banner-info-success {
   --banner-bg: var(--overlay-success-default);
   --banner-border: var(--border-success-lighter);
+  --banner-text: var(--text-success-bolder);
+  --banner-icon: var(--icon-success-bolder);
+}
+
+.dark .banner-info-success {
   --banner-text: var(--text-success-moderate);
   --banner-icon: var(--icon-success-moderate);
 }
@@ -40,6 +45,11 @@
 .banner-info-warning {
   --banner-bg: var(--overlay-warning-default);
   --banner-border: var(--border-warning-lighter);
+  --banner-text: var(--text-warning-bolder);
+  --banner-icon: var(--icon-warning-bolder);
+}
+
+.dark .banner-info-warning {
   --banner-text: var(--text-warning-moderate);
   --banner-icon: var(--icon-warning-moderate);
 }

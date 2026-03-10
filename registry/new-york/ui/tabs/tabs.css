@@ -69,17 +69,13 @@
   color: var(--text-base-strong);
 }
 
-/* Trigger — active (light: white pops from gray container, dark: lighter shade elevates) */
+/* Trigger — active */
 .tabs-trigger-pill[data-state="active"] {
-  background: var(--background-neutral-faint-default);
+  background: var(--background-surface-raised);
   color: var(--text-base-strong);
   box-shadow:
     0 1px 2px var(--shadow-neutral-strong),
     0 0 1px var(--shadow-neutral-strong);
-}
-
-.dark .tabs-trigger-pill[data-state="active"] {
-  background: var(--background-neutral-medium-default);
 }
 
 /* Trigger — disabled */
@@ -102,15 +98,7 @@
   box-shadow:
     0 1px 2px var(--shadow-neutral-strong),
     0 0 1px var(--shadow-neutral-strong),
-    0 0 0 2px var(--background-neutral-faint-default),
-    0 0 0 4px var(--border-selected);
-}
-
-.dark .tabs-trigger-pill[data-state="active"]:focus-visible {
-  box-shadow:
-    0 1px 2px var(--shadow-neutral-strong),
-    0 0 1px var(--shadow-neutral-strong),
-    0 0 0 2px var(--background-neutral-medium-default),
+    0 0 0 2px var(--background-surface-raised),
     0 0 0 4px var(--border-selected);
 }
 

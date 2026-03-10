@@ -37,12 +37,11 @@ export function DosDonts({
         {items.map((item, i) => (
           <div
             key={i}
-            className="grid grid-cols-1 md:grid-cols-2 gap-[var(--layout-gap-3xl)]"
+            className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-[auto_1fr_auto] gap-[var(--layout-gap-3xl)]"
           >
             {/* Do */}
             <div
-              className="grid gap-[var(--layout-gap-md)]"
-              style={{ gridTemplateRows: "auto 1fr auto" }}
+              className="grid grid-rows-[auto_1fr_auto] md:row-span-3 md:grid-rows-subgrid gap-[var(--layout-gap-md)]"
             >
               <div className="flex items-center gap-[var(--layout-gap-sm)]">
                 <div
@@ -94,8 +93,7 @@ export function DosDonts({
 
             {/* Don't */}
             <div
-              className="grid gap-[var(--layout-gap-md)]"
-              style={{ gridTemplateRows: "auto 1fr auto" }}
+              className="grid grid-rows-[auto_1fr_auto] md:row-span-3 md:grid-rows-subgrid gap-[var(--layout-gap-md)]"
             >
               <div className="flex items-center gap-[var(--layout-gap-sm)]">
                 <div
