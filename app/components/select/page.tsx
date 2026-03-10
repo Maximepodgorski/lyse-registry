@@ -35,10 +35,6 @@ const overviewSections: TocSection[] = [
   { id: "disabled", label: "Disabled" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -57,6 +53,17 @@ const dosDontsItems: DosDontsItem[] = [
         "Use for single-value selection in forms.",
     },
     dont: {
+      preview: (
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Actions" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="edit">Edit</SelectItem>
+            <SelectItem value="delete">Delete</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
       description:
         "Don't use for action menus — use DropdownMenu instead.",
     },
@@ -419,7 +426,7 @@ export default function SelectPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Select component is a form control for choosing a single value
             from a dropdown list. It provides a compact and accessible way to
@@ -547,9 +554,7 @@ export default function SelectPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

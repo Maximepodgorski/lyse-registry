@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { GitHubLogo } from "@/app/_components/github-logo"
+import { ThemeToggle } from "@/app/_components/theme-toggle"
 import { Button } from "@/registry/new-york/ui/button/button"
 import {
   Menu,
@@ -101,17 +102,23 @@ export default function ComponentsLayout({
             "var(--layout-border-thin) solid var(--border-default)",
         }}
       >
-        <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto" />
-        <Button variant="terciary" size="sm" asChild>
-          <a
-            href="https://github.com/Maximepodgorski/lyse-registry"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View source on GitHub"
-          >
-            <GitHubLogo className="size-4" /> GitHub
-          </a>
-        </Button>
+        <div className="relative h-[1.75rem] w-[66px]">
+          <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:block hidden" />
+          <Image src="/logo-dark.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:hidden block" />
+        </div>
+        <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <ThemeToggle />
+          <Button variant="terciary" size="sm" asChild>
+            <a
+              href="https://github.com/Maximepodgorski/lyse-registry"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View source on GitHub"
+            >
+              <GitHubLogo className="size-4" /> GitHub
+            </a>
+          </Button>
+        </div>
       </header>
 
       <div className="flex-1 w-full flex">
@@ -175,7 +182,7 @@ export default function ComponentsLayout({
             <div className="px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] pt-[var(--layout-padding-2xl)]">
               <nav
                 className="text-content-caption font-accent flex items-center gap-[var(--layout-padding-sm)]"
-                style={{ color: "var(--text-base-moderate)" }}
+                style={{ color: "var(--text-base-bolder)" }}
                 aria-label="Breadcrumb"
               >
                 <span>{breadcrumbGroup}</span>
@@ -204,7 +211,7 @@ export default function ComponentsLayout({
                 <Link
                   href={prev.href}
                   className="flex items-center gap-[var(--layout-gap-md)] text-content-note font-accent group"
-                  style={{ color: "var(--text-base-moderate)" }}
+                  style={{ color: "var(--text-base-bolder)" }}
                 >
                   <ChevronLeft
                     className="size-4 transition-transform group-hover:-translate-x-0.5"
@@ -224,7 +231,7 @@ export default function ComponentsLayout({
                 <Link
                   href={next.href}
                   className="flex items-center gap-[var(--layout-gap-md)] text-content-note font-accent group text-right"
-                  style={{ color: "var(--text-base-moderate)" }}
+                  style={{ color: "var(--text-base-bolder)" }}
                 >
                   <div className="flex flex-col">
                     <span className="text-content-caption">Next</span>

@@ -14,7 +14,7 @@ export default function ChangelogPage() {
         </h1>
         <p
           className="text-content-highlight"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           Latest updates and releases.
         </p>
@@ -84,7 +84,7 @@ function ChangelogItem({ title, description }: { title: string; description: str
       </span>
       <span
         className="text-content-note"
-        style={{ color: "var(--text-base-moderate)" }}
+        style={{ color: "var(--text-base-bolder)" }}
       >
         {description}
       </span>

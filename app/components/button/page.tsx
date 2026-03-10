@@ -32,10 +32,6 @@ const overviewSections: TocSection[] = [
   { id: "with-icons", label: "With Icons" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -271,7 +267,7 @@ export default function ButtonPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Button component is an interactive element used to trigger
             actions or events. It provides a consistent and accessible way for
@@ -367,9 +363,7 @@ export default function ButtonPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

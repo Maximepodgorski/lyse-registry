@@ -26,10 +26,6 @@ const overviewSections: TocSection[] = [
   { id: "rich-content", label: "Rich Content" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -257,7 +253,7 @@ export default function BannerInfoPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The BannerInfo component displays a static, contextual message to
             inform users about important states or outcomes. It helps
@@ -365,9 +361,7 @@ export default function BannerInfoPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

@@ -53,7 +53,7 @@ export default function InstallationPage() {
       </h1>
       <p
         className="text-content-highlight mb-4"
-        style={{ color: "var(--text-base-moderate)" }}
+        style={{ color: "var(--text-base-bolder)" }}
       >
         How to install components from the Lyse UI registry.
       </p>
@@ -61,7 +61,7 @@ export default function InstallationPage() {
       {/* Add components */}
       <p
         className="text-content-body leading-relaxed"
-        style={{ color: "var(--text-base-moderate)" }}
+        style={{ color: "var(--text-base-bolder)" }}
       >
         Use the shadcn CLI to add any component to your project. Dependencies
         and design tokens are resolved automatically.
@@ -78,7 +78,7 @@ export default function InstallationPage() {
 
       <p
         className="text-content-body leading-relaxed"
-        style={{ color: "var(--text-base-moderate)" }}
+        style={{ color: "var(--text-base-bolder)" }}
       >
         Replace{" "}
         <code
@@ -111,7 +111,7 @@ export default function InstallationPage() {
       </h2>
       <p
         className="text-content-body leading-relaxed"
-        style={{ color: "var(--text-base-moderate)" }}
+        style={{ color: "var(--text-base-bolder)" }}
       >
         Tokens are installed automatically with any component. If you only need
         the design tokens (colors, typography, spacing, radius), install them
@@ -135,7 +135,7 @@ export default function InstallationPage() {
       </h2>
       <p
         className="text-content-body leading-relaxed"
-        style={{ color: "var(--text-base-moderate)" }}
+        style={{ color: "var(--text-base-bolder)" }}
       >
         To add every component at once, run the following command. Design tokens
         and dependencies are resolved automatically.
@@ -158,7 +158,7 @@ export default function InstallationPage() {
       </h2>
       <p
         className="text-content-body leading-relaxed"
-        style={{ color: "var(--text-base-moderate)" }}
+        style={{ color: "var(--text-base-bolder)" }}
       >
         Import the component and use it in your app:
       </p>

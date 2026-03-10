@@ -27,10 +27,6 @@ const overviewSections: TocSection[] = [
   { id: "with-dot", label: "With Dot" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -286,7 +282,7 @@ export default function BadgePage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Badge component is a compact visual indicator used to
             communicate status, category, or count at a glance. It helps users
@@ -382,9 +378,7 @@ export default function BadgePage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

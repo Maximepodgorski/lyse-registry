@@ -41,10 +41,6 @@ const overviewSections: TocSection[] = [
   { id: "disabled", label: "Disabled" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -397,7 +393,7 @@ export default function InputPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Input component is a single-line text field for capturing user
             data. It supports addon slots and validation states, providing a
@@ -536,9 +532,7 @@ export default function InputPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

@@ -31,10 +31,6 @@ const overviewSections: TocSection[] = [
   { id: "disabled", label: "Disabled" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -327,7 +323,7 @@ export default function TextareaPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Textarea component is a multi-line text field for capturing
             longer form content like comments, descriptions, or messages. It
@@ -462,9 +458,7 @@ export default function TextareaPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

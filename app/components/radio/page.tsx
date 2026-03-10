@@ -27,10 +27,6 @@ const overviewSections: TocSection[] = [
   { id: "indicator-only", label: "Indicator Only" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -349,7 +345,7 @@ export default function RadioPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Radio component lets users select a single option from a
             visible group of choices. It provides a clear and accessible way to
@@ -471,9 +467,7 @@ export default function RadioPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

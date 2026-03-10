@@ -27,10 +27,6 @@ const overviewSections: TocSection[] = [
   { id: "toggle-only", label: "Toggle Only" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -305,7 +301,7 @@ export default function TogglePage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Toggle component is a switch control for turning a binary
             option on or off. It provides an intuitive way to manage settings
@@ -413,9 +409,7 @@ export default function TogglePage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

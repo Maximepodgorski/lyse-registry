@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
+import { InlineCode } from "@/app/_components/inline-code"
 import { Tag } from "@/registry/new-york/ui/tag/tag"
 import {
   TableOfContents,
@@ -31,7 +32,7 @@ export default function IntroductionPage() {
           </h1>
           <p
             className="text-content-highlight leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Production-ready components built from a real design system. Open
             source, open code.
@@ -50,19 +51,19 @@ export default function IntroductionPage() {
         {/* Explanation */}
         <p
           className="text-content-body leading-relaxed"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           You know how most traditional component libraries work: you install a
           package from{" "}
-            <code className="text-content-caption px-1 py-0.5 rounded-[var(--layout-radius-sm)]" style={{ fontFamily: "var(--font-geist-mono)", background: "var(--background-neutral-faint-default)", color: "var(--text-base-strong)" }}>
+            <InlineCode>
               npm
-            </code>
+            </InlineCode>
             , import the components, and use them in your app.
         </p>
 
         <p
           className="text-content-body leading-relaxed"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           This approach works well until you need to customize a component to
           fit your design system or require one that isn{"'"}t included in the
@@ -73,7 +74,7 @@ export default function IntroductionPage() {
 
         <p
           className="text-content-body leading-relaxed"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           This is what Lyse UI aims to solve. It is built around the following
           principles:
@@ -82,7 +83,7 @@ export default function IntroductionPage() {
         {/* Principles list */}
         <ul
           className="flex flex-col gap-2 text-content-body leading-relaxed list-disc pl-5"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           <li>
             <strong style={{ color: "var(--text-base-strong)" }}>
@@ -122,27 +123,27 @@ export default function IntroductionPage() {
           </h2>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Lyse UI hands you the actual component code. You have full control
             to customize and extend every component to fit your project. No more
             fighting library abstractions or overriding styles with{" "}
-            <code className="text-content-caption px-1 py-0.5 rounded-[var(--layout-radius-sm)]" style={{ fontFamily: "var(--font-geist-mono)", background: "var(--background-neutral-faint-default)", color: "var(--text-base-strong)" }}>
+            <InlineCode>
               !important
-            </code>.
+            </InlineCode>.
           </p>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Each component follows a dual-file pattern: a{" "}
-            <code className="text-content-caption px-1 py-0.5 rounded-[var(--layout-radius-sm)]" style={{ fontFamily: "var(--font-geist-mono)", background: "var(--background-neutral-faint-default)", color: "var(--text-base-strong)" }}>
+            <InlineCode>
               .tsx
-            </code>{" "}
+            </InlineCode>{" "}
             file for structure and variants, and a{" "}
-            <code className="text-content-caption px-1 py-0.5 rounded-[var(--layout-radius-sm)]" style={{ fontFamily: "var(--font-geist-mono)", background: "var(--background-neutral-faint-default)", color: "var(--text-base-strong)" }}>
+            <InlineCode>
               .css
-            </code>{" "}
+            </InlineCode>{" "}
             file for theming. Change the look without touching the logic.
           </p>
         </section>
@@ -157,7 +158,7 @@ export default function IntroductionPage() {
           </h2>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Every visual property flows from CSS custom properties across 3
             layers: primitives, semantics, and a shadcn bridge. This means your
@@ -166,7 +167,7 @@ export default function IntroductionPage() {
           </p>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Learn more about the token architecture on the{" "}
             <Link
@@ -190,14 +191,14 @@ export default function IntroductionPage() {
           </h2>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Every component uses a common, composable interface. Class Variance
             Authority (CVA) handles variants predictably, Radix UI primitives
             provide accessibility, and the{" "}
-            <code className="text-content-caption px-1 py-0.5 rounded-[var(--layout-radius-sm)]" style={{ fontFamily: "var(--font-geist-mono)", background: "var(--background-neutral-faint-default)", color: "var(--text-base-strong)" }}>
+            <InlineCode>
               cn()
-            </code>{" "}
+            </InlineCode>{" "}
             helper merges classes safely with tailwind-merge.
           </p>
         </section>
@@ -212,7 +213,7 @@ export default function IntroductionPage() {
           </h2>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Lyse UI uses the shadcn registry format. A flat-file schema and the
             shadcn CLI make it easy to add components to any project. No package
@@ -230,7 +231,7 @@ export default function IntroductionPage() {
           </h2>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             This file contains the library used to build Lyse, shared openly
             with the community. You{"'"}ll find production-ready components and
@@ -238,7 +239,7 @@ export default function IntroductionPage() {
           </p>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             This library is also a practical way to explore Lyse, an AI
             assistant that turns component changes in Figma into tickets
@@ -248,7 +249,7 @@ export default function IntroductionPage() {
           </p>
           <p
             className="text-content-body leading-relaxed"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Use it as a solid base for your own design system, a reference for
             structuring components and variants, or a sandbox to test how Lyse
@@ -278,18 +279,18 @@ export default function IntroductionPage() {
                 >
                   Lyse UI Library
                 </span>
-                <Tag variant="neutral" size="sm">v2.0</Tag>
+<Tag variant="neutral" size="sm">v2.0</Tag>
               </span>
               <span
                 className="text-content-note"
-                style={{ color: "var(--text-base-moderate)" }}
+                style={{ color: "var(--text-base-bolder)" }}
               >
                 Browse the full design system on Figma Community
               </span>
             </div>
             <ArrowUpRight
               className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             />
           </a>
         </section>

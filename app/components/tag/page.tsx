@@ -29,10 +29,6 @@ const overviewSections: TocSection[] = [
   { id: "dismissible", label: "Dismissible" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -333,7 +329,7 @@ export default function TagPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Tag component is a small, interactive label used to
             categorize, filter, or display metadata. It supports actions like
@@ -429,9 +425,7 @@ export default function TagPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

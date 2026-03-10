@@ -35,10 +35,6 @@ const overviewSections: TocSection[] = [
   { id: "add-button", label: "AvatarAddButton" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -80,7 +76,7 @@ const dosDontsItems: DosDontsItem[] = [
           />
           <div className="flex flex-col">
             <span className="text-content-caption">Jane Doe</span>
-            <span className="text-content-caption" style={{ color: "var(--text-base-moderate)" }}>Designer</span>
+            <span className="text-content-caption" style={{ color: "var(--text-base-bolder)" }}>Designer</span>
           </div>
         </div>
       ),
@@ -535,7 +531,7 @@ export default function AvatarPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Avatar component displays a user&apos;s profile picture,
             initials, or placeholder in a recognizable format. It helps
@@ -686,9 +682,7 @@ export default function AvatarPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

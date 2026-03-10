@@ -35,10 +35,6 @@ const overviewSections: TocSection[] = [
   { id: "dismissible", label: "Dismissible" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -115,6 +111,16 @@ const dosDontsItems: DosDontsItem[] = [
         "Provide onDismiss for non-critical content users can close.",
     },
     dont: {
+      preview: (
+        <div className="max-w-[14rem]">
+          <CalloutCard
+            icon={<AlertTriangle />}
+            title="Action required"
+            description="Your account will be suspended."
+            onDismiss={() => {}}
+          />
+        </div>
+      ),
       description:
         "Don't make critical information dismissible.",
     },
@@ -273,7 +279,7 @@ export default function CalloutCardPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The CalloutCard component is a branded callout used to surface
             tips, announcements, or contextual promotions. It draws attention
@@ -372,7 +378,7 @@ export default function CalloutCardPage() {
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

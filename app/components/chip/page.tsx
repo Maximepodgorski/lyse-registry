@@ -37,10 +37,6 @@ const overviewSections: TocSection[] = [
   { id: "disabled", label: "Disabled" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -95,10 +91,24 @@ const dosDontsItems: DosDontsItem[] = [
   },
   {
     do: {
+      preview: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Chip variant="filled" hasDropdown>Status</Chip>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>Active</DropdownMenuItem>
+            <DropdownMenuItem>Inactive</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
       description:
         'Use data-state="open" styling by wrapping in a DropdownMenuTrigger.',
     },
     dont: {
+      preview: (
+        <Chip variant="filled" hasDropdown className="bg-[var(--background-neutral-medium-default)]">Status</Chip>
+      ),
       description:
         "Don't manually toggle active styles — rely on Radix state attributes.",
     },
@@ -277,7 +287,7 @@ export default function ChipPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Chip component is a compact, clickable selector used for
             filtering or toggling options. It provides an inline way to make
@@ -373,7 +383,7 @@ export default function ChipPage() {
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

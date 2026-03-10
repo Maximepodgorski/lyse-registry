@@ -38,10 +38,6 @@ const overviewSections: TocSection[] = [
   { id: "disabled", label: "Disabled" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -138,6 +134,13 @@ const dosDontsItems: DosDontsItem[] = [
         'Use disabled for tabs that exist but aren\'t available yet.',
     },
     dont: {
+      preview: (
+        <Tabs defaultValue="active" variant="underline">
+          <TabsList>
+            <TabsTrigger value="active">Active</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ),
       description:
         "Don't hide tabs that are temporarily unavailable — show them disabled with context.",
     },
@@ -311,7 +314,7 @@ export default function TabsPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Tabs component organizes content into distinct, switchable
             sections within the same view. It helps users navigate between
@@ -410,7 +413,7 @@ export default function TabsPage() {
       </main>
 
       <TableOfContents
-        sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []}
+        sections={tab === "overview" ? overviewSections : []}
       />
     </>
   )

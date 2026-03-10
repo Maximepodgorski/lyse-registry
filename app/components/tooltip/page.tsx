@@ -32,10 +32,6 @@ const overviewSections: TocSection[] = [
   { id: "placement", label: "Placement" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -105,7 +101,7 @@ const dosDontsItems: DosDontsItem[] = [
     do: {
       preview: (
         <div className="flex flex-col items-center gap-1">
-          <span className="text-content-caption" style={{ color: "var(--text-base-moderate)" }}>App layout</span>
+          <span className="text-content-caption" style={{ color: "var(--text-base-bolder)" }}>App layout</span>
           <div className="flex items-center gap-[var(--layout-gap-sm)]" style={{ border: "var(--layout-border-thin) dashed var(--border-default)", borderRadius: "var(--layout-radius-md)", padding: "var(--layout-padding-sm) var(--layout-padding-md)" }}>
             <span className="text-content-caption font-accent" style={{ color: "var(--text-base-strong)" }}>TooltipProvider</span>
           </div>
@@ -425,7 +421,7 @@ export default function TooltipPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Tooltip component provides additional context or descriptions
             through a non-interactive overlay. It appears on hover or keyboard
@@ -533,9 +529,7 @@ export default function TooltipPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

@@ -40,7 +40,7 @@ export default function DirectoryPage() {
         </h1>
         <p
           className="text-content-highlight leading-relaxed"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           Here you can find all the components available in the registry. We are
           working on adding more components.

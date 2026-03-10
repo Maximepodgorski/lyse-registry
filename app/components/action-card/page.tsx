@@ -63,10 +63,6 @@ const overviewSections: TocSection[] = [
   { id: "with-label", label: "With Label" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -143,6 +139,16 @@ const dosDontsItems: DosDontsItem[] = [
         "Use logo for recognizable brand icons (integrations, features).",
     },
     dont: {
+      preview: (
+        <div className="w-full max-w-sm">
+          <ActionCard
+            icon={<img src="/logo.svg" alt="" className="size-5 opacity-30" />}
+            title="Feature"
+            description="Decorative illustration."
+            action={<Button size="sm" variant="secondary">View</Button>}
+          />
+        </div>
+      ),
       description:
         "Don't use logo for decorative illustrations — it's meant for compact brand marks.",
     },
@@ -169,6 +175,22 @@ const dosDontsItems: DosDontsItem[] = [
         "Stack multiple ActionCards in a flex-col list.",
     },
     dont: {
+      preview: (
+        <div className="w-full max-w-sm">
+          <ActionCard
+            icon={<Bell className="size-5" />}
+            title="Notifications"
+            description={undefined}
+            action={
+              <ActionCard
+                icon={<Settings className="size-5" />}
+                title="Nested"
+                description="Don't do this."
+              />
+            }
+          />
+        </div>
+      ),
       description:
         "Don't nest ActionCards inside each other.",
     },
@@ -340,7 +362,7 @@ export default function ActionCardPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The ActionCard component is a horizontal card that pairs
             descriptive content with a trailing action. It provides a clean
@@ -441,7 +463,7 @@ export default function ActionCardPage() {
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

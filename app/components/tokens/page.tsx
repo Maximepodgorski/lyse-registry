@@ -82,7 +82,7 @@ export default function TokensPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             A 3-layer token system built on CSS custom properties. Colors,
             typography, spacing, and layout — with automatic light/dark mode
@@ -100,7 +100,7 @@ export default function TokensPage() {
           </h2>
           <p
             className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Each layer adds meaning. Primitives hold raw values, semantics
             assign purpose, and the bridge maps to shadcn/Tailwind utilities.
@@ -124,7 +124,7 @@ export default function TokensPage() {
           </h2>
           <p
             className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Raw values with no semantic meaning. Five color scales (brand,
             danger, neutral, success, warning) with 50–950 steps, plus
@@ -132,7 +132,7 @@ export default function TokensPage() {
           </p>
           <div
             className="flex flex-col gap-2 text-content-note"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             <span><InlineCode>root-colors.css</InlineCode> — Color palette (oklch)</span>
             <span><InlineCode>root-typography.css</InlineCode> — Font sizes, weights, line heights</span>
@@ -158,7 +158,7 @@ export default function TokensPage() {
           </h2>
           <p
             className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Named by purpose, not value. Semantic tokens reference primitives
             and remap automatically between light and dark mode. Components
@@ -166,7 +166,7 @@ export default function TokensPage() {
           </p>
           <div
             className="flex flex-col gap-2 text-content-note"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             <span><InlineCode>semantic-colors.css</InlineCode> — Background, text, border, icon tokens</span>
             <span><InlineCode>semantic-global.css</InlineCode> — Mode-independent layout aliases</span>
@@ -192,7 +192,7 @@ export default function TokensPage() {
           </h2>
           <p
             className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Maps Lyse semantic tokens to shadcn variable names. This makes
             components compatible with the shadcn ecosystem and Tailwind
@@ -219,7 +219,7 @@ export default function TokensPage() {
           </h2>
           <p
             className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Component CSS files use Layer 2 tokens for theming (colors,
             borders, shadows). Layout properties use dedicated layout tokens.
@@ -250,7 +250,7 @@ export default function TokensPage() {
           </h2>
           <p
             className="text-content-body"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Add the <InlineCode>dark</InlineCode> class to any ancestor.
             Semantic tokens remap automatically — no component changes needed.

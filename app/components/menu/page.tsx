@@ -49,10 +49,6 @@ const overviewSections: TocSection[] = [
   { id: "grouped", label: "Grouped" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -94,7 +90,7 @@ const dosDontsItems: DosDontsItem[] = [
       preview: (
         <div className="w-[240px] flex flex-col">
           <MenuGroup>
-            <span className="text-content-caption px-3 py-1" style={{ color: "var(--text-base-moderate)" }}>Navigation</span>
+            <span className="text-content-caption px-3 py-1" style={{ color: "var(--text-base-bolder)" }}>Navigation</span>
             <MenuItem icon={<Home />} size="sm">Home</MenuItem>
             <MenuItem icon={<FileText />} size="sm">Documents</MenuItem>
           </MenuGroup>
@@ -407,7 +403,7 @@ export default function MenuPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Menu component provides a vertical navigation structure for
             sidebars and panels. It organizes links and actions into logical
@@ -506,9 +502,7 @@ export default function MenuPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

@@ -34,10 +34,6 @@ const overviewSections: TocSection[] = [
   { id: "interactive", label: "Interactive" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -83,7 +79,7 @@ const dosDontsItems: DosDontsItem[] = [
     do: {
       preview: (
         <div className="flex flex-col gap-[var(--layout-gap-sm)] w-full max-w-xs">
-          <span className="text-content-caption font-accent" style={{ color: "var(--text-base-moderate)" }}>Profile setup</span>
+          <span className="text-content-caption font-accent" style={{ color: "var(--text-base-bolder)" }}>Profile setup</span>
           <ProgressIndicator value={60} labelPosition="right" />
         </div>
       ),
@@ -189,7 +185,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               sm
             </span>
@@ -198,7 +194,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               md
             </span>
@@ -216,7 +212,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               3 steps
             </span>
@@ -225,7 +221,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               5 steps (default)
             </span>
@@ -234,7 +230,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               10 steps
             </span>
@@ -252,7 +248,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               none (default)
             </span>
@@ -261,7 +257,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               right
             </span>
@@ -270,7 +266,7 @@ function OverviewTab() {
           <div className="flex flex-col gap-[var(--layout-gap-sm)]">
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               bottom
             </span>
@@ -348,7 +344,7 @@ export default function ProgressPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Progress component visualizes task completion through a
             segmented bar. It helps users understand how far along a process
@@ -448,7 +444,7 @@ export default function ProgressPage() {
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

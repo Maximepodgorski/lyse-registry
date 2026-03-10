@@ -30,10 +30,6 @@ const overviewSections: TocSection[] = [
   { id: "grid", label: "Grid Layout" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -252,7 +248,7 @@ export default function SpotlightCardPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The SpotlightCard component is a vertical card featuring a
             prominent image area above a title and description. It provides an
@@ -352,7 +348,7 @@ export default function SpotlightCardPage() {
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

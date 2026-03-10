@@ -32,17 +32,13 @@ const overviewSections: TocSection[] = [
   { id: "in-a-button", label: "In a Button" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
         <div className="flex items-center gap-[var(--layout-gap-md)]">
           <Spinner size="sm" />
-          <span className="text-content-note" style={{ color: "var(--text-base-moderate)" }}>Loading...</span>
+          <span className="text-content-note" style={{ color: "var(--text-base-bolder)" }}>Loading...</span>
         </div>
       ),
       description:
@@ -132,7 +128,7 @@ function OverviewTab() {
             <Spinner size="sm" />
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               sm
             </span>
@@ -141,7 +137,7 @@ function OverviewTab() {
             <Spinner size="md" />
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               md
             </span>
@@ -150,7 +146,7 @@ function OverviewTab() {
             <Spinner size="lg" />
             <span
               className="text-content-caption"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               lg
             </span>
@@ -168,7 +164,7 @@ function OverviewTab() {
             <Spinner label="Saving changes" />
             <span
               className="text-content-note"
-              style={{ color: "var(--text-base-moderate)" }}
+              style={{ color: "var(--text-base-bolder)" }}
             >
               label=&quot;Saving changes&quot;
             </span>
@@ -240,7 +236,7 @@ export default function SpinnerPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Spinner component is an animated loading indicator that
             communicates ongoing background processes. It provides visual
@@ -338,7 +334,7 @@ export default function SpinnerPage() {
         </div>
       </main>
 
-      <TableOfContents sections={tab === "overview" ? overviewSections : tab === "documentation" ? docSections : []} />
+      <TableOfContents sections={tab === "overview" ? overviewSections : []} />
     </>
   )
 }

@@ -47,10 +47,6 @@ const overviewSections: TocSection[] = [
   { id: "disabled-items", label: "Disabled Items" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -434,7 +430,7 @@ export default function DropdownMenuPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The DropdownMenu component is an action menu triggered by a button
             or control. It organizes contextual actions into a structured
@@ -542,9 +538,7 @@ export default function DropdownMenuPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

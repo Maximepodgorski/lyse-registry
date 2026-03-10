@@ -27,10 +27,6 @@ const overviewSections: TocSection[] = [
   { id: "stacking", label: "Stacking" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -99,7 +95,7 @@ const dosDontsItems: DosDontsItem[] = [
           </span>
           <span
             className="text-content-caption"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             Verify your identity to continue.
           </span>
@@ -117,7 +113,7 @@ const dosDontsItems: DosDontsItem[] = [
       preview: (
         <div
           className="flex items-center gap-2 text-content-caption"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           <span>Layout:</span>
           <span style={{ color: "var(--text-base-strong)" }}>
@@ -133,7 +129,7 @@ const dosDontsItems: DosDontsItem[] = [
       preview: (
         <div
           className="flex flex-col gap-1 text-content-caption"
-          style={{ color: "var(--text-base-moderate)" }}
+          style={{ color: "var(--text-base-bolder)" }}
         >
           <span>
             Page A: <span style={{ color: "var(--text-danger-strong)" }}>{'<Toaster />'}</span>
@@ -291,7 +287,7 @@ export default function ToastPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Toast component delivers brief, non-intrusive notifications
             in response to user actions. It provides real-time feedback without
@@ -391,9 +387,7 @@ export default function ToastPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

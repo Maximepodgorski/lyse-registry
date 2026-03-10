@@ -28,10 +28,6 @@ const overviewSections: TocSection[] = [
   { id: "indicator-only", label: "Indicator Only" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -349,7 +345,7 @@ export default function CheckboxPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Checkbox component is a form control that allows users to
             toggle between checked, unchecked, and indeterminate states. It
@@ -458,9 +454,7 @@ export default function CheckboxPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>

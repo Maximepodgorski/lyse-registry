@@ -55,10 +55,6 @@ const overviewSections: TocSection[] = [
   { id: "controlled", label: "Controlled" },
 ]
 
-const docSections: TocSection[] = [
-  { id: "dos-donts", label: "Do / Don't" },
-]
-
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
@@ -124,7 +120,7 @@ const dosDontsItems: DosDontsItem[] = [
       preview: (
         <div className="flex flex-col gap-[var(--layout-gap-xs)]">
           <p className="text-content-body font-accent" style={{ color: "var(--text-base-strong)" }}>Delete project</p>
-          <p className="text-content-caption" style={{ color: "var(--text-base-moderate)" }}>This action cannot be undone.</p>
+          <p className="text-content-caption" style={{ color: "var(--text-base-bolder)" }}>This action cannot be undone.</p>
         </div>
       ),
       description:
@@ -587,7 +583,7 @@ export default function ModalPage() {
           </h1>
           <p
             className="text-content-highlight"
-            style={{ color: "var(--text-base-moderate)" }}
+            style={{ color: "var(--text-base-bolder)" }}
           >
             The Modal component is an overlay dialog that focuses the
             user&apos;s attention on a specific task or decision. It provides a
@@ -762,9 +758,7 @@ export default function ModalPage() {
         sections={
           tab === "overview"
             ? overviewSections
-            : tab === "documentation"
-              ? docSections
-              : []
+            : []
         }
       />
     </>
