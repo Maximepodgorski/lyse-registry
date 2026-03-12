@@ -8,6 +8,14 @@ import {
   TextareaLabel,
   TextareaHint,
 } from "@/registry/new-york/ui/textarea/textarea"
+import {
+  Field,
+  FieldLabel,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+} from "@/registry/new-york/ui/field/field"
+
 import { Button } from "@/registry/new-york/ui/button/button"
 import { Copy, ExternalLink } from "lucide-react"
 import { ComponentPreview } from "@/app/_components/component-preview"
@@ -27,7 +35,7 @@ const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
   { id: "sizes", label: "Sizes" },
   { id: "variants", label: "Variants" },
-  { id: "textarea-field", label: "TextareaField" },
+  { id: "field", label: "Field" },
   { id: "disabled", label: "Disabled" },
 ]
 
@@ -35,38 +43,42 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <Textarea
-          variant="destructive"
-          aria-invalid="true"
-          placeholder="Error state"
-          className="w-[420px]"
-        />
+        <Field error required className="w-[420px]">
+          <FieldLabel>Message</FieldLabel>
+          <FieldControl>
+            <Textarea placeholder="Type your message..." />
+          </FieldControl>
+          <FieldDescription>Maximum 500 characters.</FieldDescription>
+          <FieldError>Message is required.</FieldError>
+        </Field>
       ),
       description:
-        'Use variant="destructive" with aria-invalid="true" for error states.',
+        "Use Field to compose form fields — error, required, and a11y propagate automatically.",
     },
     dont: {
       preview: (
-        <Textarea
-          variant="destructive"
-          placeholder="Styled only"
-          className="w-[420px]"
-        />
+        <TextareaField className="w-[420px]">
+          <TextareaLabel required>Message</TextareaLabel>
+          <Textarea variant="destructive" placeholder="Type your message..." />
+          <TextareaHint variant="destructive">Message is required.</TextareaHint>
+        </TextareaField>
       ),
       description:
-        "Don't use destructive variant for visual styling without communicating error to screen readers.",
+        "Don't manually wire variant, htmlFor, and aria attributes — use Field instead.",
     },
   },
   {
     do: {
       preview: (
-        <TextareaField className="w-[420px]">
-          <TextareaLabel>Message</TextareaLabel>
-          <Textarea placeholder="Type your message here..." />
-        </TextareaField>
+        <Field className="w-[420px]">
+          <FieldLabel>Message</FieldLabel>
+          <FieldControl>
+            <Textarea placeholder="Type your message here..." />
+          </FieldControl>
+        </Field>
       ),
       description:
-        "Pair with a <label> element using matching id/htmlFor.",
+        "Use Field with a label for accessible form fields.",
     },
     dont: {
       preview: (
@@ -95,21 +107,16 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <TextareaField className="w-[420px]">
-          <TextareaLabel required>Message</TextareaLabel>
-          <Textarea
-            variant="destructive"
-            aria-invalid="true"
-            aria-describedby="msg-error"
-            placeholder="Type your message..."
-          />
-          <TextareaHint variant="destructive" id="msg-error">
-            Message is required.
-          </TextareaHint>
-        </TextareaField>
+        <Field error required className="w-[420px]">
+          <FieldLabel>Message</FieldLabel>
+          <FieldControl>
+            <Textarea placeholder="Type your message..." />
+          </FieldControl>
+          <FieldError>Message is required.</FieldError>
+        </Field>
       ),
       description:
-        "Add aria-describedby pointing to hint/error text for screen reader context.",
+        "Field auto-wires aria-describedby, aria-invalid, and role=\"alert\" for screen readers.",
     },
     dont: {
       preview: (
@@ -198,18 +205,19 @@ const hintPropDefs: PropDef[] = [
   },
 ]
 
-const importCode = `import {
-  Textarea, TextareaField,
-  TextareaLabel, TextareaHint
-} from '@/components/ui/textarea'
+const importCode = `import { Textarea } from '@/components/ui/textarea'
+import {
+  Field, FieldLabel, FieldControl,
+  FieldDescription, FieldError
+} from '@/components/ui/field'
 
-<TextareaField>
-  <TextareaLabel required>Message</TextareaLabel>
-  <Textarea
-    placeholder="Type your message..."
-  />
-  <TextareaHint>Helper text</TextareaHint>
-</TextareaField>`
+<Field required>
+  <FieldLabel>Message</FieldLabel>
+  <FieldControl>
+    <Textarea placeholder="Type your message..." />
+  </FieldControl>
+  <FieldDescription>Helper text</FieldDescription>
+</Field>`
 
 /* ----------------------------------------------------------------
  * Tabs
@@ -250,28 +258,27 @@ function OverviewTab() {
       </ComponentPreview>
 
       <ComponentPreview
-        id="textarea-field"
-        title="TextareaField"
-        description="Full form field with label, textarea, and helper text."
+        id="field"
+        title="Field"
+        description="Compose label, control, description, and error. State propagates automatically."
       >
         <div className="flex flex-col gap-8 w-[420px]">
-          <TextareaField>
-            <TextareaLabel required>Message</TextareaLabel>
-            <Textarea placeholder="Type your message here..." />
-            <TextareaHint>Maximum 500 characters.</TextareaHint>
-          </TextareaField>
+          <Field required>
+            <FieldLabel>Message</FieldLabel>
+            <FieldControl>
+              <Textarea placeholder="Type your message here..." />
+            </FieldControl>
+            <FieldDescription>Maximum 500 characters.</FieldDescription>
+          </Field>
 
-          <TextareaField>
-            <TextareaLabel required>Message</TextareaLabel>
-            <Textarea
-              variant="destructive"
-              placeholder="Type your message here..."
-            />
-            <TextareaHint variant="destructive">
-              Message is required.
-            </TextareaHint>
-          </TextareaField>
-
+          <Field error required>
+            <FieldLabel>Message</FieldLabel>
+            <FieldControl>
+              <Textarea placeholder="Type your message here..." />
+            </FieldControl>
+            <FieldDescription>Maximum 500 characters.</FieldDescription>
+            <FieldError>Message is required.</FieldError>
+          </Field>
         </div>
       </ComponentPreview>
 
@@ -282,11 +289,13 @@ function OverviewTab() {
       >
         <div className="flex flex-col gap-4 w-[420px]">
           <Textarea disabled placeholder="Disabled textarea" />
-          <TextareaField>
-            <TextareaLabel required>Message</TextareaLabel>
-            <Textarea disabled placeholder="Type your message here..." />
-            <TextareaHint>Maximum 500 characters.</TextareaHint>
-          </TextareaField>
+          <Field disabled>
+            <FieldLabel>Message</FieldLabel>
+            <FieldControl>
+              <Textarea placeholder="Type your message here..." />
+            </FieldControl>
+            <FieldDescription>Maximum 500 characters.</FieldDescription>
+          </Field>
         </div>
       </ComponentPreview>
     </div>
@@ -395,11 +404,13 @@ export default function TextareaPage() {
           {tab === "overview" && (
             <CodeBlock
               preview={
-                <TextareaField className="w-[420px]">
-                  <TextareaLabel required>Message</TextareaLabel>
-                  <Textarea placeholder="Type your message here..." />
-                  <TextareaHint>Maximum 500 characters.</TextareaHint>
-                </TextareaField>
+                <Field required className="w-[420px]">
+                  <FieldLabel>Message</FieldLabel>
+                  <FieldControl>
+                    <Textarea placeholder="Type your message here..." />
+                  </FieldControl>
+                  <FieldDescription>Maximum 500 characters.</FieldDescription>
+                </Field>
               }
               codeString={importCode}
               language="tsx"
@@ -464,3 +475,4 @@ export default function TextareaPage() {
     </>
   )
 }
+

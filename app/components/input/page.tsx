@@ -8,6 +8,14 @@ import {
   InputLabel,
   InputHint,
 } from "@/registry/new-york/ui/input/input"
+import {
+  Field,
+  FieldLabel,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+} from "@/registry/new-york/ui/field/field"
+
 import { Button } from "@/registry/new-york/ui/button/button"
 import {
   Copy,
@@ -37,13 +45,31 @@ const overviewSections: TocSection[] = [
   { id: "sizes", label: "Sizes" },
   { id: "variants", label: "Variants" },
   { id: "with-icons", label: "With Icons" },
-  { id: "input-field", label: "InputField" },
+  { id: "field", label: "Field" },
   { id: "disabled", label: "Disabled" },
 ]
 
 const dosDontsItems: DosDontsItem[] = [
   {
     do: {
+      preview: (
+        <Field error required className="w-[420px]">
+          <FieldLabel>Email</FieldLabel>
+          <FieldControl>
+            <Input
+              leading={<Mail />}
+              trailing={<AlertCircle />}
+              placeholder="registry@getlyse.com"
+            />
+          </FieldControl>
+          <FieldDescription>We&apos;ll never share your email.</FieldDescription>
+          <FieldError>Please enter a valid email address.</FieldError>
+        </Field>
+      ),
+      description:
+        "Use Field to compose form fields — error, required, and disabled propagate automatically.",
+    },
+    dont: {
       preview: (
         <InputField className="w-[420px]">
           <InputLabel required>Email</InputLabel>
@@ -59,25 +85,7 @@ const dosDontsItems: DosDontsItem[] = [
         </InputField>
       ),
       description:
-        "Match Input variant and InputHint variant (e.g. destructive + destructive).",
-    },
-    dont: {
-      preview: (
-        <InputField className="w-[420px]">
-          <InputLabel required>Email</InputLabel>
-          <Input
-            variant="destructive"
-            leading={<Mail />}
-            trailing={<AlertCircle />}
-            placeholder="registry@getlyse.com"
-          />
-          <InputHint>
-            Please enter a valid email address.
-          </InputHint>
-        </InputField>
-      ),
-      description:
-        "Don't use mismatched variants between input and hint.",
+        "Don't manually wire variant, htmlFor, and required on each element — use Field instead.",
     },
   },
   {
@@ -99,27 +107,32 @@ const dosDontsItems: DosDontsItem[] = [
   {
     do: {
       preview: (
-        <InputField className="w-[420px]">
-          <InputLabel required>Email</InputLabel>
-          <Input leading={<Mail />} placeholder="registry@getlyse.com" />
-          <InputHint>We&apos;ll never share your email.</InputHint>
-        </InputField>
+        <Field required className="w-[420px]">
+          <FieldLabel>Email</FieldLabel>
+          <FieldControl>
+            <Input leading={<Mail />} placeholder="registry@getlyse.com" />
+          </FieldControl>
+          <FieldDescription>We&apos;ll never share your email.</FieldDescription>
+        </Field>
       ),
       description:
-        "Use InputField to compose label + input + hint with consistent spacing.",
+        "Use Field to compose label + input + description with consistent spacing and auto-wired accessibility.",
     },
     dont: {
       preview: (
         <div className="flex flex-col gap-1 w-[420px]">
-          <InputLabel required>Email</InputLabel>
+          <label className="field-label inline-flex items-center gap-[var(--layout-gap-xs)] text-content-note font-accent">
+            Email
+            <span className="field-label-asterisk">*</span>
+          </label>
           <div className="mt-3" />
           <Input leading={<Mail />} placeholder="registry@getlyse.com" />
           <div className="mt-4" />
-          <InputHint>We&apos;ll never share your email.</InputHint>
+          <p className="text-content-note [color:var(--text-base-moderate)]">We&apos;ll never share your email.</p>
         </div>
       ),
       description:
-        "Don't manually add spacing between label, input, and hint — use InputField instead.",
+        "Don't manually add spacing and labels — use Field for consistent layout and a11y.",
     },
   },
   {
@@ -221,19 +234,19 @@ const hintPropDefs: PropDef[] = [
   },
 ]
 
-const importCode = `import {
-  Input, InputField,
-  InputLabel, InputHint
-} from '@/components/ui/input'
+const importCode = `import { Input } from '@/components/ui/input'
+import {
+  Field, FieldLabel, FieldControl,
+  FieldDescription, FieldError
+} from '@/components/ui/field'
 
-<InputField>
-  <InputLabel required>Email</InputLabel>
-  <Input
-    leading={<Mail />}
-    placeholder="Enter email"
-  />
-  <InputHint>Helper text</InputHint>
-</InputField>`
+<Field required>
+  <FieldLabel>Email</FieldLabel>
+  <FieldControl>
+    <Input leading={<Mail />} placeholder="Enter email" />
+  </FieldControl>
+  <FieldDescription>Helper text</FieldDescription>
+</Field>`
 
 /* ----------------------------------------------------------------
  * Tabs
@@ -304,34 +317,35 @@ function OverviewTab() {
       </ComponentPreview>
 
       <ComponentPreview
-        id="input-field"
-        title="InputField"
-        description="Full form field with label, input, and helper text."
+        id="field"
+        title="Field"
+        description="Compose label, control, description, and error. State propagates automatically — no manual id, htmlFor, or variant wiring."
       >
         <div className="flex flex-col gap-8 w-[420px]">
-          <InputField>
-            <InputLabel required>Email</InputLabel>
-            <Input
-              leading={<Mail />}
-              trailing={<HelpCircle />}
-              placeholder="registry@getlyse.com"
-            />
-            <InputHint>This is a hint text to help user.</InputHint>
-          </InputField>
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <FieldControl>
+              <Input
+                leading={<Mail />}
+                trailing={<HelpCircle />}
+                placeholder="registry@getlyse.com"
+              />
+            </FieldControl>
+            <FieldDescription>This is a hint text to help user.</FieldDescription>
+          </Field>
 
-          <InputField>
-            <InputLabel required>Email</InputLabel>
-            <Input
-              variant="destructive"
-              leading={<Mail />}
-              trailing={<AlertCircle />}
-              placeholder="registry@getlyse.com"
-            />
-            <InputHint variant="destructive">
-              Please enter a valid email address.
-            </InputHint>
-          </InputField>
-
+          <Field error required>
+            <FieldLabel>Email</FieldLabel>
+            <FieldControl>
+              <Input
+                leading={<Mail />}
+                trailing={<AlertCircle />}
+                placeholder="registry@getlyse.com"
+              />
+            </FieldControl>
+            <FieldDescription>We&apos;ll never share your email.</FieldDescription>
+            <FieldError>Please enter a valid email address.</FieldError>
+          </Field>
         </div>
       </ComponentPreview>
 
@@ -347,16 +361,17 @@ function OverviewTab() {
             trailing={<HelpCircle />}
             placeholder="Disabled input"
           />
-          <InputField>
-            <InputLabel required>Email</InputLabel>
-            <Input
-              disabled
-              leading={<Mail />}
-              trailing={<HelpCircle />}
-              placeholder="registry@getlyse.com"
-            />
-            <InputHint>This is a hint text to help user.</InputHint>
-          </InputField>
+          <Field disabled>
+            <FieldLabel>Email</FieldLabel>
+            <FieldControl>
+              <Input
+                leading={<Mail />}
+                trailing={<HelpCircle />}
+                placeholder="registry@getlyse.com"
+              />
+            </FieldControl>
+            <FieldDescription>This is a hint text to help user.</FieldDescription>
+          </Field>
         </div>
       </ComponentPreview>
     </div>
@@ -465,15 +480,17 @@ export default function InputPage() {
           {tab === "overview" && (
             <CodeBlock
               preview={
-                <InputField className="w-[420px]">
-                  <InputLabel required>Email</InputLabel>
-                  <Input
-                    leading={<Mail />}
-                    trailing={<HelpCircle />}
-                    placeholder="Enter email"
-                  />
-                  <InputHint>We&apos;ll never share your email.</InputHint>
-                </InputField>
+                <Field required className="w-[420px]">
+                  <FieldLabel>Email</FieldLabel>
+                  <FieldControl>
+                    <Input
+                      leading={<Mail />}
+                      trailing={<HelpCircle />}
+                      placeholder="Enter email"
+                    />
+                  </FieldControl>
+                  <FieldDescription>We&apos;ll never share your email.</FieldDescription>
+                </Field>
               }
               codeString={importCode}
               language="tsx"
@@ -538,3 +555,4 @@ export default function InputPage() {
     </>
   )
 }
+

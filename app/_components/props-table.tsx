@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Badge } from "@/registry/new-york/ui/badge/badge"
+import { InlineCode } from "@/app/_components/inline-code"
 
 export type PropDef = {
   name: string
@@ -24,12 +25,7 @@ export function PropsTable({
           style={{ color: "var(--text-base-moderate)" }}
         >
           Extends{" "}
-          <code
-            className="font-mono"
-            style={{ color: "var(--text-base-strong)" }}
-          >
-            {extendsType}
-          </code>{" "}
+          <InlineCode>{extendsType}</InlineCode>{" "}
           — all native attributes are forwarded.
         </p>
       )}
