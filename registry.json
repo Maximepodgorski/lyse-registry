@@ -47,6 +47,25 @@
       "docs": "After installing, import all token files in your main CSS entry point (e.g. globals.css):\n\n@import './styles/lyse/root-colors.css';\n@import './styles/lyse/root-typography.css';\n@import './styles/lyse/root-layout.css';\n@import './styles/lyse/semantic-global.css';\n@import './styles/lyse/semantic-colors.css';\n@import './styles/lyse/shadcn-bridge.css';\n@import './styles/lyse/typography.css';\n\nFor dark mode, add the 'dark' class to your HTML root element."
     },
     {
+      "name": "alert",
+      "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/alert/alert.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/alert/alert.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "dependencies": [
