@@ -2,13 +2,13 @@
 
 ## User Story
 
-As a developer, I want an Alert compound component so that I can communicate contextual feedback — informational, success, warning, or danger — to users in a visually distinct, accessible banner that supports icons, dismissal, and composable content.
+As a developer, I want an Alert compound component so that I can communicate contextual feedback — brand, success, warning, or danger — to users in a visually distinct, accessible banner that supports icons, dismissal, and composable content.
 
 ## Component Tree
 
 ```
 ┌───────────────────────────────────────────────────────┐
-│ Alert (<div> role="alert" aria-live="assertive")      │
+│ Alert (<div> role="alert" aria-live="polite")          │
 │ ├── AlertIcon (<span> auto or custom icon)            │
 │ ├── <div> content wrapper (flex col)                  │
 │ │   ├── AlertTitle (<p> bold label)                   │
@@ -34,7 +34,7 @@ registry/new-york/ui/alert/
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `variant` | `"info" \| "success" \| "warning" \| "danger"` | `"info"` | No | Semantic intent — controls background, accent, icon, text colors |
+| `variant` | `"brand" \| "success" \| "warning" \| "danger"` | `"brand"` | No | Semantic intent — controls background, accent, icon, text colors |
 | `icon` | `ReactNode \| null` | auto | No | Custom icon override. Pass `null` to suppress icon entirely. Omit to use the default icon for the variant |
 | `onDismiss` | `() => void` | — | No | If provided, renders an X dismiss button; click fires callback |
 | `className` | `string` | — | No | Additional classes |
@@ -68,21 +68,21 @@ Rendered automatically inside Alert based on `variant`. Consumer can override vi
 
 | Variant | Icon | Import |
 |---------|------|--------|
-| `info` | `Info` | `lucide-react` |
+| `brand` | `Info` | `lucide-react` |
 | `success` | `CheckCircle2` | `lucide-react` |
 | `warning` | `AlertTriangle` | `lucide-react` |
 | `danger` | `XCircle` | `lucide-react` |
 
-Icon size: 16px (w-4 h-4). Color driven by variant CSS class via `[color:var(--icon-*-moderate)]`.
+Icon size: 16px (w-4 h-4). Color driven by variant CSS class via `[color:var(--icon-*-moderate)]`. `Sparkles` may also be considered for `brand` to match BannerInfo.
 
 ## Variant Styling
 
-### info
+### brand
 
 | Property | Token |
 |----------|-------|
 | Background | `--background-brand-lighter-default` |
-| Border left (4px accent) | `--border-brand-default` |
+| Border left (4px accent) | `--border-brand-strong` |
 | Icon color | `--icon-brand-moderate` |
 | Title color | `--text-base-strong` |
 | Description color | `--text-base-moderate` |
@@ -92,7 +92,7 @@ Icon size: 16px (w-4 h-4). Color driven by variant CSS class via `[color:var(--i
 | Property | Token |
 |----------|-------|
 | Background | `--background-success-lighter-default` |
-| Border left (4px accent) | `--border-success-default` |
+| Border left (4px accent) | `--border-success-strong` |
 | Icon color | `--icon-success-moderate` |
 | Title color | `--text-base-strong` |
 | Description color | `--text-base-moderate` |
@@ -102,7 +102,7 @@ Icon size: 16px (w-4 h-4). Color driven by variant CSS class via `[color:var(--i
 | Property | Token |
 |----------|-------|
 | Background | `--background-warning-lighter-default` |
-| Border left (4px accent) | `--border-warning-default` |
+| Border left (4px accent) | `--border-warning-strong` |
 | Icon color | `--icon-warning-moderate` |
 | Title color | `--text-base-strong` |
 | Description color | `--text-base-moderate` |
@@ -112,12 +112,10 @@ Icon size: 16px (w-4 h-4). Color driven by variant CSS class via `[color:var(--i
 | Property | Token |
 |----------|-------|
 | Background | `--background-danger-lighter-default` |
-| Border left (4px accent) | `--border-danger-default` |
+| Border left (4px accent) | `--border-danger-strong` |
 | Icon color | `--icon-danger-moderate` |
 | Title color | `--text-base-strong` |
 | Description color | `--text-base-moderate` |
-
-Note: `--border-*-default` refers to the semantic border token for each category (e.g. `--border-brand-strong` for info). Map to the strongest single-intent border per variant. See Token Mapping table for exact tokens.
 
 ## Layout
 
@@ -161,15 +159,15 @@ Dismiss button:
 
 | Property | Token | Category |
 |----------|-------|----------|
-| Background (info) | `--background-brand-lighter-default` | Color |
+| Background (brand) | `--background-brand-lighter-default` | Color |
 | Background (success) | `--background-success-lighter-default` | Color |
 | Background (warning) | `--background-warning-lighter-default` | Color |
 | Background (danger) | `--background-danger-lighter-default` | Color |
-| Left accent border (info) | `--border-brand-strong` | Color |
+| Left accent border (brand) | `--border-brand-strong` | Color |
 | Left accent border (success) | `--border-success-strong` | Color |
 | Left accent border (warning) | `--border-warning-strong` | Color |
 | Left accent border (danger) | `--border-danger-strong` | Color |
-| Icon color (info) | `--icon-brand-moderate` | Color |
+| Icon color (brand) | `--icon-brand-moderate` | Color |
 | Icon color (success) | `--icon-success-moderate` | Color |
 | Icon color (warning) | `--icon-warning-moderate` | Color |
 | Icon color (danger) | `--icon-danger-moderate` | Color |
@@ -189,7 +187,7 @@ Dismiss button:
 
 ### Must Have
 
-- [ ] AC-1: GIVEN an Alert with `variant="info"` WHEN rendered THEN shows brand-lighter bg, brand-strong left accent border, Info icon in brand-moderate color
+- [ ] AC-1: GIVEN an Alert with `variant="brand"` WHEN rendered THEN shows brand-lighter bg, brand-strong left accent border, Info icon in brand-moderate color
 - [ ] AC-2: GIVEN `variant="success"` WHEN rendered THEN shows success-lighter bg, success-strong left accent, CheckCircle2 icon in success-moderate color
 - [ ] AC-3: GIVEN `variant="warning"` WHEN rendered THEN shows warning-lighter bg, warning-strong left accent, AlertTriangle icon in warning-moderate color
 - [ ] AC-4: GIVEN `variant="danger"` WHEN rendered THEN shows danger-lighter bg, danger-strong left accent, XCircle icon in danger-moderate color
@@ -197,7 +195,7 @@ Dismiss button:
 - [ ] AC-6: GIVEN a custom `icon` ReactNode WHEN rendered THEN custom icon replaces the auto icon
 - [ ] AC-7: GIVEN `onDismiss` is provided WHEN rendered THEN X button is visible
 - [ ] AC-8: GIVEN the dismiss button WHEN clicked THEN `onDismiss` callback is fired
-- [ ] AC-9: GIVEN `role="alert"` and `aria-live="assertive"` WHEN the Alert mounts THEN screen readers announce the content immediately
+- [ ] AC-9: GIVEN `role="alert"` and `aria-live="polite"` WHEN the Alert mounts THEN screen readers announce the content at the next opportunity
 - [ ] AC-10: GIVEN AlertTitle WHEN rendered THEN uses `text-content-note font-accent` (14px/500)
 - [ ] AC-11: GIVEN AlertDescription WHEN rendered THEN uses `text-content-note` in `--text-base-moderate` color
 - [ ] AC-12: GIVEN the registry WHEN running `pnpm registry:build` THEN alert.json is produced with correct schema
@@ -217,7 +215,7 @@ Dismiss button:
 ## Accessibility
 
 - **Keyboard:** Dismiss button is Tab-focusable, activated with Enter or Space. Icon is decorative — `aria-hidden="true"` on the icon element
-- **Screen reader:** `role="alert"` + `aria-live="assertive"` causes the Alert content to be announced immediately upon mount. Use only for time-sensitive messages; for passive info, consumer should override with `aria-live="polite"`
+- **Screen reader:** `role="alert"` + `aria-live="polite"` causes the Alert content to be announced at the next idle opportunity. For time-sensitive messages (errors, urgent warnings), consumer should override with `aria-live="assertive"`
 - **ARIA:** Dismiss button must have `aria-label="Dismiss"` (hardcoded in implementation). AlertTitle and AlertDescription have no extra ARIA — their text content is announced as part of the alert region
 - **Focus:** Dismiss button shows focus ring via `outline: 2px solid var(--border-selected)` with `outline-offset: 2px`
 
@@ -226,7 +224,7 @@ Dismiss button:
 | Decision | Rationale |
 |----------|-----------|
 | No Radix dependency | Alert is a static presentational molecule — no overlay, portal, or accessibility primitives needed beyond native HTML semantics |
-| `role="alert"` + `aria-live="assertive"` on root | Standard pattern for time-sensitive status messages per WCAG 4.1.3 and WAI-ARIA practices |
+| `role="alert"` + `aria-live="polite"` on root | Safe default — most alerts are informational. Consumer opts into `assertive` for urgent cases. Avoids accidental screen reader interruptions |
 | Auto icon per variant | Reduces consumer cognitive load — correct icon is always paired with the correct semantic intent by default |
 | `icon={null}` to suppress (not a boolean) | `null` is the idiomatic React way to render nothing; avoids a separate `showIcon` prop |
 | Left border accent (4px) via `border-left` | Figma pattern — stronger visual signal than a full border; `border-left` is the correct CSS property, not `border-l` Tailwind utility, to allow token-driven color in `.css` |
@@ -245,7 +243,7 @@ Dismiss button:
 | Priority | Recommendation | Rationale |
 |----------|---------------|-----------|
 | Must | Doc examples for all 4 variants, with and without dismiss button | Core use cases must be immediately visible to consumers |
-| Must | Doc note: override `aria-live="polite"` for non-urgent info alerts | `assertive` interrupts screen reader — misuse causes accessibility issues |
+| Must | Doc note: use `aria-live="assertive"` for urgent alerts (errors, critical warnings) | Default `polite` is safe; `assertive` should be a conscious choice |
 | Should | Doc example: Alert with only title (no description) | Common compact usage pattern |
 | Should | Export `AlertProps` type | Enables consumer type composition |
 | Could | Add `size` prop in V2 (sm/md for compact alerts) | Not in current Figma spec — hold for design sign-off |
