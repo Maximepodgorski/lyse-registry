@@ -1,0 +1,79 @@
+/* ================================================================
+ * ALERT — Variant Styles
+ * Structure (flex, padding, gap, radius) lives in alert.tsx via cva.
+ * Theming (colors, borders, accent) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Variant tokens
+ * Each variant sets scoped custom properties.
+ * -------------------------------- */
+
+.alert-brand {
+  --alert-bg: var(--background-brand-lighter-default);
+  --alert-accent: var(--border-brand-strong);
+  --alert-icon: var(--icon-brand-bolder);
+}
+
+.alert-success {
+  --alert-bg: var(--background-success-lighter-default);
+  --alert-accent: var(--border-success-strong);
+  --alert-icon: var(--icon-success-bolder);
+}
+
+.alert-warning {
+  --alert-bg: var(--background-warning-lighter-default);
+  --alert-accent: var(--border-warning-strong);
+  --alert-icon: var(--icon-warning-bolder);
+}
+
+.alert-danger {
+  --alert-bg: var(--background-danger-lighter-default);
+  --alert-accent: var(--border-danger-strong);
+  --alert-icon: var(--icon-danger-bolder);
+}
+
+/* --------------------------------
+ * Base — applied to all variants
+ * -------------------------------- */
+
+.alert-brand,
+.alert-success,
+.alert-warning,
+.alert-danger {
+  background: var(--alert-bg);
+  border-left: 4px solid var(--alert-accent);
+}
+
+/* --------------------------------
+ * Icon color — separate from text
+ * -------------------------------- */
+
+.alert-icon {
+  color: var(--alert-icon);
+}
+
+/* --------------------------------
+ * Dismiss button
+ * -------------------------------- */
+
+.alert-dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--layout-size-md);
+  height: var(--layout-size-md);
+  color: var(--text-base-moderate);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.alert-dismiss:hover {
+  color: var(--text-base-strong);
+}
+
+.alert-dismiss:focus-visible {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 2px;
+}
