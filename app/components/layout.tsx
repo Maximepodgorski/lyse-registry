@@ -30,6 +30,7 @@ const navGroups = [
     label: "Components",
     items: [
       { label: "ActionCard", href: "/components/action-card" },
+      { label: "Alert", href: "/components/alert" },
       { label: "Avatar", href: "/components/avatar" },
       { label: "Badge", href: "/components/badge" },
       { label: "BannerInfo", href: "/components/banner-info" },

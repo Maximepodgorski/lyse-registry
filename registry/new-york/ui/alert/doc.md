@@ -1,27 +1,38 @@
 # Alert
 
-A static callout that communicates contextual feedback — informational, success, warning, or danger — inline with page content.
+A compound banner that communicates contextual feedback — brand, success, warning, or danger — with icon, title, description, and optional dismiss.
 
 ## When to use
 
 Use `Alert` when:
-- Displaying a persistent, in-page message that relates to the surrounding content (e.g., a form warning, a feature notice, an error summary)
+- Displaying a persistent, in-page message related to surrounding content (form warning, feature notice, error summary)
 - Communicating a status that the user should read but does not need to act on immediately
-- Providing inline validation feedback at the section level
+- Providing section-level feedback that benefits from a title + description structure
 
 Do NOT use `Alert` when:
-- The message is triggered by an async action (save, delete, upload) → use a `Toast` instead
-- The user must acknowledge before continuing → use a `Modal` or `Dialog` instead
+- The message is triggered by an async action (save, delete, upload) → use `Toast` instead
+- The user must acknowledge before continuing → use `Modal` instead
+- The message is a simple one-liner with no title → use `BannerInfo` instead
 - The message is tied to a single field → use inline field validation instead
+
+### Alert vs BannerInfo vs CalloutCard
+
+| Component | Structure | Dismiss | ARIA | Best for |
+|-----------|-----------|---------|------|----------|
+| `Alert` | Title + Description (compound) | Yes (`onDismiss`) | `role="alert"` | Structured feedback with title/body |
+| `BannerInfo` | Free-form children | No | `role="status"` | Simple one-line notices |
+| `CalloutCard` | Icon + Title + Description (props) | No | None | Inline callouts in content |
 
 ## How to use
 
 ### Basic
 
+<!-- DRAFT — update after implementation -->
+
 ```tsx
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 
-<Alert variant="info">
+<Alert>
   <AlertTitle>Heads up</AlertTitle>
   <AlertDescription>This workspace is in read-only mode.</AlertDescription>
 </Alert>
@@ -30,9 +41,9 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 ### Variants
 
 ```tsx
-<Alert variant="info">
+<Alert variant="brand">
   <AlertTitle>Info</AlertTitle>
-  <AlertDescription>Informational message with neutral blue styling.</AlertDescription>
+  <AlertDescription>Informational message with brand styling.</AlertDescription>
 </Alert>
 
 <Alert variant="success">
@@ -54,8 +65,8 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 ### Auto icon
 
 Each variant automatically renders a matching icon from `lucide-react`:
-- `info` → `Info`
-- `success` → `CheckCircle`
+- `brand` → `Info`
+- `success` → `CheckCircle2`
 - `warning` → `AlertTriangle`
 - `danger` → `XCircle`
 
@@ -63,7 +74,8 @@ To suppress the auto icon, pass `icon={null}`:
 
 ```tsx
 <Alert variant="warning" icon={null}>
-  <AlertTitle>Custom icon omitted</AlertTitle>
+  <AlertTitle>No icon</AlertTitle>
+  <AlertDescription>Content shifts left when the icon is suppressed.</AlertDescription>
 </Alert>
 ```
 
@@ -74,7 +86,7 @@ Override the auto icon with any `ReactNode`:
 ```tsx
 import { Rocket } from "lucide-react"
 
-<Alert variant="info" icon={<Rocket />}>
+<Alert variant="brand" icon={<Rocket />}>
   <AlertTitle>Deployment started</AlertTitle>
   <AlertDescription>Your app is being built and deployed.</AlertDescription>
 </Alert>
@@ -82,13 +94,13 @@ import { Rocket } from "lucide-react"
 
 ### Dismissible
 
-Pass `onDismiss` to render a close button in the top-right corner.
+Pass `onDismiss` to render a close button. The caller controls visibility.
 
 ```tsx
 const [visible, setVisible] = React.useState(true)
 
 {visible && (
-  <Alert variant="info" onDismiss={() => setVisible(false)}>
+  <Alert variant="brand" onDismiss={() => setVisible(false)}>
     <AlertTitle>New features available</AlertTitle>
     <AlertDescription>Check the changelog for the latest updates.</AlertDescription>
   </Alert>
@@ -97,7 +109,7 @@ const [visible, setVisible] = React.useState(true)
 
 ### Title only
 
-`AlertDescription` is optional.
+`AlertDescription` is optional — the alert works with just a title.
 
 ```tsx
 <Alert variant="success">
@@ -105,25 +117,36 @@ const [visible, setVisible] = React.useState(true)
 </Alert>
 ```
 
+### Urgent alert (assertive)
+
+For time-sensitive messages, override `aria-live` to interrupt screen readers:
+
+```tsx
+<Alert variant="danger" aria-live="assertive">
+  <AlertTitle>Connection lost</AlertTitle>
+  <AlertDescription>Changes will not be saved until reconnected.</AlertDescription>
+</Alert>
+```
+
 ## API
 
 ### Alert
 
-Root container. Renders a `<div>` with a left border accent, background fill, and icon column.
+Root container. Renders a `<div>` with a 4px left border accent, tinted background, and icon column.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"info" \| "success" \| "warning" \| "danger"` | `"info"` | Color scheme and auto icon selection |
+| `variant` | `"brand" \| "success" \| "warning" \| "danger"` | `"brand"` | Color scheme and auto icon selection |
 | `icon` | `React.ReactNode \| null` | auto | Override the auto icon. Pass `null` to suppress it entirely |
-| `onDismiss` | `() => void` | — | Renders a dismiss button when provided. The caller controls visibility state |
+| `onDismiss` | `() => void` | — | Renders a dismiss button when provided. Caller controls visibility |
 | `className` | `string` | — | Additional classes merged via `cn()` |
-| `children` | `React.ReactNode` | — | Slot composition: `AlertTitle`, `AlertDescription` |
+| `children` | `React.ReactNode` | — | `AlertTitle`, `AlertDescription`, or custom content |
 
-Extends `React.ComponentProps<"div">`. All native div attributes are forwarded.
+Extends `React.ComponentProps<"div">`. All native div attributes (including `aria-live`) are forwarded.
 
 ### AlertTitle
 
-Heading line inside the alert. Renders a `<p>` with accented weight and base-strong text color.
+Title line inside the alert. Renders a `<p>` with `text-content-note font-accent` and `--text-base-strong` color.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -134,7 +157,7 @@ Extends `React.ComponentProps<"p">`.
 
 ### AlertDescription
 
-Supporting copy below the title. Renders a `<p>` with note-sized body text and muted color.
+Supporting text below the title. Renders a `<p>` with `text-content-note` and `--text-base-moderate` color.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -143,32 +166,24 @@ Supporting copy below the title. Renders a `<p>` with note-sized body text and m
 
 Extends `React.ComponentProps<"p">`.
 
-### AlertIcon
+### Token mapping
 
-Internal icon wrapper. Renders as a `<span>` with `aria-hidden="true"` and variant-matched icon color token. Used internally by `Alert` — exposed for advanced custom composition.
+| Variant | Background | Border accent (left 4px) | Icon color |
+|---------|-----------|--------------------------|------------|
+| `brand` | `--background-brand-lighter-default` | `--border-brand-strong` | `--icon-brand-moderate` |
+| `success` | `--background-success-lighter-default` | `--border-success-strong` | `--icon-success-moderate` |
+| `warning` | `--background-warning-lighter-default` | `--border-warning-strong` | `--icon-warning-moderate` |
+| `danger` | `--background-danger-lighter-default` | `--border-danger-strong` | `--icon-danger-moderate` |
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"info" \| "success" \| "warning" \| "danger"` | — | Drives the icon color token applied |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `React.ReactNode` | — | Icon element |
-
-**Token mapping per variant:**
-
-| Variant | Background | Border accent | Icon color |
-|---------|-----------|---------------|------------|
-| `info` | `--background-brand-faint-default` | `--border-brand-moderate` | `--icon-brand-moderate` |
-| `success` | `--background-success-faint-default` | `--border-success-moderate` | `--icon-success-moderate` |
-| `warning` | `--background-warning-faint-default` | `--border-warning-moderate` | `--icon-warning-moderate` |
-| `danger` | `--background-danger-faint-default` | `--border-danger-moderate` | `--icon-danger-moderate` |
+Title and description colors are shared across all variants: `--text-base-strong` (title), `--text-base-moderate` (description).
 
 ## Examples
 
 ### Form-level error summary
 
-```tsx
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+<!-- DRAFT — update after implementation -->
 
+```tsx
 <Alert variant="danger">
   <AlertTitle>Could not save changes</AlertTitle>
   <AlertDescription>
@@ -176,8 +191,6 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
   </AlertDescription>
 </Alert>
 ```
-
-<!-- DRAFT — update after implementation -->
 
 ### Feature notice with dismiss
 
@@ -192,7 +205,7 @@ export function FeatureNotice() {
   if (!visible) return null
 
   return (
-    <Alert variant="info" onDismiss={() => setVisible(false)}>
+    <Alert variant="brand" onDismiss={() => setVisible(false)}>
       <AlertTitle>AI task creation is now available</AlertTitle>
       <AlertDescription>
         Connect your Slack workspace to start generating tasks automatically.
@@ -202,41 +215,45 @@ export function FeatureNotice() {
 }
 ```
 
-<!-- DRAFT — update after implementation -->
-
 ### Stacked alerts in a settings page
 
 ```tsx
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
-
 <div className="flex flex-col gap-[var(--layout-gap-md)]">
   <Alert variant="warning">
     <AlertTitle>Trial ends in 3 days</AlertTitle>
     <AlertDescription>Upgrade to keep access to all features.</AlertDescription>
   </Alert>
-  <Alert variant="info">
+  <Alert variant="brand">
     <AlertTitle>Two-factor authentication is not enabled</AlertTitle>
     <AlertDescription>Add an extra layer of security to your account.</AlertDescription>
   </Alert>
 </div>
 ```
 
-<!-- DRAFT — update after implementation -->
+### Compact (title only, no icon)
+
+```tsx
+<Alert variant="success" icon={null}>
+  <AlertTitle>All changes saved</AlertTitle>
+</Alert>
+```
 
 ## Do / Don't
 
 | Do | Don't |
 |----|-------|
-| Use `variant="danger"` for error states that block the user's current task | Use `danger` for soft warnings that don't block anything — use `warning` instead |
-| Keep `AlertTitle` short (one line) and `AlertDescription` to 1–2 sentences | Write multi-paragraph descriptions inside an `Alert` — use a dedicated section or modal |
-| Use `onDismiss` only for non-critical notices that users can safely ignore | Make a `danger` alert dismissible without resolving the underlying error |
-| Use the auto icon — it reinforces variant meaning without extra markup | Replace the auto icon with an unrelated icon that contradicts the variant color |
-| Use `icon={null}` only when the icon adds no value (e.g., in dense compact layouts) | Remove icons by default — they improve scannability and reinforce color meaning for colorblind users |
+| Use `variant="danger"` for errors that block the user's task | Use `danger` for soft warnings — use `warning` instead |
+| Keep `AlertTitle` to one line and `AlertDescription` to 1-2 sentences | Write multi-paragraph content inside an Alert — use a dedicated section |
+| Use `onDismiss` only for non-critical notices the user can safely ignore | Make a `danger` alert dismissible without resolving the underlying error |
+| Use the auto icon — it reinforces variant meaning for colorblind users | Replace the auto icon with an unrelated icon that contradicts the variant |
+| Use `icon={null}` only in dense layouts where the icon adds clutter | Remove icons by default — they improve scannability |
+| Use `aria-live="assertive"` only for urgent, time-sensitive messages | Leave `assertive` on every alert — it interrupts screen readers on mount |
+| Use `Alert` when you need title + description structure | Use `Alert` for a one-liner — use `BannerInfo` instead |
 
 ## Accessibility
 
-- **Role:** `Alert` renders with `role="alert"` and `aria-live="assertive"` so assistive technologies announce it when it appears in the DOM. For non-urgent notices, override to `role="status"` and `aria-live="polite"` via props.
-- **Keyboard:** Alert is non-interactive. When `onDismiss` is provided, the dismiss button is focusable, labeled `aria-label="Dismiss"`, and activatable with `Enter` or `Space`.
-- **Screen reader:** `AlertIcon` has `aria-hidden="true"` — the icon is decorative. Meaning is conveyed through the text in `AlertTitle` and `AlertDescription`, never through color or icon alone.
-- **Color:** Do not rely on variant color alone to convey severity. The icon and text content must independently communicate the meaning to support colorblind users.
-- **Focus:** Showing an `Alert` programmatically does not move focus. If the alert requires immediate attention, move focus to `AlertTitle` or the dismiss button via `ref` after mount.
+- **Role:** Renders with `role="alert"` and `aria-live="polite"` by default. Content is announced at the next idle opportunity. For urgent messages, pass `aria-live="assertive"` to interrupt the screen reader immediately.
+- **Keyboard:** Alert itself is non-interactive. When `onDismiss` is provided, the dismiss button is Tab-focusable, labeled `aria-label="Dismiss"`, and activatable with `Enter` or `Space`.
+- **Screen reader:** Icon has `aria-hidden="true"` — it is decorative. Meaning is conveyed through `AlertTitle` and `AlertDescription` text, never through color or icon alone.
+- **Color:** All variant colors meet WCAG AA contrast. Do not rely on color alone to convey severity — the icon and text must independently communicate intent.
+- **Focus:** Mounting an Alert does not move focus. If the alert requires immediate attention, move focus to the alert or dismiss button via `ref` after mount.
