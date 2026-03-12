@@ -94,8 +94,10 @@ function Input({
 
 /* ------------------------------------------------------------------ */
 /*  InputField                                                         */
+/*  @deprecated Use <Field> from '@/components/ui/field' instead.      */
 /* ------------------------------------------------------------------ */
 
+/** @deprecated Use `<Field>` from `@/components/ui/field` instead. */
 function InputField({
   className,
   children,
@@ -117,8 +119,10 @@ function InputField({
 
 /* ------------------------------------------------------------------ */
 /*  InputLabel                                                         */
+/*  @deprecated Use <FieldLabel> from '@/components/ui/field' instead.  */
 /* ------------------------------------------------------------------ */
 
+/** @deprecated Use `<FieldLabel>` from `@/components/ui/field` instead. */
 function InputLabel({
   className,
   required,
@@ -142,8 +146,10 @@ function InputLabel({
 
 /* ------------------------------------------------------------------ */
 /*  InputHint                                                          */
+/*  @deprecated Use <FieldDescription> + <FieldError> instead.         */
 /* ------------------------------------------------------------------ */
 
+/** @deprecated Use `<FieldDescription>` + `<FieldError>` from `@/components/ui/field` instead. */
 function InputHint({
   className,
   variant,

@@ -64,8 +64,10 @@ function Textarea({
 
 /* ------------------------------------------------------------------ */
 /*  TextareaField                                                      */
+/*  @deprecated Use <Field> from '@/components/ui/field' instead.      */
 /* ------------------------------------------------------------------ */
 
+/** @deprecated Use `<Field>` from `@/components/ui/field` instead. */
 function TextareaField({
   className,
   children,
@@ -87,8 +89,10 @@ function TextareaField({
 
 /* ------------------------------------------------------------------ */
 /*  TextareaLabel                                                      */
+/*  @deprecated Use <FieldLabel> from '@/components/ui/field' instead.  */
 /* ------------------------------------------------------------------ */
 
+/** @deprecated Use `<FieldLabel>` from `@/components/ui/field` instead. */
 function TextareaLabel({
   className,
   required,
@@ -112,8 +116,10 @@ function TextareaLabel({
 
 /* ------------------------------------------------------------------ */
 /*  TextareaHint                                                       */
+/*  @deprecated Use <FieldDescription> + <FieldError> instead.         */
 /* ------------------------------------------------------------------ */
 
+/** @deprecated Use `<FieldDescription>` + `<FieldError>` from `@/components/ui/field` instead. */
 function TextareaHint({
   className,
   variant,

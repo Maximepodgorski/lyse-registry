@@ -1,0 +1,34 @@
+/* ================================================================
+ * FIELD — Styles
+ * Structure (flex, gap) lives in field.tsx.
+ * Theming (colors) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * FieldLabel
+ * -------------------------------- */
+.field-label {
+  color: var(--text-base-strong);
+}
+
+.field-label[data-disabled] {
+  color: var(--text-disabled);
+}
+
+.field-label-asterisk {
+  color: var(--text-danger-moderate);
+}
+
+/* --------------------------------
+ * FieldDescription
+ * -------------------------------- */
+.field-description {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * FieldError
+ * -------------------------------- */
+.field-error {
+  color: var(--text-danger-moderate);
+}

@@ -85,6 +85,21 @@
 }
 
 /* --------------------------------
+ * Input — Field error (auto-propagated via data-field-error)
+ * -------------------------------- */
+.input-base:has([data-field-error]) {
+  border-color: var(--border-danger-strong);
+}
+
+.input-base:has([data-field-error]):focus-within {
+  box-shadow: 0 0 0 2px var(--shadow-danger-moderate);
+}
+
+.input-base:has([data-field-error]) .input-trailing {
+  color: var(--icon-danger-moderate);
+}
+
+/* --------------------------------
  * InputLabel
  * -------------------------------- */
 .input-label {
