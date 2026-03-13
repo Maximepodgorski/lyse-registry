@@ -1,13 +1,17 @@
 "use client"
 
+import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Menu as MenuIcon, Search } from "lucide-react"
 
+import { CommandPalette } from "@/app/_components/command-palette"
 import { GitHubLogo } from "@/app/_components/github-logo"
+import { MobileNav } from "@/app/_components/mobile-nav"
 import { ThemeToggle } from "@/app/_components/theme-toggle"
 import { Button } from "@/registry/new-york/ui/button/button"
+import { navGroups, allPages } from "@/lib/navigation"
 import {
   Menu,
   MenuGroup,
@@ -15,60 +19,51 @@ import {
 } from "@/registry/new-york/ui/menu/menu"
 import { Toaster } from "@/registry/new-york/ui/toast/toast"
 
-const navGroups = [
-  {
-    label: "Getting Started",
-    items: [
-      { label: "Introduction", href: "/components/introduction" },
-      { label: "Components", href: "/components/directory" },
-      { label: "Installation", href: "/components/installation" },
-      { label: "Design Tokens", href: "/components/tokens" },
-      { label: "Changelog", href: "/components/changelog" },
-    ],
-  },
-  {
-    label: "Components",
-    items: [
-      { label: "ActionCard", href: "/components/action-card" },
-      { label: "Alert", href: "/components/alert" },
-      { label: "AlertDialog", href: "/components/alert-dialog" },
-      { label: "Avatar", href: "/components/avatar" },
-      { label: "Badge", href: "/components/badge" },
-      { label: "BannerInfo", href: "/components/banner-info" },
-      { label: "Button", href: "/components/button" },
-      { label: "CalloutCard", href: "/components/callout-card" },
-      { label: "Checkbox", href: "/components/checkbox" },
-      { label: "Chip", href: "/components/chip" },
-      { label: "DropdownMenu", href: "/components/dropdown-menu" },
-      { label: "Input", href: "/components/input" },
-      { label: "Menu", href: "/components/menu" },
-      { label: "Modal", href: "/components/modal" },
-      { label: "Progress", href: "/components/progress" },
-      { label: "Radio", href: "/components/radio" },
-      { label: "Select", href: "/components/select" },
-      { label: "Spinner", href: "/components/spinner" },
-      { label: "SpotlightCard", href: "/components/spotlight-card" },
-      { label: "Tabs", href: "/components/tabs" },
-      { label: "Tag", href: "/components/tag" },
-      { label: "Textarea", href: "/components/textarea" },
-      { label: "Toast", href: "/components/toast" },
-      { label: "Toggle", href: "/components/toggle" },
-      { label: "Tooltip", href: "/components/tooltip" },
-    ],
-  },
-] as const
-
-/* Flat ordered list of navigable pages */
-const allPages = navGroups.flatMap((g) =>
-  g.items.filter((i): i is typeof i & { href: string } => "href" in i)
-)
-
 export default function ComponentsLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+  const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
+  const [paletteOpen, setPaletteOpen] = React.useState(false)
+  const hamburgerRef = React.useRef<HTMLButtonElement>(null)
+
+  /* Detect Mac for ⌘ vs Ctrl display */
+  const [isMac, setIsMac] = React.useState(false)
+  React.useEffect(() => {
+    setIsMac(navigator.userAgent.includes("Mac"))
+  }, [])
+
+  /* Global keyboard shortcuts: Cmd+K / Ctrl+K / "/" */
+  React.useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      /* Cmd+K or Ctrl+K */
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        if (mobileNavOpen) setMobileNavOpen(false)
+        setPaletteOpen((prev) => !prev)
+        return
+      }
+      /* "/" — only when not in an input */
+      if (
+        e.key === "/" &&
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.altKey &&
+        !(e.target instanceof HTMLInputElement) &&
+        !(e.target instanceof HTMLTextAreaElement) &&
+        !(e.target instanceof HTMLSelectElement) &&
+        !(e.target as HTMLElement)?.isContentEditable
+      ) {
+        e.preventDefault()
+        if (mobileNavOpen) setMobileNavOpen(false)
+        setPaletteOpen(true)
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [mobileNavOpen])
 
   /* Prev / Next */
   const currentIndex = allPages.findIndex((p) => p.href === pathname)
@@ -104,11 +99,49 @@ export default function ComponentsLayout({
             "var(--layout-border-thin) solid var(--border-default)",
         }}
       >
-        <div className="relative h-[1.75rem] w-[66px]">
-          <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:block hidden" />
-          <Image src="/logo-dark.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:hidden block" />
-        </div>
         <div className="flex items-center gap-[var(--layout-gap-sm)]">
+          <button
+            ref={hamburgerRef}
+            type="button"
+            className="lg:hidden flex items-center justify-center size-8 rounded-[var(--layout-radius-md)] cursor-pointer"
+            style={{ color: "var(--text-base-moderate)" }}
+            aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
+            onClick={() => setMobileNavOpen(true)}
+          >
+            <MenuIcon className="size-5" aria-hidden="true" />
+          </button>
+          <div className="relative h-[1.75rem] w-[66px]">
+            <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:block hidden" />
+            <Image src="/logo-dark.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:hidden block" />
+          </div>
+        </div>
+        <div className="flex items-center gap-[var(--layout-gap-md)]">
+          <button
+            type="button"
+            onClick={() => {
+              if (mobileNavOpen) setMobileNavOpen(false)
+              setPaletteOpen(true)
+            }}
+            className="flex items-center gap-[var(--layout-gap-sm)] h-8 sm:w-40 px-[var(--layout-padding-sm)] sm:px-[var(--layout-padding-md)] rounded-[var(--layout-radius-lg)] cursor-pointer text-content-caption font-accent"
+            style={{
+              color: "var(--text-base-moderate)",
+              background: "var(--background-neutral-faint-default)",
+              border: "var(--layout-border-thin) solid var(--border-default)",
+            }}
+            aria-label="Search pages"
+          >
+            <Search className="size-3.5" aria-hidden="true" />
+            <span className="hidden sm:inline">Search...</span>
+            <kbd
+              className="hidden sm:inline-flex items-center justify-center h-[var(--layout-size-sm)] px-[var(--layout-padding-xs)] text-content-caption font-mono rounded-[var(--layout-radius-sm)] ml-auto"
+              style={{
+                color: "var(--text-base-medium)",
+                border: "var(--layout-border-thin) solid var(--border-default)",
+              }}
+            >
+              {isMac ? "⌘K" : "Ctrl K"}
+            </kbd>
+          </button>
           <ThemeToggle />
           <Button variant="terciary" size="sm" asChild>
             <a
@@ -117,13 +150,25 @@ export default function ComponentsLayout({
               rel="noopener noreferrer"
               aria-label="View source on GitHub"
             >
-              <GitHubLogo className="size-4" /> GitHub
+              <GitHubLogo className="size-4" />{" "}
+              <span className="hidden sm:inline">GitHub</span>
             </a>
           </Button>
         </div>
       </header>
 
-      <div className="flex-1 w-full flex">
+      <MobileNav
+        navGroups={navGroups}
+        open={mobileNavOpen}
+        onClose={() => {
+          setMobileNavOpen(false)
+          hamburgerRef.current?.focus()
+        }}
+      />
+
+      <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
+
+      <div className="flex-1 w-full flex" inert={mobileNavOpen || undefined}>
         {/* Left sidebar */}
         <div
           className="hidden lg:block w-56 shrink-0 sticky top-14 h-[calc(100svh-3.5rem)] relative"
@@ -139,9 +184,8 @@ export default function ComponentsLayout({
           {navGroups.map((group) => (
             <MenuGroup key={group.label} label={group.label}>
               {group.items.map((item) => {
-                const href = "href" in item ? item.href : undefined
-                const isCurrent = href === pathname
-                return href ? (
+                const isCurrent = item.href === pathname
+                return (
                   <MenuItem
                     key={item.label}
                     size="sm"
@@ -149,15 +193,11 @@ export default function ComponentsLayout({
                     asChild
                   >
                     <Link
-                      href={href}
+                      href={item.href}
                       aria-current={isCurrent ? "page" : undefined}
                     >
                       {item.label}
                     </Link>
-                  </MenuItem>
-                ) : (
-                  <MenuItem key={item.label} size="sm" disabled>
-                    {item.label}
                   </MenuItem>
                 )
               })}
@@ -181,7 +221,7 @@ export default function ComponentsLayout({
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Breadcrumb */}
           {breadcrumb && (
-            <div className="px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] pt-[var(--layout-padding-2xl)]">
+            <div className="px-[var(--layout-padding-xl)] sm:px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] pt-[var(--layout-padding-2xl)]">
               <nav
                 className="text-content-caption font-accent flex items-center gap-[var(--layout-padding-sm)]"
                 style={{ color: "var(--text-base-bolder)" }}
@@ -202,7 +242,7 @@ export default function ComponentsLayout({
           {/* Prev / Next */}
           {(prev || next) && (
             <nav
-              className="flex items-center justify-between px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] py-[var(--layout-padding-4xl)]"
+              className="flex items-center justify-between px-[var(--layout-padding-xl)] sm:px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] py-[var(--layout-padding-4xl)]"
               style={{
                 borderTop:
                   "var(--layout-border-thin) solid var(--border-default)",
@@ -256,6 +296,7 @@ export default function ComponentsLayout({
 
       {/* Footer */}
       <footer
+        inert={mobileNavOpen || undefined}
         className="px-[var(--layout-padding-2xl)] py-[var(--layout-padding-2xl)] text-center text-content-caption"
         style={{
           color: "var(--text-base-moderate)",

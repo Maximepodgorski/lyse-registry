@@ -44,7 +44,7 @@ export default function App() {
 
 export default function InstallationPage() {
   return (
-    <main className="flex-1 min-w-0 py-16 flex flex-col gap-2 max-w-none px-8 lg:px-16 xl:px-20">
+    <main className="flex-1 min-w-0 py-16 flex flex-col gap-2 max-w-none px-5 sm:px-8 lg:px-16 xl:px-20">
       <h1
         className="font-bold"
         style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}

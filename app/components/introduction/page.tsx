@@ -21,7 +21,7 @@ const sections: TocSection[] = [
 export default function IntroductionPage() {
   return (
     <>
-      <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 max-w-none px-8 lg:px-16 xl:px-20">
+      <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 max-w-none px-5 sm:px-8 lg:px-16 xl:px-20">
         {/* Hero */}
         <div className="flex flex-col gap-2">
           <h1

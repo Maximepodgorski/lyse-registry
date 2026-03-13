@@ -430,7 +430,7 @@ export default function AlertPage() {
 
   return (
     <>
-      <main className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none px-8 lg:px-16 xl:px-20">
+      <main className="flex-1 min-w-0 py-16 flex flex-col gap-10 max-w-none px-5 sm:px-8 lg:px-16 xl:px-20">
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
@@ -443,9 +443,10 @@ export default function AlertPage() {
             className="text-content-highlight"
             style={{ color: "var(--text-base-bolder)" }}
           >
-            A compound banner that communicates contextual feedback — brand,
-            success, warning, or danger — with icon, title, description, and
-            optional dismiss.
+            The Alert component displays an inline message to communicate
+            important feedback within a page. It helps users understand status
+            changes, errors, or required actions without interrupting their
+            workflow.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Button

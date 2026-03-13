@@ -30,7 +30,7 @@ const components = [
 
 export default function DirectoryPage() {
   return (
-    <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 px-8 lg:px-16 xl:px-20">
+    <main className="flex-1 min-w-0 py-16 flex flex-col gap-6 px-5 sm:px-8 lg:px-16 xl:px-20">
       <div className="flex flex-col gap-2">
         <h1
           className="font-bold"

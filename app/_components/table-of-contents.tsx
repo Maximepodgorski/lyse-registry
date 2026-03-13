@@ -33,7 +33,7 @@ export function TableOfContents({ sections }: { sections: TocSection[] }) {
   }, [sections])
 
   return (
-    <aside className="hidden xl:block w-56 shrink-0 py-[var(--root-space-11)] pr-[var(--layout-padding-2xl)]">
+    <aside className="hidden lg:block w-56 shrink-0 py-[var(--root-space-11)] pr-[var(--layout-padding-2xl)]">
       {sections.length > 0 && (
         <nav className="sticky top-20 flex flex-col gap-[var(--layout-gap-xl)]">
           <span
