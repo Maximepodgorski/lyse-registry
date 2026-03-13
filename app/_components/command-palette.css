@@ -1,0 +1,81 @@
+/* ================================================================
+ * COMMAND PALETTE — Search overlay (Cmd+K)
+ * ================================================================ */
+
+/* Overlay */
+.command-palette-overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Content panel */
+.command-palette-content {
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.16),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Root container */
+.command-palette-root {
+  background: var(--background-elevated);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* Input wrapper */
+.command-palette-input-wrapper {
+  border-bottom: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* Input field */
+.command-palette-input {
+  caret-color: var(--text-brand-moderate);
+}
+
+/* Results list separator */
+.command-palette-list {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-default) transparent;
+}
+
+/* Group heading */
+.command-palette-group [cmdk-group-heading] {
+  padding: var(--layout-padding-sm) var(--layout-padding-md);
+  font-size: var(--root-font-size-2xs);
+  font-weight: var(--root-font-weight-medium);
+  color: var(--text-base-moderate);
+}
+
+/* Item — default */
+.command-palette-item {
+  color: var(--text-base-moderate);
+  transition: background 100ms ease, color 100ms ease;
+}
+
+/* Item — hover / aria-selected */
+.command-palette-item[data-selected="true"] {
+  background: var(--background-neutral-lighter-default);
+  color: var(--text-base-strong);
+}
+
+/* Hash symbol */
+.command-palette-hash {
+  color: var(--text-base-faint);
+  font-size: var(--root-font-size-md);
+  font-weight: var(--root-font-weight-medium);
+}
+
+.command-palette-item[data-selected="true"] .command-palette-hash {
+  color: var(--text-brand-moderate);
+}
+
+/* Empty state */
+.command-palette-empty {
+  color: var(--text-base-moderate);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .command-palette-overlay,
+  .command-palette-content {
+    animation: none !important;
+  }
+}
