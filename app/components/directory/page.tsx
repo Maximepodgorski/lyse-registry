@@ -4,6 +4,8 @@ import Link from "next/link"
 
 const components = [
   { name: "ActionCard", href: "/components/action-card" },
+  { name: "Alert", href: "/components/alert" },
+  { name: "AlertDialog", href: "/components/alert-dialog" },
   { name: "Avatar", href: "/components/avatar" },
   { name: "Badge", href: "/components/badge" },
   { name: "BannerInfo", href: "/components/banner-info" },

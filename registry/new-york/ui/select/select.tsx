@@ -142,10 +142,10 @@ function SelectItem({
       )}
       {...props}
     >
-      <SelectPrimitive.ItemIndicator className="select-item-indicator shrink-0">
+      <SelectPrimitive.ItemText className="flex-1">{children}</SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemIndicator className="select-item-indicator shrink-0 ml-auto">
         <Check className="h-[var(--layout-size-xs)] w-[var(--layout-size-xs)]" />
       </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   )
 }
