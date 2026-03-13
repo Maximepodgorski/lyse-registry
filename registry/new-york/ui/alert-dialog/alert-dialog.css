@@ -1,0 +1,86 @@
+/* ================================================================
+ * ALERT DIALOG — Styles
+ * Structure (flex, gap, padding, radius) lives in alert-dialog.tsx.
+ * Theming (colors, borders, shadow) lives here via tokens.
+ * Mirrors Modal styling exactly.
+ * ================================================================ */
+
+/* --------------------------------
+ * Overlay (backdrop)
+ * -------------------------------- */
+.alert-dialog-overlay {
+  background: var(--overlay-default);
+}
+
+/* --------------------------------
+ * Content (surface)
+ * -------------------------------- */
+.alert-dialog-content {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  border-radius: var(--layout-radius-xl);
+  box-shadow: var(--shadow-elevation-md);
+}
+
+/* --------------------------------
+ * Header
+ * -------------------------------- */
+.alert-dialog-header:has([data-slot="alert-dialog-icon"]) {
+  align-items: center;
+  text-align: center;
+}
+
+/* --------------------------------
+ * Title
+ * -------------------------------- */
+.alert-dialog-title {
+  color: var(--text-base-bolder);
+}
+
+/* --------------------------------
+ * Description
+ * -------------------------------- */
+.alert-dialog-description {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Footer (with top border)
+ * -------------------------------- */
+.alert-dialog-footer {
+  border-top: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Cancel — focus ring
+ * Uses :focus-visible so the ring appears only
+ * when the dialog is opened via keyboard, not mouse.
+ * -------------------------------- */
+.alert-dialog-cancel-btn:focus-visible {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 2px;
+}
+
+/* --------------------------------
+ * Icon — variant colors
+ * Own classes (not shared with Modal)
+ * -------------------------------- */
+.alert-dialog-icon-brand {
+  background: var(--overlay-brand-default);
+  color: var(--icon-brand-moderate);
+}
+
+.alert-dialog-icon-destructive {
+  background: var(--overlay-danger-default);
+  color: var(--icon-danger-moderate);
+}
+
+.alert-dialog-icon-success {
+  background: var(--overlay-success-default);
+  color: var(--icon-success-moderate);
+}
+
+.alert-dialog-icon-warning {
+  background: var(--overlay-warning-default);
+  color: var(--icon-warning-moderate);
+}
