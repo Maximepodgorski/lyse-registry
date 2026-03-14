@@ -15,15 +15,28 @@ import {
   ExternalLink,
   FileText,
   Home,
+  LogOut,
   MessageSquare,
   Search,
   Settings,
   Sparkles,
   Star,
   Trash2,
+  User,
   Users,
 } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button/button"
+import { Avatar } from "@/registry/new-york/ui/avatar/avatar"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+} from "@/registry/new-york/ui/dropdown-menu/dropdown-menu"
+import { LyseLogo } from "@/app/_components/lyse-logo"
 import { ComponentPreview } from "@/app/_components/component-preview"
 import { DosDonts, type DosDontsItem } from "@/app/_components/dos-donts"
 import { PropsTable, type PropDef } from "@/app/_components/props-table"
@@ -47,6 +60,7 @@ const overviewSections: TocSection[] = [
   { id: "badge", label: "Badge" },
   { id: "dot", label: "Dot" },
   { id: "grouped", label: "Grouped" },
+  { id: "sidebar-user-menu", label: "Sidebar + User Menu" },
 ]
 
 const dosDontsItems: DosDontsItem[] = [
@@ -326,7 +340,7 @@ function OverviewTab() {
           <div className="flex-1">
             <Menu className="gap-[var(--layout-gap-lg)]">
               <div className="p-[var(--layout-padding-xs)]">
-                <img src="/logotype.svg" alt="Lyse" className="h-6 w-auto" />
+                <LyseLogo className="h-6 w-auto" />
               </div>
               <MenuGroup label="Platform">
                 <MenuItem size="sm" icon={<Home />} active>
@@ -359,6 +373,87 @@ function OverviewTab() {
               </MenuItem>
             </MenuGroup>
           </Menu>
+        </div>
+      </ComponentPreview>
+
+      <ComponentPreview
+        id="sidebar-user-menu"
+        title="Sidebar + User Menu"
+        description="Combine Menu for navigation with a DropdownMenu for the user account at the bottom."
+      >
+        <div
+          className="w-[240px] h-[50rem] flex flex-col p-[var(--layout-padding-md)]"
+          style={{
+            borderRight: "var(--layout-border-thin) solid var(--border-default)",
+          }}
+        >
+          <div className="flex-1">
+            <Menu className="gap-[var(--layout-gap-lg)]">
+              <div className="p-[var(--layout-padding-xs)]">
+                <LyseLogo className="h-6 w-auto" />
+              </div>
+              <MenuGroup label="Platform">
+                <MenuItem size="sm" icon={<Home />} active>
+                  Dashboard
+                </MenuItem>
+                <MenuItem size="sm" icon={<BarChart3 />}>
+                  Analytics
+                </MenuItem>
+                <MenuItem size="sm" icon={<Users />}>
+                  Team
+                </MenuItem>
+              </MenuGroup>
+              <MenuGroup label="Resources">
+                <MenuItem size="sm" icon={<FileText />}>
+                  Documentation
+                </MenuItem>
+                <MenuItem size="sm" icon={<MessageSquare />}>
+                  Support
+                </MenuItem>
+              </MenuGroup>
+            </Menu>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className="flex items-center gap-[var(--layout-gap-md)] w-full p-[var(--layout-padding-sm)] rounded-[var(--layout-radius-lg)] cursor-pointer hover:bg-[var(--background-neutral-faint-hover)] transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--border-selected)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-base)]"
+                aria-label="Jane Doe account menu"
+              >
+                <Avatar size="sm" initials="JD" />
+                <div className="flex flex-col min-w-0 flex-1 text-left">
+                  <span className="text-content-caption font-accent truncate [color:var(--text-base-strong)]">
+                    Jane Doe
+                  </span>
+                  <span className="text-content-caption truncate [color:var(--text-base-moderate)]">
+                    jane@getlyse.com
+                  </span>
+                </div>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent side="top" align="start" className="min-w-[220px]">
+              <DropdownMenuLabel className="flex items-center gap-[var(--layout-gap-md)] p-[var(--layout-padding-md)] font-normal">
+                <Avatar size="md" initials="JD" aria-hidden="true" />
+                <div className="flex flex-col min-w-0">
+                  <span className="text-content-note font-accent truncate" style={{ color: "var(--text-base-strong)" }}>
+                    Jane Doe
+                  </span>
+                  <span className="text-content-caption truncate" style={{ color: "var(--text-base-moderate)" }}>
+                    jane@getlyse.com
+                  </span>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem icon={<User />}>Profile</DropdownMenuItem>
+                <DropdownMenuItem icon={<Settings />}>Settings</DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem icon={<LogOut />}>
+                Sign out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </ComponentPreview>
     </div>

@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
 } from "@/registry/new-york/ui/dropdown-menu/dropdown-menu"
 import { Button } from "@/registry/new-york/ui/button/button"
+import { Avatar } from "@/registry/new-york/ui/avatar/avatar"
 import {
   Copy,
   ExternalLink,
@@ -45,6 +46,7 @@ const overviewSections: TocSection[] = [
   { id: "destructive", label: "Destructive" },
   { id: "grouped", label: "Grouped" },
   { id: "disabled-items", label: "Disabled Items" },
+  { id: "user-menu", label: "User Menu" },
 ]
 
 const dosDontsItems: DosDontsItem[] = [
@@ -393,6 +395,46 @@ function OverviewTab() {
               Download (unavailable)
             </DropdownMenuItem>
             <DropdownMenuItem icon={<Share2 />}>Share</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </ComponentPreview>
+
+      <ComponentPreview
+        id="user-menu"
+        title="User Menu"
+        description="Compose Avatar + DropdownMenu into a SaaS account dropdown. Use DropdownMenuLabel for the non-interactive identity header — it stays valid inside the ARIA menu structure."
+      >
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="rounded-[var(--layout-radius-full)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--border-selected)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-base)]"
+              aria-label="Jane Doe account menu"
+            >
+              <Avatar size="sm" initials="JD" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="min-w-[220px]">
+            <DropdownMenuLabel className="flex items-center gap-[var(--layout-gap-md)] p-[var(--layout-padding-md)] font-normal">
+              <Avatar size="md" initials="JD" aria-hidden="true" />
+              <div className="flex flex-col min-w-0">
+                <span className="text-content-note font-accent truncate" style={{ color: "var(--text-base-strong)" }}>
+                  Jane Doe
+                </span>
+                <span className="text-content-caption truncate" style={{ color: "var(--text-base-moderate)" }}>
+                  jane@getlyse.com
+                </span>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem icon={<User />}>Profile</DropdownMenuItem>
+              <DropdownMenuItem icon={<Settings />}>Settings</DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem icon={<LogOut />}>
+              Sign out
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </ComponentPreview>
