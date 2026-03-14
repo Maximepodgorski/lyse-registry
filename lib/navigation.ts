@@ -176,6 +176,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["tabs", "tab", "panel", "switch", "navigation", "segment"],
       },
       {
+        label: "Table",
+        href: "/components/table",
+        description: "Structured data display with striped rows and sticky header",
+        keywords: ["table", "data", "grid", "row", "column", "header", "striped"],
+      },
+      {
         label: "Tag",
         href: "/components/tag",
         description: "Categorical label with variants, dot, and close button",

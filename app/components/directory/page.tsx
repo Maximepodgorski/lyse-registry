@@ -23,6 +23,7 @@ const components = [
   { name: "Select", href: "/components/select" },
   { name: "Spinner", href: "/components/spinner" },
   { name: "SpotlightCard", href: "/components/spotlight-card" },
+  { name: "Table", href: "/components/table" },
   { name: "Tabs", href: "/components/tabs" },
   { name: "Tag", href: "/components/tag" },
   { name: "Textarea", href: "/components/textarea" },

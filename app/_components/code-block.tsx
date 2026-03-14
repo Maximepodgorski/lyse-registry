@@ -89,7 +89,7 @@ export function CodeBlock({
       {/* Preview area */}
       {preview && (
         <div
-          className="flex items-center justify-center py-[var(--root-space-11)]"
+          className="flex items-center justify-center px-[var(--layout-padding-3xl)] py-[var(--root-space-11)]"
           style={{ background: "var(--background-neutral-faint-default)" }}
         >
           {preview}
