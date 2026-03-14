@@ -1,3 +1,5 @@
 2026-03-13 | shipped | responsive-registry | 4h→3h | 3h | Mobile nav drawer, responsive padding, hamburger toggle, inert overlay
 2026-03-13 | shipped | command-palette | 6h→4h | 4h | cmdk search overlay, Cmd+K/Ctrl+K/slash shortcuts, shared navigation module
 2026-03-14 | shipped | breadcrumb | 3h→2h | 2h | 7 sub-components, WAI-ARIA breadcrumb, spec-reviewed (19 findings), doc page, registry entry
+2026-03-14 | dropped | input-group | 1h | wrong approach | Wrapper breaks Field a11y, parallel Button, CSS fragility — extend Input with addon props instead
+2026-03-14 | shipped | table | 2h→2h | 2h | 8 sub-components, spec-reviewed (22 findings), sticky th, border-separate body container, DropdownMenu actions demo, doc page

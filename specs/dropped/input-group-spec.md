@@ -166,3 +166,22 @@ Extends `React.ComponentProps<"button">`. Sets `data-slot="input-group-button"` 
 | Must | Note in docs: screen reader consumers should use `aria-label` on Input to convey addon context | Prevents accessibility gap from hidden addon content |
 | Should | Export `InputGroupProps`, `InputGroupAddonProps`, `InputGroupButtonProps` types | Enables consumer type extension |
 | Could | Add `InputGroupSeparator` (vertical divider between addon and input) in V2 | Common pattern in search bars with icon + divider + input |
+
+## Notes
+
+### Drop Retro (2026-03-14)
+**Reason:** wrong approach — spec review (4 perspectives, 18 findings, 5 critical) concluded the wrapper component model is fundamentally flawed.
+**Time spent:** 1h (spec + review)
+**Reusable pieces:**
+- Token mapping for addon bg (`--background-neutral-lighter-default`) and disabled states
+- A11y insight: `aria-hidden` on semantic addon text requires compensating `aria-label` on Input
+- Focus ring coordination pattern (z-index: 1 on focused element, no overflow:hidden on parent)
+**What we learned:**
+- Input already has `leading`/`trailing` slots — the "addon zone" is a CSS variant, not a structural composition problem
+- FieldControl (Radix Slot) injects props onto its immediate child — any wrapper between Field and Input breaks a11y prop injection
+- InputGroupButton as a parallel Button implementation guarantees silent divergence over time
+- CSS child selectors (`:first-child`/`:last-child`) are fragile with conditional rendering
+**If revisited:**
+- Extend Input with `addonLeading`/`addonTrailing` props instead of a wrapper component
+- Spike both approaches (2-3h) before committing to spec
+- Verify Field + Input composition is preserved (FieldControl → Input path must remain direct)
