@@ -116,7 +116,6 @@
 .select-item:focus-visible {
   background: var(--background-neutral-faint-hover);
   outline: none;
-  box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
 }
 
 /* --------------------------------
@@ -140,6 +139,30 @@
  * -------------------------------- */
 .select-label {
   color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Viewport — scrollbar
+ * Override Radix's injected [data-radix-select-viewport] styles
+ * that force scrollbar-width:none and -webkit-scrollbar:display:none
+ * -------------------------------- */
+[data-radix-select-viewport].select-viewport {
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--border-default) transparent;
+}
+
+[data-radix-select-viewport].select-viewport::-webkit-scrollbar {
+  display: block !important;
+  width: 6px;
+}
+
+[data-radix-select-viewport].select-viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-radix-select-viewport].select-viewport::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: var(--layout-radius-full);
 }
 
 /* --------------------------------

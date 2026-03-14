@@ -32,6 +32,7 @@ const overviewSections: TocSection[] = [
   { id: "sizes", label: "Sizes" },
   { id: "variants", label: "Variants" },
   { id: "grouped", label: "Grouped" },
+  { id: "scrollable", label: "Scrollable" },
   { id: "disabled", label: "Disabled" },
 ]
 
@@ -360,6 +361,40 @@ function OverviewTab() {
               <SelectItem value="cet">Central (CET)</SelectItem>
               <SelectItem value="eet">Eastern (EET)</SelectItem>
             </SelectGroup>
+          </SelectContent>
+        </Select>
+      </ComponentPreview>
+
+      <ComponentPreview
+        id="scrollable"
+        title="Scrollable"
+        description="Long lists scroll automatically when items exceed available space."
+      >
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select a country" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="ar">Argentina</SelectItem>
+            <SelectItem value="au">Australia</SelectItem>
+            <SelectItem value="br">Brazil</SelectItem>
+            <SelectItem value="ca">Canada</SelectItem>
+            <SelectItem value="cn">China</SelectItem>
+            <SelectItem value="fr">France</SelectItem>
+            <SelectItem value="de">Germany</SelectItem>
+            <SelectItem value="in">India</SelectItem>
+            <SelectItem value="it">Italy</SelectItem>
+            <SelectItem value="jp">Japan</SelectItem>
+            <SelectItem value="mx">Mexico</SelectItem>
+            <SelectItem value="nl">Netherlands</SelectItem>
+            <SelectItem value="nz">New Zealand</SelectItem>
+            <SelectItem value="ng">Nigeria</SelectItem>
+            <SelectItem value="no">Norway</SelectItem>
+            <SelectItem value="pt">Portugal</SelectItem>
+            <SelectItem value="kr">South Korea</SelectItem>
+            <SelectItem value="es">Spain</SelectItem>
+            <SelectItem value="se">Sweden</SelectItem>
+            <SelectItem value="gb">United Kingdom</SelectItem>
           </SelectContent>
         </Select>
       </ComponentPreview>
