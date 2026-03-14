@@ -83,22 +83,21 @@ For components with many color variants (Badge, Tag, CalloutCard), define scoped
 ```css
 /* Each variant sets its own tokens */
 .tag-brand {
-  --tag-bg: var(--background-brand-light-default);
-  --tag-text: var(--text-brand-on-light);
-  --tag-border: var(--border-brand-subtle);
+  --tag-bg-faint: var(--background-brand-faint-default);
+  --tag-text: var(--text-brand-moderate);
+  --tag-border-variant: var(--border-brand-lighter);
 }
 
 .tag-danger {
-  --tag-bg: var(--background-danger-light-default);
-  --tag-text: var(--text-danger-on-light);
-  --tag-border: var(--border-danger-subtle);
+  --tag-bg-faint: var(--background-danger-faint-default);
+  --tag-text: var(--text-danger-moderate);
+  --tag-border-variant: var(--border-danger-lighter);
 }
 
-/* Shared rules use scoped variables */
-.tag-base {
-  background-color: var(--tag-bg);
-  color: var(--tag-text);
-  border-color: var(--tag-border);
+/* Type rules consume scoped variables */
+.tag-fill {
+  background: var(--tag-bg-faint);
+  border: var(--layout-border-thin) solid var(--tag-border-variant);
 }
 ```
 

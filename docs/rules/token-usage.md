@@ -35,8 +35,8 @@ Layer 3: shadcn Bridge (app/styles/shadcn-bridge.css)
 
 Categories: `background`, `text`, `border`, `icon`
 Semantics: `brand`, `danger`, `success`, `warning`, `neutral`, `base`
-Variants: `strong`, `light`, `medium`, `subtle`, `on-strong`, `on-light`
-States: `default`, `hover`, `active`, `disabled`
+Variants: `strong`, `bolder`, `moderate`, `medium`, `lighter`, `faint`
+States: `default`, `hover`, `pressed`
 
 ### Examples
 
@@ -44,19 +44,19 @@ States: `default`, `hover`, `active`, `disabled`
 /* Background */
 var(--background-brand-strong-default)    /* Primary button bg */
 var(--background-brand-strong-hover)      /* Primary button hover */
-var(--background-neutral-light-default)   /* Subtle container bg */
+var(--background-neutral-faint-default)   /* Subtle container bg */
 var(--background-base)                    /* Page background */
 
 /* Text */
 var(--text-base-strong)     /* Headings, primary text */
 var(--text-base-moderate)   /* Secondary text */
-var(--text-base-subtle)     /* Muted text */
-var(--text-brand-on-strong) /* Text on brand-strong bg */
+var(--text-base-medium)     /* Muted text */
+var(--text-fixed)           /* Text on strong bg (always light) */
 
 /* Border */
 var(--border-default)       /* Standard border */
 var(--border-selected)      /* Focus ring, active state */
-var(--border-brand-subtle)  /* Brand-tinted border */
+var(--border-brand-lighter) /* Brand-tinted border */
 ```
 
 ## Layout Tokens
@@ -66,8 +66,8 @@ All spacing, sizing, radius, and border tokens live in `app/styles/root-layout.c
 ### Spacing (padding, gap, margin)
 
 ```
---layout-padding-{xs|sm|md|lg|xl|2xl}
---layout-gap-{xs|sm|md|lg|xl|2xl}
+--layout-padding-{none|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl}
+--layout-gap-{none|xs|sm|md|lg|xl|2xl|3xl|4xl}
 ```
 
 Usage in TSX:
@@ -95,7 +95,7 @@ className="h-[var(--layout-size-lg)] size-[var(--layout-size-xl)]"
 ### Radius
 
 ```
---layout-radius-{xs|sm|md|lg|xl|full}
+--layout-radius-{xs|sm|md|lg|xl|2xl|3xl|full}
 ```
 
 Usage:
@@ -110,8 +110,10 @@ className="rounded-[var(--layout-radius-lg)]"
 ### Borders
 
 ```
---layout-border-thin    /* 1px */
---layout-border-medium  /* 2px */
+--layout-border-none      /* 0 */
+--layout-border-thin      /* 1px */
+--layout-border-thick     /* 2px */
+--layout-border-thicker   /* 4px */
 ```
 
 Usage:
