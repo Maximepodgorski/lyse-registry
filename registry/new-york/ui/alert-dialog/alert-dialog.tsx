@@ -135,7 +135,7 @@ function AlertDialogHeader({
     <div
       data-slot="alert-dialog-header"
       className={cn(
-        "alert-dialog-header flex w-full flex-col gap-[var(--layout-gap-md)] p-[var(--layout-padding-xl)]",
+        "alert-dialog-header flex w-full flex-col gap-[var(--layout-gap-xs)] p-[var(--layout-padding-xl)]",
         className
       )}
       {...props}
