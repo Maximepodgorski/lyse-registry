@@ -73,17 +73,6 @@ export default function ComponentsLayout({
       ? allPages[currentIndex + 1]
       : null
 
-  /* Breadcrumb */
-  const segments = pathname.split("/").filter(Boolean)
-  const pageName = segments[segments.length - 1]
-  const breadcrumb = pageName
-    ? pageName.charAt(0).toUpperCase() + pageName.slice(1)
-    : null
-  const breadcrumbGroup =
-    navGroups.find((g) =>
-      g.items.some((i) => "href" in i && i.href === pathname)
-    )?.label ?? "Components"
-
   return (
     <div
       className="min-h-svh flex flex-col"
@@ -219,23 +208,6 @@ export default function ComponentsLayout({
 
         {/* Main content area */}
         <div className="flex-1 min-w-0 flex flex-col">
-          {/* Breadcrumb */}
-          {breadcrumb && (
-            <div className="px-[var(--layout-padding-xl)] sm:px-[var(--layout-padding-3xl)] lg:px-[var(--layout-padding-4xl)] xl:px-[var(--layout-padding-5xl)] pt-[var(--layout-padding-2xl)]">
-              <nav
-                className="text-content-caption font-accent flex items-center gap-[var(--layout-padding-sm)]"
-                style={{ color: "var(--text-base-bolder)" }}
-                aria-label="Breadcrumb"
-              >
-                <span>{breadcrumbGroup}</span>
-                <span aria-hidden>/</span>
-                <span style={{ color: "var(--text-base-strong)" }}>
-                  {breadcrumb}
-                </span>
-              </nav>
-            </div>
-          )}
-
           {/* Page content */}
           <div className="flex-1 flex">{children}</div>
 
