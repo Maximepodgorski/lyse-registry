@@ -16,7 +16,7 @@ const tagVariants = cva(
         warning: "tag-warning",
       },
       size: {
-        sm: "gap-[var(--layout-gap-xs)] px-[var(--layout-padding-sm)] py-[var(--layout-padding-2xs)] rounded-[var(--layout-radius-sm)] text-content-caption [&_svg]:size-3 [&_.tag-dot]:size-1.5",
+        sm: "gap-[var(--layout-gap-sm)] px-[var(--layout-padding-sm)] py-[var(--layout-padding-2xs)] rounded-[var(--layout-radius-sm)] text-content-caption [&_svg]:size-3 [&_.tag-dot]:size-1.5",
         md: "gap-[var(--layout-gap-sm)] px-[var(--layout-padding-md)] py-[var(--layout-padding-xs)] rounded-[var(--layout-radius-md)] text-content-caption [&_svg]:size-3 [&_.tag-dot]:size-2",
         lg: "gap-[var(--layout-gap-sm)] px-[var(--layout-padding-md)] py-[var(--layout-padding-xs)] rounded-[var(--layout-radius-lg)] text-content-note [&_svg]:size-3.5 [&_.tag-dot]:size-2",
       },
