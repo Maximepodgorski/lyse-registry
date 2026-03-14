@@ -194,7 +194,7 @@ export { Component, componentVariants }
 - `React.forwardRef` when the component uses Radix or needs ref forwarding
 - For simple components, plain function components with `React.ComponentProps` pattern
 
-## Shipped Components (23)
+## Shipped Components (24)
 
 | Component | Variants | Sizes | Extras | Radix |
 |-----------|----------|-------|--------|-------|
@@ -213,6 +213,7 @@ export { Component, componentVariants }
 | **Progress** | brand, success, danger, warning | sm, md, lg | determinate | — |
 | **Radio** | — | sm, md | `RadioGroup` | — |
 | **Select** | — | sm, md, lg | `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectGroup` | Select |
+| **Skeleton** | text, circle, rect (shape) | sm, md, lg | shimmer animation, `animated` prop, compound size×shape variants | — |
 | **Spinner** | — | xs, sm, md, lg | — | — |
 | **SpotlightCard** | — | — | `image` slot, fallback bg | — |
 | **Tabs** | — | sm, md | `TabsList`, `TabsTrigger`, `TabsContent` | Tabs |
@@ -278,6 +279,10 @@ Each page is a `"use client"` component with:
 - Each component needs a registry item in `registry.json` with `files` + `dependencies`
 - Build with `pnpm registry:build` → validates + outputs to `public/r/`
 - Install test: `npx shadcn@latest add http://localhost:3000/r/{component}.json`
+- When adding a new component, update **all 3 registries**:
+  1. `registry.json` — registry manifest entry
+  2. `lib/navigation.ts` — sidebar nav entry (alphabetical in Components group)
+  3. `app/components/directory/page.tsx` — directory grid entry (alphabetical)
 
 ## File Naming
 
@@ -300,12 +305,65 @@ Specs live in `specs/` with date-prefixed filenames. Check `specs/active/` befor
 |-------|------|--------|
 | 1 | Scaffold + registry init | Shipped |
 | 2 | Design tokens (CSS vars) | Shipped |
-| 3 | Components (batched) | In progress — 23 shipped, 13 in specs |
+| 3 | Components (batched) | In progress — 24 shipped, 5 in specs |
 | 4 | Docsite + deploy to Vercel | Shipped — live at ui.getlyse.com |
 
 ## Path Aliases
 
 `@/*` → project root (configured in tsconfig.json + components.json).
+
+## Rules
+
+Detailed conventions in `docs/rules/`. These are BLOCKING — every PR must comply.
+
+### Tokens — Zero Hardcoded Values
+
+- **Colors**: Always Layer 2 semantic tokens in `.css` (`var(--background-brand-strong-default)`). Never raw hex/oklch.
+- **Spacing/sizing in TSX**: Tailwind arbitrary syntax with layout tokens: `gap-[var(--layout-gap-sm)]`, `px-[var(--layout-padding-md)]`, `h-[var(--layout-size-xl)]`. Never `gap-2`, `px-4`, `h-10`.
+- **Spacing in doc pages**: Raw Tailwind classes (`gap-10`, `py-16`) are OK — token spacing is only required inside registry components and component previews.
+- **Typography**: Composite classes only (`text-content-caption`, `text-heading-small`, `font-accent`). Never `text-[12px]` or `font-[500]`.
+- **Radius**: `rounded-[var(--layout-radius-md)]`. Never `rounded-lg`.
+- **Borders**: `var(--layout-border-thin) solid var(--border-default)`. Never `1px solid #ccc`.
+- **Dark mode**: Handled by semantic tokens in `semantic-colors.css`. Never write `.dark .component` rules in component CSS.
+
+### Components — Follow Existing Patterns
+
+- **Dual-file**: Always `.tsx` + `.css`. No component ships one without the other.
+- **Import order**: `React` → Radix (if needed) → `cva` → `cn` → `./component.css` (CSS last).
+- **CVA base**: Structure only (flex, overflow, cursor, transition). Variant values are single CSS class names (`"btn-primary"`) that delegate to the CSS file.
+- **CSS file header**: Fixed format — see `docs/rules/css-conventions.md`.
+- **CSS scoped variables**: For multi-variant components (Badge, Tag), each variant sets `--component-bg`, `--component-text` etc. Shared rules consume them.
+- **State order in CSS**: default → hover → active/pressed → disabled → focus-visible.
+- **Focus rings**: `box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected)` double-ring for interactive components.
+- **Reduced motion**: Handle locally per animating component. Slow down, don't remove (consistent with Spinner pattern).
+- **`data-slot`**: Required on root + every sub-component. Kebab-case for compounds: `"tag-close"`.
+- **Exports**: Flat, not namespaced: `export { Tag, TagDot, TagClose, tagVariants }`.
+- **Props**: `React.ComponentProps<"element">` + `VariantProps<typeof variants>` + custom inline type. Spread `...props`.
+- **No `forwardRef`**: Unless Radix or explicit ref forwarding is required.
+- **Sub-components**: Minimal wrapper, `className` only prop, CSS class provides all styling.
+
+### Doc Pages — Consistent Structure
+
+- Always `"use client"`.
+- 3 sections: `/* Data */`, `/* Tabs */`, `/* Page */`.
+- 3 tabs: `"overview" | "props" | "documentation"` (Best practices).
+- Hero: `h1.font-bold` + `p.text-content-highlight` + copy install + v0.dev buttons.
+- Overview: `ComponentPreview` sections with `id` matching `overviewSections` (feeds TableOfContents).
+- Props: `PropsTable` with `propDefs` array.
+- Best practices: `DosDonts` component.
+
+### Registry — Entry Format
+
+- Every entry: `"type": "registry:ui"`, `dependencies` includes `"class-variance-authority"`.
+- `registryDependencies` always includes `"https://ui.getlyse.com/r/lyse-tokens.json"`.
+- Cross-component deps use full URL: `"https://ui.getlyse.com/r/button.json"`.
+- File paths match filesystem exactly: `registry/new-york/ui/{name}/{name}.tsx` + `.css`.
+- Build with `pnpm registry:build` after any registry change.
+
+### tailwind-merge Gotcha
+
+When using `cn()`, custom CSS classes with `text-*` prefix (like `text-content-note`) conflict with Tailwind arbitrary color utilities `text-[color:var(--token)]`. tailwind-merge strips one as duplicate.
+**Fix:** Use `[color:var(--token)]` arbitrary property syntax instead of `text-[color:var(--token)]`.
 
 ## Quality Gates
 
