@@ -86,6 +86,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["banner", "info", "notice", "announcement", "bar"],
       },
       {
+        label: "Breadcrumb",
+        href: "/components/breadcrumb",
+        description: "Navigation trail showing current page location in hierarchy",
+        keywords: ["breadcrumb", "nav", "trail", "path", "hierarchy", "location"],
+      },
+      {
         label: "Button",
         href: "/components/button",
         description: "Trigger actions with multiple variants and sizes",

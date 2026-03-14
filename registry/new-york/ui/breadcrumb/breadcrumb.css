@@ -1,0 +1,55 @@
+/* ================================================================
+ * BREADCRUMB — Token-based theming
+ * ================================================================ */
+
+/* Link — default state */
+.breadcrumb-link {
+  color: var(--text-base-moderate);
+  cursor: pointer;
+}
+
+.breadcrumb-link:hover {
+  color: var(--text-base-strong);
+}
+
+.breadcrumb-link:focus-visible {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 2px;
+  border-radius: var(--layout-radius-sm);
+}
+
+/* Current page */
+.breadcrumb-page {
+  color: var(--text-base-strong);
+  pointer-events: none;
+}
+
+.breadcrumb-page:focus-visible {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 2px;
+  border-radius: var(--layout-radius-sm);
+}
+
+/* Separator */
+.breadcrumb-separator {
+  color: var(--text-base-medium);
+}
+
+/* Ellipsis button */
+.breadcrumb-ellipsis {
+  color: var(--text-base-medium);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.breadcrumb-ellipsis:hover {
+  color: var(--text-base-moderate);
+  background: var(--background-neutral-faint-hover);
+}
+
+.breadcrumb-ellipsis:focus-visible {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 2px;
+}

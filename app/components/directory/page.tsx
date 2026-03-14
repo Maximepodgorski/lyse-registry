@@ -9,6 +9,7 @@ const components = [
   { name: "Avatar", href: "/components/avatar" },
   { name: "Badge", href: "/components/badge" },
   { name: "BannerInfo", href: "/components/banner-info" },
+  { name: "Breadcrumb", href: "/components/breadcrumb" },
   { name: "Button", href: "/components/button" },
   { name: "CalloutCard", href: "/components/callout-card" },
   { name: "Checkbox", href: "/components/checkbox" },
