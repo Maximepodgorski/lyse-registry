@@ -1,0 +1,144 @@
+/* ================================================================
+ * TABLE — Token-based theming
+ * ================================================================ */
+
+/* --------------------------------
+ * Scroll wrapper
+ * -------------------------------- */
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: clip;
+}
+
+/* --------------------------------
+ * Table — base
+ * -------------------------------- */
+.table-base {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* --------------------------------
+ * TableHead — sticky + styling
+ * -------------------------------- */
+.table-head {
+  padding: var(--layout-padding-md) var(--layout-padding-lg);
+  color: var(--text-base-moderate);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* --------------------------------
+ * TableCell — default padding
+ * -------------------------------- */
+.table-cell {
+  padding: var(--layout-padding-md) var(--layout-padding-lg);
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Body — rounded border container
+ * -------------------------------- */
+.table-body .table-cell {
+  border-left: var(--layout-border-thin) solid transparent;
+  border-right: var(--layout-border-thin) solid transparent;
+}
+
+.table-body .table-row:first-child .table-cell {
+  border-top: var(--layout-border-thin) solid var(--border-default);
+}
+
+.table-body .table-row:last-child .table-cell {
+  border-bottom: var(--layout-border-thin) solid var(--border-default);
+}
+
+.table-body .table-row:first-child .table-cell:first-child {
+  border-left-color: var(--border-default);
+  border-top-left-radius: var(--layout-radius-lg);
+}
+
+.table-body .table-row:first-child .table-cell:last-child {
+  border-right-color: var(--border-default);
+  border-top-right-radius: var(--layout-radius-lg);
+}
+
+.table-body .table-row:last-child .table-cell:first-child {
+  border-left-color: var(--border-default);
+  border-bottom-left-radius: var(--layout-radius-lg);
+}
+
+.table-body .table-row:last-child .table-cell:last-child {
+  border-right-color: var(--border-default);
+  border-bottom-right-radius: var(--layout-radius-lg);
+}
+
+/* Middle rows — left/right borders */
+.table-body .table-row .table-cell:first-child {
+  border-left-color: var(--border-default);
+}
+
+.table-body .table-row .table-cell:last-child {
+  border-right-color: var(--border-default);
+}
+
+/* --------------------------------
+ * TableRow — divider + hover
+ * -------------------------------- */
+.table-body .table-row + .table-row .table-cell {
+  border-top: var(--layout-border-thin) solid var(--border-divider);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .table-row {
+    transition: background 150ms ease;
+  }
+}
+
+/* Stripe — scoped to tbody only, declared BEFORE hover */
+[data-variant="striped"] tbody .table-row:nth-child(even) {
+  background: var(--background-neutral-faint-default);
+}
+
+/* Hover — declared AFTER stripe, wins via source order */
+tbody .table-row:hover {
+  background: var(--background-neutral-faint-hover);
+}
+
+/* --------------------------------
+ * TableFooter
+ * -------------------------------- */
+.table-footer {
+  background: var(--background-neutral-faint-default);
+}
+
+.table-footer .table-row {
+  background: transparent;
+}
+
+.table-footer .table-cell {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * TableCaption
+ * -------------------------------- */
+.table-caption {
+  color: var(--text-base-medium);
+  padding: var(--layout-padding-md) var(--layout-padding-lg);
+}
+
+/* --------------------------------
+ * Compact density
+ * -------------------------------- */
+[data-compact] .table-head {
+  padding: var(--layout-padding-xs) var(--layout-padding-md);
+}
+
+[data-compact] .table-cell {
+  padding: var(--layout-padding-xs) var(--layout-padding-md);
+}
+
+[data-compact] .table-caption {
+  padding: var(--layout-padding-xs) var(--layout-padding-md);
+}
