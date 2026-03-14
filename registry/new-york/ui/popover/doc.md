@@ -20,7 +20,6 @@ Do NOT use `Popover` when:
 ### Basic
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 import {
   Popover,
   PopoverTrigger,
@@ -32,8 +31,8 @@ import { Button } from "@/components/ui/button"
   <PopoverTrigger asChild>
     <Button variant="secondary">Open</Button>
   </PopoverTrigger>
-  <PopoverContent>
-    <p className="text-content-body">Popover content goes here.</p>
+  <PopoverContent aria-label="Details">
+    <p className="text-content-note">Popover content goes here.</p>
   </PopoverContent>
 </Popover>
 ```
@@ -41,7 +40,6 @@ import { Button } from "@/components/ui/button"
 ### Placement
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 <PopoverContent side="top">Opens above the trigger</PopoverContent>
 <PopoverContent side="right">Opens to the right</PopoverContent>
 <PopoverContent side="bottom">Opens below (default)</PopoverContent>
@@ -55,7 +53,6 @@ import { Button } from "@/components/ui/button"
 ### With close button
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 import {
   Popover,
   PopoverTrigger,
@@ -69,11 +66,11 @@ import { X } from "lucide-react"
   <PopoverTrigger asChild>
     <Button variant="secondary">Settings</Button>
   </PopoverTrigger>
-  <PopoverContent className="w-72">
-    <div className="flex items-center justify-between mb-[var(--layout-gap-md)]">
-      <span className="text-content-body font-accent">Preferences</span>
+  <PopoverContent className="w-72" aria-label="Preferences">
+    <div className="flex items-center justify-between mb-[var(--layout-gap-xs)]">
+      <span className="text-content-note font-accent">Preferences</span>
       <PopoverClose asChild>
-        <Button isIconOnly variant="terciary" size="xs" aria-label="Close">
+        <Button isIconOnly variant="terciary" size="xs">
           <X />
         </Button>
       </PopoverClose>
@@ -86,14 +83,13 @@ import { X } from "lucide-react"
 ### Controlled
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 const [open, setOpen] = React.useState(false)
 
 <Popover open={open} onOpenChange={setOpen}>
   <PopoverTrigger asChild>
     <Button variant="secondary">Toggle popover</Button>
   </PopoverTrigger>
-  <PopoverContent>
+  <PopoverContent aria-label="Actions">
     <Button size="sm" onClick={() => setOpen(false)}>Done</Button>
   </PopoverContent>
 </Popover>
@@ -102,7 +98,6 @@ const [open, setOpen] = React.useState(false)
 ### With custom anchor
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 import { PopoverAnchor } from "@/components/ui/popover"
 
 <Popover>
@@ -114,7 +109,9 @@ import { PopoverAnchor } from "@/components/ui/popover"
   <PopoverTrigger asChild>
     <Button>Open near anchor</Button>
   </PopoverTrigger>
-  <PopoverContent>Content anchored to the div above</PopoverContent>
+  <PopoverContent aria-label="Anchored content">
+    Content anchored to the div above
+  </PopoverContent>
 </Popover>
 ```
 
@@ -129,7 +126,7 @@ Root component. Manages open state and coordinates sub-components.
 | `open` | `boolean` | — | Controlled open state |
 | `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
 | `defaultOpen` | `boolean` | `false` | Uncontrolled initial open state |
-| `modal` | `boolean` | `false` | When true, interaction outside is blocked (modal-like behavior) |
+| `modal` | `boolean` | `false` | When true, interaction outside is blocked and focus is trapped |
 
 Re-export of `Radix PopoverPrimitive.Root`.
 
@@ -143,7 +140,7 @@ Element that opens the popover on click. Supports `asChild` to delegate to your 
 
 ### PopoverContent
 
-Floating panel rendered in a portal. Inherits the same visual styling as `DropdownMenuContent` (background, border, shadow, radius via Lyse tokens).
+Floating panel rendered in a portal. Same surface styling as `DropdownMenuContent` — with the addition of an elevation shadow.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -156,18 +153,18 @@ Floating panel rendered in a portal. Inherits the same visual styling as `Dropdo
 | `className` | `string` | — | Additional CSS classes |
 | `children` | `React.ReactNode` | — | Popover panel content |
 
-CSS theming (via `.css` file):
-- Background: `var(--background-base-default)`
+CSS theming (via `popover.css`):
+- Background: `var(--background-neutral-faint-default)`
 - Border: `var(--layout-border-thin) solid var(--border-default)`
-- Border radius: `var(--layout-radius-md)`
-- Box shadow: `var(--shadow-md)` (matches dropdown-menu)
-- Padding: `var(--layout-padding-md)`
+- Border radius: `var(--layout-radius-xl)`
+- Box shadow: `var(--shadow-elevation-md)`
+- Padding: `var(--layout-padding-lg)`
 
-Animations: `animate-in` / `animate-out` with `fade` + `zoom` + `slide` — same as `DropdownMenuContent`. Animations are suppressed for `prefers-reduced-motion`.
+Animations: `animate-in` / `animate-out` with `fade` + `zoom` + `slide` — same as `DropdownMenuContent`.
 
 ### PopoverClose
 
-Button that closes the popover. Use `asChild` to delegate to your own `<Button>`.
+Button that closes the popover. Renders with `aria-label="Close"` by default. Use `asChild` to delegate to your own `<Button>`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -175,7 +172,7 @@ Button that closes the popover. Use `asChild` to delegate to your own `<Button>`
 
 ### PopoverAnchor
 
-An invisible anchor element. Positions the `PopoverContent` relative to the anchor instead of the trigger. Useful when the trigger and the visual anchor are different elements.
+An invisible anchor element. Positions the `PopoverContent` relative to the anchor instead of the trigger. Useful when the trigger and the visual anchor are different elements (e.g., date picker input + calendar icon trigger).
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -186,7 +183,6 @@ An invisible anchor element. Positions the `PopoverContent` relative to the anch
 ### Filter panel
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 import { Filter } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
@@ -199,8 +195,8 @@ import { Checkbox } from "@/components/ui/checkbox"
       Filter
     </Button>
   </PopoverTrigger>
-  <PopoverContent className="w-56" align="start">
-    <p className="text-content-caption font-accent mb-[var(--layout-gap-sm)] [color:var(--text-base-subtle)]">
+  <PopoverContent className="w-56" align="start" aria-label="Filter by status">
+    <p className="text-content-caption font-accent mb-[var(--layout-gap-sm)] [color:var(--text-base-moderate)]">
       Status
     </p>
     <div className="flex flex-col gap-[var(--layout-gap-sm)]">
@@ -215,7 +211,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 ### User detail card
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 import { Avatar } from "@/components/ui/avatar"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 
@@ -225,12 +220,12 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
       <Avatar src="/avatars/maxime.jpg" fallback="MP" size="sm" />
     </button>
   </PopoverTrigger>
-  <PopoverContent side="bottom" align="start" className="w-64">
+  <PopoverContent side="bottom" align="start" className="w-64" aria-label="User details">
     <div className="flex items-center gap-[var(--layout-gap-md)]">
       <Avatar src="/avatars/maxime.jpg" fallback="MP" size="md" />
       <div>
-        <p className="text-content-body font-accent">Maxime Podgorski</p>
-        <p className="text-content-caption [color:var(--text-base-subtle)]">maxime@getlyse.com</p>
+        <p className="text-content-note font-accent">Maxime Podgorski</p>
+        <p className="text-content-caption [color:var(--text-base-moderate)]">maxime@getlyse.com</p>
       </div>
     </div>
   </PopoverContent>
@@ -240,7 +235,6 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 ### Inline date picker trigger
 
 ```tsx
-<!-- DRAFT — update after implementation -->
 import { CalendarDays } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
@@ -252,7 +246,7 @@ import { Button } from "@/components/ui/button"
       Pick a date
     </Button>
   </PopoverTrigger>
-  <PopoverContent className="w-auto p-0" align="start">
+  <PopoverContent className="w-auto p-0" align="start" aria-label="Date picker">
     {/* Calendar component goes here */}
   </PopoverContent>
 </Popover>
@@ -263,15 +257,15 @@ import { Button } from "@/components/ui/button"
 | Do | Don't |
 |----|-------|
 | Use `asChild` on `PopoverTrigger` to avoid a redundant wrapping element | Nest a `<button>` inside `PopoverTrigger` without `asChild` — produces invalid HTML |
+| Always pass `aria-label` on `PopoverContent` to name the dialog region | Omit `aria-label` — screen readers announce an unnamed dialog |
 | Keep popover content focused and purposeful — one task per popover | Place unrelated content sections inside a single `PopoverContent` — use a `Modal` |
-| Use `align="start"` or `align="end"` when the trigger is at a viewport edge | Let popover overflow the viewport — `avoidCollisions` handles this automatically |
-| Use `PopoverClose asChild` with a `<Button>` for a styled close action | Manage close state manually with `useState` when a `PopoverClose` or `onOpenChange` suffices |
-| Constrain width with `className="w-{N}"` — `PopoverContent` grows to fit children by default | Let long content stretch the popover to full viewport width |
+| Constrain width with `className="w-{N}"` — content grows to fit children by default | Let long content stretch the popover to full viewport width |
+| Use `PopoverClose asChild` with a `<Button>` for a styled close action | Manage close state manually with `useState` when `PopoverClose` or `onOpenChange` suffices |
 
 ## Accessibility
 
-- **Keyboard:** `Enter` or `Space` opens the popover from the trigger. `Escape` closes it and returns focus to the trigger. `Tab` cycles through focusable elements inside the open popover.
-- **Focus:** Focus moves into the `PopoverContent` on open. On close, focus returns to the `PopoverTrigger`.
-- **ARIA:** `aria-expanded` is set on the trigger automatically. `PopoverContent` has `role="dialog"` when `modal={true}`, otherwise content is accessible inline.
-- **Screen reader:** The popover content is announced when focus enters it. Provide a visible heading or descriptive first element so users immediately understand the context.
+- **Keyboard:** `Enter` or `Space` opens the popover from the trigger. `Escape` closes it and returns focus to the trigger.
+- **Focus (modal=false, default):** Focus moves into the popover on open. `Tab` moves freely in and out of the popover — focus is NOT trapped. On close, focus returns to the trigger.
+- **Focus (modal=true):** Focus is trapped within the popover content. `Tab` cycles through interactive elements inside the popover only. `aria-hidden` is applied to the rest of the page.
+- **ARIA:** `aria-expanded` is set on the trigger automatically. `PopoverContent` receives `role="dialog"` from Radix. Always provide `aria-label` on `PopoverContent` to name the dialog region.
 - **Motion:** Enter/exit animations respect `prefers-reduced-motion` — fade and zoom transitions are suppressed when reduced motion is preferred.

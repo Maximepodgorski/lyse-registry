@@ -1,0 +1,36 @@
+/* ================================================================
+ * SKELETON — Base & Shimmer Styles
+ * Structure (shape, radius) lives in skeleton.tsx via cva.
+ * Theming (colors, animation) lives here via tokens.
+ * ================================================================ */
+
+.skeleton-base {
+  background-color: var(--background-neutral-medium-default);
+}
+
+.skeleton-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    transparent 30%,
+    oklch(100% 0 0 / 0.06) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Slow instead of remove — preserves loading signal (consistent with Spinner) */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation-duration: 8s;
+  }
+}

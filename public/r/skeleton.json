@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://ui.getlyse.com/r/lyse-tokens.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ui/skeleton/skeleton.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./skeleton.css\"\n\nconst skeletonVariants = cva(\"skeleton-base\", {\n  variants: {\n    shape: {\n      text: \"w-full rounded-[var(--layout-radius-sm)]\",\n      circle: \"rounded-full aspect-square\",\n      rect: \"w-full rounded-[var(--layout-radius-md)]\",\n    },\n    size: {\n      sm: \"\",\n      md: \"\",\n      lg: \"\",\n    },\n    animated: {\n      true: \"skeleton-shimmer\",\n      false: \"\",\n    },\n  },\n  compoundVariants: [\n    // text × size\n    { shape: \"text\", size: \"sm\", class: \"h-[var(--layout-size-2xs)]\" },\n    { shape: \"text\", size: \"md\", class: \"h-[var(--layout-size-xs)]\" },\n    { shape: \"text\", size: \"lg\", class: \"h-[var(--layout-size-base)]\" },\n    // circle × size\n    { shape: \"circle\", size: \"sm\", class: \"size-[var(--layout-size-sm)]\" },\n    { shape: \"circle\", size: \"md\", class: \"size-[var(--layout-size-lg)]\" },\n    { shape: \"circle\", size: \"lg\", class: \"size-[var(--layout-size-xl)]\" },\n    // rect × size\n    { shape: \"rect\", size: \"sm\", class: \"h-[var(--layout-size-sm)]\" },\n    { shape: \"rect\", size: \"md\", class: \"h-[var(--layout-size-lg)]\" },\n    { shape: \"rect\", size: \"lg\", class: \"h-[var(--layout-size-xl)]\" },\n  ],\n  defaultVariants: {\n    shape: \"rect\",\n    size: \"md\",\n    animated: true,\n  },\n})\n\nfunction Skeleton({\n  className,\n  shape,\n  size,\n  animated,\n  ...props\n}: React.ComponentProps<\"div\"> &\n  VariantProps<typeof skeletonVariants>) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      aria-hidden=\"true\"\n      className={cn(skeletonVariants({ shape, size, animated, className }))}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton, skeletonVariants }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/skeleton/skeleton.css",
+      "content": "/* ================================================================\n * SKELETON — Base & Shimmer Styles\n * Structure (shape, radius) lives in skeleton.tsx via cva.\n * Theming (colors, animation) lives here via tokens.\n * ================================================================ */\n\n.skeleton-base {\n  background-color: var(--background-neutral-medium-default);\n}\n\n.skeleton-shimmer {\n  background-image: linear-gradient(\n    90deg,\n    transparent 30%,\n    oklch(100% 0 0 / 0.06) 50%,\n    transparent 70%\n  );\n  background-size: 200% 100%;\n  animation: skeleton-shimmer 1.5s ease-in-out infinite;\n}\n\n@keyframes skeleton-shimmer {\n  from {\n    background-position: 200% 0;\n  }\n  to {\n    background-position: -200% 0;\n  }\n}\n\n/* Slow instead of remove — preserves loading signal (consistent with Spinner) */\n@media (prefers-reduced-motion: reduce) {\n  .skeleton-shimmer {\n    animation-duration: 8s;\n  }\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

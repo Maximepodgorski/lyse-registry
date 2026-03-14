@@ -73,20 +73,32 @@ registry/new-york/ui/popover/
 | asChild | `boolean` | `false` | No | Merge props onto child element |
 | children | `ReactNode` | — | Yes | Close trigger (button, icon, etc.) |
 
+## When to Use
+
+| Use case | Component |
+|----------|-----------|
+| Persistent interactive floating content (forms, pickers, filters) | **Popover** |
+| Action list triggered by click (menus, context menus) | DropdownMenu |
+| Read-only hint on hover/focus | Tooltip |
+| Blocking task requiring a decision | Modal |
+
+**Use Popover when** the floating content is interactive and should stay open while the user interacts with it. **Do not use Popover** for action menus (use DropdownMenu) or read-only hints (use Tooltip).
+
 ## Token Mapping
 
-Visual styling is identical to `DropdownMenuContent`. Both surfaces are floating panels with the same elevation and treatment.
+Floating panel surface — same elevation as `DropdownMenuContent` and `Select` dropdown.
 
 | Property | Token | Category |
 |----------|-------|----------|
 | Background | `var(--background-neutral-faint-default)` | Color |
 | Border | `var(--layout-border-thin) solid var(--border-default)` | Border |
 | Border radius | `var(--layout-radius-xl)` | Radius |
-| Padding | `var(--layout-padding-xs)` | Spacing |
-| Shadow (light) | `0 3px 8px rgba(0,0,0,0.04), 0 14px 14px rgba(0,0,0,0.03), 0 31px 19px rgba(0,0,0,0.02), 0 55px 22px rgba(0,0,0,0.01)` | Shadow |
-| Shadow (dark) | `0 3px 8px rgba(0,0,0,0.2), 0 14px 14px rgba(0,0,0,0.18), 0 31px 19px rgba(0,0,0,0.1), 0 55px 22px rgba(0,0,0,0.05)` | Shadow |
+| Padding | `var(--layout-padding-lg)` | Spacing |
+| Shadow | `var(--shadow-elevation-md)` | Shadow |
 | z-index | `50` | Layout |
 | Min width | `8rem` | Sizing |
+
+> **Note:** `--shadow-elevation-md` is a Layer 2 semantic token defined in `semantic-colors.css` with light/dark mode remapping. Modal already uses it. DropdownMenu and Select currently lack it — adding shadow to those components is a follow-up task to establish full floating surface consistency.
 
 ### Animations
 
@@ -110,7 +122,7 @@ Same animation classes as `DropdownMenuContent` — shared CSS keyframes from `t
 - [ ] AC-5: GIVEN `align="start"` THEN content aligns to the start edge of the trigger
 - [ ] AC-6: GIVEN PopoverContent WHEN rendered THEN enter animation plays (fade + zoom + slide)
 - [ ] AC-7: GIVEN PopoverContent WHEN dismissed THEN exit animation plays
-- [ ] AC-8: GIVEN PopoverContent THEN visual styling (bg, border, shadow, radius) matches DropdownMenuContent exactly
+- [ ] AC-8: GIVEN PopoverContent THEN visual styling uses floating panel tokens (bg, border, radius from DropdownMenuContent + shadow from `--shadow-elevation-md`)
 - [ ] AC-9: GIVEN a PopoverClose inside content WHEN clicked THEN Popover closes
 - [ ] AC-10: GIVEN controlled `open` + `onOpenChange` THEN external state drives the Popover
 - [ ] AC-11: GIVEN light mode THEN all tokens render correctly
@@ -121,30 +133,51 @@ Same animation classes as `DropdownMenuContent` — shared CSS keyframes from `t
 | Case | Expected Behavior |
 |------|-------------------|
 | Content overflows viewport | Radix collision detection repositions content within viewport |
+| Content taller than viewport | Content scrolls internally (`overflow-y: auto`); no `max-height` enforced by default — consumers set their own via `className` |
 | Trigger inside a scroll container | Popover tracks trigger position on open; does not reposition on scroll (Radix default) |
-| `modal=true` | Interaction outside content is blocked; aria-hidden applied to rest of page |
+| `modal=true` | Interaction outside content is blocked; aria-hidden applied to rest of page; focus trapped within content |
+| `modal=false` (default) | Clicking outside closes popover; Tab exits freely; no focus trap |
 | No `sideOffset` | Defaults to 6px — same as DropdownMenu and Tooltip |
 | Rapid toggle | Open/close states cancel cleanly; no duplicate portals |
 | Content wider than trigger | Content uses its own intrinsic width; not constrained to trigger width |
+| Popover open + Modal opens | Modal overlay renders above Popover (later DOM order). Popover should auto-close or be visually behind overlay. |
+| Nested Radix components inside content | Supported (e.g., Select inside Popover). Inner portals render independently at `z-50`. |
 
 ## Accessibility
 
-- **Keyboard:** Trigger is focusable; Enter/Space opens; ESC closes; Tab cycles within content
-- **Screen reader:** `aria-expanded` on trigger (Radix); content has `role="dialog"` implicitly via Radix
-- **Focus:** On open, focus moves into content; on close, returns to trigger
-- **WCAG 2.1 AA:** Sufficient color contrast for all text and border tokens in both modes
+### Keyboard
+
+- Trigger is focusable; Enter/Space opens; ESC closes
+- **`modal=false` (default):** Tab moves freely in and out of the popover — focus is NOT trapped. This is intentional for non-modal supplementary content.
+- **`modal=true`:** Tab is trapped within the popover content. Focus cycles through interactive elements inside the popover only.
+
+### Screen reader
+
+- `aria-expanded` on trigger (Radix automatic)
+- Content receives `role="dialog"` from Radix. For non-modal uses, this signals supplementary interactive content. Consumers needing a different role can override via `role` prop on `PopoverContent`.
+
+### Focus
+
+- On open, focus moves into content (first focusable element)
+- On close, focus returns to trigger
+
+### WCAG 2.1 AA
+
+- Sufficient color contrast for all text and border tokens in both modes
 
 ## Decisions
 
 | Decision | Rationale |
 |----------|-----------|
 | Radix Popover as base | Positioning (Floating UI), collision detection, portal, focus management — all handled |
-| Visual styling identical to DropdownMenuContent | Popovers and dropdowns are the same elevation/surface. Divergence requires explicit Figma direction. |
-| Shadow defined in CSS (not Tailwind) | Same pattern as Modal — light/dark shadow variants via CSS class + dark selector |
+| Floating panel surface tokens | Same bg, border, radius, padding as DropdownMenuContent. Shadow via `--shadow-elevation-md` token (same as Modal). |
+| Shadow via `--shadow-elevation-md` token in CSS | Layer 2 semantic token with auto light/dark remapping. Same pattern as Modal. Raw rgba values are never used in component CSS. |
 | `sideOffset=6` as default | Matches DropdownMenu and Tooltip defaults — consistent gap across all floating surfaces |
-| PopoverAnchor exported | Enables detached trigger patterns (trigger element != anchor for positioning) |
-| `modal=false` as default | Popover is non-modal by default. Modal behavior is opt-in. |
-| Padding `--layout-padding-xs` on content | Matches DropdownMenuContent — leaves internal spacing to child components |
+| PopoverAnchor exported | Enables detached trigger patterns (trigger element != anchor for positioning). Zero cost — thin Radix passthrough. |
+| `modal=false` as default | Popover is non-modal by default. Modal behavior is opt-in. Non-modal = no focus trap, Tab exits freely. |
+| Padding `--layout-padding-lg` on content | Freeform content needs breathing room — unlike DropdownMenu whose items have own padding |
+| No enforced `max-height` | Consumer controls overflow via `className`. Popover content is freeform — no single default fits all use cases. |
+| z-index `50` for all floating surfaces | Consistent with DropdownMenu, Tooltip, Select. Modal overlay also uses `z-50` but renders later in DOM order, so it stacks above. |
 
 ## Blockers
 
@@ -157,6 +190,7 @@ Same animation classes as `DropdownMenuContent` — shared CSS keyframes from `t
 | Priority | Recommendation | Rationale |
 |----------|---------------|-----------|
 | Must | Use `@radix-ui/react-popover` | Floating UI positioning + portal + a11y out of the box |
-| Must | Mirror DropdownMenuContent CSS class names for the content panel | Enforce visual parity; single source of truth for floating panel tokens |
+| Must | Use `--shadow-elevation-md` token for shadow (not raw rgba) | Layer 2 compliance; auto light/dark remapping; same pattern as Modal |
+| Should | Add `--shadow-elevation-md` to DropdownMenu + Select in a follow-up | Floating surface visual consistency across all components |
 | Should | Document the anchor pattern in doc page | Non-obvious Radix feature that unlocks date-picker and combobox patterns |
 | Could | Add `PopoverArrow` in a follow-up | Arrow indicator for popover position — not in Figma v1, but common ask |

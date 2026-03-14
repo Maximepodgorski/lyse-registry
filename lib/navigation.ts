@@ -140,6 +140,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["modal", "dialog", "overlay", "popup", "lightbox"],
       },
       {
+        label: "Popover",
+        href: "/components/popover",
+        description: "Floating panel for interactive content anchored to a trigger",
+        keywords: ["popover", "floating", "panel", "picker", "filter", "anchor", "portal"],
+      },
+      {
         label: "Progress",
         href: "/components/progress",
         description: "Determinate progress bar with color variants",
@@ -156,6 +162,12 @@ export const navGroups: readonly NavGroup[] = [
         href: "/components/select",
         description: "Dropdown select with trigger, content, items, and groups",
         keywords: ["select", "dropdown", "picker", "option", "form", "combobox"],
+      },
+      {
+        label: "Skeleton",
+        href: "/components/skeleton",
+        description: "Shimmer placeholder for loading content",
+        keywords: ["skeleton", "loading", "placeholder", "shimmer", "loader"],
       },
       {
         label: "Spinner",

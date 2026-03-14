@@ -1,6 +1,6 @@
 # Skeleton
 
-A placeholder loading animation that mirrors the shape of content before it arrives, reducing perceived wait time.
+A shimmer placeholder that mirrors the shape of content before it arrives, reducing perceived wait time and layout shift.
 
 ## When to use
 
@@ -11,8 +11,8 @@ Use `Skeleton` when:
 
 Do NOT use `Skeleton` when:
 - The loading duration is under ~200 ms — a flash of skeleton is more jarring than nothing
-- The content shape is unknown or highly variable → use a spinner or progress bar instead
-- The entire page is loading → use a page-level loading state instead
+- The content shape is unknown or highly variable → use `Spinner` instead
+- The loading state has a measurable progress value → use `Progress` instead
 
 ## How to use
 
@@ -26,20 +26,38 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 ### Shapes
 
+Three presets control radius and default dimensions. All shapes have visible defaults — override via `className`.
+
 ```tsx
-{/* Text line — rounded-sm, h-4, full width (default) */}
+{/* Text line — body text height, full width, small radius */}
 <Skeleton shape="text" />
 
-{/* Circle — rounded-full, aspect-square; size controlled by className */}
-<Skeleton shape="circle" className="w-10 h-10" />
+{/* Circle — avatar-sized, rounded-full, aspect-square */}
+<Skeleton shape="circle" className="size-10" />
 
-{/* Rectangle — rounded-md; size controlled by className */}
+{/* Rectangle (default) — block height, full width, medium radius */}
 <Skeleton shape="rect" className="h-32 w-full" />
 ```
 
-### Static (no animation)
+### Sizes
 
-Use `animated={false}` when the loading state is part of a static mockup or a reduced-motion context.
+Match the skeleton size to your content hierarchy.
+
+```tsx
+{/* Caption placeholder */}
+<Skeleton shape="text" size="sm" />
+
+{/* Body text placeholder (default) */}
+<Skeleton shape="text" size="md" />
+
+{/* Heading placeholder */}
+<Skeleton shape="text" size="lg" />
+
+{/* Small avatar */}
+<Skeleton shape="circle" size="sm" />
+```
+
+### Static (no animation)
 
 ```tsx
 <Skeleton animated={false} />
@@ -47,14 +65,17 @@ Use `animated={false}` when the loading state is part of a static mockup or a re
 
 ### Composing a content placeholder
 
-Match the skeleton layout to the real component it replaces.
+Match the skeleton layout to the real component it replaces. Wrap in `role="status"` for accessibility.
 
 ```tsx
-<div className="flex items-center gap-[var(--layout-gap-md)]">
-  <Skeleton shape="circle" className="w-10 h-10 shrink-0" />
-  <div className="flex flex-col gap-[var(--layout-gap-xs)] flex-1">
-    <Skeleton shape="text" className="w-3/4" />
-    <Skeleton shape="text" className="w-1/2" />
+<div role="status" aria-live="polite">
+  <span className="sr-only">Loading content</span>
+  <div className="flex items-center gap-[var(--layout-gap-md)]">
+    <Skeleton shape="circle" className="size-10 shrink-0" />
+    <div className="flex flex-col gap-[var(--layout-gap-xs)] flex-1">
+      <Skeleton shape="text" className="w-3/4" />
+      <Skeleton shape="text" className="w-1/2" />
+    </div>
   </div>
 </div>
 ```
@@ -65,11 +86,14 @@ Match the skeleton layout to the real component it replaces.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `shape` | `"text" \| "circle" \| "rect"` | `"text"` | Controls border-radius and default dimensions. `text` = `rounded-sm h-4 w-full`; `circle` = `rounded-full aspect-square`; `rect` = `rounded-md` |
-| `animated` | `boolean` | `true` | Toggles the CSS pulse animation. Set to `false` for static placeholders or reduced-motion fallbacks |
+| `shape` | `"text" \| "circle" \| "rect"` | `"rect"` | Controls border-radius and default dimensions. `text` = body line height, full width; `circle` = rounded-full, aspect-square; `rect` = block height, full width |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Controls height (text/rect) or diameter (circle). `sm` = caption-sized, `md` = body-sized, `lg` = heading-sized |
+| `animated` | `boolean` | `true` | Toggles the CSS shimmer animation. Set to `false` for static placeholders |
 | `className` | `string` | — | Additional classes merged via `cn()`. Use to override width, height, and margin |
 
 Extends `React.ComponentProps<"div">`. All native div attributes are forwarded.
+
+`aria-hidden="true"` is set by default. Override via props spread for advanced live region patterns.
 
 **Token used:** `background-color` is `var(--background-neutral-medium-default)`, which adapts to light and dark mode automatically.
 
@@ -78,23 +102,27 @@ Extends `React.ComponentProps<"div">`. All native div attributes are forwarded.
 ### Card loading state
 
 ```tsx
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
-<Card>
-  <CardHeader>
-    <Skeleton shape="text" className="w-1/3" />
-    <Skeleton shape="text" className="w-1/2 mt-[var(--layout-gap-xs)]" />
-  </CardHeader>
-  <CardContent>
-    <Skeleton shape="rect" className="h-24 w-full" />
-  </CardContent>
-</Card>
+<div
+  role="status"
+  aria-live="polite"
+  className="rounded-[var(--layout-radius-lg)] p-[var(--layout-padding-xl)]"
+  style={{ border: "var(--layout-border-thin) solid var(--border-default)" }}
+>
+  <span className="sr-only">Loading content</span>
+  <div className="flex flex-col gap-4">
+    <Skeleton shape="rect" className="h-32 w-full" />
+    <div className="flex flex-col gap-2">
+      <Skeleton shape="text" className="w-3/4" />
+      <Skeleton shape="text" />
+      <Skeleton shape="text" className="w-1/2" />
+    </div>
+  </div>
+</div>
 ```
 
-<!-- DRAFT — update after implementation -->
-
-### User list row
+### User list rows
 
 ```tsx
 import { Skeleton } from "@/components/ui/skeleton"
@@ -102,24 +130,22 @@ import { Skeleton } from "@/components/ui/skeleton"
 function UserRowSkeleton() {
   return (
     <div className="flex items-center gap-[var(--layout-gap-md)] py-[var(--layout-padding-sm)]">
-      <Skeleton shape="circle" className="w-8 h-8 shrink-0" />
+      <Skeleton shape="circle" className="size-8 shrink-0" />
       <div className="flex flex-col gap-[var(--layout-gap-xs)] flex-1">
         <Skeleton shape="text" className="w-40" />
         <Skeleton shape="text" className="w-24" />
       </div>
-      <Skeleton shape="rect" className="w-16 h-6 rounded-full" />
     </div>
   )
 }
 
-<div>
+<div role="status" aria-live="polite">
+  <span className="sr-only">Loading users</span>
   {Array.from({ length: 4 }).map((_, i) => (
     <UserRowSkeleton key={i} />
   ))}
 </div>
 ```
-
-<!-- DRAFT — update after implementation -->
 
 ### Conditional render
 
@@ -132,21 +158,20 @@ function ProfileName({ name, isLoading }: { name: string; isLoading: boolean }) 
 }
 ```
 
-<!-- DRAFT — update after implementation -->
-
 ## Do / Don't
 
 | Do | Don't |
 |----|-------|
-| Match skeleton dimensions as closely as possible to the real content they replace | Use a single full-width `rect` skeleton for every loading state — it misleads users about the content shape |
-| Use `shape="circle"` for avatars and icon placeholders with a matching `w-*` and `h-*` class | Omit size classes on `circle` — it collapses to zero without an explicit dimension |
-| Compose multiple `Skeleton` elements to match the real component layout | Animate more than ~5 skeletons simultaneously — it becomes visually noisy |
-| Set `animated={false}` inside `prefers-reduced-motion` media queries | Show animated skeletons indefinitely — pair them with a real error or empty state fallback |
-| Use `className` to fine-tune width only — avoid overriding background-color directly | Override the background color with raw hex values — use token overrides via CSS custom properties if needed |
+| Match skeleton dimensions as closely as possible to the real content they replace | Use a single full-width `rect` for every loading state — it misleads users about the content shape |
+| Use `shape="circle"` for avatars and icon placeholders | Use `shape="rect"` for avatars — circles match the actual content shape |
+| Wrap skeleton groups in a `role="status"` container with a `sr-only` label | Use skeletons without any accessible loading announcement |
+| Set `animated={false}` for static mockups or snapshot tests | Show animated skeletons indefinitely without a timeout or error fallback |
+| Override default sizes via `className` when content dimensions are known | Override `background-color` with raw hex values — use token overrides if needed |
 
 ## Accessibility
 
-- **Screen reader:** `Skeleton` renders as a `<div>` with `aria-hidden="true"` by default. Placeholder content carries no meaningful information for assistive technologies. The surrounding loading context should be communicated via an `aria-live` region or `aria-busy="true"` on the container.
+- **Screen reader:** Renders as a `<div>` with `aria-hidden="true"` by default. Consumer must wrap skeleton groups in a `role="status"` + `aria-live="polite"` container with a descriptive `sr-only` label (e.g. "Loading content").
 - **Keyboard:** Non-interactive, not focusable.
-- **Motion:** The pulse animation uses a CSS `@keyframes` animation. Override with `animated={false}` or add a global `prefers-reduced-motion` rule in `skeleton.css` that sets `animation: none` to respect user preferences.
-- **Color contrast:** The skeleton background uses `--background-neutral-medium-default`, which is intentionally low-contrast — it is decorative, not informational, so WCAG contrast requirements do not apply.
+- **Motion:** The shimmer animation slows from 1.5s to 8s when `prefers-reduced-motion: reduce` is active — consistent with the Spinner pattern (slow instead of stop, preserving the loading signal).
+- **Focus restoration:** Consumer is responsible for moving focus to the first interactive element when skeleton-to-content transition completes.
+- **Color contrast:** The skeleton background is decorative, not informational — WCAG contrast requirements do not apply.

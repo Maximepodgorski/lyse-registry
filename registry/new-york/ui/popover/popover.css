@@ -1,0 +1,14 @@
+/* ================================================================
+ * POPOVER — Styles
+ * Structure (flex, gap, padding, radius) lives in popover.tsx.
+ * Theming (colors, borders, shadow) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Content panel
+ * -------------------------------- */
+.popover-content {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  box-shadow: var(--shadow-elevation-md);
+}

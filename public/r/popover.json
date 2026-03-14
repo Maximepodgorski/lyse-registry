@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ui/react-popover"
+  ],
+  "registryDependencies": [
+    "https://ui.getlyse.com/r/lyse-tokens.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ui/popover/popover.tsx",
+      "content": "import * as React from \"react\"\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./popover.css\"\n\n/* ------------------------------------------------------------------ */\n/*  Popover                                                            */\n/* ------------------------------------------------------------------ */\n\nfunction Popover({\n  ...props\n}: React.ComponentProps<typeof PopoverPrimitive.Root>) {\n  return <PopoverPrimitive.Root {...props} />\n}\n\n/* ------------------------------------------------------------------ */\n/*  PopoverTrigger                                                     */\n/* ------------------------------------------------------------------ */\n\nfunction PopoverTrigger({\n  ...props\n}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {\n  return (\n    <PopoverPrimitive.Trigger\n      data-slot=\"popover-trigger\"\n      {...props}\n    />\n  )\n}\n\n/* ------------------------------------------------------------------ */\n/*  PopoverAnchor                                                      */\n/* ------------------------------------------------------------------ */\n\nfunction PopoverAnchor({\n  ...props\n}: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {\n  return (\n    <PopoverPrimitive.Anchor\n      data-slot=\"popover-anchor\"\n      {...props}\n    />\n  )\n}\n\n/* ------------------------------------------------------------------ */\n/*  PopoverContent                                                     */\n/* ------------------------------------------------------------------ */\n\nfunction PopoverContent({\n  className,\n  sideOffset = 6,\n  align = \"center\",\n  children,\n  ...props\n}: React.ComponentProps<typeof PopoverPrimitive.Content>) {\n  return (\n    <PopoverPrimitive.Portal>\n      <PopoverPrimitive.Content\n        data-slot=\"popover-content\"\n        sideOffset={sideOffset}\n        align={align}\n        className={cn(\n          \"popover-content z-50 min-w-[8rem] overflow-hidden rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-lg)] animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </PopoverPrimitive.Content>\n    </PopoverPrimitive.Portal>\n  )\n}\n\n/* ------------------------------------------------------------------ */\n/*  PopoverClose                                                       */\n/* ------------------------------------------------------------------ */\n\nfunction PopoverClose({\n  ...props\n}: React.ComponentProps<typeof PopoverPrimitive.Close>) {\n  return (\n    <PopoverPrimitive.Close\n      data-slot=\"popover-close\"\n      aria-label=\"Close\"\n      {...props}\n    />\n  )\n}\n\nexport {\n  Popover,\n  PopoverTrigger,\n  PopoverAnchor,\n  PopoverContent,\n  PopoverClose,\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/popover/popover.css",
+      "content": "/* ================================================================\n * POPOVER — Styles\n * Structure (flex, gap, padding, radius) lives in popover.tsx.\n * Theming (colors, borders, shadow) lives here via tokens.\n * ================================================================ */\n\n/* --------------------------------\n * Content panel\n * -------------------------------- */\n.popover-content {\n  background: var(--background-neutral-faint-default);\n  border: var(--layout-border-thin) solid var(--border-default);\n  box-shadow: var(--shadow-elevation-md);\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}
