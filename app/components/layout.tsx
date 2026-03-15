@@ -11,6 +11,7 @@ import { GitHubLogo } from "@/app/_components/github-logo"
 import { MobileNav } from "@/app/_components/mobile-nav"
 import { ThemeToggle } from "@/app/_components/theme-toggle"
 import { Button } from "@/registry/new-york/ui/button/button"
+import { Badge } from "@/registry/new-york/ui/badge/badge"
 import { navGroups, allPages } from "@/lib/navigation"
 import {
   Menu,
@@ -99,9 +100,12 @@ export default function ComponentsLayout({
           >
             <MenuIcon className="size-5" aria-hidden="true" />
           </button>
-          <div className="relative h-[1.75rem] w-[66px]">
-            <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:block hidden" />
-            <Image src="/logo-dark.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:hidden block" />
+          <div className="flex items-center gap-[var(--layout-gap-md)]">
+            <div className="relative h-[1.75rem] w-[66px]">
+              <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:block hidden" />
+              <Image src="/logo-dark.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:hidden block" />
+            </div>
+            <Badge variant="neutral" size="sm">v1.1</Badge>
           </div>
         </div>
         <div className="flex items-center gap-[var(--layout-gap-md)]">
@@ -168,12 +172,13 @@ export default function ComponentsLayout({
           }}
         >
           <Menu
-            className="flex w-full h-full pt-[var(--layout-padding-2xl)] pb-[var(--layout-padding-4xl)] px-[var(--layout-padding-lg)] overflow-y-auto gap-[var(--layout-gap-2xl)]"
+            className="flex w-full h-full pt-[var(--layout-padding-2xl)] pb-[var(--layout-padding-4xl)] pl-[var(--layout-padding-lg)] pr-0 overflow-y-auto gap-[var(--layout-gap-2xl)]"
           >
           {navGroups.map((group) => (
             <MenuGroup key={group.label} label={group.label}>
               {group.items.map((item) => {
                 const isCurrent = item.href === pathname
+                const isNew = ["Alert", "AlertDialog", "Breadcrumb", "Card", "Popover", "Separator", "Skeleton", "Table"].includes(item.label)
                 return (
                   <MenuItem
                     key={item.label}
@@ -185,7 +190,10 @@ export default function ComponentsLayout({
                       href={item.href}
                       aria-current={isCurrent ? "page" : undefined}
                     >
-                      {item.label}
+                      <span className="flex-1 min-w-0 text-start">{item.label}</span>
+                      {isNew && (
+                        <Badge variant="brand" size="sm">new</Badge>
+                      )}
                     </Link>
                   </MenuItem>
                 )

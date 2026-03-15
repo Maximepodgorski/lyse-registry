@@ -104,6 +104,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["callout", "card", "highlight", "info", "tip", "note"],
       },
       {
+        label: "Card",
+        href: "/components/card",
+        description: "Container for grouping related content with outline or ghost surface styles",
+        keywords: ["card", "container", "surface", "panel", "box", "outline", "ghost"],
+      },
+      {
         label: "Checkbox",
         href: "/components/checkbox",
         description: "Toggle selection with optional group and indeterminate state",

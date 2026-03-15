@@ -12,6 +12,7 @@ const components = [
   { name: "Breadcrumb", href: "/components/breadcrumb" },
   { name: "Button", href: "/components/button" },
   { name: "CalloutCard", href: "/components/callout-card" },
+  { name: "Card", href: "/components/card" },
   { name: "Checkbox", href: "/components/checkbox" },
   { name: "Chip", href: "/components/chip" },
   { name: "DropdownMenu", href: "/components/dropdown-menu" },
@@ -22,6 +23,7 @@ const components = [
   { name: "Progress", href: "/components/progress" },
   { name: "Radio", href: "/components/radio" },
   { name: "Select", href: "/components/select" },
+  { name: "Separator", href: "" }, /* no doc page — utility component, registry-only */
   { name: "Skeleton", href: "/components/skeleton" },
   { name: "Spinner", href: "/components/spinner" },
   { name: "SpotlightCard", href: "/components/spotlight-card" },
@@ -54,16 +56,26 @@ export default function DirectoryPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 mt-4">
-        {components.map((c) => (
-          <Link
-            key={c.name}
-            href={c.href}
-            className="text-content-body font-accent py-1 underline-offset-4 hover:underline transition-colors"
-            style={{ color: "var(--text-base-strong)" }}
-          >
-            {c.name}
-          </Link>
-        ))}
+        {components.map((c) =>
+          c.href ? (
+            <Link
+              key={c.name}
+              href={c.href}
+              className="text-content-body font-accent py-1 underline-offset-4 hover:underline transition-colors"
+              style={{ color: "var(--text-base-strong)" }}
+            >
+              {c.name}
+            </Link>
+          ) : (
+            <span
+              key={c.name}
+              className="text-content-body font-accent py-1"
+              style={{ color: "var(--text-base-default)" }}
+            >
+              {c.name}
+            </span>
+          )
+        )}
       </div>
     </main>
   )
