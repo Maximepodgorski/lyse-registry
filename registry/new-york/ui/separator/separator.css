@@ -1,0 +1,24 @@
+/* ================================================================
+ * SEPARATOR — Variant & State Styles
+ * Structure (orientation, dimensions) lives in separator.tsx via cva.
+ * Theming (colors) lives here via tokens.
+ * ================================================================ */
+
+.separator-subtle {
+  background-color: var(--border-divider);
+}
+
+.separator-default {
+  background-color: var(--border-default);
+}
+
+.separator-strong {
+  background-color: var(--border-neutral-bolder);
+}
+
+/* Forced colors — ensure visibility in Windows High Contrast Mode */
+@media (forced-colors: active) {
+  .separator-base {
+    background-color: CanvasText;
+  }
+}
