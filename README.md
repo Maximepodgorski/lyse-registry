@@ -23,7 +23,7 @@ Open source, open code.
 
 ## What is this?
 
-Lyse Registry is a collection of **23 components** you can add to any React project with a single command. No package to install, no version to manage. The components live in your codebase, fully editable.
+Lyse Registry is a collection of **31 components** you can add to any React project with a single command. No package to install, no version to manage. The components live in your codebase, fully editable.
 
 It works with the [shadcn CLI](https://ui.shadcn.com/docs/cli) — the same tool used by shadcn/ui.
 
@@ -77,7 +77,15 @@ npx shadcn@latest add \
   https://ui.getlyse.com/r/spotlight-card.json \
   https://ui.getlyse.com/r/callout-card.json \
   https://ui.getlyse.com/r/chip.json \
-  https://ui.getlyse.com/r/tabs.json
+  https://ui.getlyse.com/r/tabs.json \
+  https://ui.getlyse.com/r/alert.json \
+  https://ui.getlyse.com/r/alert-dialog.json \
+  https://ui.getlyse.com/r/breadcrumb.json \
+  https://ui.getlyse.com/r/card.json \
+  https://ui.getlyse.com/r/popover.json \
+  https://ui.getlyse.com/r/skeleton.json \
+  https://ui.getlyse.com/r/separator.json \
+  https://ui.getlyse.com/r/table.json
 ```
 
 ## Components
@@ -107,6 +115,14 @@ npx shadcn@latest add \
 | **CalloutCard** | Highlighted content blocks with icon |
 | **Chip** | Compact toggleable elements |
 | **Tabs** | Tabbed content navigation |
+| **Alert** | Inline feedback messages with icon and dismiss |
+| **AlertDialog** | Confirmation dialogs for destructive actions |
+| **Breadcrumb** | Navigation trail showing page location |
+| **Card** | Content container with outline and ghost variants |
+| **Popover** | Floating panels anchored to a trigger |
+| **Separator** | Visual divider between content sections |
+| **Skeleton** | Shimmer placeholders for loading states |
+| **Table** | Structured data display with striped rows |
 
 Browse live previews and usage examples on the [documentation site](https://ui.getlyse.com).
 
