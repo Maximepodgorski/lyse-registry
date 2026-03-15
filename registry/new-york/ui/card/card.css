@@ -1,0 +1,36 @@
+/* ================================================================
+ * CARD — Variant & State Styles
+ * Structure (layout, spacing) lives in card.tsx via cva + Tailwind.
+ * Theming (colors, borders, shadows) lives here via tokens.
+ * ================================================================ */
+
+/* ── Outline (default) ─────────────────────────────────────────── */
+
+.card-outline {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* ── Ghost ─────────────────────────────────────────────────────── */
+
+.card-ghost {
+  background: transparent;
+}
+
+/* ── Typography colors ─────────────────────────────────────────── */
+
+[data-slot="card-title"] {
+  color: var(--text-base-strong);
+}
+
+[data-slot="card-description"] {
+  color: var(--text-base-moderate);
+}
+
+/* ── Forced colors ─────────────────────────────────────────────── */
+
+@media (forced-colors: active) {
+  .card-outline {
+    border-color: CanvasText;
+  }
+}

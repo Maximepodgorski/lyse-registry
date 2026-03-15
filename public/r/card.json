@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://ui.getlyse.com/r/lyse-tokens.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ui/card/card.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./card.css\"\n\nconst cardVariants = cva(\n  \"card-base flex flex-col gap-[var(--layout-gap-xl)] p-[var(--layout-padding-xl)] rounded-[var(--layout-radius-xl)]\",\n  {\n    variants: {\n      variant: {\n        outline: \"card-outline\",\n        ghost: \"card-ghost\",\n      },\n    },\n    defaultVariants: {\n      variant: \"outline\",\n    },\n  }\n)\n\nfunction Card({\n  className,\n  variant,\n  ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof cardVariants>) {\n  return (\n    <div\n      data-slot=\"card\"\n      className={cn(cardVariants({ variant, className }))}\n      {...props}\n    />\n  )\n}\n\nfunction CardHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"card-header\"\n      className={cn(\"flex flex-col gap-[var(--layout-gap-sm)]\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction CardTitle({ className, ...props }: React.ComponentProps<\"h3\">) {\n  return (\n    <h3\n      data-slot=\"card-title\"\n      className={cn(\"text-heading-small font-bold\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction CardDescription({ className, ...props }: React.ComponentProps<\"p\">) {\n  return (\n    <p\n      data-slot=\"card-description\"\n      className={cn(\"text-content-note\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction CardContent({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"card-content\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction CardFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"card-footer\"\n      className={cn(\n        \"flex items-center gap-[var(--layout-gap-md)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport {\n  Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardDescription,\n  CardContent,\n  cardVariants,\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/card/card.css",
+      "content": "/* ================================================================\n * CARD — Variant & State Styles\n * Structure (layout, spacing) lives in card.tsx via cva + Tailwind.\n * Theming (colors, borders, shadows) lives here via tokens.\n * ================================================================ */\n\n/* ── Outline (default) ─────────────────────────────────────────── */\n\n.card-outline {\n  background: var(--background-neutral-faint-default);\n  border: var(--layout-border-thin) solid var(--border-default);\n}\n\n/* ── Ghost ─────────────────────────────────────────────────────── */\n\n.card-ghost {\n  background: transparent;\n}\n\n/* ── Typography colors ─────────────────────────────────────────── */\n\n[data-slot=\"card-title\"] {\n  color: var(--text-base-strong);\n}\n\n[data-slot=\"card-description\"] {\n  color: var(--text-base-moderate);\n}\n\n/* ── Forced colors ─────────────────────────────────────────────── */\n\n@media (forced-colors: active) {\n  .card-outline {\n    border-color: CanvasText;\n  }\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}
