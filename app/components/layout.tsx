@@ -172,7 +172,7 @@ export default function ComponentsLayout({
           }}
         >
           <Menu
-            className="flex w-full h-full pt-[var(--layout-padding-2xl)] pb-[var(--layout-padding-4xl)] pl-[var(--layout-padding-lg)] pr-0 overflow-y-auto gap-[var(--layout-gap-2xl)]"
+            className="flex w-full h-full pt-[var(--layout-padding-2xl)] pb-[var(--layout-padding-4xl)] pl-[var(--layout-padding-lg)] pr-[var(--layout-padding-md)] overflow-y-auto gap-[var(--layout-gap-2xl)]"
           >
           {navGroups.map((group) => (
             <MenuGroup key={group.label} label={group.label}>
