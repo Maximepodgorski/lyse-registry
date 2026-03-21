@@ -1,0 +1,81 @@
+/* ================================================================
+ * STEPPER — Dot-based Step Indicator
+ * Structure (flex, gap) lives in stepper.tsx via cva.
+ * Theming (colors, sizes, transitions) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Size — custom properties per size
+ * -------------------------------- */
+.stepper-sm {
+  --stepper-dot: 6px;
+  --stepper-pill: 18px;
+}
+
+.stepper-md {
+  --stepper-dot: 8px;
+  --stepper-pill: 24px;
+}
+
+/* --------------------------------
+ * Dot — base dimensions
+ * -------------------------------- */
+.step-dot {
+  height: var(--stepper-dot);
+  width: var(--stepper-dot);
+}
+
+/* --------------------------------
+ * Dot — active pill override
+ * -------------------------------- */
+.step-dot-active {
+  width: var(--stepper-pill);
+}
+
+/* --------------------------------
+ * Transition — width
+ * -------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .step-dot {
+    transition: width 300ms ease, background-color 300ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-dot {
+    transition: width 800ms ease, background-color 800ms ease;
+  }
+}
+
+/* --------------------------------
+ * State colors
+ * -------------------------------- */
+.step-dot-complete {
+  background-color: var(--text-base-moderate);
+}
+
+.step-dot-active {
+  background-color: var(--text-base-strong);
+}
+
+.step-dot-incomplete {
+  background-color: var(--background-neutral-medium-default);
+}
+
+/* --------------------------------
+ * Clickable — hover & focus
+ * -------------------------------- */
+.step-dot-clickable {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.step-dot-clickable:hover {
+  opacity: 0.7;
+}
+
+.step-dot-clickable:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}

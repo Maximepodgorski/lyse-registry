@@ -26,6 +26,7 @@ const components = [
   { name: "Separator", href: "" }, /* no doc page — utility component, registry-only */
   { name: "Skeleton", href: "/components/skeleton" },
   { name: "Spinner", href: "/components/spinner" },
+  { name: "Stepper", href: "/components/stepper" },
   { name: "SpotlightCard", href: "/components/spotlight-card" },
   { name: "Table", href: "/components/table" },
   { name: "Tabs", href: "/components/tabs" },

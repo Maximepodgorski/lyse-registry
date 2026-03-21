@@ -182,6 +182,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["spinner", "loading", "loader", "indicator", "busy"],
       },
       {
+        label: "Stepper",
+        href: "/components/stepper",
+        description: "Dot-based step indicator for wizards and onboarding flows with optional click navigation",
+        keywords: ["stepper", "steps", "dots", "wizard", "onboarding", "progress", "indicator"],
+      },
+      {
         label: "SpotlightCard",
         href: "/components/spotlight-card",
         description: "Showcase card with image slot and fallback background",
