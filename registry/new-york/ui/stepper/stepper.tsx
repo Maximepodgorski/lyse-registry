@@ -5,15 +5,20 @@ import { cn } from "@/lib/utils"
 import "./stepper.css"
 
 const stepperVariants = cva(
-  "stepper-base inline-flex items-center",
+  "inline-flex items-center",
   {
     variants: {
+      variant: {
+        neutral: "stepper-neutral",
+        brand: "stepper-brand",
+      },
       size: {
-        sm: "gap-[var(--layout-gap-xs)]",
-        md: "gap-[var(--layout-gap-sm)]",
+        sm: "stepper-sm gap-[var(--layout-gap-xs)]",
+        md: "stepper-md gap-[var(--layout-gap-sm)]",
       },
     },
     defaultVariants: {
+      variant: "neutral",
       size: "md",
     },
   }
@@ -21,7 +26,8 @@ const stepperVariants = cva(
 
 function Stepper({
   className,
-  size = "md",
+  variant,
+  size,
   current = 0,
   total,
   onStepClick,
@@ -32,7 +38,7 @@ function Stepper({
     total: number
     onStepClick?: (step: number) => void
   }) {
-  const safeTotal = Math.max(1, total)
+  const safeTotal = Number.isFinite(total) ? Math.max(1, Math.floor(total)) : 1
   const safeCurrent = Math.max(0, Math.min(current, safeTotal - 1))
 
   return (
@@ -40,10 +46,7 @@ function Stepper({
       data-slot="stepper"
       role="group"
       aria-label={`Step ${safeCurrent + 1} of ${safeTotal}`}
-      className={cn(
-        stepperVariants({ size, className }),
-        size === "sm" ? "stepper-sm" : "stepper-md"
-      )}
+      className={cn(stepperVariants({ variant, size, className }))}
       {...props}
     >
       {Array.from({ length: safeTotal }, (_, i) => {
@@ -70,7 +73,7 @@ function Stepper({
               data-slot="step-dot"
               type="button"
               className={cn(shared, "step-dot-clickable")}
-              aria-label={`Step ${i + 1}`}
+              aria-label={`Step ${i + 1}${state === "complete" ? " (completed)" : state === "active" ? " (current)" : ""}`}
               aria-current={state === "active" ? "step" : undefined}
               onClick={() => onStepClick(i)}
             />

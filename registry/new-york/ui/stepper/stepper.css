@@ -8,21 +8,22 @@
  * Size — custom properties per size
  * -------------------------------- */
 .stepper-sm {
-  --stepper-dot: 6px;
-  --stepper-pill: 18px;
+  --stepper-dot: var(--root-positive-4);
+  --stepper-pill: var(--root-positive-10);
 }
 
 .stepper-md {
-  --stepper-dot: 8px;
-  --stepper-pill: 24px;
+  --stepper-dot: var(--root-positive-5);
+  --stepper-pill: var(--root-positive-11);
 }
 
 /* --------------------------------
- * Dot — base dimensions
+ * Dot — base dimensions + transition
  * -------------------------------- */
 .step-dot {
   height: var(--stepper-dot);
   width: var(--stepper-dot);
+  transition: width 300ms ease, background-color 300ms ease;
 }
 
 /* --------------------------------
@@ -33,46 +34,60 @@
 }
 
 /* --------------------------------
- * Transition — width
+ * Reduced motion — slow, don't remove
  * -------------------------------- */
-@media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: reduce) {
   .step-dot {
-    transition: width 300ms ease, background-color 300ms ease;
+    transition-duration: 800ms;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .step-dot {
-    transition: width 800ms ease, background-color 800ms ease;
-  }
+/* --------------------------------
+ * Variant — scoped color variables
+ * -------------------------------- */
+.stepper-neutral {
+  --stepper-complete: var(--text-base-moderate);
+  --stepper-active: var(--text-base-strong);
+  --stepper-incomplete: var(--background-neutral-medium-default);
+}
+
+.stepper-brand {
+  --stepper-complete: var(--background-brand-strong-default);
+  --stepper-active: var(--background-brand-strong-default);
+  --stepper-incomplete: var(--background-neutral-medium-default);
 }
 
 /* --------------------------------
  * State colors
  * -------------------------------- */
 .step-dot-complete {
-  background-color: var(--text-base-moderate);
+  background-color: var(--stepper-complete);
 }
 
 .step-dot-active {
-  background-color: var(--text-base-strong);
+  background-color: var(--stepper-active);
 }
 
 .step-dot-incomplete {
-  background-color: var(--background-neutral-medium-default);
+  background-color: var(--stepper-incomplete);
 }
 
 /* --------------------------------
- * Clickable — hover & focus
+ * Clickable — hover, active, focus
  * -------------------------------- */
 .step-dot-clickable {
   cursor: pointer;
   border: none;
   padding: 0;
+  background: transparent;
 }
 
 .step-dot-clickable:hover {
-  opacity: 0.7;
+  opacity: var(--root-opacity-7);
+}
+
+.step-dot-clickable:active {
+  opacity: var(--root-opacity-6);
 }
 
 .step-dot-clickable:focus-visible {
