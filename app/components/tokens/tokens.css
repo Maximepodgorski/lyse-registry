@@ -1,0 +1,96 @@
+/* ================================================================
+ * Token Reference Page — Styles
+ * Table-based layout with inline swatches, sub-group headers,
+ * state grouping, filter, and click-to-copy affordance.
+ * ================================================================ */
+
+/* --------------------------------
+ * Table overrides — spacing & fit
+ * -------------------------------- */
+.token-page .table-wrapper {
+  width: 100%;
+}
+
+.token-page .table-cell,
+.token-page .table-head {
+  padding: var(--layout-padding-md) var(--layout-padding-xl);
+}
+
+.token-page [data-slot="tag"] {
+  max-width: 100%;
+}
+
+/* --------------------------------
+ * Token Chip Button — Clickable wrapper
+ * -------------------------------- */
+.token-chip-btn {
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.token-chip-btn:hover {
+  opacity: 0.8;
+}
+
+.token-chip-btn:active {
+  opacity: 0.6;
+}
+
+/* --------------------------------
+ * Token Name — Monospace code
+ * -------------------------------- */
+.token-chip-name {
+  font-family: var(--font-geist-mono);
+  font-size: var(--font-size-content-caption);
+  line-height: var(--font-line-height-content-caption);
+  color: var(--text-base-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --------------------------------
+ * Inline Color Swatch
+ * -------------------------------- */
+.token-swatch {
+  width: var(--layout-size-2xs);
+  height: var(--layout-size-2xs);
+  border-radius: var(--layout-radius-xs);
+  border: var(--layout-border-thin) solid var(--border-default);
+  flex-shrink: 0;
+}
+
+/* --------------------------------
+ * Sub-group Header Cell
+ * -------------------------------- */
+.token-subgroup-cell {
+  background: var(--background-neutral-faint-default);
+}
+
+.token-subgroup-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--layout-gap-md);
+  color: var(--text-base-moderate);
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-content-caption);
+  font-weight: var(--font-weight-accent);
+  text-transform: none;
+  letter-spacing: var(--root-font-letter-spacing-md);
+}
+
+/* --------------------------------
+ * State Indent (hover/pressed children)
+ * -------------------------------- */
+.token-state-indent {
+  margin-left: var(--layout-padding-xl);
+}
+
+/* --------------------------------
+ * Usage / Function Text
+ * -------------------------------- */
+.token-usage {
+  color: var(--text-base-moderate);
+  font-size: var(--font-size-content-caption);
+  line-height: var(--font-line-height-content-caption);
+}
+
