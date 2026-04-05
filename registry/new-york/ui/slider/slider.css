@@ -1,0 +1,167 @@
+/* ================================================================
+ * SLIDER — Track, Range, Thumb & State Styles
+ * Structure (flex, size, radius, rotation) lives in slider.tsx via cva.
+ * Theming (colors, borders, shadows, transitions) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Track — background
+ * -------------------------------- */
+.slider-track {
+  background-color: transparent;
+  border: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Range — filled portion
+ * -------------------------------- */
+.slider-range {
+  background-color: var(--background-neutral-strong-default);
+}
+
+/* --------------------------------
+ * Thumb — base
+ * -------------------------------- */
+.slider-thumb {
+  background: var(--text-fixed);
+  border: var(--layout-border-thin) solid var(--border-default);
+  box-shadow: var(--shadow-elevation-sm);
+}
+
+/* --------------------------------
+ * Thumb — touch target (44×44px WCAG 2.5.5)
+ * -------------------------------- */
+.slider-thumb::before {
+  content: "";
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* --------------------------------
+ * Thumb — no focus ring on pointer interaction, only keyboard
+ * -------------------------------- */
+.slider-thumb:focus-visible:not(:active) {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 2px;
+}
+
+/* --------------------------------
+ * Disabled — track + range + thumb
+ * -------------------------------- */
+.slider-root[data-disabled] {
+  pointer-events: none;
+}
+
+.slider-root[data-disabled] .slider-track,
+.slider-root[data-disabled] .slider-range {
+  background-color: var(--background-neutral-lighter-default);
+}
+
+.slider-root[data-disabled] .slider-thumb {
+  background: var(--background-neutral-medium-default);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* --------------------------------
+ * Transitions
+ * -------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .slider-range,
+  .slider-track {
+    transition: background-color 150ms ease;
+  }
+
+  .slider-thumb {
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+}
+
+/* --------------------------------
+ * Forced colors (Windows High Contrast)
+ * -------------------------------- */
+/* ================================================================
+ * SLIDER FIELD — Label + Input wrapper
+ * ================================================================ */
+
+/* --------------------------------
+ * Label
+ * -------------------------------- */
+.slider-field-label {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Input wrapper
+ * -------------------------------- */
+.slider-field-input-wrapper {
+  border: var(--layout-border-thin) solid var(--border-default);
+  border-radius: var(--layout-radius-md);
+}
+
+/* --------------------------------
+ * Input
+ * -------------------------------- */
+.slider-field-input,
+.slider-field-suffix {
+  font-size: var(--font-size-content-note);
+  line-height: var(--font-line-height-content-note);
+}
+
+.slider-field-input {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Suffix
+ * -------------------------------- */
+.slider-field-suffix {
+  color: var(--text-base-moderate);
+  background-color: var(--background-neutral-lighter-default);
+  border-left: var(--layout-border-thin) solid var(--border-default);
+  padding-left: var(--layout-padding-md);
+  padding-right: var(--layout-padding-md);
+}
+
+/* --------------------------------
+ * Disabled — field
+ * -------------------------------- */
+[data-slot="slider-field"][data-disabled] .slider-field-label {
+  color: var(--text-disabled);
+}
+
+[data-slot="slider-field"][data-disabled] .slider-field-input-wrapper {
+  border-color: var(--border-default);
+}
+
+[data-slot="slider-field"][data-disabled] .slider-field-input,
+[data-slot="slider-field"][data-disabled] .slider-field-suffix {
+  color: var(--text-disabled);
+}
+
+/* ================================
+ * Forced colors (Windows High Contrast)
+ * ================================ */
+@media (forced-colors: active) {
+  .slider-thumb:focus-visible {
+    outline: 2px solid ButtonText;
+  }
+
+  .slider-range {
+    background-color: Highlight;
+  }
+
+  .slider-track {
+    background-color: ButtonFace;
+    border: 1px solid ButtonText;
+  }
+
+  .slider-thumb {
+    background: ButtonText;
+    border-color: ButtonText;
+  }
+}
