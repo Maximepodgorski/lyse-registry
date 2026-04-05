@@ -21,10 +21,10 @@ function Slider({
       defaultValue={defaultValue}
       {...props}
     >
-      <SliderPrimitive.Track className="slider-track relative grow overflow-visible rounded-[var(--layout-radius-full)] h-1.5">
-        <SliderPrimitive.Range className="slider-range absolute h-full rounded-[var(--layout-radius-full)]" />
+      <SliderPrimitive.Track data-slot="slider-track" className="slider-track relative grow overflow-visible rounded-[var(--layout-radius-full)] h-1.5">
+        <SliderPrimitive.Range data-slot="slider-range" className="slider-range absolute h-full rounded-[var(--layout-radius-full)]" />
       </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className="slider-thumb block h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] rounded-[var(--layout-radius-xs)] rotate-45 focus-visible:outline-none" />
+      <SliderPrimitive.Thumb data-slot="slider-thumb" className="slider-thumb block h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] rounded-[var(--layout-radius-xs)] rotate-45 focus-visible:outline-none" />
     </SliderPrimitive.Root>
   )
 }
@@ -41,7 +41,7 @@ function SliderField({
   step = 1,
   disabled,
   ...props
-}: Omit<React.ComponentProps<"div">, "value" | "onChange"> & {
+}: Omit<React.ComponentProps<"div">, "value"> & {
   label: string
   suffix?: string
   value: number[]
@@ -104,7 +104,7 @@ function SliderField({
             onKeyDown={(e) => {
               if (e.key === "Enter") commitInput()
             }}
-            className="slider-field-input w-12 text-center font-mono bg-transparent border-none outline-none px-[var(--layout-padding-sm)] py-[var(--layout-padding-xs)] [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            className="slider-field-input w-10 text-center font-mono bg-transparent border-none outline-none px-[var(--layout-padding-xs)] py-[var(--layout-padding-xs)] [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           />
           {suffix && (
             <span className="slider-field-suffix font-mono py-[var(--layout-padding-xs)]">

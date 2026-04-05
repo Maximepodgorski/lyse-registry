@@ -34,8 +34,8 @@
 .slider-thumb::before {
   content: "";
   position: absolute;
-  width: 44px;
-  height: 44px;
+  width: 2.75rem;
+  height: 2.75rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-45deg);
@@ -81,9 +81,6 @@
   }
 }
 
-/* --------------------------------
- * Forced colors (Windows High Contrast)
- * -------------------------------- */
 /* ================================================================
  * SLIDER FIELD — Label + Input wrapper
  * ================================================================ */
@@ -157,7 +154,7 @@
 
   .slider-track {
     background-color: ButtonFace;
-    border: 1px solid ButtonText;
+    border: var(--layout-border-thin) solid ButtonText;
   }
 
   .slider-thumb {
