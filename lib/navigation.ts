@@ -170,6 +170,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["select", "dropdown", "picker", "option", "form", "combobox"],
       },
       {
+        label: "Sheet",
+        href: "/components/sheet",
+        description: "Sliding side panel from any screen edge",
+        keywords: ["sheet", "drawer", "panel", "slide", "sidebar", "overlay"],
+      },
+      {
         label: "Skeleton",
         href: "/components/skeleton",
         description: "Shimmer placeholder for loading content",

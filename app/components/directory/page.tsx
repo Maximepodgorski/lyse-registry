@@ -24,6 +24,7 @@ const components = [
   { name: "Radio", href: "/components/radio" },
   { name: "Select", href: "/components/select" },
   { name: "Separator", href: "" }, /* no doc page — utility component, registry-only */
+  { name: "Sheet", href: "/components/sheet" },
   { name: "Skeleton", href: "/components/skeleton" },
   { name: "Slider", href: "/components/slider" },
   { name: "Spinner", href: "/components/spinner" },
