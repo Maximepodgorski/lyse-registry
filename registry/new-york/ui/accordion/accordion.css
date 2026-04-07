@@ -1,0 +1,125 @@
+/* ================================================================
+ * ACCORDION — Item, Trigger, Icon & Content Styles
+ * Structure (flex, padding, radius, gap) lives in accordion.tsx.
+ * Theming (colors, borders, transitions, animation) lives here.
+ * ================================================================ */
+
+/* --------------------------------
+ * Item — card background
+ * -------------------------------- */
+.accordion-item {
+  background-color: var(--background-neutral-faint-default);
+}
+
+/* --------------------------------
+ * Trigger — text color + states
+ * -------------------------------- */
+.accordion-trigger {
+  color: var(--text-base-strong);
+}
+
+.accordion-trigger:hover {
+  color: var(--text-base-bolder);
+}
+
+.accordion-trigger[data-disabled] {
+  color: var(--text-disabled);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* --------------------------------
+ * Trigger — focus ring
+ * -------------------------------- */
+.accordion-trigger:focus-visible {
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* --------------------------------
+ * Icon — toggle Plus/X via data-state
+ * -------------------------------- */
+.accordion-icon {
+  color: var(--text-base-moderate);
+}
+
+.accordion-trigger[data-state="closed"] .accordion-icon-x {
+  display: none;
+}
+
+.accordion-trigger[data-state="open"] .accordion-icon-plus {
+  display: none;
+}
+
+.accordion-trigger[data-disabled] .accordion-icon {
+  color: var(--text-disabled);
+}
+
+/* --------------------------------
+ * Content — height animation
+ * Uses Radix CSS variable --radix-accordion-content-height
+ * -------------------------------- */
+.accordion-content[data-state="open"] {
+  animation: accordion-expand 250ms ease;
+}
+
+.accordion-content[data-state="closed"] {
+  animation: accordion-collapse 250ms ease;
+}
+
+@keyframes accordion-expand {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-collapse {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* --------------------------------
+ * Content — text color
+ * -------------------------------- */
+.accordion-content-inner {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Reduced motion — slow to 400ms (project pattern)
+ * -------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .accordion-content[data-state="open"],
+  .accordion-content[data-state="closed"] {
+    animation-duration: 400ms;
+    animation-timing-function: linear;
+  }
+}
+
+/* --------------------------------
+ * Forced colors (Windows High Contrast)
+ * -------------------------------- */
+@media (forced-colors: active) {
+  .accordion-item {
+    border: var(--layout-border-thin) solid ButtonText;
+  }
+
+  .accordion-trigger {
+    color: ButtonText;
+  }
+
+  .accordion-trigger:focus-visible {
+    outline: 2px solid ButtonText;
+    box-shadow: none;
+  }
+
+  .accordion-icon {
+    color: ButtonText;
+  }
+}
