@@ -1,0 +1,205 @@
+/* ================================================================
+ * SHEET — Styles
+ * Structure (flex, gap, padding, radius) lives in sheet.tsx via cva.
+ * Theming (colors, borders, shadow, animations) lives here via tokens.
+ * ================================================================ */
+
+/* --------------------------------
+ * Overlay (backdrop)
+ * -------------------------------- */
+.sheet-overlay {
+  background: var(--overlay-default);
+}
+
+/* --------------------------------
+ * Content (surface)
+ * -------------------------------- */
+.sheet-content {
+  background: var(--background-neutral-faint-default);
+  border: var(--layout-border-thin) solid var(--border-default);
+  box-shadow: var(--shadow-elevation-md);
+}
+
+/* --------------------------------
+ * Header (with bottom border)
+ * -------------------------------- */
+.sheet-header {
+  border-bottom: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Title
+ * -------------------------------- */
+.sheet-title {
+  color: var(--text-base-strong);
+}
+
+/* --------------------------------
+ * Description text
+ * -------------------------------- */
+.sheet-description {
+  color: var(--text-base-moderate);
+}
+
+/* --------------------------------
+ * Footer (with top border)
+ * -------------------------------- */
+.sheet-footer {
+  border-top: var(--layout-border-thin) solid var(--border-default);
+}
+
+/* --------------------------------
+ * Close button
+ * -------------------------------- */
+.sheet-close {
+  color: var(--text-base-moderate);
+  cursor: pointer;
+  border-radius: var(--layout-radius-sm);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.sheet-close:hover {
+  color: var(--text-base-strong);
+  background: var(--background-neutral-faint-hover);
+}
+
+.sheet-close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+/* --------------------------------
+ * Slide-in/out Animations
+ * -------------------------------- */
+
+/* Right */
+@keyframes sheet-slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes sheet-slide-out-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+/* Left */
+@keyframes sheet-slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+@keyframes sheet-slide-out-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Top */
+@keyframes sheet-slide-in-top {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+@keyframes sheet-slide-out-top {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+/* Bottom */
+@keyframes sheet-slide-in-bottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes sheet-slide-out-bottom {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+/* Overlay fade */
+@keyframes sheet-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sheet-overlay-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Fade (reduced motion fallback) */
+@keyframes sheet-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sheet-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* --------------------------------
+ * Animation assignments — Overlay
+ * -------------------------------- */
+.sheet-overlay[data-state="open"] {
+  animation: sheet-overlay-in 200ms ease forwards;
+}
+.sheet-overlay[data-state="closed"] {
+  animation: sheet-overlay-out 200ms ease forwards;
+}
+
+/* --------------------------------
+ * Animation assignments — Content
+ * -------------------------------- */
+
+/* Right (default) */
+.sheet-side-right[data-state="open"] {
+  animation: sheet-slide-in-right 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+.sheet-side-right[data-state="closed"] {
+  animation: sheet-slide-out-right 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* Left */
+.sheet-side-left[data-state="open"] {
+  animation: sheet-slide-in-left 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+.sheet-side-left[data-state="closed"] {
+  animation: sheet-slide-out-left 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* Top */
+.sheet-side-top[data-state="open"] {
+  animation: sheet-slide-in-top 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+.sheet-side-top[data-state="closed"] {
+  animation: sheet-slide-out-top 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* Bottom */
+.sheet-side-bottom[data-state="open"] {
+  animation: sheet-slide-in-bottom 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+.sheet-side-bottom[data-state="closed"] {
+  animation: sheet-slide-out-bottom 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* --------------------------------
+ * Reduced Motion
+ * -------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .sheet-overlay[data-state="open"] {
+    animation: sheet-fade-in 150ms ease forwards;
+  }
+  .sheet-overlay[data-state="closed"] {
+    animation: sheet-fade-out 150ms ease forwards;
+  }
+
+  .sheet-side-right[data-state="open"],
+  .sheet-side-left[data-state="open"],
+  .sheet-side-top[data-state="open"],
+  .sheet-side-bottom[data-state="open"] {
+    animation: sheet-fade-in 150ms ease forwards;
+  }
+
+  .sheet-side-right[data-state="closed"],
+  .sheet-side-left[data-state="closed"],
+  .sheet-side-top[data-state="closed"],
+  .sheet-side-bottom[data-state="closed"] {
+    animation: sheet-fade-out 150ms ease forwards;
+  }
+}
