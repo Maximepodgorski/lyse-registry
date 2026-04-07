@@ -27,6 +27,7 @@ export default function Example() {
 
 const overviewSections: TocSection[] = [
   { id: "default", label: "Default" },
+  { id: "variants", label: "Variants" },
   { id: "sizes", label: "Sizes" },
   { id: "interactive", label: "Interactive" },
 ]
@@ -71,6 +72,12 @@ const propDefs: PropDef[] = [
     description: "Total number of steps.",
   },
   {
+    name: "variant",
+    type: ["neutral", "brand"],
+    default: "neutral",
+    description: "Color variant. Brand uses accent colors for dots.",
+  },
+  {
     name: "size",
     type: ["sm", "md"],
     default: "md",
@@ -107,9 +114,36 @@ function OverviewTab() {
       </ComponentPreview>
 
       <ComponentPreview
+        id="variants"
+        title="Variants"
+        description="Neutral (default) uses greyscale tones. Brand uses accent colors for a stronger visual tie to your theme."
+      >
+        <div className="flex flex-col items-start gap-[var(--layout-gap-2xl)]">
+          <div className="flex flex-col gap-[var(--layout-gap-md)]">
+            <span
+              className="text-content-caption"
+              style={{ color: "var(--text-base-bolder)" }}
+            >
+              neutral
+            </span>
+            <Stepper current={2} total={5} variant="neutral" />
+          </div>
+          <div className="flex flex-col gap-[var(--layout-gap-md)]">
+            <span
+              className="text-content-caption"
+              style={{ color: "var(--text-base-bolder)" }}
+            >
+              brand
+            </span>
+            <Stepper current={2} total={5} variant="brand" />
+          </div>
+        </div>
+      </ComponentPreview>
+
+      <ComponentPreview
         id="sizes"
         title="Sizes"
-        description="Two sizes: sm (6px dots) and md (8px dots, default)."
+        description="Two sizes: sm and md (default)."
       >
         <div className="flex flex-col items-start gap-[var(--layout-gap-2xl)]">
           <div className="flex flex-col gap-[var(--layout-gap-md)]">
@@ -203,7 +237,7 @@ export default function StepperPage() {
                   .catch(() => {})
               }}
             >
-              <><Copy /> Copy install command</>
+              <Copy /> Copy install command
             </Button>
             <Button variant="secondary" size="sm" asChild>
               <a
