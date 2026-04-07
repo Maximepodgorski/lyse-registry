@@ -3,6 +3,7 @@
 import Link from "next/link"
 
 const components = [
+  { name: "Accordion", href: "/components/accordion" },
   { name: "ActionCard", href: "/components/action-card" },
   { name: "Alert", href: "/components/alert" },
   { name: "AlertDialog", href: "/components/alert-dialog" },

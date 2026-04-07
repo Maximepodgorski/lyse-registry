@@ -50,6 +50,12 @@ export const navGroups: readonly NavGroup[] = [
     label: "Components",
     items: [
       {
+        label: "Accordion",
+        href: "/components/accordion",
+        description: "Stacked expandable panels with +/× icon toggle",
+        keywords: ["accordion", "collapse", "expand", "faq", "panel", "disclosure"],
+      },
+      {
         label: "ActionCard",
         href: "/components/action-card",
         description: "Clickable card with hover state for navigation or actions",
