@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
-import { Plus, X } from "lucide-react"
+import { Plus } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import "./accordion.css"
@@ -51,8 +51,7 @@ function AccordionTrigger({
       >
         <span>{children}</span>
         <span className="accordion-icon shrink-0 [&_svg]:h-[var(--layout-size-xs)] [&_svg]:w-[var(--layout-size-xs)]">
-          <Plus className="accordion-icon-plus" />
-          <X className="accordion-icon-x" />
+          <Plus />
         </span>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -70,7 +69,7 @@ function AccordionContent({
       className={cn("accordion-content overflow-hidden", className)}
       {...props}
     >
-      <div className="accordion-content-inner px-[var(--layout-padding-lg)] pb-[var(--layout-padding-lg)] text-content-body">
+      <div className="accordion-content-inner px-[var(--layout-padding-lg)] pb-[var(--layout-padding-lg)] text-content-note">
         {children}
       </div>
     </AccordionPrimitive.Content>

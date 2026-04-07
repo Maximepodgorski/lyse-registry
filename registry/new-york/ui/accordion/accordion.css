@@ -36,18 +36,15 @@
 }
 
 /* --------------------------------
- * Icon — toggle Plus/X via data-state
+ * Icon — Plus rotates 45° to become × when open
  * -------------------------------- */
 .accordion-icon {
   color: var(--text-base-moderate);
+  transition: transform 250ms ease;
 }
 
-.accordion-trigger[data-state="closed"] .accordion-icon-x {
-  display: none;
-}
-
-.accordion-trigger[data-state="open"] .accordion-icon-plus {
-  display: none;
+.accordion-trigger[data-state="open"] .accordion-icon {
+  transform: rotate(45deg);
 }
 
 .accordion-trigger[data-disabled] .accordion-icon {
@@ -99,6 +96,10 @@
   .accordion-content[data-state="closed"] {
     animation-duration: 400ms;
     animation-timing-function: linear;
+  }
+
+  .accordion-icon {
+    transition-duration: 400ms;
   }
 }
 
