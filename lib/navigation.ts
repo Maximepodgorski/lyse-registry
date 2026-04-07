@@ -176,6 +176,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["skeleton", "loading", "placeholder", "shimmer", "loader"],
       },
       {
+        label: "Slider",
+        href: "/components/slider",
+        description: "Range input with diamond thumb for selecting a value",
+        keywords: ["slider", "range", "input", "thumb", "drag", "volume"],
+      },
+      {
         label: "Spinner",
         href: "/components/spinner",
         description: "Loading indicator with size variants",

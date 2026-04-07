@@ -25,6 +25,7 @@ const components = [
   { name: "Select", href: "/components/select" },
   { name: "Separator", href: "" }, /* no doc page — utility component, registry-only */
   { name: "Skeleton", href: "/components/skeleton" },
+  { name: "Slider", href: "/components/slider" },
   { name: "Spinner", href: "/components/spinner" },
   { name: "Stepper", href: "/components/stepper" },
   { name: "SpotlightCard", href: "/components/spotlight-card" },
