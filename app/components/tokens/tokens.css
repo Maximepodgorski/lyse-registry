@@ -11,6 +11,14 @@
   width: 100%;
 }
 
+/* Below lg: columns size to content, scroll horizontally */
+@media (max-width: 1023px) {
+  .token-table {
+    table-layout: auto;
+    width: max-content;
+  }
+}
+
 .token-page .table-cell,
 .token-page .table-head {
   padding: var(--layout-padding-md) var(--layout-padding-xl);
@@ -18,6 +26,20 @@
 
 .token-page [data-slot="tag"] {
   max-width: 100%;
+}
+
+/* --------------------------------
+ * Column widths — desktop only
+ * -------------------------------- */
+@media (min-width: 1024px) {
+  .token-table {
+    table-layout: fixed;
+  }
+
+  .token-col-name { width: 35%; }
+  .token-col-value { width: 40%; }
+  .token-col-usage { width: 25%; }
+  .token-col-half { width: 50%; }
 }
 
 /* --------------------------------
@@ -44,8 +66,7 @@
   font-size: var(--font-size-content-caption);
   line-height: var(--font-line-height-content-caption);
   color: var(--text-base-strong);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* --------------------------------

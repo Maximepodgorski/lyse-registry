@@ -290,20 +290,20 @@ function SemanticGroupSection({ group }: { group: TokenGroup }) {
       >
         {group.description}
       </p>
-      <Table style={{ tableLayout: "fixed" }}>
+      <Table className="token-table">
         <TableHeader>
           <TableRow>
             {color ? (
               <>
-                <TableHead style={{ width: "35%" }}>Semantic token</TableHead>
-                <TableHead style={{ width: "40%" }}>Primitive token</TableHead>
-                <TableHead style={{ width: "25%" }}>Function</TableHead>
+                <TableHead className="token-col-name">Semantic token</TableHead>
+                <TableHead className="token-col-value">Primitive token</TableHead>
+                <TableHead className="token-col-usage">Function</TableHead>
               </>
             ) : (
               <>
-                <TableHead style={{ width: "35%" }}>Token</TableHead>
-                <TableHead style={{ width: "40%" }}>Value</TableHead>
-                <TableHead style={{ width: "25%" }}>Reference</TableHead>
+                <TableHead className="token-col-name">Token</TableHead>
+                <TableHead className="token-col-value">Value</TableHead>
+                <TableHead className="token-col-usage">Reference</TableHead>
               </>
             )}
           </TableRow>
@@ -367,19 +367,19 @@ function PrimitiveGroupSection({ group }: { group: TokenGroup }) {
       >
         {group.description}
       </p>
-      <Table style={{ tableLayout: "fixed" }}>
+      <Table className="token-table">
         <TableHeader>
           <TableRow>
             {color ? (
               <>
-                <TableHead style={{ width: "50%" }}>Token</TableHead>
-                <TableHead style={{ width: "50%" }}>Value</TableHead>
+                <TableHead className="token-col-half">Token</TableHead>
+                <TableHead className="token-col-half">Value</TableHead>
               </>
             ) : (
               <>
-                <TableHead style={{ width: "35%" }}>Token</TableHead>
-                <TableHead style={{ width: "40%" }}>Value</TableHead>
-                <TableHead style={{ width: "25%" }}>Usage</TableHead>
+                <TableHead className="token-col-name">Token</TableHead>
+                <TableHead className="token-col-value">Value</TableHead>
+                <TableHead className="token-col-usage">Usage</TableHead>
               </>
             )}
           </TableRow>
@@ -465,12 +465,12 @@ function BridgeGroupSection({ group }: { group: BridgeGroup }) {
       >
         {group.label}
       </h3>
-      <Table style={{ tableLayout: "fixed" }}>
+      <Table className="token-table">
         <TableHeader>
           <TableRow>
-            <TableHead style={{ width: "35%" }}>shadcn token</TableHead>
-            <TableHead style={{ width: "40%" }}>Lyse source</TableHead>
-            <TableHead style={{ width: "25%" }}>Utility</TableHead>
+            <TableHead className="token-col-name">shadcn token</TableHead>
+            <TableHead className="token-col-value">Lyse source</TableHead>
+            <TableHead className="token-col-usage">Utility</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
