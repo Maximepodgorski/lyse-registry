@@ -52,7 +52,7 @@ app/
 │   ├── changelog/page.tsx
 │   ├── button/page.tsx
 │   ├── badge/page.tsx
-│   ├── ... (23 component pages total)
+│   ├── ... (31 component pages total)
 │   └── tooltip/page.tsx
 └── styles/                  # Design tokens (CSS custom properties)
     ├── root-colors.css         # Primitive palette (brand, danger, neutral, success, warning)
@@ -89,12 +89,26 @@ registry/
     ├── tabs/          (tabs.tsx + tabs.css)
     ├── tag/           (tag.tsx + tag.css)
     ├── textarea/      (textarea.tsx + textarea.css)
+    ├── accordion/     (accordion.tsx + accordion.css)
+    ├── alert/         (alert.tsx + alert.css)
+    ├── alert-dialog/  (alert-dialog.tsx + alert-dialog.css)
+    ├── breadcrumb/    (breadcrumb.tsx + breadcrumb.css)
+    ├── card/          (card.tsx + card.css)
+    ├── field/         (field.tsx + field.css)
+    ├── input-group/   (input-group.tsx + input-group.css)
+    ├── kbd/           (kbd.tsx + kbd.css)
+    ├── popover/       (popover.tsx + popover.css)
+    ├── separator/     (separator.tsx + separator.css)
+    ├── sheet/         (sheet.tsx + sheet.css)
+    ├── slider/        (slider.tsx + slider.css)
+    ├── stepper/       (stepper.tsx + stepper.css)
+    ├── table/         (table.tsx + table.css)
     ├── toast/         (toast.tsx + toast.css)
     ├── toggle/        (toggle.tsx + toggle.css)
     └── tooltip/       (tooltip.tsx + tooltip.css)
 
 public/
-├── r/                       # Built registry JSON output (25 files)
+├── r/                       # Built registry JSON output (38 files)
 │   ├── registry.json           # Master manifest
 │   ├── lyse-tokens.json        # Token-only install
 │   └── [component].json        # One per shipped component
@@ -194,29 +208,40 @@ export { Component, componentVariants }
 - `React.forwardRef` when the component uses Radix or needs ref forwarding
 - For simple components, plain function components with `React.ComponentProps` pattern
 
-## Shipped Components (24)
+## Shipped Components (34)
 
 | Component | Variants | Sizes | Extras | Radix |
 |-----------|----------|-------|--------|-------|
+| **Accordion** | — | — | `AccordionItem`, `AccordionTrigger`, `AccordionContent`, +/× icon toggle | Accordion |
 | **ActionCard** | — | — | `onClick`, hover state | — |
+| **Alert** | brand, success, warning, danger | — | `icon`, `action`, `actionPlacement`, `onDismiss`, `AlertTitle`, `AlertDescription` | — |
+| **AlertDialog** | — | — | `Trigger`, `Content`, `Header`, `Icon`, `Title`, `Description`, `Footer`, `Action`, `Cancel` | AlertDialog |
 | **Avatar** | — | xs, sm, md, lg, xl | `fallback`, `src`, `AvatarGroup` | — |
 | **Badge** | brand, neutral, success, danger, warning | sm, md, lg | `type` (fill/light/dash), `isFilled`, `BadgeDot` | — |
 | **BannerInfo** | brand, success, danger, warning | — | `icon`, `action`, dismissible | — |
+| **Breadcrumb** | — | — | `List`, `Item`, `Link`, `Page`, `Separator`, `Ellipsis` | Slot |
 | **Button** | primary, secondary, terciary, destructive | xs, sm, md, lg | `asChild`, `isIconOnly` | Slot |
 | **CalloutCard** | brand, neutral, success, danger, warning | — | `icon`, `title`, `description` | — |
+| **Card** | outline, ghost | — | `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` | — |
 | **Checkbox** | — | sm, md | `CheckboxGroup`, `indeterminate` | — |
 | **Chip** | — | sm, md | toggleable, `selected` | — |
 | **DropdownMenu** | — | — | Full Radix DropdownMenu compound | DropdownMenu |
 | **Input** | default, destructive | sm, md, lg | `InputField`, `InputLabel`, `InputHint`, `leading`/`trailing` | — |
 | **Menu** | default, accent | sm, md | `Menu`, `MenuGroup`, `MenuItem`, `MenuDivider`, icon/badge/shortcut/dot slots | Slot |
 | **Modal** | — | sm, md, lg, xl, full | `ModalHeader`, `ModalFooter`, `ModalClose` | Dialog |
+| **Popover** | — | — | `Trigger`, `Anchor`, `Content`, `Close` | Popover |
 | **Progress** | brand, success, danger, warning | sm, md, lg | determinate | — |
 | **Radio** | — | sm, md | `RadioGroup` | — |
 | **Select** | — | sm, md, lg | `SelectTrigger`, `SelectContent`, `SelectItem`, `SelectGroup` | Select |
+| **Separator** | subtle, default, strong | — | `orientation` (horizontal/vertical), `decorative` | — |
+| **Sheet** | right, left, top, bottom (side) | sm, md, lg, full | `Trigger`, `Content`, `Header`, `Title`, `Description`, `Body`, `Footer`, `Close` | Dialog |
 | **Skeleton** | text, circle, rect (shape) | sm, md, lg | shimmer animation, `animated` prop, compound size×shape variants | — |
+| **Slider** | — | — | `SliderField` with label, suffix, min, max, step | Slider |
 | **Spinner** | — | xs, sm, md, lg | — | — |
 | **SpotlightCard** | — | — | `image` slot, fallback bg | — |
+| **Stepper** | neutral, brand | sm, md | `current`, `total`, `onStepClick` | — |
 | **Tabs** | — | sm, md | `TabsList`, `TabsTrigger`, `TabsContent` | Tabs |
+| **Table** | default, striped | — | `compact`, `Header`, `Body`, `Footer`, `Row`, `Head`, `Cell`, `Caption` | — |
 | **Tag** | brand, neutral, success, danger, warning | sm, md, lg | `type` (fill/dash/emphasis/ghost), `TagDot`, `TagClose` | — |
 | **Textarea** | default, destructive | sm, md, lg | `TextareaField`, `TextareaLabel`, `TextareaHint`, auto-resize | — |
 | **Toast** | brand, success, danger, warning | — | `Toaster` (stacking), `toast()` pub/sub API, auto-dismiss, hover-pause | — |
@@ -238,7 +263,7 @@ The doc site lives at `app/components/` with a shared layout.
 - **Introduction**: principles, Figma Library section with thumbnail card
 - **Components (Directory)**: grid of all component links
 - **Installation**: step-by-step with CodeBlocks (single, tokens-only, install-all)
-- **Design Tokens**: 3-layer architecture with real oklch values
+- **Design Tokens**: searchable token reference tables (primitives, semantics, bridge) with copy-to-clipboard
 - **Changelog**: card-based layout with Tag v1.0
 
 ### Component Page Pattern (`app/components/{name}/page.tsx`)
@@ -305,7 +330,7 @@ Specs live in `specs/` with date-prefixed filenames. Check `specs/active/` befor
 |-------|------|--------|
 | 1 | Scaffold + registry init | Shipped |
 | 2 | Design tokens (CSS vars) | Shipped |
-| 3 | Components (batched) | In progress — 24 shipped, 5 in specs |
+| 3 | Components (batched) | In progress — 34 shipped |
 | 4 | Docsite + deploy to Vercel | Shipped — live at ui.getlyse.com |
 
 ## Path Aliases
