@@ -152,6 +152,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["modal", "dialog", "overlay", "popup", "lightbox"],
       },
       {
+        label: "Pagination",
+        href: "/components/pagination",
+        description: "Page navigation with prev/next, page numbers, ellipsis, and mobile status",
+        keywords: ["pagination", "pages", "next", "prev", "navigation", "table", "results"],
+      },
+      {
         label: "Popover",
         href: "/components/popover",
         description: "Floating panel for interactive content anchored to a trigger",
