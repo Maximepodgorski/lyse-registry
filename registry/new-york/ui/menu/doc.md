@@ -124,7 +124,7 @@ Interactive row. Renders a `<button>` by default, or delegates to the child elem
 | `size` | `"sm" \| "md"` | `"md"` | Row height. `sm` = 32px, `md` = 36px |
 | `active` | `boolean` | `false` | Highlights the row with a subtle background |
 | `disabled` | `boolean` | `false` | Prevents interaction. Sets `aria-disabled` in `asChild` mode |
-| `asChild` | `boolean` | `false` | Merges props onto the child element via Radix Slot |
+| `asChild` | `boolean` | `false` | Merges props onto the child element via Base UI useRender |
 | `icon` | `ReactNode` | — | Leading icon. Ignored in `asChild` mode |
 | `shortcut` | `string` | — | Keyboard shortcut label shown at the trailing edge. Ignored in `asChild` mode |
 | `badge` | `ReactNode` | — | Trailing badge (e.g., count). Ignored in `asChild` mode |

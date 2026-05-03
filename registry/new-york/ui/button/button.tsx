@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { useRender } from "@base-ui-components/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -42,8 +42,6 @@ function Button({
     asChild?: boolean
     isIconOnly?: boolean
   }) {
-  const Comp = asChild ? Slot : "button"
-
   const handlePointerDown = React.useCallback(
     (e: React.PointerEvent<HTMLButtonElement>) => {
       onPointerDown?.(e)
@@ -62,17 +60,22 @@ function Button({
     [onPointerDown]
   )
 
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(
+  const valid = asChild && React.isValidElement(props.children)
+  return useRender({
+    render: valid
+      ? (props.children as React.ReactElement<Record<string, unknown>>)
+      : undefined,
+    defaultTagName: "button",
+    props: {
+      "data-slot": "button",
+      className: cn(
         buttonVariants({ variant, size, className }),
         isIconOnly && "aspect-square px-0 gap-0"
-      )}
-      onPointerDown={handlePointerDown}
-      {...props}
-    />
-  )
+      ),
+      onPointerDown: handlePointerDown,
+      ...(props as Record<string, unknown>),
+    },
+  })
 }
 
 export { Button, buttonVariants }

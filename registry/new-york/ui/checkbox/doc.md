@@ -158,6 +158,6 @@ const someChecked = items.some(Boolean)
 
 - **Keyboard:** `Tab` focuses the checkbox. `Space` toggles checked state.
 - **Screen reader:** Announces label text + state (checked / not checked / mixed). Uses `role="checkbox"` with `aria-checked`.
-- **ARIA:** `aria-checked="true | false | mixed"` managed automatically by Radix. `aria-disabled` when disabled. `aria-required` when required.
+- **ARIA:** `aria-checked="true | false | mixed"` managed automatically by Base UI. `aria-disabled` when disabled. `aria-required` when required.
 - **Focus:** Visible double-ring focus indicator on `:focus-visible`. Label click toggles the checkbox via `htmlFor`.
 - **Motion:** Color transitions respect `prefers-reduced-motion`.

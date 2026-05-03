@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as SelectPrimitive from "@radix-ui/react-select"
+import { Select as SelectPrimitive } from "@base-ui-components/react/select"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Check, ChevronDown } from "lucide-react"
 
@@ -36,9 +36,9 @@ const selectTriggerVariants = cva(
 /*  Select                                                             */
 /* ------------------------------------------------------------------ */
 
-function Select({
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Root>) {
+function Select<Value>(
+  props: React.ComponentProps<typeof SelectPrimitive.Root<Value, false>>
+) {
   return <SelectPrimitive.Root {...props} />
 }
 
@@ -57,9 +57,23 @@ function SelectGroup({
 /* ------------------------------------------------------------------ */
 
 function SelectValue({
+  placeholder,
+  children,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Value>) {
-  return <SelectPrimitive.Value data-slot="select-value" {...props} />
+}: Omit<React.ComponentProps<typeof SelectPrimitive.Value>, "children"> & {
+  placeholder?: React.ReactNode
+  children?: React.ReactNode | ((value: unknown) => React.ReactNode)
+}) {
+  return (
+    <SelectPrimitive.Value data-slot="select-value" {...props}>
+      {children !== undefined
+        ? (children as React.ComponentProps<typeof SelectPrimitive.Value>["children"])
+        : (value: unknown) =>
+            value === null || value === undefined || value === ""
+              ? placeholder
+              : (value as React.ReactNode)}
+    </SelectPrimitive.Value>
+  )
 }
 
 /* ------------------------------------------------------------------ */
@@ -81,9 +95,11 @@ function SelectTrigger({
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon asChild>
-        <ChevronDown className="select-chevron h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] shrink-0" />
-      </SelectPrimitive.Icon>
+      <SelectPrimitive.Icon
+        render={
+          <ChevronDown className="select-chevron h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] shrink-0" />
+        }
+      />
     </SelectPrimitive.Trigger>
   )
 }
@@ -94,34 +110,36 @@ function SelectTrigger({
 
 function SelectContent({
   className,
-  position = "popper",
   sideOffset = 6,
+  side,
+  align,
   children,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Content>) {
+}: React.ComponentProps<typeof SelectPrimitive.Popup> & {
+  sideOffset?: number
+  side?: React.ComponentProps<typeof SelectPrimitive.Positioner>["side"]
+  align?: React.ComponentProps<typeof SelectPrimitive.Positioner>["align"]
+  position?: "popper" | "item-aligned"
+}) {
   return (
     <SelectPrimitive.Portal>
-      <SelectPrimitive.Content
-        data-slot="select-content"
-        position={position}
+      <SelectPrimitive.Positioner
         sideOffset={sideOffset}
-        className={cn(
-          "select-content z-50 min-w-[8rem] rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-xs)] animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          position === "popper" && "max-h-[var(--radix-select-content-available-height)]",
-          className
-        )}
-        {...props}
+        side={side}
+        align={align}
+        className="z-50"
       >
-        <SelectPrimitive.Viewport
-          data-slot="select-viewport"
+        <SelectPrimitive.Popup
+          data-slot="select-content"
           className={cn(
-            "select-viewport overflow-y-auto",
-            position === "popper" && "w-full min-w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)]"
+            "select-content min-w-[var(--anchor-width)] rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-xs)] transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95 max-h-[var(--available-height)] overflow-y-auto",
+            className
           )}
+          {...props}
         >
           {children}
-        </SelectPrimitive.Viewport>
-      </SelectPrimitive.Content>
+        </SelectPrimitive.Popup>
+      </SelectPrimitive.Positioner>
     </SelectPrimitive.Portal>
   )
 }
@@ -159,9 +177,9 @@ function SelectItem({
 function SelectLabel({
   className,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Label>) {
+}: React.ComponentProps<typeof SelectPrimitive.GroupLabel>) {
   return (
-    <SelectPrimitive.Label
+    <SelectPrimitive.GroupLabel
       data-slot="select-label"
       className={cn(
         "select-label px-[var(--layout-padding-md)] py-[var(--layout-padding-sm)] text-content-caption font-accent",

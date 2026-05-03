@@ -137,5 +137,5 @@ const [enabled, setEnabled] = React.useState(false)
 
 - **Keyboard:** `Tab` focuses the toggle. `Space` toggles on/off.
 - **Screen reader:** Announces label text + state (on / off). Uses `role="switch"` with `aria-checked`.
-- **ARIA:** `aria-checked="true | false"` managed automatically by Radix. `aria-disabled` when disabled. `aria-required` when required.
+- **ARIA:** `aria-checked="true | false"` managed automatically by Base UI. `aria-disabled` when disabled. `aria-required` when required.
 - **Focus:** Visible double-ring focus indicator on `:focus-visible`. Label click toggles the switch via `htmlFor`.

@@ -1,6 +1,6 @@
 # Table
 
-A responsive data table with styled header, body, footer, and caption. Pure HTML — no Radix dependency. Supports striped rows, compact density, sortable column headers, and a horizontal scroll wrapper for mobile.
+A responsive data table with styled header, body, footer, and caption. Pure HTML — no third-party dependency. Supports striped rows, compact density, sortable column headers, and a horizontal scroll wrapper for mobile.
 
 ## When to use
 

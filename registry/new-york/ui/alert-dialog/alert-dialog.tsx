@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
+import { AlertDialog as AlertDialogPrimitive } from "@base-ui-components/react/alert-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -28,13 +28,20 @@ const alertDialogIconVariants = cva(
 )
 
 /* ------------------------------------------------------------------ */
+/*  Cancel-focus context (internal)                                    */
+/* ------------------------------------------------------------------ */
+
+const AlertDialogCancelFocusContext =
+  React.createContext<React.RefObject<HTMLButtonElement | null> | null>(null)
+
+/* ------------------------------------------------------------------ */
 /*  AlertDialog                                                        */
 /* ------------------------------------------------------------------ */
 
 function AlertDialog({
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
-  return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />
+  return <AlertDialogPrimitive.Root {...props} />
 }
 
 /* ------------------------------------------------------------------ */
@@ -42,13 +49,28 @@ function AlertDialog({
 /* ------------------------------------------------------------------ */
 
 function AlertDialogTrigger({
+  asChild,
+  children,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>) {
+}: React.ComponentProps<typeof AlertDialogPrimitive.Trigger> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <AlertDialogPrimitive.Trigger
+        data-slot="alert-dialog-trigger"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        {...props}
+      />
+    )
+  }
   return (
     <AlertDialogPrimitive.Trigger
       data-slot="alert-dialog-trigger"
       {...props}
-    />
+    >
+      {children}
+    </AlertDialogPrimitive.Trigger>
   )
 }
 
@@ -69,12 +91,12 @@ function AlertDialogPortal({
 function AlertDialogOverlay({
   className,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Overlay>) {
+}: React.ComponentProps<typeof AlertDialogPrimitive.Backdrop>) {
   return (
-    <AlertDialogPrimitive.Overlay
+    <AlertDialogPrimitive.Backdrop
       data-slot="alert-dialog-overlay"
       className={cn(
-        "alert-dialog-overlay fixed inset-0 z-50 animate-in fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0",
+        "alert-dialog-overlay fixed inset-0 z-50 transition-opacity duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
         className
       )}
       {...props}
@@ -90,38 +112,28 @@ function AlertDialogContent({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
+}: React.ComponentProps<typeof AlertDialogPrimitive.Popup>) {
   const cancelRef = React.useRef<HTMLButtonElement>(null)
 
   return (
     <AlertDialogPortal>
-      <AlertDialogOverlay onClick={() => cancelRef.current?.click()} />
-      <AlertDialogPrimitive.Content
+      <AlertDialogOverlay />
+      <AlertDialogPrimitive.Popup
         data-slot="alert-dialog-content"
+        initialFocus={(type) => cancelRef.current ?? (type === "keyboard")}
         className={cn(
-          "alert-dialog-content fixed left-1/2 top-1/2 z-50 w-[22rem] -translate-x-1/2 -translate-y-1/2 flex flex-col items-start animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+          "alert-dialog-content fixed left-1/2 top-1/2 z-50 w-[22rem] -translate-x-1/2 -translate-y-1/2 flex flex-col items-start transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
           className
         )}
-        onOpenAutoFocus={(e) => {
-          e.preventDefault()
-          cancelRef.current?.focus()
-        }}
         {...props}
       >
         <AlertDialogCancelFocusContext.Provider value={cancelRef}>
           {children}
         </AlertDialogCancelFocusContext.Provider>
-      </AlertDialogPrimitive.Content>
+      </AlertDialogPrimitive.Popup>
     </AlertDialogPortal>
   )
 }
-
-/* ------------------------------------------------------------------ */
-/*  Focus context (internal)                                           */
-/* ------------------------------------------------------------------ */
-
-const AlertDialogCancelFocusContext =
-  React.createContext<React.RefObject<HTMLButtonElement | null> | null>(null)
 
 /* ------------------------------------------------------------------ */
 /*  AlertDialogHeader                                                  */
@@ -217,56 +229,59 @@ function AlertDialogFooter({
 }
 
 /* ------------------------------------------------------------------ */
-/*  AlertDialogAction                                                  */
+/*  AlertDialogAction (close on click)                                 */
 /* ------------------------------------------------------------------ */
 
 function AlertDialogAction({
   className,
   variant = "destructive",
   children,
+  onClick,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Action> & {
+}: Omit<React.ComponentProps<typeof Button>, "variant"> & {
   variant?: "destructive" | "primary"
 }) {
   return (
-    <AlertDialogPrimitive.Action
+    <AlertDialogPrimitive.Close
       data-slot="alert-dialog-action"
-      asChild
-      {...props}
-    >
-      <Button variant={variant} size="sm" className={className}>
-        {children}
-      </Button>
-    </AlertDialogPrimitive.Action>
+      render={
+        <Button variant={variant} size="sm" className={className} onClick={onClick}>
+          {children}
+        </Button>
+      }
+      {...(props as React.ComponentProps<typeof AlertDialogPrimitive.Close>)}
+    />
   )
 }
 
 /* ------------------------------------------------------------------ */
-/*  AlertDialogCancel                                                  */
+/*  AlertDialogCancel (close on click, focus on open)                  */
 /* ------------------------------------------------------------------ */
 
 function AlertDialogCancel({
   className,
   children,
+  onClick,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Cancel>) {
+}: React.ComponentProps<typeof Button>) {
   const focusRef = React.useContext(AlertDialogCancelFocusContext)
 
   return (
-    <AlertDialogPrimitive.Cancel
+    <AlertDialogPrimitive.Close
       data-slot="alert-dialog-cancel"
-      asChild
-      {...props}
-    >
-      <Button
-        variant="secondary"
-        size="sm"
-        className={cn("alert-dialog-cancel-btn", className)}
-        ref={focusRef}
-      >
-        {children}
-      </Button>
-    </AlertDialogPrimitive.Cancel>
+      render={
+        <Button
+          variant="secondary"
+          size="sm"
+          className={cn("alert-dialog-cancel-btn", className)}
+          ref={focusRef}
+          onClick={onClick}
+        >
+          {children}
+        </Button>
+      }
+      {...(props as React.ComponentProps<typeof AlertDialogPrimitive.Close>)}
+    />
   )
 }
 

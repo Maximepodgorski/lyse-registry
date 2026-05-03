@@ -1,6 +1,6 @@
 # Modal
 
-An overlay dialog component for confirmations, alerts, forms, and focused user interactions. Built on Radix Dialog with focus trap, ESC dismiss, and ARIA support.
+An overlay dialog component for confirmations, alerts, forms, and focused user interactions. Built on Base UI Dialog with focus trap, ESC dismiss, and ARIA support.
 
 ## When to use
 
@@ -168,7 +168,7 @@ Generic flex container with bottom border. Place `ModalTitle` + `ModalClose` ins
 |------|------|---------|-------------|
 | className | `string` | — | Override classes. Default: `text-content-body font-accent` |
 
-Wraps Radix Dialog.Title. Provides `aria-labelledby` for the dialog.
+Wraps Base UI Dialog.Title. Provides `aria-labelledby` for the dialog.
 
 ### ModalDescription
 
@@ -176,7 +176,7 @@ Wraps Radix Dialog.Title. Provides `aria-labelledby` for the dialog.
 |------|------|---------|-------------|
 | className | `string` | — | Override classes. Default: `text-content-note` |
 
-Wraps Radix Dialog.Description. Provides `aria-describedby` for the dialog.
+Wraps Base UI Dialog.Description. Provides `aria-describedby` for the dialog.
 
 ### ModalBody
 
@@ -295,5 +295,5 @@ import { Textarea, TextareaField, TextareaLabel } from "@/components/ui/textarea
 
 - **Keyboard:** Tab cycles through focusable elements within the modal; ESC closes; Enter/Space activates buttons
 - **Screen reader:** Title announced on open via `aria-labelledby` (from ModalTitle); Description via `aria-describedby` (from ModalDescription)
-- **ARIA:** `role="dialog"`, `aria-modal="true"` applied automatically by Radix
+- **ARIA:** `role="dialog"`, `aria-modal="true"` applied automatically by Base UI
 - **Focus:** Trapped within ModalContent while open; restored to trigger element on close

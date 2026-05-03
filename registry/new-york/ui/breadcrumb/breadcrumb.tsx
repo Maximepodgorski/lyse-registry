@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { useRender } from "@base-ui-components/react/use-render"
 import { cva } from "class-variance-authority"
 import { MoreHorizontal } from "lucide-react"
 
@@ -91,14 +91,18 @@ function BreadcrumbLink({
   className,
   ...props
 }: React.ComponentProps<"a"> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : "a"
-  return (
-    <Comp
-      data-slot="breadcrumb-link"
-      className={cn(breadcrumbLinkVariants(), className)}
-      {...props}
-    />
-  )
+  const valid = asChild && React.isValidElement(props.children)
+  return useRender({
+    render: valid
+      ? (props.children as React.ReactElement<Record<string, unknown>>)
+      : undefined,
+    defaultTagName: "a",
+    props: {
+      "data-slot": "breadcrumb-link",
+      className: cn(breadcrumbLinkVariants(), className),
+      ...(props as Record<string, unknown>),
+    },
+  })
 }
 
 /* ------------------------------------------------------------------ */

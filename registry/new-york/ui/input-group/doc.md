@@ -1,6 +1,6 @@
 # InputGroup
 
-A compound component that attaches addons (text, icons) and action buttons to an `Input`. Handles shared borders, radius clipping, and visual joining so addons look like a single cohesive field. Pure HTML — no Radix dependency.
+A compound component that attaches addons (text, icons) and action buttons to an `Input`. Handles shared borders, radius clipping, and visual joining so addons look like a single cohesive field. Pure HTML — no third-party dependency.
 
 ## When to use
 

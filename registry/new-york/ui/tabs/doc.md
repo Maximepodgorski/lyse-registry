@@ -164,7 +164,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 ## Accessibility
 
 - **Keyboard:** `Tab` moves focus to the active trigger. `ArrowLeft` / `ArrowRight` navigate between triggers. `Enter` or `Space` activates a trigger. `Tab` again moves focus into the content panel.
-- **Screen reader:** Uses Radix `Tabs` primitive which provides `role="tablist"`, `role="tab"`, and `role="tabpanel"` automatically. Active tab is announced via `aria-selected`.
+- **Screen reader:** Uses Base UI `Tabs` primitive which provides `role="tablist"`, `role="tab"`, and `role="tabpanel"` automatically. Active tab is announced via `aria-selected`.
 - **ARIA:** Each trigger is linked to its content panel via `aria-controls`. Content panels have `aria-labelledby` pointing back to their trigger.
 - **Focus:** Visible double-ring focus indicator on `:focus-visible` (2 px base offset + 4 px ring using `--border-selected`). Pill active state combines the elevation shadow with the focus ring.
 - **Motion:** Color and background transitions respect `prefers-reduced-motion` — transitions are disabled when reduced motion is preferred.

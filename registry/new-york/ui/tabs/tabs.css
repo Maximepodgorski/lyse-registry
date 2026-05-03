@@ -39,7 +39,7 @@
 }
 
 /* Trigger — active */
-.tabs-trigger-underline[data-state="active"] {
+.tabs-trigger-underline[data-selected] {
   color: var(--text-base-strong);
   border-bottom-color: var(--border-selected);
 }
@@ -70,7 +70,7 @@
 }
 
 /* Trigger — active */
-.tabs-trigger-pill[data-state="active"] {
+.tabs-trigger-pill[data-selected] {
   background: var(--background-surface-raised);
   color: var(--text-base-strong);
   box-shadow:
@@ -94,7 +94,7 @@
 }
 
 /* Pill active + focus needs combined shadow */
-.tabs-trigger-pill[data-state="active"]:focus-visible {
+.tabs-trigger-pill[data-selected]:focus-visible {
   box-shadow:
     0 1px 2px var(--shadow-neutral-strong),
     0 0 1px var(--shadow-neutral-strong),

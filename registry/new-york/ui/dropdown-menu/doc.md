@@ -1,6 +1,6 @@
 # DropdownMenu
 
-An action menu triggered by a button or control. Built on Radix UI DropdownMenu with full keyboard navigation, focus management, and ARIA menu pattern.
+An action menu triggered by a button or control. Built on Base UI Menu with full keyboard navigation, focus management, and ARIA menu pattern.
 
 ## When to Use
 
@@ -68,7 +68,7 @@ import { Copy, Trash2 } from "lucide-react"
 
 ### DropdownMenu
 
-Root component. Re-export of Radix `DropdownMenu.Root`.
+Root component. Re-export of Base UI `Menu.Root`.
 
 ### DropdownMenuTrigger
 
@@ -97,7 +97,7 @@ Group header text. Styled with muted color and caption size.
 
 ### DropdownMenuGroup
 
-Groups related items. Re-export of Radix `DropdownMenu.Group`.
+Groups related items. Re-export of Base UI `Menu.Group`.
 
 ### DropdownMenuSeparator
 
@@ -111,7 +111,7 @@ Inline keyboard shortcut display (`<kbd>` element).
 
 - **Keyboard:** Arrow keys navigate, Enter/Space activates, Escape closes
 - **Focus:** Trapped inside open menu, returns to trigger on close
-- **ARIA:** `role="menu"` on content, `role="menuitem"` on items (via Radix)
+- **ARIA:** `role="menu"` on content, `role="menuitem"` on items (via Base UI)
 
 ## Do / Don't
 

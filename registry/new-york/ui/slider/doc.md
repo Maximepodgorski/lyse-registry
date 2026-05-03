@@ -139,15 +139,15 @@ const [value, setValue] = React.useState([62])
 
 | Do | Don't |
 |----|-------|
-| Always provide `aria-label` — Radix does not generate an accessible name | Omit `aria-label` — screen readers will announce an unlabelled slider |
+| Always provide `aria-label` — the primitive does not generate an accessible name | Omit `aria-label` — screen readers will announce an unlabelled slider |
 | Use `onValueCommit` for expensive operations (API calls, state saves) | Use `onValueChange` for API calls — it fires on every pixel of drag |
-| Pass value as `number[]` even for single thumb: `[50]` | Pass a plain number: `50` — Radix expects an array |
+| Pass value as `number[]` even for single thumb: `[50]` | Pass a plain number: `50` — the underlying primitive expects an array |
 | Use `step` for discrete values (e.g., `step={10}` for 0–100 in tens) | Use `step={0.001}` unless sub-pixel precision is truly needed |
 
 ## Accessibility
 
 - **Keyboard:** `Arrow Left/Down` decrements by `step`. `Arrow Right/Up` increments by `step`. `Home` jumps to `min`. `End` jumps to `max`. `Page Up/Down` for 10× step jumps.
 - **Screen reader:** Thumb announces as `slider` role with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`. Consumer must provide `aria-label` for accessible name.
-- **ARIA:** `role="slider"` on thumb (Radix default). `aria-orientation="horizontal"`. `aria-disabled` when disabled.
+- **ARIA:** `role="slider"` on thumb (Base UI default). `aria-orientation="horizontal"`. `aria-disabled` when disabled.
 - **Focus:** Outline focus ring on thumb (not clipped by overflow). Works in Forced Colors mode via `outline: 2px solid ButtonText`.
 - **Touch:** 44×44px transparent hit area on thumb via `::before` — WCAG 2.5.5 compliant regardless of visual thumb size.

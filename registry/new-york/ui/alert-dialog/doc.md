@@ -1,6 +1,6 @@
 # AlertDialog
 
-A modal confirmation dialog for critical or destructive actions. Forces an explicit user decision before proceeding. Built on `@radix-ui/react-alert-dialog` with focus trap, ESC dismiss prevention, and ARIA alertdialog role.
+A modal confirmation dialog for critical or destructive actions. Forces an explicit user decision before proceeding. Built on `@base-ui-components/react/alert-dialog` with focus trap, ESC dismiss prevention, and ARIA alertdialog role.
 
 ## When to use
 
@@ -137,7 +137,7 @@ Root component. Manages open state.
 | `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
 | `defaultOpen` | `boolean` | `false` | Uncontrolled initial open state |
 
-Re-export of `Radix AlertDialogPrimitive.Root`.
+Re-export of `Base UI AlertDialog.Root`.
 
 ### AlertDialogTrigger
 
@@ -187,7 +187,7 @@ The dialog heading. Required for accessibility — provides the `aria-labelledby
 | `className` | `string` | — | Additional CSS classes. Default: `text-content-body font-accent` |
 | `children` | `React.ReactNode` | — | **Required.** Dialog title text |
 
-Wraps `Radix AlertDialogPrimitive.Title`.
+Wraps `Base UI AlertDialog.Title`.
 
 ### AlertDialogDescription
 
@@ -200,7 +200,7 @@ Supporting text below the title. Required for accessibility — provides the `ar
 
 Color: `var(--text-base-subtle)`.
 
-Wraps `Radix AlertDialogPrimitive.Description`.
+Wraps `Base UI AlertDialog.Description`.
 
 ### AlertDialogFooter
 
@@ -222,7 +222,7 @@ The confirmation button. Renders as `Button` with `variant="destructive"` by def
 | `onClick` | `React.MouseEventHandler` | — | Called when the action is confirmed. The dialog closes automatically after this. |
 | `children` | `React.ReactNode` | — | **Required.** Action button label |
 
-Wraps `Radix AlertDialogPrimitive.Action` and renders a `Button` internally.
+Wraps `Base UI AlertDialog.Action` and renders a `Button` internally.
 
 ### AlertDialogCancel
 
@@ -234,7 +234,7 @@ The cancellation button. Renders as `Button` with `variant="secondary"`. Always 
 | `className` | `string` | — | Additional CSS classes |
 | `children` | `React.ReactNode` | — | Cancel button label. Default: `"Cancel"` |
 
-Wraps `Radix AlertDialogPrimitive.Cancel` and renders a `Button` internally.
+Wraps `Base UI AlertDialog.Cancel` and renders a `Button` internally.
 
 ## Examples
 
@@ -340,8 +340,8 @@ import { Send } from "lucide-react"
 
 ## Accessibility
 
-- **Role:** `AlertDialogContent` renders with `role="alertdialog"` and `aria-modal="true"` automatically via Radix. Screen readers announce this as an alert dialog — a stronger signal than a regular dialog.
-- **Labeling:** `AlertDialogTitle` provides `aria-labelledby`. `AlertDialogDescription` provides `aria-describedby`. Both are required — Radix will warn in development if either is missing.
+- **Role:** `AlertDialogContent` renders with `role="alertdialog"` and `aria-modal="true"` automatically. Screen readers announce this as an alert dialog — a stronger signal than a regular dialog.
+- **Labeling:** `AlertDialogTitle` provides `aria-labelledby`. `AlertDialogDescription` provides `aria-describedby`. Both are required — Base UI will warn in development if either is missing.
 - **Focus:** On open, focus moves to `AlertDialogCancel` by default (the safe action). This prevents accidental confirmation via keyboard. On close, focus returns to the trigger.
 - **Keyboard:** `Tab` cycles between Cancel and Action buttons. `Escape` closes the dialog (triggers Cancel, not Action). Clicking the overlay does NOT close — this is intentional to force an explicit choice.
 - **Screen reader:** The alert dialog is announced immediately on open with the title and description. The modal context is communicated via `aria-modal="true"`.

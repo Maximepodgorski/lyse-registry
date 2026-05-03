@@ -7,28 +7,28 @@
 /* --------------------------------
  * Track — unchecked states
  * -------------------------------- */
-.toggle-track[data-state="unchecked"] {
+.toggle-track[data-unchecked] {
   background: var(--background-neutral-medium-default);
   border: var(--layout-border-thin) solid transparent;
 }
-.toggle-track[data-state="unchecked"]:not([data-disabled]):hover {
+.toggle-track[data-unchecked]:not([data-disabled]):hover {
   background: var(--background-neutral-medium-hover);
 }
-.toggle-track[data-state="unchecked"]:not([data-disabled]):active {
+.toggle-track[data-unchecked]:not([data-disabled]):active {
   background: var(--background-neutral-medium-pressed);
 }
 
 /* --------------------------------
  * Track — checked states
  * -------------------------------- */
-.toggle-track[data-state="checked"] {
+.toggle-track[data-checked] {
   background: var(--background-brand-strong-default);
   border: var(--layout-border-thin) solid var(--border-default);
 }
-.toggle-track[data-state="checked"]:not([data-disabled]):hover {
+.toggle-track[data-checked]:not([data-disabled]):hover {
   background: var(--background-brand-strong-hover);
 }
-.toggle-track[data-state="checked"]:not([data-disabled]):active {
+.toggle-track[data-checked]:not([data-disabled]):active {
   background: var(--background-brand-strong-pressed);
 }
 

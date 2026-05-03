@@ -27,7 +27,7 @@
 }
 
 .select-trigger:focus-visible,
-.select-trigger[data-state="open"] {
+.select-trigger[data-popup-open] {
   outline: none;
   box-shadow: 0 0 0 2px var(--shadow-brand-moderate);
 }
@@ -61,7 +61,7 @@
 }
 
 .select-trigger-destructive:focus-visible,
-.select-trigger-destructive[data-state="open"] {
+.select-trigger-destructive[data-popup-open] {
   box-shadow: 0 0 0 2px var(--shadow-danger-moderate);
 }
 
@@ -73,7 +73,7 @@
 }
 
 .select-trigger-success:focus-visible,
-.select-trigger-success[data-state="open"] {
+.select-trigger-success[data-popup-open] {
   box-shadow: 0 0 0 2px var(--shadow-success-moderate);
 }
 
@@ -142,25 +142,22 @@
 }
 
 /* --------------------------------
- * Viewport — scrollbar
- * Override Radix's injected [data-radix-select-viewport] styles
- * that force scrollbar-width:none and -webkit-scrollbar:display:none
+ * Content scrollbar
  * -------------------------------- */
-[data-radix-select-viewport].select-viewport {
-  scrollbar-width: thin !important;
+.select-content {
+  scrollbar-width: thin;
   scrollbar-color: var(--border-default) transparent;
 }
 
-[data-radix-select-viewport].select-viewport::-webkit-scrollbar {
-  display: block !important;
+.select-content::-webkit-scrollbar {
   width: 6px;
 }
 
-[data-radix-select-viewport].select-viewport::-webkit-scrollbar-track {
+.select-content::-webkit-scrollbar-track {
   background: transparent;
 }
 
-[data-radix-select-viewport].select-viewport::-webkit-scrollbar-thumb {
+.select-content::-webkit-scrollbar-thumb {
   background: var(--border-default);
   border-radius: var(--layout-radius-full);
 }

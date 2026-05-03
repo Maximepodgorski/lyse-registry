@@ -15,26 +15,26 @@
 /* --------------------------------
  * Indicator — unchecked states
  * -------------------------------- */
-.radio-indicator[data-state="unchecked"] {
+.radio-indicator[data-unchecked] {
   background: var(--background-neutral-faint-default);
 }
-.radio-indicator[data-state="unchecked"]:not([data-disabled]):hover {
+.radio-indicator[data-unchecked]:not([data-disabled]):hover {
   background: var(--background-neutral-faint-hover);
 }
-.radio-indicator[data-state="unchecked"]:not([data-disabled]):active {
+.radio-indicator[data-unchecked]:not([data-disabled]):active {
   background: var(--background-neutral-faint-pressed);
 }
 
 /* --------------------------------
  * Indicator — checked states
  * -------------------------------- */
-.radio-indicator[data-state="checked"] {
+.radio-indicator[data-checked] {
   background: var(--background-brand-strong-default);
 }
-.radio-indicator[data-state="checked"]:not([data-disabled]):hover {
+.radio-indicator[data-checked]:not([data-disabled]):hover {
   background: var(--background-brand-strong-hover);
 }
-.radio-indicator[data-state="checked"]:not([data-disabled]):active {
+.radio-indicator[data-checked]:not([data-disabled]):active {
   background: var(--background-brand-strong-pressed);
 }
 
@@ -57,10 +57,14 @@
 }
 
 /* --------------------------------
- * Checked dot
+ * Checked dot — only show when parent radio is checked
  * -------------------------------- */
 .radio-dot {
   background: var(--text-fixed);
+  display: none;
+}
+.radio-indicator[data-checked] .radio-dot {
+  display: block;
 }
 .radio-indicator[data-disabled] .radio-dot {
   background: var(--text-disabled);

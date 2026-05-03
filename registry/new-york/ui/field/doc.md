@@ -144,7 +144,7 @@ Transparent slot wrapper for the actual form control. Passes `id`, `aria-describ
 |------|------|---------|-------------|
 | `className` | `string` | — | Additional CSS classes |
 
-Generates a stable `id` that is shared with `FieldLabel` (`htmlFor`) and referenced by `FieldDescription` / `FieldError` (`aria-describedby`). Uses Radix `Slot` internally so no wrapping DOM element is added.
+Generates a stable `id` that is shared with `FieldLabel` (`htmlFor`) and referenced by `FieldDescription` / `FieldError` (`aria-describedby`). Uses Base UI `useRender` internally so no wrapping DOM element is added.
 
 Extends `React.ComponentProps<"div">`.
 

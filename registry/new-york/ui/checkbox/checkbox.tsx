@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+import { Checkbox as CheckboxPrimitive } from "@base-ui-components/react/checkbox"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Check, Minus } from "lucide-react"
 
@@ -21,19 +21,35 @@ const checkboxVariants = cva(
   }
 )
 
+type CheckedValue = boolean | "indeterminate"
+
 function Checkbox({
   className,
   size = "sm",
   label,
   description,
   disabled,
+  checked,
+  defaultChecked,
+  onCheckedChange,
   ...props
-}: React.ComponentProps<typeof CheckboxPrimitive.Root> &
+}: Omit<
+  React.ComponentProps<typeof CheckboxPrimitive.Root>,
+  "checked" | "defaultChecked" | "onCheckedChange" | "indeterminate"
+> &
   VariantProps<typeof checkboxVariants> & {
     label?: string
     description?: string
+    checked?: CheckedValue
+    defaultChecked?: CheckedValue
+    onCheckedChange?: (checked: CheckedValue) => void
   }) {
   const id = React.useId()
+
+  const indeterminate = checked === "indeterminate"
+  const baseChecked = checked === "indeterminate" ? false : checked
+  const baseDefaultChecked =
+    defaultChecked === "indeterminate" ? false : defaultChecked
 
   return (
     <div
@@ -46,9 +62,20 @@ function Checkbox({
           id={id}
           className={cn(checkboxVariants({ size }))}
           disabled={disabled}
+          checked={baseChecked}
+          defaultChecked={baseDefaultChecked}
+          indeterminate={indeterminate}
+          onCheckedChange={
+            onCheckedChange
+              ? (next) => onCheckedChange(next)
+              : undefined
+          }
           {...props}
         >
-          <CheckboxPrimitive.Indicator className="checkbox-icon flex items-center justify-center">
+          <CheckboxPrimitive.Indicator
+            keepMounted
+            className="checkbox-icon flex items-center justify-center"
+          >
             <Check
               className={cn(
                 "checkbox-check",

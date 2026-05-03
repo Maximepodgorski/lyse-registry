@@ -50,7 +50,7 @@
       "name": "alert-dialog",
       "type": "registry:ui",
       "dependencies": [
-        "@radix-ui/react-alert-dialog",
+        "@base-ui-components/react",
         "class-variance-authority"
       ],
       "registryDependencies": [
@@ -92,7 +92,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-slot"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -129,7 +129,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-slot"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -166,7 +166,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-tooltip"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -204,7 +204,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-slot"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -223,7 +223,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-checkbox",
+        "@base-ui-components/react",
         "lucide-react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
@@ -243,7 +243,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-radio-group"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -262,7 +262,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-switch"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -300,7 +300,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-slot",
+        "@base-ui-components/react",
         "lucide-react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
@@ -320,7 +320,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-dropdown-menu"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -339,7 +339,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-select",
+        "@base-ui-components/react",
         "lucide-react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
@@ -359,7 +359,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-dialog",
+        "@base-ui-components/react",
         "lucide-react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
@@ -421,7 +421,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-dialog",
+        "@base-ui-components/react",
         "lucide-react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
@@ -477,7 +477,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-slider"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -599,7 +599,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-tabs"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -635,7 +635,7 @@
       "name": "field",
       "type": "registry:ui",
       "dependencies": [
-        "@radix-ui/react-slot"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
@@ -673,7 +673,7 @@
       "name": "popover",
       "type": "registry:ui",
       "dependencies": [
-        "@radix-ui/react-popover"
+        "@base-ui-components/react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
       "files": [
