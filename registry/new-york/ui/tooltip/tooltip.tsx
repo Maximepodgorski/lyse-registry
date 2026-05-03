@@ -67,6 +67,8 @@ function TooltipContent({
   className,
   size,
   sideOffset = 6,
+  side,
+  align,
   children,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Popup> &
@@ -75,17 +77,13 @@ function TooltipContent({
     side?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["side"]
     align?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["align"]
   }) {
-  const { side, align, ...popupProps } = props as typeof props & {
-    side?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["side"]
-    align?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["align"]
-  }
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Positioner sideOffset={sideOffset} side={side} align={align}>
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
           className={cn(tooltipContentVariants({ size, className }))}
-          {...popupProps}
+          {...props}
         >
           {children}
         </TooltipPrimitive.Popup>
