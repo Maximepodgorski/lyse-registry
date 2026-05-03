@@ -1,0 +1,108 @@
+/* ================================================================
+ * PAGINATION — Token-based theming
+ * ================================================================ */
+
+/* Link — sizing */
+.pagination-link-sm {
+  height: var(--layout-size-md);
+  min-width: var(--layout-size-md);
+  padding-inline: var(--layout-padding-xs);
+}
+
+.pagination-link-md {
+  height: var(--layout-size-lg);
+  min-width: var(--layout-size-lg);
+  padding-inline: var(--layout-padding-sm);
+}
+
+/* Link — default state */
+.pagination-link {
+  color: var(--text-base-strong);
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: var(--font-weight-regular);
+}
+
+.pagination-link:hover {
+  background-color: var(--background-neutral-faint-hover);
+}
+
+.pagination-link:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--background-base),
+    0 0 0 4px var(--border-selected);
+}
+
+/* Link — active (current page) — neutral subtle, not brand */
+.pagination-link[data-active="true"] {
+  background-color: var(--background-neutral-faint-pressed);
+  font-weight: var(--font-weight-accent);
+  cursor: default;
+}
+
+.pagination-link[data-active="true"]:hover {
+  background-color: var(--background-neutral-faint-pressed);
+}
+
+/* Link — disabled */
+.pagination-link[aria-disabled="true"],
+.pagination-link[data-disabled="true"] {
+  color: var(--text-disabled);
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Prev/Next — sizing */
+.pagination-prev-next-sm {
+  height: var(--layout-size-md);
+  padding-inline: var(--layout-padding-xs);
+}
+
+.pagination-prev-next-md {
+  height: var(--layout-size-lg);
+  padding-inline: var(--layout-padding-sm);
+}
+
+/* Prev/Next — default state */
+.pagination-prev-next {
+  color: var(--text-base-strong);
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: var(--font-weight-regular);
+}
+
+.pagination-prev-next:hover {
+  background-color: var(--background-neutral-faint-hover);
+}
+
+.pagination-prev-next:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--background-base),
+    0 0 0 4px var(--border-selected);
+}
+
+/* Prev/Next — disabled */
+.pagination-prev-next[aria-disabled="true"],
+.pagination-prev-next[data-disabled="true"] {
+  color: var(--text-disabled);
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Status (mobile only) */
+.pagination-status {
+  color: var(--text-base-moderate);
+}
+
+/* Ellipsis */
+.pagination-ellipsis {
+  color: var(--icon-neutral-moderate);
+}
+
+/* Reduced motion — slow, don't remove (Lyse convention) */
+@media (prefers-reduced-motion: reduce) {
+  .pagination-link,
+  .pagination-prev-next {
+    transition-duration: 0.01ms;
+  }
+}

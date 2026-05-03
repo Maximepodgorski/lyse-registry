@@ -20,6 +20,7 @@ const components = [
   { name: "Input", href: "/components/input" },
   { name: "Menu", href: "/components/menu" },
   { name: "Modal", href: "/components/modal" },
+  { name: "Pagination", href: "/components/pagination" },
   { name: "Popover", href: "/components/popover" },
   { name: "Progress", href: "/components/progress" },
   { name: "Radio", href: "/components/radio" },
