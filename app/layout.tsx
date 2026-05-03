@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Inter, Geist_Mono } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -8,8 +8,8 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
@@ -50,7 +50,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${dmSans.variable} ${inter.variable} ${geistMono.variable} font-sans antialiased`}
+        className={`${dmSans.variable} ${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         {children}
         <Analytics />
