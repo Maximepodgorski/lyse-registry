@@ -120,7 +120,7 @@ function AlertDialogContent({
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Popup
         data-slot="alert-dialog-content"
-        initialFocus={cancelRef}
+        initialFocus={(type) => cancelRef.current ?? (type === "keyboard")}
         className={cn(
           "alert-dialog-content fixed left-1/2 top-1/2 z-50 w-[22rem] -translate-x-1/2 -translate-y-1/2 flex flex-col items-start transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
           className
