@@ -3,7 +3,7 @@
 import "./command-palette.css"
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { Dialog as DialogPrimitive } from "@base-ui-components/react/dialog"
 import { Command } from "cmdk"
 import { Search } from "lucide-react"
 
@@ -31,12 +31,11 @@ export function CommandPalette({
   )
 
   /* Two-stage Escape: first clears query, second closes dialog */
-  function handleEscapeKeyDown(e: KeyboardEvent) {
+  function handleEscapeKeyDown(e: React.KeyboardEvent) {
     if (search) {
       e.preventDefault()
       setSearch("")
     }
-    /* If search is empty, let Radix handle the close natively */
   }
 
   /* Navigate on item select */
@@ -48,14 +47,16 @@ export function CommandPalette({
   return (
     <DialogPrimitive.Root open={open} onOpenChange={handleOpenChange}>
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay
+        <DialogPrimitive.Backdrop
           data-slot="command-palette-overlay"
-          className="command-palette-overlay fixed inset-0 z-50 animate-in fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
+          className="command-palette-overlay fixed inset-0 z-50 transition-opacity duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
         />
-        <DialogPrimitive.Content
+        <DialogPrimitive.Popup
           data-slot="command-palette"
-          className="command-palette-content fixed left-1/2 top-[20%] z-50 w-[min(32rem,calc(100vw-2rem))] -translate-x-1/2 animate-in fade-in-0 slide-in-from-top-2 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2"
-          onEscapeKeyDown={handleEscapeKeyDown}
+          className="command-palette-content fixed left-1/2 top-[20%] z-50 w-[min(32rem,calc(100vw-2rem))] -translate-x-1/2 transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:-translate-y-2 data-[ending-style]:opacity-0 data-[ending-style]:-translate-y-2"
+          onKeyDown={(e) => {
+            if (e.key === "Escape") handleEscapeKeyDown(e)
+          }}
         >
           <DialogPrimitive.Title className="sr-only">Search pages</DialogPrimitive.Title>
           <Command label="Search pages" className="command-palette-root flex flex-col overflow-hidden rounded-[var(--layout-radius-xl)]">
@@ -115,7 +116,7 @@ export function CommandPalette({
               ))}
             </Command.List>
           </Command>
-        </DialogPrimitive.Content>
+        </DialogPrimitive.Popup>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>
   )

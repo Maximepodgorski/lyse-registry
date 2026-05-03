@@ -43,7 +43,7 @@
   transition: transform 250ms ease;
 }
 
-.accordion-trigger[data-state="open"] .accordion-icon {
+.accordion-trigger[data-panel-open] .accordion-icon {
   transform: rotate(45deg);
 }
 
@@ -53,13 +53,13 @@
 
 /* --------------------------------
  * Content — height animation
- * Uses Radix CSS variable --radix-accordion-content-height
+ * Uses Base UI CSS variable --accordion-panel-height
  * -------------------------------- */
-.accordion-content[data-state="open"] {
+.accordion-content[data-open] {
   animation: accordion-expand 250ms ease;
 }
 
-.accordion-content[data-state="closed"] {
+.accordion-content[data-ending-style] {
   animation: accordion-collapse 250ms ease;
 }
 
@@ -68,13 +68,13 @@
     height: 0;
   }
   to {
-    height: var(--radix-accordion-content-height);
+    height: var(--accordion-panel-height);
   }
 }
 
 @keyframes accordion-collapse {
   from {
-    height: var(--radix-accordion-content-height);
+    height: var(--accordion-panel-height);
   }
   to {
     height: 0;
@@ -92,8 +92,8 @@
  * Reduced motion — slow to 400ms (project pattern)
  * -------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .accordion-content[data-state="open"],
-  .accordion-content[data-state="closed"] {
+  .accordion-content[data-open],
+  .accordion-content[data-ending-style] {
     animation-duration: 400ms;
     animation-timing-function: linear;
   }

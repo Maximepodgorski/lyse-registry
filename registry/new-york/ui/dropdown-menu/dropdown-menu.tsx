@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
+import { Menu as MenuPrimitive } from "@base-ui-components/react/menu"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -35,8 +35,8 @@ const dropdownMenuItemVariants = cva(
 
 function DropdownMenu({
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
-  return <DropdownMenuPrimitive.Root {...props} />
+}: React.ComponentProps<typeof MenuPrimitive.Root>) {
+  return <MenuPrimitive.Root {...props} />
 }
 
 /* ------------------------------------------------------------------ */
@@ -44,13 +44,25 @@ function DropdownMenu({
 /* ------------------------------------------------------------------ */
 
 function DropdownMenuTrigger({
+  asChild,
+  children,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
+}: React.ComponentProps<typeof MenuPrimitive.Trigger> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <MenuPrimitive.Trigger
+        data-slot="dropdown-menu-trigger"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        {...props}
+      />
+    )
+  }
   return (
-    <DropdownMenuPrimitive.Trigger
-      data-slot="dropdown-menu-trigger"
-      {...props}
-    />
+    <MenuPrimitive.Trigger data-slot="dropdown-menu-trigger" {...props}>
+      {children}
+    </MenuPrimitive.Trigger>
   )
 }
 
@@ -61,23 +73,35 @@ function DropdownMenuTrigger({
 function DropdownMenuContent({
   className,
   sideOffset = 6,
+  side,
+  align,
   children,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) {
+}: React.ComponentProps<typeof MenuPrimitive.Popup> & {
+  sideOffset?: number
+  side?: React.ComponentProps<typeof MenuPrimitive.Positioner>["side"]
+  align?: React.ComponentProps<typeof MenuPrimitive.Positioner>["align"]
+}) {
   return (
-    <DropdownMenuPrimitive.Portal>
-      <DropdownMenuPrimitive.Content
-        data-slot="dropdown-menu-content"
+    <MenuPrimitive.Portal>
+      <MenuPrimitive.Positioner
         sideOffset={sideOffset}
-        className={cn(
-          "dropdown-menu-content z-50 min-w-[8rem] overflow-hidden rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-xs)] animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          className
-        )}
-        {...props}
+        side={side}
+        align={align}
+        className="z-50"
       >
-        {children}
-      </DropdownMenuPrimitive.Content>
-    </DropdownMenuPrimitive.Portal>
+        <MenuPrimitive.Popup
+          data-slot="dropdown-menu-content"
+          className={cn(
+            "dropdown-menu-content min-w-[8rem] overflow-hidden rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-xs)] transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </MenuPrimitive.Popup>
+      </MenuPrimitive.Positioner>
+    </MenuPrimitive.Portal>
   )
 }
 
@@ -87,9 +111,9 @@ function DropdownMenuContent({
 
 function DropdownMenuGroup({
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Group>) {
+}: React.ComponentProps<typeof MenuPrimitive.Group>) {
   return (
-    <DropdownMenuPrimitive.Group
+    <MenuPrimitive.Group
       data-slot="dropdown-menu-group"
       {...props}
     />
@@ -108,13 +132,13 @@ function DropdownMenuItem({
   shortcut,
   children,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Item> &
+}: React.ComponentProps<typeof MenuPrimitive.Item> &
   VariantProps<typeof dropdownMenuItemVariants> & {
     icon?: React.ReactNode
     shortcut?: string
   }) {
   return (
-    <DropdownMenuPrimitive.Item
+    <MenuPrimitive.Item
       data-slot="dropdown-menu-item"
       className={cn(dropdownMenuItemVariants({ variant, size, className }))}
       {...props}
@@ -128,7 +152,7 @@ function DropdownMenuItem({
       {shortcut && (
         <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>
       )}
-    </DropdownMenuPrimitive.Item>
+    </MenuPrimitive.Item>
   )
 }
 
@@ -139,9 +163,9 @@ function DropdownMenuItem({
 function DropdownMenuLabel({
   className,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Label>) {
+}: React.ComponentProps<typeof MenuPrimitive.GroupLabel>) {
   return (
-    <DropdownMenuPrimitive.Label
+    <MenuPrimitive.GroupLabel
       data-slot="dropdown-menu-label"
       className={cn(
         "dropdown-menu-label px-[var(--layout-padding-md)] py-[var(--layout-padding-sm)] text-content-caption font-accent",
@@ -159,9 +183,9 @@ function DropdownMenuLabel({
 function DropdownMenuSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Separator>) {
+}: React.ComponentProps<typeof MenuPrimitive.Separator>) {
   return (
-    <DropdownMenuPrimitive.Separator
+    <MenuPrimitive.Separator
       data-slot="dropdown-menu-separator"
       className={cn("dropdown-menu-separator my-[var(--layout-gap-xs)]", className)}
       {...props}

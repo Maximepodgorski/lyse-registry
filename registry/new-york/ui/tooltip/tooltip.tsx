@@ -1,12 +1,12 @@
 import * as React from "react"
-import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+import { Tooltip as TooltipPrimitive } from "@base-ui-components/react/tooltip"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import "./tooltip.css"
 
 const tooltipContentVariants = cva(
-  "tooltip-content z-50 flex items-center overflow-hidden font-accent animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+  "tooltip-content z-50 flex items-center overflow-hidden font-accent transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[side=bottom]:data-[starting-style]:-translate-y-2 data-[side=top]:data-[starting-style]:translate-y-2 data-[side=left]:data-[starting-style]:translate-x-2 data-[side=right]:data-[starting-style]:-translate-x-2",
   {
     variants: {
       size: {
@@ -23,11 +23,12 @@ const tooltipContentVariants = cva(
 function TooltipProvider({
   delayDuration = 300,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
+}: Omit<React.ComponentProps<typeof TooltipPrimitive.Provider>, "delay"> & {
+  delayDuration?: number
+}) {
   return (
     <TooltipPrimitive.Provider
-      data-slot="tooltip-provider"
-      delayDuration={delayDuration}
+      delay={delayDuration}
       {...props}
     />
   )
@@ -40,9 +41,26 @@ function Tooltip({
 }
 
 function TooltipTrigger({
+  asChild,
+  children,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
+}: React.ComponentProps<typeof TooltipPrimitive.Trigger> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <TooltipPrimitive.Trigger
+        data-slot="tooltip-trigger"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        {...props}
+      />
+    )
+  }
+  return (
+    <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props}>
+      {children}
+    </TooltipPrimitive.Trigger>
+  )
 }
 
 function TooltipContent({
@@ -51,18 +69,27 @@ function TooltipContent({
   sideOffset = 6,
   children,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Content> &
-  VariantProps<typeof tooltipContentVariants>) {
+}: React.ComponentProps<typeof TooltipPrimitive.Popup> &
+  VariantProps<typeof tooltipContentVariants> & {
+    sideOffset?: number
+    side?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["side"]
+    align?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["align"]
+  }) {
+  const { side, align, ...popupProps } = props as typeof props & {
+    side?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["side"]
+    align?: React.ComponentProps<typeof TooltipPrimitive.Positioner>["align"]
+  }
   return (
     <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Content
-        data-slot="tooltip-content"
-        sideOffset={sideOffset}
-        className={cn(tooltipContentVariants({ size, className }))}
-        {...props}
-      >
-        {children}
-      </TooltipPrimitive.Content>
+      <TooltipPrimitive.Positioner sideOffset={sideOffset} side={side} align={align}>
+        <TooltipPrimitive.Popup
+          data-slot="tooltip-content"
+          className={cn(tooltipContentVariants({ size, className }))}
+          {...popupProps}
+        >
+          {children}
+        </TooltipPrimitive.Popup>
+      </TooltipPrimitive.Positioner>
     </TooltipPrimitive.Portal>
   )
 }

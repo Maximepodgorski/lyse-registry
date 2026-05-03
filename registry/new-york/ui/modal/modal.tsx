@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { Dialog as DialogPrimitive } from "@base-ui-components/react/dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
@@ -11,7 +11,7 @@ import "./modal.css"
 /* ------------------------------------------------------------------ */
 
 const modalContentVariants = cva(
-  "modal-content fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 flex flex-col items-start animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+  "modal-content fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 flex flex-col items-start transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
   {
     variants: {
       size: {
@@ -50,7 +50,7 @@ const modalIconVariants = cva(
 function Modal({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="modal" {...props} />
+  return <DialogPrimitive.Root {...props} />
 }
 
 /* ------------------------------------------------------------------ */
@@ -58,9 +58,26 @@ function Modal({
 /* ------------------------------------------------------------------ */
 
 function ModalTrigger({
+  asChild,
+  children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-  return <DialogPrimitive.Trigger data-slot="modal-trigger" {...props} />
+}: React.ComponentProps<typeof DialogPrimitive.Trigger> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <DialogPrimitive.Trigger
+        data-slot="modal-trigger"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        {...props}
+      />
+    )
+  }
+  return (
+    <DialogPrimitive.Trigger data-slot="modal-trigger" {...props}>
+      {children}
+    </DialogPrimitive.Trigger>
+  )
 }
 
 /* ------------------------------------------------------------------ */
@@ -70,12 +87,12 @@ function ModalTrigger({
 function ModalOverlay({
   className,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+}: React.ComponentProps<typeof DialogPrimitive.Backdrop>) {
   return (
-    <DialogPrimitive.Overlay
+    <DialogPrimitive.Backdrop
       data-slot="modal-overlay"
       className={cn(
-        "modal-overlay fixed inset-0 z-50 animate-in fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0",
+        "modal-overlay fixed inset-0 z-50 transition-opacity duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
         className
       )}
       {...props}
@@ -92,18 +109,18 @@ function ModalContent({
   size,
   children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> &
+}: React.ComponentProps<typeof DialogPrimitive.Popup> &
   VariantProps<typeof modalContentVariants>) {
   return (
     <DialogPrimitive.Portal>
       <ModalOverlay />
-      <DialogPrimitive.Content
+      <DialogPrimitive.Popup
         data-slot="modal-content"
         className={cn(modalContentVariants({ size, className }))}
         {...props}
       >
         {children}
-      </DialogPrimitive.Content>
+      </DialogPrimitive.Popup>
     </DialogPrimitive.Portal>
   )
 }
@@ -209,9 +226,22 @@ function ModalFooter({
 function ModalClose({
   className,
   children,
+  asChild,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  // When children are provided (asChild or custom), skip icon-specific sizing
+}: React.ComponentProps<typeof DialogPrimitive.Close> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <DialogPrimitive.Close
+        data-slot="modal-close"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        className={className}
+        {...props}
+      />
+    )
+  }
+
   if (children) {
     return (
       <DialogPrimitive.Close
@@ -224,7 +254,6 @@ function ModalClose({
     )
   }
 
-  // Default: X icon button with fixed sizing
   return (
     <DialogPrimitive.Close
       data-slot="modal-close"

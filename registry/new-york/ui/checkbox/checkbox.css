@@ -24,39 +24,39 @@
 /* --------------------------------
  * Indicator — unchecked states
  * -------------------------------- */
-.checkbox-indicator[data-state="unchecked"] {
+.checkbox-indicator[data-unchecked] {
   background: var(--background-neutral-faint-default);
 }
-.checkbox-indicator[data-state="unchecked"]:hover {
+.checkbox-indicator[data-unchecked]:hover {
   background: var(--background-neutral-faint-hover);
 }
-.checkbox-indicator[data-state="unchecked"]:active {
+.checkbox-indicator[data-unchecked]:active {
   background: var(--background-neutral-faint-pressed);
 }
 
 /* --------------------------------
  * Indicator — checked states
  * -------------------------------- */
-.checkbox-indicator[data-state="checked"] {
+.checkbox-indicator[data-checked] {
   background: var(--background-brand-strong-default);
 }
-.checkbox-indicator[data-state="checked"]:hover {
+.checkbox-indicator[data-checked]:hover {
   background: var(--background-brand-strong-hover);
 }
-.checkbox-indicator[data-state="checked"]:active {
+.checkbox-indicator[data-checked]:active {
   background: var(--background-brand-strong-pressed);
 }
 
 /* --------------------------------
  * Indicator — indeterminate states
  * -------------------------------- */
-.checkbox-indicator[data-state="indeterminate"] {
+.checkbox-indicator[data-indeterminate] {
   background: var(--background-brand-strong-default);
 }
-.checkbox-indicator[data-state="indeterminate"]:hover {
+.checkbox-indicator[data-indeterminate]:hover {
   background: var(--background-brand-strong-hover);
 }
-.checkbox-indicator[data-state="indeterminate"]:active {
+.checkbox-indicator[data-indeterminate]:active {
   background: var(--background-brand-strong-pressed);
 }
 
@@ -96,12 +96,12 @@
 }
 
 /* Show check when checked */
-.checkbox-indicator[data-state="checked"] .checkbox-check {
+.checkbox-indicator[data-checked] .checkbox-check {
   display: block;
 }
 
 /* Show minus when indeterminate */
-.checkbox-indicator[data-state="indeterminate"] .checkbox-minus {
+.checkbox-indicator[data-indeterminate] .checkbox-minus {
   display: block;
 }
 

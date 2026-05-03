@@ -1,10 +1,24 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { useRender } from "@base-ui-components/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Plus, User } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import "./avatar.css"
+
+function Slot({
+  children,
+  ...props
+}: React.PropsWithChildren<Record<string, unknown>>) {
+  const valid = React.isValidElement(children)
+  return useRender({
+    render: valid
+      ? (children as React.ReactElement<Record<string, unknown>>)
+      : undefined,
+    defaultTagName: "span",
+    props: valid ? props : { ...props, children },
+  })
+}
 
 /* ------------------------------------------------------------------ */
 /*  CVA                                                                */
@@ -317,20 +331,33 @@ function AvatarAddButton({
   VariantProps<typeof avatarAddButtonVariants> & {
     asChild?: boolean
   }) {
-  const Comp = asChild ? Slot : "button"
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <Slot
+        ref={ref as React.Ref<HTMLElement>}
+        data-slot="avatar-add-button"
+        disabled={disabled}
+        aria-label="Add user"
+        className={cn(avatarAddButtonVariants({ size, className }))}
+        {...(props as Record<string, unknown>)}
+      >
+        {children as React.ReactElement}
+      </Slot>
+    )
+  }
 
   return (
-    <Comp
-      ref={ref as React.Ref<HTMLButtonElement>}
+    <button
+      ref={ref}
       data-slot="avatar-add-button"
-      type={asChild ? undefined : "button"}
+      type="button"
       disabled={disabled}
       aria-label="Add user"
       className={cn(avatarAddButtonVariants({ size, className }))}
       {...props}
     >
-      {asChild ? children : <Plus aria-hidden="true" />}
-    </Comp>
+      <Plus aria-hidden="true" />
+    </button>
   )
 }
 

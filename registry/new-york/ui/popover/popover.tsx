@@ -1,8 +1,14 @@
 import * as React from "react"
-import * as PopoverPrimitive from "@radix-ui/react-popover"
+import { Popover as PopoverPrimitive } from "@base-ui-components/react/popover"
 
 import { cn } from "@/lib/utils"
 import "./popover.css"
+
+/* ------------------------------------------------------------------ */
+/*  Anchor context                                                     */
+/* ------------------------------------------------------------------ */
+
+const PopoverAnchorContext = React.createContext<React.RefObject<HTMLElement | null> | null>(null)
 
 /* ------------------------------------------------------------------ */
 /*  Popover                                                            */
@@ -11,7 +17,12 @@ import "./popover.css"
 function Popover({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Root>) {
-  return <PopoverPrimitive.Root {...props} />
+  const anchorRef = React.useRef<HTMLElement | null>(null)
+  return (
+    <PopoverAnchorContext.Provider value={anchorRef}>
+      <PopoverPrimitive.Root {...props} />
+    </PopoverAnchorContext.Provider>
+  )
 }
 
 /* ------------------------------------------------------------------ */
@@ -19,29 +30,51 @@ function Popover({
 /* ------------------------------------------------------------------ */
 
 function PopoverTrigger({
+  asChild,
+  children,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
+}: React.ComponentProps<typeof PopoverPrimitive.Trigger> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <PopoverPrimitive.Trigger
+        data-slot="popover-trigger"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        {...props}
+      />
+    )
+  }
   return (
-    <PopoverPrimitive.Trigger
-      data-slot="popover-trigger"
-      {...props}
-    />
+    <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props}>
+      {children}
+    </PopoverPrimitive.Trigger>
   )
 }
 
 /* ------------------------------------------------------------------ */
 /*  PopoverAnchor                                                      */
+/*  Captures the rendered child ref and exposes it to PopoverContent   */
+/*  via context, so Positioner can anchor to it.                       */
 /* ------------------------------------------------------------------ */
 
 function PopoverAnchor({
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {
-  return (
-    <PopoverPrimitive.Anchor
-      data-slot="popover-anchor"
-      {...props}
-    />
-  )
+  children,
+}: {
+  children: React.ReactElement<{ ref?: React.Ref<HTMLElement> }>
+}) {
+  const anchorRef = React.useContext(PopoverAnchorContext)
+  const child = React.Children.only(children)
+  return React.cloneElement(child, {
+    ref: (node: HTMLElement | null) => {
+      if (anchorRef) anchorRef.current = node
+      const original = (child as { ref?: React.Ref<HTMLElement> }).ref
+      if (typeof original === "function") original(node)
+      else if (original && "current" in original) {
+        (original as React.MutableRefObject<HTMLElement | null>).current = node
+      }
+    },
+  })
 }
 
 /* ------------------------------------------------------------------ */
@@ -52,23 +85,35 @@ function PopoverContent({
   className,
   sideOffset = 6,
   align = "center",
+  side,
   children,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Content>) {
+}: React.ComponentProps<typeof PopoverPrimitive.Popup> & {
+  sideOffset?: number
+  side?: React.ComponentProps<typeof PopoverPrimitive.Positioner>["side"]
+  align?: React.ComponentProps<typeof PopoverPrimitive.Positioner>["align"]
+}) {
+  const anchorRef = React.useContext(PopoverAnchorContext)
+  const hasAnchor = anchorRef && anchorRef.current
   return (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content
-        data-slot="popover-content"
+      <PopoverPrimitive.Positioner
         sideOffset={sideOffset}
         align={align}
-        className={cn(
-          "popover-content z-50 min-w-[8rem] overflow-hidden rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-lg)] animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          className
-        )}
-        {...props}
+        side={side}
+        anchor={hasAnchor ? anchorRef : undefined}
       >
-        {children}
-      </PopoverPrimitive.Content>
+        <PopoverPrimitive.Popup
+          data-slot="popover-content"
+          className={cn(
+            "popover-content z-50 min-w-[8rem] overflow-hidden rounded-[var(--layout-radius-xl)] p-[var(--layout-padding-lg)] transition-[opacity,transform] duration-150 data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[side=bottom]:data-[starting-style]:-translate-y-2 data-[side=top]:data-[starting-style]:translate-y-2 data-[side=left]:data-[starting-style]:translate-x-2 data-[side=right]:data-[starting-style]:-translate-x-2",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </PopoverPrimitive.Popup>
+      </PopoverPrimitive.Positioner>
     </PopoverPrimitive.Portal>
   )
 }
@@ -78,14 +123,26 @@ function PopoverContent({
 /* ------------------------------------------------------------------ */
 
 function PopoverClose({
+  asChild,
+  children,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Close>) {
+}: React.ComponentProps<typeof PopoverPrimitive.Close> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <PopoverPrimitive.Close
+        data-slot="popover-close"
+        aria-label="Close"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        {...props}
+      />
+    )
+  }
   return (
-    <PopoverPrimitive.Close
-      data-slot="popover-close"
-      aria-label="Close"
-      {...props}
-    />
+    <PopoverPrimitive.Close data-slot="popover-close" aria-label="Close" {...props}>
+      {children}
+    </PopoverPrimitive.Close>
   )
 }
 

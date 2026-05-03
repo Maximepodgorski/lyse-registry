@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as SliderPrimitive from "@radix-ui/react-slider"
+import { Slider as SliderPrimitive } from "@base-ui-components/react/slider"
 import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -9,22 +9,56 @@ const sliderVariants = cva(
   "slider-root relative flex w-full touch-none items-center select-none h-[var(--layout-size-md)]"
 )
 
+type SliderProps = Omit<
+  React.ComponentProps<typeof SliderPrimitive.Root>,
+  "value" | "defaultValue" | "onValueChange" | "onValueCommit"
+> & {
+  value?: number[]
+  defaultValue?: number[]
+  onValueChange?: (value: number[]) => void
+  onValueCommit?: (value: number[]) => void
+}
+
 function Slider({
   className,
   defaultValue = [0],
+  value,
+  onValueChange,
+  onValueCommit,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: SliderProps) {
+  const toArray = (v: number | readonly number[]): number[] =>
+    Array.isArray(v) ? [...v] : [v as number]
+
   return (
     <SliderPrimitive.Root
       data-slot="slider"
       className={cn(sliderVariants(), className)}
       defaultValue={defaultValue}
+      value={value}
+      onValueChange={
+        onValueChange ? (v) => onValueChange(toArray(v)) : undefined
+      }
+      onValueCommitted={
+        onValueCommit ? (v) => onValueCommit(toArray(v)) : undefined
+      }
       {...props}
     >
-      <SliderPrimitive.Track data-slot="slider-track" className="slider-track relative grow overflow-visible rounded-[var(--layout-radius-full)] h-1.5">
-        <SliderPrimitive.Range data-slot="slider-range" className="slider-range absolute h-full rounded-[var(--layout-radius-full)]" />
-      </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb data-slot="slider-thumb" className="slider-thumb block h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] rounded-[var(--layout-radius-xs)] rotate-45 focus-visible:outline-none" />
+      <SliderPrimitive.Control className="slider-control relative flex grow items-center">
+        <SliderPrimitive.Track
+          data-slot="slider-track"
+          className="slider-track relative grow overflow-visible rounded-[var(--layout-radius-full)] h-1.5"
+        >
+          <SliderPrimitive.Indicator
+            data-slot="slider-range"
+            className="slider-range absolute h-full rounded-[var(--layout-radius-full)]"
+          />
+          <SliderPrimitive.Thumb
+            data-slot="slider-thumb"
+            className="slider-thumb block h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] rounded-[var(--layout-radius-xs)] rotate-45 focus-visible:outline-none"
+          />
+        </SliderPrimitive.Track>
+      </SliderPrimitive.Control>
     </SliderPrimitive.Root>
   )
 }

@@ -1,5 +1,6 @@
 import * as React from "react"
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
+import { Radio as RadioPrimitive } from "@base-ui-components/react/radio"
+import { RadioGroup as RadioGroupPrimitive } from "@base-ui-components/react/radio-group"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -23,9 +24,9 @@ const radioVariants = cva(
 function RadioGroup({
   className,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
+}: React.ComponentProps<typeof RadioGroupPrimitive>) {
   return (
-    <RadioGroupPrimitive.Root
+    <RadioGroupPrimitive
       data-slot="radio-group"
       className={cn("flex flex-col gap-[var(--layout-gap-md)]", className)}
       {...props}
@@ -40,7 +41,7 @@ function Radio({
   description,
   disabled,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Item> &
+}: React.ComponentProps<typeof RadioPrimitive.Root> &
   VariantProps<typeof radioVariants> & {
     label?: string
     description?: string
@@ -54,19 +55,20 @@ function Radio({
       className={cn("flex items-start gap-[var(--layout-gap-md)]", className)}
     >
       <div className="flex items-center py-[var(--layout-padding-2xs)]">
-        <RadioGroupPrimitive.Item
+        <RadioPrimitive.Root
           id={id}
           className={cn(radioVariants({ size }))}
           disabled={disabled}
           {...props}
         >
-          <RadioGroupPrimitive.Indicator
+          <RadioPrimitive.Indicator
+            keepMounted
             className={cn(
               "radio-dot rounded-full",
               size === "sm" ? "size-1.5" : "size-2"
             )}
           />
-        </RadioGroupPrimitive.Item>
+        </RadioPrimitive.Root>
       </div>
       {label && (
         <label

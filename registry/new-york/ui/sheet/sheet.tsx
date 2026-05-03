@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { Dialog as DialogPrimitive } from "@base-ui-components/react/dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
@@ -61,7 +61,7 @@ const sheetContentVariants = cva(
 function Sheet({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="sheet" {...props} />
+  return <DialogPrimitive.Root {...props} />
 }
 
 /* ------------------------------------------------------------------ */
@@ -69,9 +69,26 @@ function Sheet({
 /* ------------------------------------------------------------------ */
 
 function SheetTrigger({
+  asChild,
+  children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-  return <DialogPrimitive.Trigger data-slot="sheet-trigger" {...props} />
+}: React.ComponentProps<typeof DialogPrimitive.Trigger> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <DialogPrimitive.Trigger
+        data-slot="sheet-trigger"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        {...props}
+      />
+    )
+  }
+  return (
+    <DialogPrimitive.Trigger data-slot="sheet-trigger" {...props}>
+      {children}
+    </DialogPrimitive.Trigger>
+  )
 }
 
 /* ------------------------------------------------------------------ */
@@ -81,11 +98,14 @@ function SheetTrigger({
 function SheetOverlay({
   className,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+}: React.ComponentProps<typeof DialogPrimitive.Backdrop>) {
   return (
-    <DialogPrimitive.Overlay
+    <DialogPrimitive.Backdrop
       data-slot="sheet-overlay"
-      className={cn("sheet-overlay fixed inset-0 z-50", className)}
+      className={cn(
+        "sheet-overlay fixed inset-0 z-50 transition-opacity duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+        className
+      )}
       {...props}
     />
   )
@@ -101,18 +121,18 @@ function SheetContent({
   size,
   children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> &
+}: React.ComponentProps<typeof DialogPrimitive.Popup> &
   VariantProps<typeof sheetContentVariants>) {
   return (
     <DialogPrimitive.Portal>
       <SheetOverlay />
-      <DialogPrimitive.Content
+      <DialogPrimitive.Popup
         data-slot="sheet-content"
         className={cn(sheetContentVariants({ side, size, className }))}
         {...props}
       >
         {children}
-      </DialogPrimitive.Content>
+      </DialogPrimitive.Popup>
     </DialogPrimitive.Portal>
   )
 }
@@ -218,8 +238,22 @@ function SheetFooter({
 function SheetClose({
   className,
   children,
+  asChild,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
+}: React.ComponentProps<typeof DialogPrimitive.Close> & {
+  asChild?: boolean
+}) {
+  if (asChild && React.isValidElement(children)) {
+    return (
+      <DialogPrimitive.Close
+        data-slot="sheet-close"
+        render={children as React.ReactElement<Record<string, unknown>>}
+        className={className}
+        {...props}
+      />
+    )
+  }
+
   if (children) {
     return (
       <DialogPrimitive.Close

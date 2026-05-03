@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as SwitchPrimitive from "@radix-ui/react-switch"
+import { Switch as SwitchPrimitive } from "@base-ui-components/react/switch"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -25,8 +25,8 @@ const thumbVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] data-[state=checked]:translate-x-[14px]",
-        md: "h-[var(--layout-size-sm)] w-[var(--layout-size-sm)] data-[state=checked]:translate-x-[18px]",
+        sm: "h-[var(--layout-size-xs)] w-[var(--layout-size-xs)] data-[checked]:translate-x-[14px]",
+        md: "h-[var(--layout-size-sm)] w-[var(--layout-size-sm)] data-[checked]:translate-x-[18px]",
       },
     },
     defaultVariants: {
