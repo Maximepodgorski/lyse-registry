@@ -21,14 +21,13 @@ type AccordionProps = Omit<
 function Accordion({
   className,
   type = "multiple",
-  collapsible,
+  collapsible = true,
   value,
   defaultValue,
   onValueChange,
   ...props
 }: AccordionProps) {
   const isSingle = type === "single"
-  void collapsible
 
   const toArray = (v: string | string[] | AccordionValue | undefined): AccordionValue => {
     if (v === undefined) return []
@@ -41,22 +40,32 @@ function Accordion({
     return isSingle ? filtered[0] ?? "" : filtered
   }
 
-  const baseValue = value !== undefined ? toArray(value) : undefined
-  const baseDefault = defaultValue !== undefined ? toArray(defaultValue) : undefined
+  const [internalValue, setInternalValue] = React.useState<AccordionValue>(() =>
+    defaultValue !== undefined ? toArray(defaultValue) : []
+  )
+  const isControlled = value !== undefined
+  const currentValue = isControlled ? toArray(value) : internalValue
 
-  const handleChange = onValueChange
-    ? (next: AccordionValue) => {
-        const constrained = isSingle ? next.slice(-1) : next
-        onValueChange(fromArray(constrained))
+  const handleChange = (next: AccordionValue) => {
+    let constrained: AccordionValue = next
+    if (isSingle) {
+      const last = next.slice(-1)
+      // type=single: only one open at a time
+      // collapsible=false: prevent closing the only open item
+      if (!collapsible && last.length === 0 && currentValue.length > 0) {
+        return
       }
-    : undefined
+      constrained = last
+    }
+    if (!isControlled) setInternalValue(constrained)
+    onValueChange?.(fromArray(constrained))
+  }
 
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
       className={cn("flex flex-col gap-[var(--layout-gap-sm)]", className)}
-      value={baseValue}
-      defaultValue={baseDefault}
+      value={currentValue}
       onValueChange={handleChange}
       {...props}
     />
