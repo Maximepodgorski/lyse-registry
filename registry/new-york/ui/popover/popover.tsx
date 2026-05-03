@@ -94,14 +94,17 @@ function PopoverContent({
   align?: React.ComponentProps<typeof PopoverPrimitive.Positioner>["align"]
 }) {
   const anchorRef = React.useContext(PopoverAnchorContext)
-  const hasAnchor = anchorRef && anchorRef.current
+  const anchorFn = React.useCallback(
+    () => anchorRef?.current ?? null,
+    [anchorRef]
+  )
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Positioner
         sideOffset={sideOffset}
         align={align}
         side={side}
-        anchor={hasAnchor ? anchorRef : undefined}
+        anchor={anchorRef ? anchorFn : undefined}
       >
         <PopoverPrimitive.Popup
           data-slot="popover-content"
