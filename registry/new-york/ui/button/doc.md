@@ -81,7 +81,7 @@ import Link from "next/link"
 | `variant` | `"primary" \| "secondary" \| "terciary" \| "destructive"` | `"primary"` | Visual style of the button |
 | `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | Height and padding scale |
 | `isIconOnly` | `boolean` | `false` | Collapses horizontal padding to produce a square button for icon-only usage |
-| `asChild` | `boolean` | `false` | Renders the button as its child element via Radix `Slot` |
+| `asChild` | `boolean` | `false` | Renders the button as its child element via Base UI `useRender` |
 | `disabled` | `boolean` | `false` | Disables interaction and applies disabled token styles |
 | `onPointerDown` | `React.PointerEventHandler<HTMLButtonElement>` | — | Called before the internal ripple handler — both are always invoked |
 | `className` | `string` | — | Additional classes merged via `cn()` |

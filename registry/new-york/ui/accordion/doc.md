@@ -1,6 +1,6 @@
 # Accordion
 
-Stacked expandable panels for organizing content into collapsible sections. Built on Radix Accordion with animated height transitions. Card-style items with +/× icon toggle.
+Stacked expandable panels for organizing content into collapsible sections. Built on Base UI Accordion with animated height transitions. Card-style items with +/× icon toggle.
 
 ## When to use
 
@@ -160,6 +160,6 @@ const faqs = [
 
 - **Keyboard:** `Enter`/`Space` toggles the focused item. `Arrow Down`/`Arrow Up` moves focus between triggers. `Home`/`End` jumps to first/last trigger.
 - **Screen reader:** Triggers have `aria-expanded` and `aria-controls` linking to content. Content has `role="region"` with `aria-labelledby` pointing to the trigger.
-- **ARIA:** Each trigger is a `<button>` inside a heading-level wrapper. Radix handles all ARIA attributes automatically.
+- **ARIA:** Each trigger is a `<button>` inside a heading-level wrapper. Base UI handles all ARIA attributes automatically.
 - **Focus:** Visible focus ring on triggers via `:focus-visible`.
 - **Reduced motion:** Height animation respects `prefers-reduced-motion` — instant expand/collapse.

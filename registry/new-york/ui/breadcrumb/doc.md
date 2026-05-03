@@ -1,6 +1,6 @@
 # Breadcrumb
 
-A hierarchical navigation trail that shows the user's location within a site or app. Pure HTML — no Radix dependency. Supports custom separators, ellipsis truncation for deep paths, and a proper `<nav>` landmark.
+A hierarchical navigation trail that shows the user's location within a site or app. Pure HTML — no third-party dependency. Supports custom separators, ellipsis truncation for deep paths, and a proper `<nav>` landmark.
 
 ## When to use
 
@@ -145,7 +145,7 @@ Navigable ancestor segment. Renders an `<a>` by default; swap to a router link v
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `href` | `string` | — | Link destination. Required when not using `asChild` |
-| `asChild` | `boolean` | `false` | Delegates rendering to child element via Radix Slot |
+| `asChild` | `boolean` | `false` | Delegates rendering to child element via Base UI useRender |
 | `className` | `string` | — | Additional CSS classes |
 | ...props | `React.ComponentProps<"a">` | — | All native anchor attributes |
 

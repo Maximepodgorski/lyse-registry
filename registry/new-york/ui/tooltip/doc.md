@@ -89,7 +89,7 @@ import {
 | `className` | `string` | — | Additional CSS classes |
 | `children` | `React.ReactNode` | — | Tooltip text and optional `TooltipShortcut` |
 
-All other Radix `TooltipPrimitive.Content` props are forwarded (e.g. `collisionPadding`, `avoidCollisions`).
+All other Base UI `Tooltip.Popup` props are forwarded (e.g. `collisionPadding`, `avoidCollisions`).
 
 ### TooltipTrigger
 
@@ -168,7 +168,7 @@ A styled `<kbd>` element placed inside `TooltipContent` to display a keyboard sh
 ## Accessibility
 
 - **Keyboard:** `Tab` focuses the trigger. The tooltip opens immediately on focus (no delay). `Escape` dismisses it.
-- **Screen reader:** The tooltip content is linked to the trigger via `aria-describedby` managed by Radix. It supplements — not replaces — a meaningful `aria-label` on the trigger.
+- **Screen reader:** The tooltip content is linked to the trigger via `aria-describedby` managed by Base UI. It supplements — not replaces — a meaningful `aria-label` on the trigger.
 - **Role:** The tooltip container carries `role="tooltip"` automatically.
 - **Motion:** Fade and zoom animations respect `prefers-reduced-motion` — transitions are suppressed when reduced motion is preferred.
 - **Pointer:** Opens after `delayDuration` on `pointerenter`. Closes immediately on `pointerleave` or when the trigger loses focus.

@@ -1,6 +1,6 @@
 # Select
 
-A form select component for choosing a single value from a dropdown list. Built on Radix UI Select with full keyboard navigation, ARIA combobox pattern, and scroll management.
+A form select component for choosing a single value from a dropdown list. Built on Base UI Select with full keyboard navigation, ARIA combobox pattern, and scroll management.
 
 ## When to Use
 
@@ -98,7 +98,7 @@ const [value, setValue] = useState("")
 
 ### Select
 
-Root component. Re-export of Radix `Select.Root`. Manages value state.
+Root component. Re-export of Base UI `Select.Root`. Manages value state.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -116,7 +116,7 @@ Root component. Re-export of Radix `Select.Root`. Manages value state.
 
 ### SelectValue
 
-Displays the selected value or placeholder text. Re-export of Radix `Select.Value`.
+Displays the selected value or placeholder text. Re-export of Base UI `Select.Value`.
 
 ### SelectContent
 
@@ -139,7 +139,7 @@ Organizational sub-components for grouping, labeling, and dividing options.
 ## Accessibility
 
 - **Keyboard:** Arrow keys navigate, Enter/Space select, Escape closes
-- **Focus:** Managed by Radix, returns to trigger on close
+- **Focus:** Managed by Base UI, returns to trigger on close
 - **ARIA:** `role="combobox"` on trigger, `role="listbox"` on content
 
 ## Do / Don't

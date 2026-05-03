@@ -91,7 +91,7 @@ When omitting the `label`, always provide `aria-label` for accessibility.
 | `disabled` | `boolean` | `false` | Disable all items in the group |
 | `className` | `string` | — | Additional class names |
 
-Extends `Radix RadioGroup.Root` — all additional props are forwarded.
+Extends `Base UI RadioGroup.Root` — all additional props are forwarded.
 
 ### Radio
 
@@ -104,7 +104,7 @@ Extends `Radix RadioGroup.Root` — all additional props are forwarded.
 | `disabled` | `boolean` | `false` | Disable this item |
 | `className` | `string` | — | Additional class names |
 
-Extends `Radix RadioGroup.Item` — all additional props (including `aria-label`) are forwarded.
+Extends `Base UI RadioGroup.Item` — all additional props (including `aria-label`) are forwarded.
 
 ## Examples
 
@@ -160,5 +160,5 @@ Extends `Radix RadioGroup.Item` — all additional props (including `aria-label`
 
 - **Keyboard:** `Tab` to focus the group, `Arrow Up/Down` and `Arrow Left/Right` to navigate between items, `Space` to select the focused item
 - **Screen reader:** Each item announces as "radio button, [label], [checked/unchecked], [position] of [total]". When `label` is omitted, provide `aria-label` so the item has an accessible name.
-- **ARIA:** `role="radiogroup"` on the group, `role="radio"` and `aria-checked` on each item (provided automatically by Radix). Use `aria-label` on `RadioGroup` if no visible group heading exists.
+- **ARIA:** `role="radiogroup"` on the group, `role="radio"` and `aria-checked` on each item (provided automatically by Base UI). Use `aria-label` on `RadioGroup` if no visible group heading exists.
 - **Focus:** Visible focus ring using the project's standard `box-shadow` pattern. Only one item in the group is tabbable at a time (roving tabindex).

@@ -125,7 +125,7 @@ Extends `React.ComponentProps<"div">`.
 |------|------|---------|-------------|
 | `size` | `"xs" \| "sm" \| "md"` | `"sm"` | Button size (matches avatar sizes). |
 | `disabled` | `boolean` | `false` | Disables interaction. |
-| `asChild` | `boolean` | `false` | Render as child element via Radix Slot. |
+| `asChild` | `boolean` | `false` | Render as child element via Base UI useRender. |
 
 Extends `React.ComponentProps<"button">`. Default `aria-label` is `"Add user"` — override via `aria-label` prop.
 

@@ -108,7 +108,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 | Use `hasDropdown` when the chip opens a popover or menu | Show both `icon` and `hasDropdown` — the icon is hidden, use one or the other |
 | Use `variant="ghost"` for less prominent, secondary filters | Use `ghost` for the primary action in a filter bar — it's too subtle |
 | Keep labels short (1-2 words): "Status", "Priority", "Date" | Put long text in a chip — it breaks the compact layout |
-| Use `data-state="open"` styling by wrapping in a `DropdownMenuTrigger` | Manually toggle active styles — rely on Radix state attributes |
+| Use `data-popup-open` styling by wrapping in a `DropdownMenuTrigger` | Manually toggle active styles — rely on Base UI state attributes |
 
 ## Accessibility
 

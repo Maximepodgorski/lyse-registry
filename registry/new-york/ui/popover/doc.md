@@ -1,6 +1,6 @@
 # Popover
 
-A floating panel anchored to a trigger element, rendered in a portal. Used for rich non-modal content that supplements — rather than blocks — the current view. Built on `@radix-ui/react-popover`.
+A floating panel anchored to a trigger element, rendered in a portal. Used for rich non-modal content that supplements — rather than blocks — the current view. Built on `@base-ui-components/react/popover`.
 
 ## When to use
 
@@ -128,7 +128,7 @@ Root component. Manages open state and coordinates sub-components.
 | `defaultOpen` | `boolean` | `false` | Uncontrolled initial open state |
 | `modal` | `boolean` | `false` | When true, interaction outside is blocked and focus is trapped |
 
-Re-export of `Radix PopoverPrimitive.Root`.
+Re-export of `Popover.Root`.
 
 ### PopoverTrigger
 
@@ -267,5 +267,5 @@ import { Button } from "@/components/ui/button"
 - **Keyboard:** `Enter` or `Space` opens the popover from the trigger. `Escape` closes it and returns focus to the trigger.
 - **Focus (modal=false, default):** Focus moves into the popover on open. `Tab` moves freely in and out of the popover — focus is NOT trapped. On close, focus returns to the trigger.
 - **Focus (modal=true):** Focus is trapped within the popover content. `Tab` cycles through interactive elements inside the popover only. `aria-hidden` is applied to the rest of the page.
-- **ARIA:** `aria-expanded` is set on the trigger automatically. `PopoverContent` receives `role="dialog"` from Radix. Always provide `aria-label` on `PopoverContent` to name the dialog region.
+- **ARIA:** `aria-expanded` is set on the trigger automatically. `PopoverContent` receives `role="dialog"` from Base UI. Always provide `aria-label` on `PopoverContent` to name the dialog region.
 - **Motion:** Enter/exit animations respect `prefers-reduced-motion` — fade and zoom transitions are suppressed when reduced motion is preferred.
