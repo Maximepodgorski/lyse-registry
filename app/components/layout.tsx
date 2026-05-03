@@ -105,7 +105,7 @@ export default function ComponentsLayout({
               <Image src="/logo.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:block hidden" />
               <Image src="/logo-dark.svg" alt="Lyse UI" width={66} height={28} className="h-[1.75rem] w-auto dark:hidden block" />
             </div>
-            <Badge variant="neutral" size="sm">v1.1</Badge>
+            <Badge variant="neutral" size="sm">v1.2</Badge>
           </div>
         </div>
         <div className="flex items-center gap-[var(--layout-gap-md)]">
@@ -178,7 +178,7 @@ export default function ComponentsLayout({
             <MenuGroup key={group.label} label={group.label}>
               {group.items.map((item) => {
                 const isCurrent = item.href === pathname
-                const isNew = ["Accordion", "Sheet", "Slider", "Stepper"].includes(item.label)
+                const isNew = ["Accordion", "Pagination", "Sheet", "Slider", "Stepper"].includes(item.label)
                 return (
                   <MenuItem
                     key={item.label}
