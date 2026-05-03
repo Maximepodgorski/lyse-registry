@@ -37,7 +37,7 @@
 }
 
 .chip-filled:active,
-.chip-filled[data-state="open"] {
+.chip-filled[data-popup-open] {
   background: var(--background-neutral-lighter-pressed);
 }
 
@@ -53,7 +53,7 @@
 }
 
 .chip-outline:active,
-.chip-outline[data-state="open"] {
+.chip-outline[data-popup-open] {
   background: var(--background-neutral-faint-pressed);
 }
 
@@ -65,7 +65,7 @@
 }
 
 .chip-ghost:active,
-.chip-ghost[data-state="open"] {
+.chip-ghost[data-popup-open] {
   background: var(--background-neutral-faint-pressed);
 }
 

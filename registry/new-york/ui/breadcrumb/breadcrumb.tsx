@@ -6,20 +6,6 @@ import { MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 import "./breadcrumb.css"
 
-function Slot({
-  children,
-  ...props
-}: React.PropsWithChildren<Record<string, unknown>>) {
-  const valid = React.isValidElement(children)
-  return useRender({
-    render: valid
-      ? (children as React.ReactElement<Record<string, unknown>>)
-      : undefined,
-    defaultTagName: "span",
-    props: valid ? props : { ...props, children },
-  })
-}
-
 /* ------------------------------------------------------------------ */
 /*  CVA                                                                */
 /* ------------------------------------------------------------------ */
@@ -105,14 +91,18 @@ function BreadcrumbLink({
   className,
   ...props
 }: React.ComponentProps<"a"> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : "a"
-  return (
-    <Comp
-      data-slot="breadcrumb-link"
-      className={cn(breadcrumbLinkVariants(), className)}
-      {...props}
-    />
-  )
+  const valid = asChild && React.isValidElement(props.children)
+  return useRender({
+    render: valid
+      ? (props.children as React.ReactElement<Record<string, unknown>>)
+      : undefined,
+    defaultTagName: "a",
+    props: {
+      "data-slot": "breadcrumb-link",
+      className: cn(breadcrumbLinkVariants(), className),
+      ...(props as Record<string, unknown>),
+    },
+  })
 }
 
 /* ------------------------------------------------------------------ */

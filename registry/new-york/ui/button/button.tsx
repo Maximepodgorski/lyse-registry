@@ -5,20 +5,6 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import "./button.css"
 
-function Slot({
-  children,
-  ...props
-}: React.PropsWithChildren<Record<string, unknown>>) {
-  const valid = React.isValidElement(children)
-  return useRender({
-    render: valid
-      ? (children as React.ReactElement<Record<string, unknown>>)
-      : undefined,
-    defaultTagName: "span",
-    props: valid ? props : { ...props, children },
-  })
-}
-
 const buttonVariants = cva(
   "relative inline-flex items-center justify-center overflow-hidden whitespace-nowrap font-accent cursor-pointer transition-colors [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
@@ -56,8 +42,6 @@ function Button({
     asChild?: boolean
     isIconOnly?: boolean
   }) {
-  const Comp = asChild ? Slot : "button"
-
   const handlePointerDown = React.useCallback(
     (e: React.PointerEvent<HTMLButtonElement>) => {
       onPointerDown?.(e)
@@ -76,17 +60,22 @@ function Button({
     [onPointerDown]
   )
 
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(
+  const valid = asChild && React.isValidElement(props.children)
+  return useRender({
+    render: valid
+      ? (props.children as React.ReactElement<Record<string, unknown>>)
+      : undefined,
+    defaultTagName: "button",
+    props: {
+      "data-slot": "button",
+      className: cn(
         buttonVariants({ variant, size, className }),
         isIconOnly && "aspect-square px-0 gap-0"
-      )}
-      onPointerDown={handlePointerDown}
-      {...props}
-    />
-  )
+      ),
+      onPointerDown: handlePointerDown,
+      ...(props as Record<string, unknown>),
+    },
+  })
 }
 
 export { Button, buttonVariants }

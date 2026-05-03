@@ -134,7 +134,7 @@ function MenuItem({
     className
   )
 
-  if (asChild) {
+  if (asChild && React.isValidElement(children)) {
     return (
       <Slot
         ref={ref as React.Ref<HTMLElement>}
@@ -143,7 +143,7 @@ function MenuItem({
         className={itemClass}
         {...props}
       >
-        {children}
+        {children as React.ReactElement}
       </Slot>
     )
   }
