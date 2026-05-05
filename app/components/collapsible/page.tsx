@@ -180,12 +180,6 @@ const collapsiblePropDefs: PropDef[] = [
 
 const triggerPropDefs: PropDef[] = [
   {
-    name: "nativeButton",
-    type: ["boolean"],
-    default: "true",
-    description: "Render as a native <button>. Set false when slotting a non-button via render.",
-  },
-  {
     name: "className",
     type: ["string"],
     description: "Additional class names merged via cn().",
@@ -370,8 +364,8 @@ export default function CollapsiblePage() {
         {/* Hero */}
         <div className="flex flex-col gap-3">
           <h1
-            className="font-bold"
-            style={{ color: "var(--text-base-strong)", fontSize: "var(--root-font-size-5xl)" }}
+            className="text-heading-display font-bold"
+            style={{ color: "var(--text-base-strong)" }}
           >
             Collapsible
           </h1>
