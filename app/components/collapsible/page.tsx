@@ -269,10 +269,10 @@ function OverviewTab() {
       >
         <div className="flex flex-col gap-[var(--layout-gap-md)] w-full max-w-2xl">
           {[
-            { Icon: SiGitlab, label: "Gitlab" },
-            { Icon: SiGithub, label: "GitHub" },
-            { Icon: SiFigma, label: "Figma" },
-          ].map(({ Icon, label }, i) => (
+            { Icon: SiGitlab, label: "Gitlab", color: "default" as const },
+            { Icon: SiGithub, label: "GitHub", color: "white" },
+            { Icon: SiFigma, label: "Figma", color: "white" },
+          ].map(({ Icon, label, color }, i) => (
             <Card
               key={label}
               variant="outline"
@@ -282,7 +282,7 @@ function OverviewTab() {
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-[var(--layout-padding-lg)] text-content-note font-accent [color:var(--text-base-strong)]">
                   <span className="flex items-center gap-[var(--layout-gap-md)]">
                     <span className="flex items-center justify-center size-6 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
-                      <Icon size={14} color="default" />
+                      <Icon size={14} color={color} />
                     </span>
                     {label}
                   </span>
