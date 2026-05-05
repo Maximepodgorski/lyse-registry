@@ -94,8 +94,8 @@ const dosDontsItems: DosDontsItem[] = [
           <Collapsible defaultOpen>
             <CollapsibleTrigger className="flex items-center justify-between w-full p-[var(--layout-padding-lg)] text-content-note font-accent [color:var(--text-base-strong)]">
               <span className="flex items-center gap-[var(--layout-gap-md)]">
-                <span className="flex items-center justify-center size-7 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
-                  <SiGitlab size={18} color="default" />
+                <span className="flex items-center justify-center size-6 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
+                  <SiGitlab size={14} color="default" />
                 </span>
                 Gitlab
               </span>
@@ -281,8 +281,8 @@ function OverviewTab() {
               <Collapsible defaultOpen={i === 0}>
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-[var(--layout-padding-lg)] text-content-note font-accent [color:var(--text-base-strong)]">
                   <span className="flex items-center gap-[var(--layout-gap-md)]">
-                    <span className="flex items-center justify-center size-7 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
-                      <Icon size={18} color="default" />
+                    <span className="flex items-center justify-center size-6 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
+                      <Icon size={14} color="default" />
                     </span>
                     {label}
                   </span>
