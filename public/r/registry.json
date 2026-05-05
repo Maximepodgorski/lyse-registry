@@ -672,7 +672,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-slot",
+        "@base-ui-components/react",
         "lucide-react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
