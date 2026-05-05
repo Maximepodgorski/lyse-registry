@@ -92,7 +92,7 @@ const dosDontsItems: DosDontsItem[] = [
       preview: (
         <Card variant="outline" className="w-full !p-0 !gap-0 overflow-hidden">
           <Collapsible defaultOpen>
-            <CollapsibleTrigger className="flex items-center justify-between w-full p-[var(--layout-padding-xl)] text-content-note font-accent [color:var(--text-base-strong)]">
+            <CollapsibleTrigger className="flex items-center justify-between w-full p-[var(--layout-padding-lg)] text-content-note font-accent [color:var(--text-base-strong)]">
               <span className="flex items-center gap-[var(--layout-gap-md)]">
                 <span className="flex items-center justify-center size-7 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
                   <SiGitlab size={18} color="default" />
@@ -110,7 +110,7 @@ const dosDontsItems: DosDontsItem[] = [
                   borderTop:
                     "var(--layout-border-thin) solid var(--border-default)",
                 }}
-                className="p-[var(--layout-padding-xl)] flex flex-col gap-[var(--layout-gap-md)]"
+                className="p-[var(--layout-padding-lg)] flex flex-col gap-[var(--layout-gap-md)]"
               >
                 <span className="text-content-note font-accent [color:var(--text-base-strong)]">
                   Overview
@@ -279,7 +279,7 @@ function OverviewTab() {
               className="!p-0 !gap-0 overflow-hidden"
             >
               <Collapsible defaultOpen={i === 0}>
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-[var(--layout-padding-xl)] text-content-note font-accent [color:var(--text-base-strong)]">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-[var(--layout-padding-lg)] text-content-note font-accent [color:var(--text-base-strong)]">
                   <span className="flex items-center gap-[var(--layout-gap-md)]">
                     <span className="flex items-center justify-center size-7 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
                       <Icon size={18} color="default" />
@@ -297,7 +297,7 @@ function OverviewTab() {
                       borderTop:
                         "var(--layout-border-thin) solid var(--border-default)",
                     }}
-                    className="p-[var(--layout-padding-xl)] flex flex-col gap-[var(--layout-gap-md)]"
+                    className="p-[var(--layout-padding-lg)] flex flex-col gap-[var(--layout-gap-md)]"
                   >
                     <span className="text-content-note font-accent [color:var(--text-base-strong)]">
                       Overview
