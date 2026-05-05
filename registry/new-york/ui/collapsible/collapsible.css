@@ -1,0 +1,68 @@
+/* ================================================================
+ * COLLAPSIBLE — Trigger focus + Panel height animation
+ * Structure (none — unstyled root) lives in collapsible.tsx.
+ * Theming (focus ring, animation, reduced motion) lives here.
+ * ================================================================ */
+
+/* --------------------------------
+ * Trigger — focus ring + disabled
+ * -------------------------------- */
+.collapsible-trigger:focus-visible {
+  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);
+}
+
+.collapsible-trigger[data-disabled] {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* --------------------------------
+ * Content — height animation
+ * Uses Base UI CSS variable --collapsible-panel-height
+ * -------------------------------- */
+.collapsible-content[data-open] {
+  animation: collapsible-expand 250ms ease;
+}
+
+.collapsible-content[data-ending-style] {
+  animation: collapsible-collapse 250ms ease;
+}
+
+@keyframes collapsible-expand {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--collapsible-panel-height);
+  }
+}
+
+@keyframes collapsible-collapse {
+  from {
+    height: var(--collapsible-panel-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* --------------------------------
+ * Reduced motion — slow to 400ms (project pattern)
+ * -------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .collapsible-content[data-open],
+  .collapsible-content[data-ending-style] {
+    animation-duration: 400ms;
+    animation-timing-function: linear;
+  }
+}
+
+/* --------------------------------
+ * Forced colors (Windows High Contrast)
+ * -------------------------------- */
+@media (forced-colors: active) {
+  .collapsible-trigger:focus-visible {
+    outline: 2px solid ButtonText;
+    box-shadow: none;
+  }
+}

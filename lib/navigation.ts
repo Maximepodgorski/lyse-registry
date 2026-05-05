@@ -128,6 +128,12 @@ export const navGroups: readonly NavGroup[] = [
         keywords: ["chip", "filter", "toggle", "select", "tag", "choice"],
       },
       {
+        label: "Collapsible",
+        href: "/components/collapsible",
+        description: "Simple expandable panel with smooth height animation",
+        keywords: ["collapsible", "collapse", "expand", "disclosure", "panel", "show", "hide"],
+      },
+      {
         label: "DropdownMenu",
         href: "/components/dropdown-menu",
         description: "Context menu with items, groups, and keyboard navigation",

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "Simple expandable panel with smooth height animation. Built on Base UI for a11y and animation primitives.",
+  "dependencies": [
+    "@base-ui-components/react"
+  ],
+  "registryDependencies": [
+    "https://ui.getlyse.com/r/lyse-tokens.json"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ui/collapsible/collapsible.tsx",
+      "content": "import * as React from \"react\"\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui-components/react/collapsible\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./collapsible.css\"\n\nfunction Collapsible({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Root>) {\n  return (\n    <CollapsiblePrimitive.Root\n      data-slot=\"collapsible\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Trigger>) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      className={cn(\n        \"collapsible-trigger cursor-pointer focus-visible:outline-none\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Panel>) {\n  return (\n    <CollapsiblePrimitive.Panel\n      data-slot=\"collapsible-content\"\n      className={cn(\"collapsible-content overflow-hidden\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/new-york/ui/collapsible/collapsible.css",
+      "content": "/* ================================================================\n * COLLAPSIBLE — Trigger focus + Panel height animation\n * Structure (none — unstyled root) lives in collapsible.tsx.\n * Theming (focus ring, animation, reduced motion) lives here.\n * ================================================================ */\n\n/* --------------------------------\n * Trigger — focus ring + disabled\n * -------------------------------- */\n.collapsible-trigger:focus-visible {\n  box-shadow: 0 0 0 2px var(--background-base), 0 0 0 4px var(--border-selected);\n}\n\n.collapsible-trigger[data-disabled] {\n  color: var(--text-disabled);\n  cursor: not-allowed;\n}\n\n/* --------------------------------\n * Content — height animation\n * Uses Base UI CSS variable --collapsible-panel-height\n * -------------------------------- */\n.collapsible-content[data-open] {\n  animation: collapsible-expand 250ms ease;\n}\n\n.collapsible-content[data-ending-style] {\n  animation: collapsible-collapse 250ms ease;\n}\n\n@keyframes collapsible-expand {\n  from {\n    height: 0;\n  }\n  to {\n    height: var(--collapsible-panel-height);\n  }\n}\n\n@keyframes collapsible-collapse {\n  from {\n    height: var(--collapsible-panel-height);\n  }\n  to {\n    height: 0;\n  }\n}\n\n/* --------------------------------\n * Reduced motion — slow to 400ms (project pattern)\n * -------------------------------- */\n@media (prefers-reduced-motion: reduce) {\n  .collapsible-content[data-open],\n  .collapsible-content[data-ending-style] {\n    animation-duration: 400ms;\n    animation-timing-function: linear;\n  }\n}\n\n/* --------------------------------\n * Forced colors (Windows High Contrast)\n * -------------------------------- */\n@media (forced-colors: active) {\n  .collapsible-trigger:focus-visible {\n    outline: 2px solid ButtonText;\n    box-shadow: none;\n  }\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

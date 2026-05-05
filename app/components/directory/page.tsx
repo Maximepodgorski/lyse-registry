@@ -16,6 +16,7 @@ const components = [
   { name: "Card", href: "/components/card" },
   { name: "Checkbox", href: "/components/checkbox" },
   { name: "Chip", href: "/components/chip" },
+  { name: "Collapsible", href: "/components/collapsible" },
   { name: "DropdownMenu", href: "/components/dropdown-menu" },
   { name: "Input", href: "/components/input" },
   { name: "Menu", href: "/components/menu" },
