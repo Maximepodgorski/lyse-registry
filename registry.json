@@ -595,6 +595,24 @@
       ]
     },
     {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Simple expandable panel with smooth height animation. Built on Base UI for a11y and animation primitives.",
+      "dependencies": ["@base-ui-components/react"],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/collapsible/collapsible.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/collapsible/collapsible.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "tabs",
       "type": "registry:ui",
       "dependencies": [
@@ -654,7 +672,7 @@
       "type": "registry:ui",
       "dependencies": [
         "class-variance-authority",
-        "@radix-ui/react-slot",
+        "@base-ui-components/react",
         "lucide-react"
       ],
       "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],

@@ -1,10 +1,24 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { useRender } from "@base-ui-components/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import "./pagination.css"
+
+function Slot({
+  children,
+  ...props
+}: React.PropsWithChildren<Record<string, unknown>>) {
+  const valid = React.isValidElement(children)
+  return useRender({
+    render: valid
+      ? (children as React.ReactElement<Record<string, unknown>>)
+      : undefined,
+    defaultTagName: "a",
+    props: valid ? props : { ...props, children },
+  })
+}
 
 /* ------------------------------------------------------------------ */
 /*  CVA                                                                */
