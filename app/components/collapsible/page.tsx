@@ -97,9 +97,9 @@ const dosDontsItems: DosDontsItem[] = [
                 <span className="flex items-center justify-center size-6 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
                   <SiGitlab size={14} color="default" />
                 </span>
-                Gitlab
+                <span className="font-accent">Gitlab</span>
               </span>
-              <span className="flex items-center gap-[var(--layout-gap-sm)]">
+              <span className="flex items-center gap-[var(--layout-gap-sm)] [color:var(--text-base-moderate)] transition-colors duration-150 [.collapsible-trigger:hover_&]:[color:var(--text-base-strong)]">
                 About integration
                 <ChevronDown className="size-4 transition-transform duration-200 [.collapsible-trigger[data-panel-open]_&]:rotate-180" />
               </span>
@@ -284,9 +284,9 @@ function OverviewTab() {
                     <span className="flex items-center justify-center size-6 rounded-[var(--layout-radius-sm)] [background-color:var(--background-neutral-lighter-default)]">
                       <Icon size={14} color={color} />
                     </span>
-                    {label}
+                    <span className="font-accent">{label}</span>
                   </span>
-                  <span className="flex items-center gap-[var(--layout-gap-sm)]">
+                  <span className="flex items-center gap-[var(--layout-gap-sm)] [color:var(--text-base-moderate)] transition-colors duration-150 [.collapsible-trigger:hover_&]:[color:var(--text-base-strong)]">
                     About integration
                     <ChevronDown className="size-4 transition-transform duration-200 [.collapsible-trigger[data-panel-open]_&]:rotate-180" />
                   </span>
