@@ -178,7 +178,7 @@ export default function ComponentsLayout({
             <MenuGroup key={group.label} label={group.label}>
               {group.items.map((item) => {
                 const isCurrent = item.href === pathname
-                const isNew = ["Accordion", "Pagination", "Sheet", "Slider", "Stepper"].includes(item.label)
+                const isNew = ["Accordion", "Collapsible", "Pagination", "Sheet", "Slider", "Stepper"].includes(item.label)
                 return (
                   <MenuItem
                     key={item.label}
