@@ -740,6 +740,25 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui-components/react",
+        "lucide-react"
+      ],
+      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
+      "files": [
+        {
+          "path": "registry/new-york/ui/accordion/accordion.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/new-york/ui/accordion/accordion.css",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
