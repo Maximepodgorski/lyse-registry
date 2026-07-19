@@ -95,8 +95,6 @@ registry/
     ├── breadcrumb/    (breadcrumb.tsx + breadcrumb.css)
     ├── card/          (card.tsx + card.css)
     ├── field/         (field.tsx + field.css)
-    ├── input-group/   (input-group.tsx + input-group.css)
-    ├── kbd/           (kbd.tsx + kbd.css)
     ├── popover/       (popover.tsx + popover.css)
     ├── separator/     (separator.tsx + separator.css)
     ├── sheet/         (sheet.tsx + sheet.css)

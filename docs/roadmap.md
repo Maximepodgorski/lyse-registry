@@ -13,13 +13,20 @@ Button, Badge, Tag, Tooltip, Toast, Menu, Checkbox, Radio, Toggle, Banner Info, 
 
 ---
 
-## v1.1 Aube (12 composants) — Shipped
+## v1.1 Aube (10 composants) — Shipped
 
 La lumiere apparait. Foundation, overlays, data display, navigation.
 
-Alert, Alert Dialog, Breadcrumb, Card, Field, Input Group, Kbd, Popover, Separator, Skeleton, Stepper, Table
+Alert, Alert Dialog, Breadcrumb, Card, Field, Popover, Separator, Skeleton, Stepper, Table
 
-**Total shipped : 35 composants**
+**Total shipped : 33 composants**
+
+`Input Group` and `Kbd` were scoped for v1.1 but never shipped — no `.tsx`, no `registry.json` entry, not served at `ui.getlyse.com`. Only a `doc.md` design-notes stub exists for each under `registry/new-york/ui/`.
+
+| Composant | Statut | Note |
+|-----------|--------|------|
+| Kbd | To do | Design notes only (`doc.md`), no implementation started |
+| Input Group | Dropped | Wrong approach (wrapper breaks `Field` a11y) — see `specs/dropped/input-group-spec.md`. Superseded by extending `Input` with addon props. |
 
 ---
 
