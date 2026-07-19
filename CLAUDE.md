@@ -206,7 +206,11 @@ export { Component, componentVariants }
 - `React.forwardRef` when the component uses Radix or needs ref forwarding
 - For simple components, plain function components with `React.ComponentProps` pattern
 
-## Shipped Components (34)
+## Shipped Components (38)
+
+All `.tsx` files under `registry/new-york/ui/`. (`docs/roadmap.md`'s "33
+shipped" is the v1.1-phase cumulative total, not the current count — it
+predates 5 components that later shipped early from v1.2.)
 
 | Component | Variants | Sizes | Extras | Radix |
 |-----------|----------|-------|--------|-------|
@@ -223,10 +227,13 @@ export { Component, componentVariants }
 | **Card** | outline, ghost | — | `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` | — |
 | **Checkbox** | — | sm, md | `CheckboxGroup`, `indeterminate` | — |
 | **Chip** | — | sm, md | toggleable, `selected` | — |
+| **Collapsible** | — | — | `CollapsibleTrigger`, `CollapsibleContent` | Collapsible |
 | **DropdownMenu** | — | — | Full Radix DropdownMenu compound | DropdownMenu |
+| **Field** | — | — | `FieldLabel`, `FieldControl`, `FieldDescription`, `FieldError`, `error`/`disabled`/`required` props | Slot |
 | **Input** | default, destructive | sm, md, lg | `InputField`, `InputLabel`, `InputHint`, `leading`/`trailing` | — |
 | **Menu** | default, accent | sm, md | `Menu`, `MenuGroup`, `MenuItem`, `MenuDivider`, icon/badge/shortcut/dot slots | Slot |
 | **Modal** | — | sm, md, lg, xl, full | `ModalHeader`, `ModalFooter`, `ModalClose` | Dialog |
+| **Pagination** | — | sm, md | `PaginationContent`, `PaginationItem`, `PaginationLink`, `PaginationPrevious`, `PaginationNext`, `PaginationStatus`, `PaginationEllipsis`, `isActive`/`asChild` | Slot |
 | **Popover** | — | — | `Trigger`, `Anchor`, `Content`, `Close` | Popover |
 | **Progress** | brand, success, danger, warning | sm, md, lg | determinate | — |
 | **Radio** | — | sm, md | `RadioGroup` | — |
@@ -328,7 +335,7 @@ Specs live in `specs/` with date-prefixed filenames. Check `specs/active/` befor
 |-------|------|--------|
 | 1 | Scaffold + registry init | Shipped |
 | 2 | Design tokens (CSS vars) | Shipped |
-| 3 | Components (batched) | In progress — 34 shipped |
+| 3 | Components (batched) | In progress — 38 shipped |
 | 4 | Docsite + deploy to Vercel | Shipped — live at ui.getlyse.com |
 
 ## Path Aliases
