@@ -29,15 +29,17 @@ L'etoile s'embrase. Overlays, data display, forms, navigation.
 
 | Composant | Categorie | Taille | Status |
 |-----------|-----------|--------|--------|
-| Slider | Forms | M | To do |
-| Sheet | Overlays | M | To do |
+| Slider | Forms | M | Shipped |
+| Sheet | Overlays | M | Shipped |
 | Drawer | Overlays | M | To do |
-| Collapsible | Data display | S | To do |
-| Accordion | Data display | M | To do |
-| Pagination | Navigation | M | To do |
+| Collapsible | Data display | S | Shipped |
+| Accordion | Data display | M | Shipped |
+| Pagination | Navigation | M | Shipped |
 | Empty State | Feedback | S | To do |
 
-**Projet :** [v1.2 Nova](https://github.com/users/Maximepodgorski/projects/2)
+Only `Drawer` and `Empty State` remain unshipped for v1.2.
+
+**Projet :** v1.2 Nova (tracked in this file — no public project board yet)
 
 ---
 

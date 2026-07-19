@@ -52,7 +52,7 @@ app/
 │   ├── changelog/page.tsx
 │   ├── button/page.tsx
 │   ├── badge/page.tsx
-│   ├── ... (31 component pages total)
+│   ├── ... (36 component pages total)
 │   └── tooltip/page.tsx
 └── styles/                  # Design tokens (CSS custom properties)
     ├── root-colors.css         # Primitive palette (brand, danger, neutral, success, warning)

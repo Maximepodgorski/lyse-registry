@@ -138,7 +138,7 @@ export default function ComponentsLayout({
           <ThemeToggle />
           <Button variant="terciary" size="sm" asChild>
             <a
-              href="https://github.com/Maximepodgorski/lyse-registry"
+              href="https://github.com/lyse-labs/lyse-registry"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="View source on GitHub"

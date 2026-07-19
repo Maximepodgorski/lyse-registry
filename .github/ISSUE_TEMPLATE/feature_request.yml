@@ -1,0 +1,58 @@
+name: Feature request
+description: Request a new component or suggest an improvement
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature or a new component.
+
+        Check the [roadmap](https://github.com/lyse-labs/lyse-registry/blob/main/docs/roadmap.md) first — it may already be planned.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of request is this?
+      options:
+        - New component
+        - Improvement to an existing component
+        - Doc site feature
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the pain or the limitation. Focus on the WHY before the WHAT.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What would you like Lyse Registry to do? Link a reference implementation (e.g. shadcn/ui, Radix, Base UI) if helpful.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Would you be willing to implement it?
+      options:
+        - Yes, I will send a PR
+        - Maybe, with guidance from a maintainer
+        - No, this is a suggestion only
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/lyse-labs/lyse-registry/blob/main/CODE_OF_CONDUCT.md)
+          required: true

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://ui.getlyse.com
+    about: Browse live component previews, usage examples, and installation instructions first — many answers are already there.
+  - name: Security vulnerabilities
+    url: https://github.com/lyse-labs/lyse-registry/security/advisories/new
+    about: Report security issues privately. Do not open a public issue. See SECURITY.md if this link isn't available.

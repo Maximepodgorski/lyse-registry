@@ -17,13 +17,13 @@
 Production-ready React components built from a real design system.
 Open source, open code.
 
-[Documentation](https://ui.getlyse.com) | [Figma Library](https://www.figma.com/community/file/1470884424474781212/lyse-library-v2) | [GitHub](https://github.com/Maximepodgorski/lyse-registry)
+[Documentation](https://ui.getlyse.com) | [Figma Library](https://www.figma.com/community/file/1470884424474781212/lyse-library-v2) | [GitHub](https://github.com/lyse-labs/lyse-registry)
 
 ---
 
 ## What is this?
 
-Lyse Registry is a collection of **31 components** you can add to any React project with a single command. No package to install, no version to manage. The components live in your codebase, fully editable.
+Lyse Registry is a collection of **38 components** you can add to any React project with a single command. No package to install, no version to manage. The components live in your codebase, fully editable.
 
 It works with the [shadcn CLI](https://ui.shadcn.com/docs/cli) — the same tool used by shadcn/ui.
 
@@ -85,7 +85,14 @@ npx shadcn@latest add \
   https://ui.getlyse.com/r/popover.json \
   https://ui.getlyse.com/r/skeleton.json \
   https://ui.getlyse.com/r/separator.json \
-  https://ui.getlyse.com/r/table.json
+  https://ui.getlyse.com/r/table.json \
+  https://ui.getlyse.com/r/field.json \
+  https://ui.getlyse.com/r/stepper.json \
+  https://ui.getlyse.com/r/collapsible.json \
+  https://ui.getlyse.com/r/accordion.json \
+  https://ui.getlyse.com/r/pagination.json \
+  https://ui.getlyse.com/r/sheet.json \
+  https://ui.getlyse.com/r/slider.json
 ```
 
 ## Components
@@ -123,6 +130,13 @@ npx shadcn@latest add \
 | **Separator** | Visual divider between content sections |
 | **Skeleton** | Shimmer placeholders for loading states |
 | **Table** | Structured data display with striped rows |
+| **Field** | Compound form field wrapper with label, hint, and error states |
+| **Stepper** | Dot-based step indicator for wizard and onboarding flows |
+| **Collapsible** | Simple expandable panel with smooth height animation |
+| **Accordion** | Stacked expandable panels for collapsible content sections |
+| **Pagination** | Page navigation controls with previous/next and ellipsis |
+| **Sheet** | Sliding side panel overlay for supplementary content |
+| **Slider** | Range input for selecting a value within a bounded interval |
 
 Browse live previews and usage examples on the [documentation site](https://ui.getlyse.com).
 

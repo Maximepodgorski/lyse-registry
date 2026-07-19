@@ -7,7 +7,7 @@
   "homepage": "https://ui.getlyse.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Maximepodgorski/lyse-registry.git"
+    "url": "https://github.com/lyse-labs/lyse-registry.git"
   },
   "author": "Lyse Labs <hello@getlyse.com>",
   "scripts": {
