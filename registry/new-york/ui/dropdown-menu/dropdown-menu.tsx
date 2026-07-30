@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Menu as MenuPrimitive } from "@base-ui-components/react/menu"
+import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"

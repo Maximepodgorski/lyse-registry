@@ -18,7 +18,7 @@
     "registry:build": "shadcn build"
   },
   "dependencies": {
-    "@base-ui-components/react": "1.0.0-rc.0",
+    "@base-ui/react": "1.6.0",
     "@icons-pack/react-simple-icons": "^13.13.0",
     "@vercel/analytics": "^2.0.0",
     "class-variance-authority": "^0.7.1",

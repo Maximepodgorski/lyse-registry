@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Tabs as TabsPrimitive } from "@base-ui-components/react/tabs"
+import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
 import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"

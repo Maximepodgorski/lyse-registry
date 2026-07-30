@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useRender } from "@base-ui-components/react/use-render"
+import { useRender } from "@base-ui/react/use-render"
 
 import { cn } from "@/lib/utils"
 import "./field.css"
