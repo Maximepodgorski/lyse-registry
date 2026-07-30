@@ -5,7 +5,7 @@
   "title": "Collapsible",
   "description": "Simple expandable panel with smooth height animation. Built on Base UI for a11y and animation primitives.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui/react"
   ],
   "registryDependencies": [
     "https://ui.getlyse.com/r/lyse-tokens.json"
@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "registry/new-york/ui/collapsible/collapsible.tsx",
-      "content": "import * as React from \"react\"\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui-components/react/collapsible\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./collapsible.css\"\n\nfunction Collapsible({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Root>) {\n  return (\n    <CollapsiblePrimitive.Root\n      data-slot=\"collapsible\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Trigger>) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      className={cn(\n        \"collapsible-trigger cursor-pointer focus-visible:outline-none\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Panel>) {\n  return (\n    <CollapsiblePrimitive.Panel\n      data-slot=\"collapsible-content\"\n      className={cn(\"collapsible-content overflow-hidden\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "content": "import * as React from \"react\"\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\"\n\nimport { cn } from \"@/lib/utils\"\nimport \"./collapsible.css\"\n\nfunction Collapsible({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Root>) {\n  return (\n    <CollapsiblePrimitive.Root\n      data-slot=\"collapsible\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Trigger>) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      className={cn(\n        \"collapsible-trigger cursor-pointer focus-visible:outline-none\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Panel>) {\n  return (\n    <CollapsiblePrimitive.Panel\n      data-slot=\"collapsible-content\"\n      className={cn(\"collapsible-content overflow-hidden\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
       "type": "registry:ui"
     },
     {
