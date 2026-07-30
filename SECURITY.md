@@ -23,7 +23,7 @@ This repo has no versioned releases in the traditional sense — `main` is deplo
 
 ## Out of scope
 
-- Vulnerabilities in dependencies upstream from this repo (report to those projects — e.g. Next.js, `@base-ui-components/react`, `shadcn`).
+- Vulnerabilities in dependencies upstream from this repo (report to those projects — e.g. Next.js, `@base-ui/react`, `shadcn`).
 - Issues in components already installed into a consumer's project — once copied, that code is the consumer's to maintain and patch.
 - Cosmetic/rendering bugs in the doc site that have no security impact (use a regular [issue](https://github.com/lyse-labs/lyse-registry/issues) for those).
 

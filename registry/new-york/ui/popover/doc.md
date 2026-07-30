@@ -1,6 +1,6 @@
 # Popover
 
-A floating panel anchored to a trigger element, rendered in a portal. Used for rich non-modal content that supplements — rather than blocks — the current view. Built on `@base-ui-components/react/popover`.
+A floating panel anchored to a trigger element, rendered in a portal. Used for rich non-modal content that supplements — rather than blocks — the current view. Built on `@base-ui/react/popover`.
 
 ## When to use
 
