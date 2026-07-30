@@ -14,7 +14,7 @@ figma: https://www.figma.com/design/q1hvOfUQUNeehQ2HvVXBpF/Lyse---System-%E2%80%
 
 ## Context
 
-A single expandable region with a trigger and an animated content panel. Unlike Accordion (which composes multiple Collapsibles with shared state), Collapsible is **standalone** — one trigger, one panel, fully uncontrolled by default. Built on Base UI `@base-ui-components/react/collapsible` for a11y (`aria-expanded`, `aria-controls`, keyboard) and animation primitives (`--collapsible-panel-height` CSS variable, `data-open` / `data-ending-style` attributes).
+A single expandable region with a trigger and an animated content panel. Unlike Accordion (which composes multiple Collapsibles with shared state), Collapsible is **standalone** — one trigger, one panel, fully uncontrolled by default. Built on Base UI `@base-ui/react/collapsible` for a11y (`aria-expanded`, `aria-controls`, keyboard) and animation primitives (`--collapsible-panel-height` CSS variable, `data-open` / `data-ending-style` attributes).
 
 **Visual style:** Unstyled by default — no background, border, or padding on the root. Theming is opt-in by the consumer. Only the trigger gets focus-ring + cursor styling, and the panel gets the height animation. This keeps Collapsible composable inside any container (Card, integration row, settings section, FAQ entry).
 
@@ -38,7 +38,7 @@ The same Figma frame also shows a "Thinking Block" pattern (collapsible reasonin
 **Files:** 3 create | 3 modify | 0 affected
 **Reuse:** Accordion CSS animation pattern (`--collapsible-panel-height`, `data-open` / `data-ending-style`), Accordion focus-ring tokens
 **Breaking changes:** None
-**New dependencies (registry):** None — `@base-ui-components/react` already installed (`1.0.0-rc.0`).
+**New dependencies (registry):** None — `@base-ui/react` already installed (`1.6.0`).
 **New dependencies (doc-site only):** `@icons-pack/react-simple-icons` for brand logos in demo (Gitlab, GitHub, Figma…). NOT shipped in the registry entry.
 
 ## User Journey
@@ -107,7 +107,7 @@ EC5. Trigger as Button: Native `<button>` semantics retained; `asChild` not need
 - [ ] 5. Reduced motion support (slow to 400ms linear) → AC-E1
 - [ ] 6. Token compliance pass (lint for raw values) → AC-8, AC-9
 - [ ] 7. Doc page: hero, install command, overview demos (basic, with-card, controlled, disabled), props table, best practices
-- [ ] 8. Registry entry in `registry.json` (`type: registry:ui`, `dependencies: ["@base-ui-components/react", "class-variance-authority"]`, `registryDependencies: ["https://ui.getlyse.com/r/lyse-tokens.json"]`)
+- [ ] 8. Registry entry in `registry.json` (`type: registry:ui`, `dependencies: ["@base-ui/react", "class-variance-authority"]`, `registryDependencies: ["https://ui.getlyse.com/r/lyse-tokens.json"]`)
 - [ ] 9. Nav + directory entries (alphabetical placement)
 - [ ] 10. `pnpm registry:build` + `pnpm build` + `pnpm lint` pass
 
@@ -289,7 +289,7 @@ None. All dependencies installed. No new tokens required. Base UI Collapsible is
 2. Create `collapsible.tsx`:
    ```tsx
    import * as React from "react"
-   import { Collapsible as CollapsiblePrimitive } from "@base-ui-components/react/collapsible"
+   import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 
    import { cn } from "@/lib/utils"
    import "./collapsible.css"
@@ -414,7 +414,7 @@ None. All dependencies installed. No new tokens required. Base UI Collapsible is
      "type": "registry:ui",
      "title": "Collapsible",
      "description": "Simple expandable panel with smooth height animation. Built on Base UI for a11y and animation primitives.",
-     "dependencies": ["@base-ui-components/react"],
+     "dependencies": ["@base-ui/react"],
      "registryDependencies": ["https://ui.getlyse.com/r/lyse-tokens.json"],
      "files": [
        { "path": "registry/new-york/ui/collapsible/collapsible.tsx", "type": "registry:ui" },

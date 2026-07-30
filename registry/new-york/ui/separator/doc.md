@@ -145,5 +145,5 @@ import { Separator } from "@/components/ui/separator"
 
 - **Keyboard:** Separator is non-interactive and not focusable.
 - **Screen reader:** When `decorative` is `false`, renders with `role="separator"` and `aria-orientation` matching the `orientation` prop. Assistive technologies announce it as a divider between regions. When `decorative` is `true`, `role="none"` removes it from the accessibility tree.
-- **ARIA:** Built on `@base-ui-components/react/separator`, which handles `role` and `aria-orientation` automatically based on the `decorative` prop.
+- **ARIA:** Renders a native element that sets `role` and `aria-orientation` from the `decorative` prop. No Base UI primitive is involved.
 - **Semantics:** Use `decorative={false}` (the default) when the separator genuinely separates distinct content regions. Use `decorative={true}` for purely decorative ruled lines.

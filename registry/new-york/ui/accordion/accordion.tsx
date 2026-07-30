@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Accordion as AccordionPrimitive } from "@base-ui-components/react/accordion"
+import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 import { Plus } from "lucide-react"
 
 import { cn } from "@/lib/utils"

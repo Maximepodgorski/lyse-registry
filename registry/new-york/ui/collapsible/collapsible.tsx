@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Collapsible as CollapsiblePrimitive } from "@base-ui-components/react/collapsible"
+import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 
 import { cn } from "@/lib/utils"
 import "./collapsible.css"

@@ -1,6 +1,6 @@
 # AlertDialog
 
-A modal confirmation dialog for critical or destructive actions. Forces an explicit user decision before proceeding. Built on `@base-ui-components/react/alert-dialog` with focus trap, ESC dismiss prevention, and ARIA alertdialog role.
+A modal confirmation dialog for critical or destructive actions. Forces an explicit user decision before proceeding. Built on `@base-ui/react/alert-dialog` with focus trap, ESC dismiss prevention, and ARIA alertdialog role.
 
 ## When to use
 

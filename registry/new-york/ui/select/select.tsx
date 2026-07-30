@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Select as SelectPrimitive } from "@base-ui-components/react/select"
+import { Select as SelectPrimitive } from "@base-ui/react/select"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Check, ChevronDown } from "lucide-react"
 

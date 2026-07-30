@@ -1,5 +1,5 @@
 import * as React from "react"
-import { AlertDialog as AlertDialogPrimitive } from "@base-ui-components/react/alert-dialog"
+import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"

@@ -3,7 +3,7 @@
 import "./command-palette.css"
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Dialog as DialogPrimitive } from "@base-ui-components/react/dialog"
+import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { Command } from "cmdk"
 import { Search } from "lucide-react"
 

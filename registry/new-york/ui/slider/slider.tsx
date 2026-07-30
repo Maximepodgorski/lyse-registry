@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Slider as SliderPrimitive } from "@base-ui-components/react/slider"
+import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
